@@ -18,7 +18,20 @@ const LineChart = ({ historicalData }) => {
 	}, [historicalData]);
 
 	return (
-		<Chart chartType="LineChart" data={data} height="100%" legendToggle />
+		<Chart
+			chartType="LineChart"
+			data={data}
+			height="100%"
+			legendToggle
+			options={{
+				backgroundColor: "transparent",
+				legendTextStyle: { color: "#FFF" },
+				hAxis: {
+					textStyle: { color: "#FFF" },
+				},
+				lineWidth: 5,
+			}}
+		/>
 	);
 };
 
