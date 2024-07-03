@@ -3,6 +3,10 @@
 	flex-direction: column;
 }
 
+h2 {
+	padding-bottom: 1rem;
+}
+
 section.hero {
 	width: 90%;
 	margin: 0 auto;
@@ -33,4 +37,16 @@ section.hero .hero-text .description {
 section.hero .btn-container {
 	display: flex;
 	gap: 1rem;
+}
+
+section.home-rankings {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 5rem;
+}
+
+section.home-rankings .home-btn-rankings {
+	margin-top: 0.5rem;
 }
