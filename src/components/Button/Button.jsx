@@ -1,8 +1,12 @@
 import React from "react";
 import "./Button.css";
 
-const Button = () => {
-	return <div>Button</div>;
+const Button = (props) => {
+	return (
+		<div className={props.isGhost ? "btn btn-ghost" : "btn"}>
+			{props.text}
+		</div>
+	);
 };
 
 export default Button;
