@@ -1,6 +1,14 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
+import homeIcon from "../../assets/home-icon.svg";
+import rankIcon from "../../assets/rank-icon.svg";
+import exploreIcon from "../../assets/explore-icon.svg";
+import portfolioIcon from "../../assets/portfolio-icon.svg";
+import userPlaceholder from "../../assets/user-placeholder.svg";
+
 import { CoinContext } from "../../context/CoinContext";
 
 const Navbar = () => {
@@ -25,19 +33,56 @@ const Navbar = () => {
 
 	return (
 		<div className="navbar">
-			<img src={logo} alt="logo" className="logo" />
+			<Link to={"/"}>
+				<img src={logo} alt="logo" className="logo" />
+			</Link>
 			<ul>
-				<li>Top Cryptocurrencies</li>
-				<li>Explore</li>
-				<li>Portfolio Hub</li>
-				<li>About Us</li>
+				<Link to={"/"}>
+					<li>
+						<img src={homeIcon} alt="home" className="link-img" />
+						Home
+					</li>
+				</Link>
+				<Link to={"/rankings"}>
+					<li>
+						<img
+							src={rankIcon}
+							alt="ranking"
+							className="link-img"
+						/>
+						Rankings
+					</li>
+				</Link>
+				<Link to={"/explore"}>
+					<li>
+						<img
+							src={exploreIcon}
+							alt="explore"
+							className="link-img"
+						/>
+						Explore
+					</li>
+				</Link>
+				<Link to={"/hub"}>
+					<li>
+						<img
+							src={portfolioIcon}
+							alt="portfolio hub"
+							className="link-img"
+						/>
+						Portfolio Hub
+					</li>
+				</Link>
 			</ul>
 			<div className="nav-right">
 				<select onChange={currencyHandler}>
 					<option value="usd">USD</option>
 					<option value="eur">EUR</option>
 				</select>
-				<button>Sign Up</button>
+				<div className="user">
+					<p>Guest</p>
+					<img src={userPlaceholder} alt="user" />
+				</div>
 			</div>
 		</div>
 	);
