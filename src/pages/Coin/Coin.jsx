@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
 import Loader from "../../components/Loader/Loader";
+import formatPrice from "../../utils/format-price";
 
 const Coin = () => {
 	const { coinId } = useParams();
@@ -72,9 +73,11 @@ const Coin = () => {
 						<li>Current Price</li>
 						<li>
 							{currency.symbol}
-							{coinData.market_data.current_price[
-								currency.name
-							].toLocaleString()}
+							{formatPrice(
+								coinData.market_data.current_price[
+									currency.name
+								]
+							)}
 						</li>
 					</ul>
 					<ul>
@@ -90,18 +93,18 @@ const Coin = () => {
 						<li>24 Hour High</li>
 						<li>
 							{currency.symbol}
-							{coinData.market_data.high_24h[
-								currency.name
-							].toLocaleString()}
+							{formatPrice(
+								coinData.market_data.high_24h[currency.name]
+							)}
 						</li>
 					</ul>
 					<ul>
 						<li>24 Hour Low</li>
 						<li>
 							{currency.symbol}
-							{coinData.market_data.low_24h[
-								currency.name
-							].toLocaleString()}
+							{formatPrice(
+								coinData.market_data.low_24h[currency.name]
+							)}
 						</li>
 					</ul>
 				</div>
