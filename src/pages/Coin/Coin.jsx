@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import "./Coin.css";
 import { useParams } from "react-router-dom";
+import "./Coin.css";
+
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
 import Loader from "../../components/Loader/Loader";
-import formatPrice from "../../utils/format-price";
+import formatPrice from "../../utils/index";
+import { fetchCoinData, fetchHistoricalData } from "../../api/coinGecko";
 
 const Coin = () => {
 	const { coinId } = useParams();
@@ -12,43 +14,24 @@ const Coin = () => {
 	const [historicalData, setHistoricalData] = useState();
 	const { currency } = useContext(CoinContext);
 
-	const fetchCoinData = async () => {
-		const options = {
-			method: "GET",
-			headers: {
-				accept: "application/json",
-				"x-cg-demo-api-key": "CG-m1zpVwoWPMSFhtQz7E1tRbYe",
-			},
-		};
+	const getData = async () => {
+		try {
+			const coinData = await fetchCoinData(coinId);
+			setCoinData(coinData);
 
-		fetch(`https://api.coingecko.com/api/v3/coins/${coinId}`, options)
-			.then((response) => response.json())
-			.then((response) => setCoinData(response))
-			.catch((err) => console.error(err));
-	};
-
-	const fetchHistoricalData = async () => {
-		const options = {
-			method: "GET",
-			headers: {
-				accept: "application/json",
-				"x-cg-demo-api-key": "CG-m1zpVwoWPMSFhtQz7E1tRbYe",
-			},
-		};
-
-		fetch(
-			`https://api.coingecko.com/api/v3/coins/${coinId}/market_chart?vs_currency=${currency.name}&days=10&interval=daily`,
-			options
-		)
-			.then((response) => response.json())
-			.then((response) => setHistoricalData(response))
-			.catch((err) => console.error(err));
+			const historicalData = await fetchHistoricalData(
+				coinId,
+				currency.name
+			);
+			setHistoricalData(historicalData);
+		} catch (error) {
+			console.error(error);
+		}
 	};
 
 	useEffect(() => {
-		fetchCoinData();
-		fetchHistoricalData();
-	}, [currency]);
+		getData();
+	}, [coinId, currency]);
 
 	if (coinData && historicalData) {
 		return (
@@ -79,7 +62,7 @@ const Coin = () => {
 						</li>
 					</ul>
 					<ul>
-						<li>Marketcap</li>
+						<li>Market Cap</li>
 						<li>
 							{currency.symbol}
 							{coinData.market_data.market_cap[
