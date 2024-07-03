@@ -4,11 +4,11 @@ import rankIcon from "../../assets/icons/rank-icon-white.svg";
 import Loader from "../../components/Loader/Loader";
 
 import { CoinContext } from "../../context/CoinContext";
-import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
+import { CoinRankings } from "../../components/CoinRankings/CoinRankings";
 
 const Rankings = () => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { allCoins } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const { ref, inView } = useInView();
 	const [page, setPage] = useState(1);
@@ -19,7 +19,7 @@ const Rankings = () => {
 	}, [allCoins, page]);
 
 	useEffect(() => {
-		if (inView) {
+		if (inView && page < 10) {
 			setTimeout(() => setPage((prevPage) => prevPage + 1), 1000);
 		}
 	}, [inView]);
@@ -40,35 +40,7 @@ const Rankings = () => {
 				</div>
 
 				{displayCoins.map((item, index) => (
-					<Link
-						to={`/coin/${item.id}`}
-						className="table-layout"
-						key={index}
-					>
-						<p>{item.market_cap_rank}</p>
-						<div>
-							<img src={item.image} alt={item.symbol} />
-							<p>{item.name + " - " + item.symbol}</p>
-						</div>
-						<p>
-							{currency.symbol}{" "}
-							{item.current_price.toLocaleString()}
-						</p>
-						<p
-							className={
-								item.price_change_percentage_24h > 0
-									? "green"
-									: "red"
-							}
-						>
-							{Math.floor(
-								item.price_change_percentage_24h * 100
-							) / 100}
-						</p>
-						<p className="market-cap">
-							{currency.symbol} {item.market_cap.toLocaleString()}
-						</p>
-					</Link>
+					<CoinRankings item={item} key={index} />
 				))}
 				{page < 10 && (
 					<div ref={ref} className="loading">
