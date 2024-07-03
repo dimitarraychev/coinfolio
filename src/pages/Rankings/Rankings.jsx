@@ -1,56 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Rankings.css";
+import rankIcon from "../../assets/icons/rank-icon-white.svg";
+import Loader from "../../components/Loader/Loader";
+
 import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 const Rankings = () => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
-	const [input, setInput] = useState("");
-
-	const inputHandler = (e) => {
-		setInput(e.target.value);
-
-		if (e.target.value === "") {
-			setDisplayCoins(allCoins);
-		}
-	};
-
-	const searchHandler = async (e) => {
-		e.preventDefault();
-
-		const coins = await allCoins.filter((item) => {
-			return item.name.toLowerCase().includes(input.toLowerCase());
-		});
-
-		setDisplayCoins(coins);
-	};
+	const { ref, inView } = useInView();
+	const [page, setPage] = useState(1);
+	const coinsPerPage = 10;
 
 	useEffect(() => {
-		setDisplayCoins(allCoins);
-	}, [allCoins]);
+		setDisplayCoins(allCoins.slice(0, coinsPerPage * page));
+	}, [allCoins, page]);
+
+	useEffect(() => {
+		if (inView) {
+			setTimeout(() => setPage((prevPage) => prevPage + 1), 1000);
+		}
+	}, [inView]);
 
 	return (
-		<div className="ranking">
-			<div className="search">
-				<form onSubmit={searchHandler}>
-					<input
-						onChange={inputHandler}
-						value={input}
-						list="coinlist"
-						type="text"
-						placeholder="Search crypto..."
-						required
-					/>
-					<datalist id="coinlist">
-						{allCoins.map((item, index) => (
-							<option key={index} value={item.name} />
-						))}
-					</datalist>
-					<button type="submit">Search</button>
-				</form>
+		<section className="rankings">
+			<div className="header-wrapper">
+				<img src={rankIcon} alt="rankings" />
+				<h2>Rankings</h2>
 			</div>
-
 			<div className="crypto-table">
 				<div className="table-layout">
 					<p>#</p>
@@ -60,7 +39,7 @@ const Rankings = () => {
 					<p className="market-cap">Market Cap</p>
 				</div>
 
-				{displayCoins.slice(0, 10).map((item, index) => (
+				{displayCoins.map((item, index) => (
 					<Link
 						to={`/coin/${item.id}`}
 						className="table-layout"
@@ -91,8 +70,13 @@ const Rankings = () => {
 						</p>
 					</Link>
 				))}
+				{page < 10 && (
+					<div ref={ref} className="loading">
+						<Loader />
+					</div>
+				)}
 			</div>
-		</div>
+		</section>
 	);
 };
 
