@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
+import Explore from "./pages/Explore/Explore";
 import Footer from "./components/Footer/Footer";
 
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/rankings" element={<Rankings />} />
+				<Route path="/explore" element={<Explore />} />
 				<Route path="/coin/:coinId" element={<Coin />} />
 			</Routes>
 			<Footer />
