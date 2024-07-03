@@ -3,6 +3,7 @@ import "./Coin.css";
 import { useParams } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
+import Loader from "../../components/Loader/Loader";
 
 const Coin = () => {
 	const { coinId } = useParams();
@@ -108,8 +109,8 @@ const Coin = () => {
 		);
 	} else {
 		return (
-			<div className="spinner">
-				<div className="spin"></div>
+			<div className="loading-coin">
+				<Loader size="15rem" />
 			</div>
 		);
 	}
