@@ -2,6 +2,7 @@ import React from "react";
 import "./Home.css";
 import heroLeft from "../../assets/images/hero-left.svg";
 import heroRight from "../../assets/images/hero-right.svg";
+import Button from "../../components/Button/Button";
 
 const Home = () => {
 	return (
@@ -17,7 +18,10 @@ const Home = () => {
 						all the latest information on a wide variety of
 						cryptocurrencies.
 					</p>
-					<div className="btn-container"></div>
+					<div className="btn-container">
+						<Button text="Get Started" />
+						<Button text="Explore" isGhost={true} />
+					</div>
 				</article>
 				<img src={heroRight} alt="hero-right" />
 			</section>
