@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
-import homeIcon from "../../assets/home-icon.svg";
-import rankIcon from "../../assets/rank-icon.svg";
-import exploreIcon from "../../assets/explore-icon.svg";
-import portfolioIcon from "../../assets/portfolio-icon.svg";
+import homeIcon from "../../assets/icons/home-icon.svg";
+import rankIcon from "../../assets/icons/rank-icon.svg";
+import exploreIcon from "../../assets/icons/explore-icon.svg";
+import portfolioIcon from "../../assets/icons/portfolio-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
 import { CoinContext } from "../../context/CoinContext";
