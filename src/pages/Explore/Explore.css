@@ -1,4 +1,4 @@
-/* .search {
+.search {
 	max-width: 600px;
 	margin: 80px auto;
 	display: flex;
@@ -38,7 +38,7 @@
 	border-radius: 5px;
 	cursor: pointer;
 }
-
+/*
 .crypto-table {
 	max-width: 800px;
 	margin: auto;
