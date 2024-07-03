@@ -3,10 +3,6 @@
 	flex-direction: column;
 }
 
-h2 {
-	padding-bottom: 1rem;
-}
-
 section.hero {
 	width: 90%;
 	margin: 0 auto;
@@ -15,6 +11,10 @@ section.hero {
 	justify-content: center;
 	/* Remove later */
 	min-height: 75vh;
+}
+
+section.hero h2 {
+	padding-bottom: 1rem;
 }
 
 section.hero img {
@@ -49,4 +49,58 @@ section.home-rankings {
 
 section.home-rankings .home-btn-rankings {
 	margin-top: 0.5rem;
+}
+
+section.home-portfolio {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 60%;
+	margin: 0 auto;
+}
+
+section.home-portfolio h2 {
+	margin-bottom: 1rem;
+}
+
+section.home-portfolio img {
+	height: 25vw;
+}
+
+.home-portfolio-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	text-align: right;
+}
+
+.home-portfolio-text .home-btn-portfolio {
+	margin-top: 1rem;
+}
+
+section.home-explore {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 60%;
+	margin: 0 auto;
+}
+
+section.home-explore h2 {
+	margin-bottom: 1rem;
+}
+
+section.home-explore img {
+	height: 25vw;
+}
+
+.home-explore-text {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	text-align: left;
+}
+
+.home-explore-text .home-btn-explore {
+	margin-top: 1rem;
 }
