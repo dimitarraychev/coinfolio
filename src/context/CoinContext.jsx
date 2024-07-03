@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from "react";
+import { fetchAllCoins, fetchGlobalMarketData } from "../api/coinGecko";
 
 export const CoinContext = createContext();
 
@@ -7,45 +8,30 @@ const CoinContextProvider = (props) => {
 	const [globalMarketData, setGlobalMarketData] = useState([]);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
 
-	const fetchAllCoins = async () => {
-		const options = {
-			method: "GET",
-			headers: {
-				accept: "application/json",
-				"x-cg-demo-api-key": "CG-m1zpVwoWPMSFhtQz7E1tRbYe",
-			},
-		};
-
-		fetch(
-			`https://api.coingecko.com/api/v3/coins/markets?vs_currency=${currency.name}`,
-			options
-		)
-			.then((response) => response.json())
-			.then((response) => setAllCoins(response))
-			.catch((err) => console.error(err));
+	const loadAllCoins = async () => {
+		try {
+			const coins = await fetchAllCoins(currency.name);
+			setAllCoins(coins);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
-	const fetchGlobalMarketData = async () => {
-		const options = {
-			method: "GET",
-			headers: {
-				accept: "application/json",
-				"x-cg-demo-api-key": "CG-m1zpVwoWPMSFhtQz7E1tRbYe",
-			},
-		};
-
-		fetch("https://api.coingecko.com/api/v3/global", options)
-			.then((response) => response.json())
-			.then((response) => setGlobalMarketData(response))
-			.catch((err) => console.error(err));
+	const loadGlobalMarketData = async () => {
+		try {
+			const marketData = await fetchGlobalMarketData();
+			setGlobalMarketData(marketData);
+		} catch (err) {
+			console.error(err);
+		}
 	};
 
 	useEffect(() => {
-		fetchGlobalMarketData();
+		loadGlobalMarketData();
 	}, []);
 
 	useEffect(() => {
-		fetchAllCoins();
+		loadAllCoins();
 	}, [currency]);
 
 	const contextValue = {
