@@ -1,7 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Explore.css";
+import exploreIcon from "../../assets/icons/explore-icon-white.svg";
+
 import { CoinContext } from "../../context/CoinContext";
 import { Link } from "react-router-dom";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
@@ -31,7 +34,11 @@ const Explore = () => {
 	}, [allCoins]);
 
 	return (
-		<div className="ranking">
+		<section className="explore">
+			<div className="header-wrapper">
+				<img src={exploreIcon} alt="explore" />
+				<h2>Explore</h2>
+			</div>
 			<div className="search">
 				<form onSubmit={searchHandler}>
 					<input
@@ -51,15 +58,7 @@ const Explore = () => {
 				</form>
 			</div>
 
-			<div className="crypto-table">
-				<div className="table-layout">
-					<p>#</p>
-					<p>Coins</p>
-					<p>Price</p>
-					<p style={{ textAlign: "center" }}>24H Change</p>
-					<p className="market-cap">Market Cap</p>
-				</div>
-
+			<CryptoTable>
 				{displayCoins.slice(0, 10).map((item, index) => (
 					<Link
 						to={`/coin/${item.id}`}
@@ -91,8 +90,8 @@ const Explore = () => {
 						</p>
 					</Link>
 				))}
-			</div>
-		</div>
+			</CryptoTable>
+		</section>
 	);
 };
 
