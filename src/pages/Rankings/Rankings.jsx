@@ -32,7 +32,7 @@ const Rankings = () => {
 
 	return (
 		<div className="ranking">
-			<div className="hero">
+			<div className="search">
 				<form onSubmit={searchHandler}>
 					<input
 						onChange={inputHandler}
