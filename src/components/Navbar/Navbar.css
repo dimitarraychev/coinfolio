@@ -24,7 +24,7 @@
 }
 
 .navbar .link-img {
-	height: 1.5em;
+	height: 2em;
 	aspect-ratio: 1/1;
 }
 
@@ -56,4 +56,8 @@
 	height: 3em;
 	aspect-ratio: 1/1;
 	cursor: pointer;
+}
+
+.link-active {
+	color: var(--btn-color);
 }

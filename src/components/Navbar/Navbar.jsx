@@ -1,18 +1,16 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
-import homeIcon from "../../assets/icons/home-icon.svg";
-import rankIcon from "../../assets/icons/rank-icon.svg";
-import exploreIcon from "../../assets/icons/explore-icon.svg";
-import portfolioIcon from "../../assets/icons/portfolio-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
 import { CoinContext } from "../../context/CoinContext";
+import { navbarLinks } from "../../constants";
 
 const Navbar = () => {
 	const { setCurrency } = useContext(CoinContext);
+	const { pathname } = useLocation();
 
 	const currencyHandler = (e) => {
 		switch (e.target.value) {
@@ -37,43 +35,24 @@ const Navbar = () => {
 				<img src={logo} alt="logo" className="logo" />
 			</Link>
 			<ul>
-				<Link to={"/"}>
-					<li>
-						<img src={homeIcon} alt="home" className="link-img" />
-						Home
-					</li>
-				</Link>
-				<Link to={"/rankings"}>
-					<li>
-						<img
-							src={rankIcon}
-							alt="ranking"
-							className="link-img"
-						/>
-						Rankings
-					</li>
-				</Link>
-				<Link to={"/explore"}>
-					<li>
-						<img
-							src={exploreIcon}
-							alt="explore"
-							className="link-img"
-						/>
-						Explore
-					</li>
-				</Link>
-				<Link to={"/hub"}>
-					<li>
-						<img
-							src={portfolioIcon}
-							alt="portfolio hub"
-							className="link-img"
-						/>
-						Portfolio Hub
-					</li>
-				</Link>
+				{navbarLinks.map((link) => {
+					const isActive = pathname === link.route;
+
+					return (
+						<Link to={link.route}>
+							<li className={isActive && "link-active"}>
+								<img
+									src={isActive ? link.svgActive : link.svg}
+									alt={link.label}
+									className="link-img"
+								/>
+								{link.label}
+							</li>
+						</Link>
+					);
+				})}
 			</ul>
+
 			<div className="nav-right">
 				<select onChange={currencyHandler}>
 					<option value="usd">$USD</option>
