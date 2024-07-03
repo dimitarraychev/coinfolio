@@ -55,11 +55,9 @@ const Coin = () => {
 			<div className="coin">
 				<div className="coin-name">
 					<img src={coinData.image.large} alt={coinData.id} />
-					<p>
-						<b>
-							{coinData.name} ({coinData.symbol.toUpperCase()})
-						</b>
-					</p>
+					<h2>
+						{coinData.name} ({coinData.symbol.toUpperCase()})
+					</h2>
 				</div>
 				<div className="coin-chart">
 					<LineChart historicalData={historicalData} />

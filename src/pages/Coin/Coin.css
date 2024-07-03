@@ -10,19 +10,14 @@
 	max-width: 100px;
 }
 
-.coin-name p b {
-	font-size: 44px;
-	font-weight: 500;
-}
-
 .coin-chart {
-	max-width: 600px;
+	width: 60%;
 	height: 250px;
 	margin: auto;
 }
 
 .coin-info {
-	max-width: 600px;
+	width: 60%;
 	margin: 50px auto;
 	display: flex;
 	flex-direction: column;
