@@ -104,3 +104,23 @@ section.home-explore img {
 .home-explore-text .home-btn-explore {
 	margin-top: 1rem;
 }
+
+section.home-cta {
+	width: 80%;
+	margin: 1rem auto 4rem auto;
+	padding: 2rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 3rem;
+	border: 2px solid var(--dark-gray);
+	border-radius: 0.5rem;
+	background-color: var(--deep-blue);
+}
+
+section.home-cta .cta-text {
+	flex: 0 0 60%;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}

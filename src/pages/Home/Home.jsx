@@ -32,7 +32,7 @@ const Home = () => {
 					</p>
 
 					<div className="btn-container">
-						<Link to={"/"}>
+						<Link to={"/register"}>
 							<Button text="Get Started" />
 						</Link>
 						<Link to={"/explore"}>
@@ -95,6 +95,23 @@ const Home = () => {
 						<Button text="Explore" />
 					</Link>
 				</div>
+			</section>
+
+			<section className="home-cta">
+				<div className="cta-text">
+					<h2>Elevate Your Crypto Journey with Our Tools</h2>
+					<p>
+						Receive real-time updates, create and manage your
+						personalized cryptocurrency portfolio, compare its
+						performance with others, and stay ahead of market
+						trends. Our platform empowers you with comprehensive
+						tools to make informed investment decisions and navigate
+						the dynamic crypto landscape with confidence.
+					</p>
+				</div>
+				<Link to={"/register"}>
+					<Button text="Join Our Platform Now"></Button>
+				</Link>
 			</section>
 		</div>
 	);
