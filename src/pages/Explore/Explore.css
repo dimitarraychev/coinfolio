@@ -72,3 +72,8 @@
 .explore .categories-list li:hover {
 	filter: brightness(1.2);
 }
+
+.explore .categories-list li.category-active {
+	border: none;
+	background-color: var(--btn-color);
+}

@@ -13,7 +13,7 @@ const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [input, setInput] = useState("");
-	const [category, setCategory] = useState("");
+	const [category, setCategory] = useState(null);
 
 	const inputHandler = (e) => {
 		setInput(e.target.value);
@@ -92,6 +92,11 @@ const Explore = () => {
 						<li
 							key={cat.category_id}
 							onClick={() => categoriesHandler(cat.category_id)}
+							className={
+								category == cat.category_id
+									? "category-active"
+									: ""
+							}
 						>
 							{cat.name}
 						</li>
