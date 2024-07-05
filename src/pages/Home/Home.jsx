@@ -18,7 +18,7 @@ const Home = () => {
 	return (
 		<div className="home">
 			<section className="hero">
-				<img src={heroLeft} alt="hero-left" />
+				<img src={heroLeft} alt="hero-left" className="img-left" />
 
 				<article className="hero-text">
 					<p className="subheading">real-time tracking</p>
@@ -41,7 +41,7 @@ const Home = () => {
 					</div>
 				</article>
 
-				<img src={heroRight} alt="hero-right" />
+				<img src={heroRight} alt="hero-right" className="img-right" />
 			</section>
 
 			<section className="home-rankings">

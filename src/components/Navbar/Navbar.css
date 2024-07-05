@@ -5,6 +5,7 @@
 	padding: 0.5rem 5%;
 	color: #ddd;
 	border-bottom: 2px solid var(--separator-line);
+	animation: slideDown 1s linear;
 }
 
 .navbar .logo {

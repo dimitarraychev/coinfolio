@@ -13,12 +13,16 @@ section.hero {
 	min-height: 75vh;
 }
 
-section.hero h2 {
-	padding-bottom: 1rem;
-}
-
 section.hero img {
 	height: 25vw;
+}
+
+section.hero .img-right {
+	animation: slideLeft 0.5s linear;
+}
+
+section.hero .img-left {
+	animation: slideRight 0.5s linear;
 }
 
 section.hero .hero-text {

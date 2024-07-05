@@ -15,6 +15,9 @@
 	padding: 1rem 1.2rem;
 	align-items: center;
 	border-bottom: 1px solid var(--separator-line);
+	animation: appear linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 20%;
 }
 
 .table-layout:hover {

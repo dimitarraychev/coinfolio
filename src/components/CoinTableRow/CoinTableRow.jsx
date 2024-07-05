@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import "./CoinTableRow.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
