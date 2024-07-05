@@ -3,7 +3,7 @@ import "./Button.css";
 
 const Button = (props) => {
 	return (
-		<div
+		<button
 			className={
 				props.isGhost
 					? "btn btn-ghost"
@@ -14,7 +14,7 @@ const Button = (props) => {
 		>
 			{props.text}
 			{props.svg && <img src={props.svg} />}
-		</div>
+		</button>
 	);
 };
 

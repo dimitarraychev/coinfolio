@@ -32,10 +32,11 @@ const Rankings = () => {
 
 	return (
 		<section className="rankings">
-			<div className="header-wrapper">
+			<h2 className="page-header">
 				<img src={rankIcon} alt="rankings" />
-				<h2>Rankings</h2>
-			</div>
+				Rankings
+			</h2>
+
 			<div className="market-data">
 				<h5>
 					Global Market Cap 24H:{" "}

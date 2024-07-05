@@ -18,16 +18,16 @@ const Register = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert(inputs);
+		console.log(inputs);
 	};
 
 	return (
 		<section className="register">
 			<form onSubmit={handleSubmit}>
-				<div className="header-wrapper">
+				<h2 className="page-header">
 					<img src={registerIcon} alt="register" />
-					<h2>Register</h2>
-				</div>
+					Register
+				</h2>
 
 				<label htmlFor="username">Username:</label>
 				<input

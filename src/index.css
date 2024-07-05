@@ -76,7 +76,7 @@ h6 {
 	letter-spacing: 1px;
 }
 
-.header-wrapper {
+.page-header {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -84,7 +84,7 @@ h6 {
 	gap: 0.3rem;
 }
 
-.header-wrapper img {
+.page-header img {
 	height: 2.5rem;
 	aspect-ratio: 1/1;
 }

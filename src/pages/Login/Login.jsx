@@ -23,16 +23,16 @@ const Login = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		alert(inputs);
+		console.log(inputs);
 	};
 
 	return (
 		<section className="login">
 			<form onSubmit={handleSubmit}>
-				<div className="header-wrapper">
+				<h2 className="page-header">
 					<img src={loginIcon} alt="login" />
-					<h2>Login</h2>
-				</div>
+					Login
+				</h2>
 
 				<label htmlFor="email">Email:</label>
 				<input

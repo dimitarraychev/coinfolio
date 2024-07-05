@@ -13,7 +13,7 @@ section.login form {
 	align-items: flex-start;
 }
 
-section.login form .header-wrapper {
+section.login form .page-header {
 	align-self: center;
 }
 
@@ -50,6 +50,28 @@ section.login form .actions-wrapper {
 
 section.login form .remember-me {
 	display: flex;
+}
+
+.remember-me input[type="checkbox"] {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 1rem;
+	aspect-ratio: 1/1;
+	border: 2px solid var(--light-gray);
+	background-color: transparent;
+	cursor: pointer;
+	position: relative;
+	border-radius: 0.3rem;
+	margin-right: 0.1rem;
+}
+
+.remember-me input[type="checkbox"]:checked::before {
+	content: "✔";
+	position: absolute;
+	top: -0.25rem;
+	left: 0.04rem;
+	scale: 1.2;
 }
 
 section.login form .remember-me input:hover,

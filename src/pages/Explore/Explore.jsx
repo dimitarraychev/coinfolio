@@ -58,10 +58,10 @@ const Explore = () => {
 
 	return (
 		<section className="explore">
-			<div className="header-wrapper">
+			<h2 className="page-header">
 				<img src={exploreIcon} alt="explore" />
-				<h2>Explore</h2>
-			</div>
+				Explore
+			</h2>
 
 			<div className="search">
 				<form onSubmit={searchHandler}>

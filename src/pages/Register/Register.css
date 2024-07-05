@@ -13,7 +13,7 @@ section.register form {
 	align-items: flex-start;
 }
 
-section.register form .header-wrapper {
+section.register form .page-header {
 	align-self: center;
 }
 
