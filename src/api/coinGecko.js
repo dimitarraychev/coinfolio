@@ -1,7 +1,7 @@
 const API_BASE_URL = "https://api.coingecko.com/api/v3";
-const API_KEY = "CG-m1zpVwoWPMSFhtQz7E1tRbYe"; // Replace with your actual API key
+const API_KEY = "CG-m1zpVwoWPMSFhtQz7E1tRbYe";
 
-export const fetchAllCoins = async (currency) => {
+export const fetchAllCoins = async (currency, category) => {
 	const options = {
 		method: "GET",
 		headers: {
@@ -10,10 +10,10 @@ export const fetchAllCoins = async (currency) => {
 		},
 	};
 
-	const response = await fetch(
-		`${API_BASE_URL}/coins/markets?vs_currency=${currency}`,
-		options
-	);
+	let URL = `${API_BASE_URL}/coins/markets?vs_currency=${currency}`;
+	if (category && category != null) URL = URL + `&category=${category}`;
+
+	const response = await fetch(URL, options);
 	if (!response.ok) {
 		throw new Error("Failed to fetch coins data");
 	}
