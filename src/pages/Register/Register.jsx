@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+
 import "./Register.css";
 import registerImg from "../../assets/images/login-register.svg";
-import { useState } from "react";
+import registerIcon from "../../assets/icons/register-icon.svg";
+import arrowRight from "../../assets/icons/arrow-right.svg";
+import Button from "../../components/Button/Button";
 
 const Register = () => {
 	const [inputs, setInputs] = useState({});
@@ -20,27 +24,56 @@ const Register = () => {
 	return (
 		<section className="register">
 			<form onSubmit={handleSubmit}>
-				<label>
-					Enter your name:
-					<input
-						type="text"
-						name="username"
-						value={inputs.username || ""}
-						onChange={handleChange}
-					/>
-				</label>
-				<label>
-					Enter your age:
-					<input
-						type="number"
-						name="age"
-						value={inputs.age || ""}
-						onChange={handleChange}
-					/>
-				</label>
-				<input type="submit" />
+				<div className="header-wrapper">
+					<img src={registerIcon} alt="rankings" />
+					<h2>Register</h2>
+				</div>
+
+				<label htmlFor="username">Username:</label>
+				<input
+					type="text"
+					name="username"
+					placeholder="Your username..."
+					value={inputs.username || ""}
+					onChange={handleChange}
+				/>
+
+				<label htmlFor="email">Email:</label>
+				<input
+					type="email"
+					name="email"
+					placeholder="Your email address..."
+					value={inputs.email || ""}
+					onChange={handleChange}
+				/>
+
+				<label htmlFor="password">Password:</label>
+				<input
+					type="password"
+					name="password"
+					placeholder="Set your password..."
+					value={inputs.password || ""}
+					onChange={handleChange}
+				/>
+
+				<label htmlFor="re_password">Repeat Password:</label>
+				<input
+					type="number"
+					name="re_password"
+					placeholder="Repeat your password..."
+					value={inputs.re_password || ""}
+					onChange={handleChange}
+				/>
+
+				<Button text="sign up" svg={arrowRight} isWide={true} />
+				<p className="link">
+					Already have an account?{" "}
+					<Link to={"/login"}>
+						<span>Log in</span>
+					</Link>
+				</p>
 			</form>
-			<img src={registerImg} alt="register" />
+			<img src={registerImg} alt="register" className="register-img" />
 		</section>
 	);
 };
