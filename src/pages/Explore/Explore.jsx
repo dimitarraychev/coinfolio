@@ -2,15 +2,18 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 import categoriesIcon from "../../assets/icons/categories-icon.svg";
+import { categories } from "../../constants/index";
 
 import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
+import { fetchAllCoins } from "../../api/coinGecko";
 
 const Explore = () => {
-	const { allCoins } = useContext(CoinContext);
+	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [input, setInput] = useState("");
+	const [category, setCategory] = useState("");
 
 	const inputHandler = (e) => {
 		setInput(e.target.value);
@@ -20,15 +23,34 @@ const Explore = () => {
 		}
 	};
 
-	const searchHandler = async (e) => {
-		e.preventDefault();
-
-		const coins = await allCoins.filter((item) => {
-			return item.name.toLowerCase().includes(input.toLowerCase());
-		});
-
-		setDisplayCoins(coins);
+	const categoriesHandler = (value) => {
+		setCategory(value);
 	};
+
+	const searchHandler = (e) => {
+		e.preventDefault();
+		fetchCoins();
+	};
+
+	const fetchCoins = async () => {
+		try {
+			const coins = await fetchAllCoins(currency.name, category);
+			if (input) {
+				const filteredCoins = coins.filter((item) =>
+					item.name.toLowerCase().includes(input.toLowerCase())
+				);
+				setDisplayCoins(filteredCoins);
+			} else {
+				setDisplayCoins(coins);
+			}
+		} catch (error) {
+			console.error("Failed to fetch coins:", error);
+		}
+	};
+
+	useEffect(() => {
+		fetchCoins();
+	}, [category]);
 
 	useEffect(() => {
 		setDisplayCoins(allCoins);
@@ -52,7 +74,7 @@ const Explore = () => {
 						required
 					/>
 					<datalist id="coinlist">
-						{allCoins.map((item, index) => (
+						{displayCoins.map((item, index) => (
 							<option key={index} value={item.name} />
 						))}
 					</datalist>
@@ -66,14 +88,14 @@ const Explore = () => {
 					Categories
 				</p>
 				<ul className="categories-list">
-					<li>All</li>
-					<li>Layer 1</li>
-					<li>Layer 2</li>
-					<li>DeFi</li>
-					<li>Stablecoins</li>
-					<li>AI</li>
-					<li>Storage</li>
-					<li>Meme</li>
+					{categories.map((cat) => (
+						<li
+							key={cat.category_id}
+							onClick={() => categoriesHandler(cat.category_id)}
+						>
+							{cat.name}
+						</li>
+					))}
 				</ul>
 			</div>
 

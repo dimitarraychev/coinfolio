@@ -1,10 +1,10 @@
 .explore {
-	padding: 2em;
+	padding: 2rem;
 }
 
 .search {
 	width: 40%;
-	margin: 0 auto 1em auto;
+	margin: 0 auto 1rem auto;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -45,7 +45,7 @@
 .explore .categories-wrapper {
 	width: 70%;
 	margin: 0 auto;
-	font-size: 14px;
+	padding: 1rem 0 2rem 0;
 }
 
 .explore .categories-wrapper img {
@@ -54,17 +54,17 @@
 }
 
 .explore .categories-list {
+	padding-top: 0.5rem;
 	font-size: 16px;
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	justify-content: space-between;
+	gap: 1rem;
 	list-style: none;
-	padding: 1em 0;
 }
 
 .explore .categories-list li {
-	border: 1px solid var(--light-gray);
+	border: 1px solid var(--btn-color);
 	border-radius: 0.5rem;
 	padding: 0.2rem 1rem;
 	cursor: pointer;
