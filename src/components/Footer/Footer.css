@@ -1,8 +1,66 @@
 .footer {
-	text-align: center;
 	margin: auto;
-	max-width: 80%;
-	padding: 15px 0px;
+	max-width: 90%;
 	border-top: 1px solid #989898;
-	font-size: 13px;
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	padding: 1rem 4rem;
+}
+
+.footer-about {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.footer-about .logo {
+	height: 3rem;
+	margin-bottom: 1rem;
+}
+
+.footer-about .coingecko-logo {
+	height: 2rem;
+}
+
+.footer-about .coingecko {
+	margin: 0.5rem 0;
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+}
+
+.footer-about .motto {
+	max-width: 30ch;
+}
+
+.footer-about .logos-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	margin: 1rem 0 2rem 0;
+}
+
+.footer-about .logos-wrapper img {
+	height: 2rem;
+	aspect-ratio: 1/1;
+}
+
+.footer-right {
+	display: flex;
+	gap: 5vw;
+}
+
+.footer-market,
+.footer-portfolio,
+.footer-user {
+	margin-top: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.footer h6 {
+	margin-bottom: 1rem;
 }
