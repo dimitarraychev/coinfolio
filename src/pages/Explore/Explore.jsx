@@ -8,12 +8,14 @@ import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import { fetchAllCoins } from "../../api/coinGecko";
+import Loader from "../../components/Loader/Loader";
 
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [input, setInput] = useState("");
 	const [category, setCategory] = useState(null);
+	const [isLoading, setIsLoading] = useState(false);
 
 	const inputHandler = (e) => {
 		setInput(e.target.value);
@@ -24,11 +26,13 @@ const Explore = () => {
 	};
 
 	const categoriesHandler = (value) => {
+		setIsLoading(true);
 		setCategory(value);
 	};
 
 	const searchHandler = (e) => {
 		e.preventDefault();
+		setIsLoading(true);
 		fetchCoins();
 	};
 
@@ -43,6 +47,7 @@ const Explore = () => {
 			} else {
 				setDisplayCoins(coins);
 			}
+			setIsLoading(false);
 		} catch (error) {
 			console.error("Failed to fetch coins:", error);
 		}
@@ -105,9 +110,17 @@ const Explore = () => {
 			</div>
 
 			<CryptoTable>
-				{displayCoins.slice(0, 10).map((item, index) => (
-					<CoinTableRow item={item} key={index} />
-				))}
+				{isLoading ? (
+					<div className="loader-wrapper">
+						<Loader size="10rem" />
+					</div>
+				) : (
+					displayCoins
+						.slice(0, 10)
+						.map((item, index) => (
+							<CoinTableRow item={item} key={index} />
+						))
+				)}
 			</CryptoTable>
 		</section>
 	);
