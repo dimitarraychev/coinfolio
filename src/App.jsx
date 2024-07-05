@@ -6,6 +6,7 @@ import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
 import Explore from "./pages/Explore/Explore";
 import Footer from "./components/Footer/Footer";
+import Register from "./pages/Register/Register";
 
 const App = () => {
 	return (
@@ -16,6 +17,7 @@ const App = () => {
 				<Route path="/rankings" element={<Rankings />} />
 				<Route path="/explore" element={<Explore />} />
 				<Route path="/coin/:coinId" element={<Coin />} />
+				<Route path="/register" element={<Register />} />
 			</Routes>
 			<Footer />
 		</div>
