@@ -112,14 +112,13 @@ section.home-explore img {
 section.home-cta {
 	width: 80%;
 	margin: 1rem auto 8rem auto;
-	padding: 2rem;
+	padding: 3rem;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	gap: 3rem;
-	border: 2px solid var(--dark-gray);
-	border-radius: 0.5rem;
-	background-color: var(--deep-blue);
+	border-radius: 1rem;
+	background: linear-gradient(to right, var(--deep-blue), var(--light));
 }
 
 section.home-cta .cta-text {
@@ -127,4 +126,8 @@ section.home-cta .cta-text {
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
+}
+
+section.home-cta .cta-text p {
+	max-width: 66ch;
 }
