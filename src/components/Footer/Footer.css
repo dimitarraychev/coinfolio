@@ -47,6 +47,10 @@
 	aspect-ratio: 1/1;
 }
 
+.footer-about .logos-wrapper img.github-link {
+	height: 1.8rem;
+}
+
 .footer-right {
 	display: flex;
 	gap: 5vw;

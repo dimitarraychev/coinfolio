@@ -3,7 +3,7 @@ section.login {
 	align-items: center;
 	justify-content: center;
 	padding: 2rem;
-	min-height: 90vh;
+	min-height: 85vh;
 }
 
 section.login form {
