@@ -6,10 +6,19 @@
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
 	font-weight: 500;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.3rem;
 }
 
 .btn:hover {
 	filter: brightness(1.2);
+}
+
+.btn img {
+	height: 1rem;
+	aspect-ratio: 1/1;
 }
 
 .btn-ghost {
@@ -19,4 +28,8 @@
 
 .btn-ghost:hover {
 	filter: brightness(0.8);
+}
+
+.btn-wide {
+	width: 100%;
 }
