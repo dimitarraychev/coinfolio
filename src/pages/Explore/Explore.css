@@ -48,6 +48,14 @@
 	padding: 1rem 0 2rem 0;
 }
 
+.explore .categories-wrapper .categories {
+	cursor: pointer;
+}
+
+.explore .categories-list.cat-hide {
+	display: none;
+}
+
 .explore .categories-wrapper img {
 	height: 1em;
 	aspect-ratio: 1/1;

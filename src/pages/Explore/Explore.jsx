@@ -16,6 +16,7 @@ const Explore = () => {
 	const [input, setInput] = useState("");
 	const [category, setCategory] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const [isCategoriesShown, setIsCategoriesShown] = useState(true);
 
 	const inputHandler = (e) => {
 		setInput(e.target.value);
@@ -34,6 +35,10 @@ const Explore = () => {
 		e.preventDefault();
 		setIsLoading(true);
 		fetchCoins();
+	};
+
+	const toggleCategoriesViewHandler = (e) => {
+		setIsCategoriesShown((state) => !state);
 	};
 
 	const fetchCoins = async () => {
@@ -88,11 +93,17 @@ const Explore = () => {
 			</div>
 
 			<div className="categories-wrapper">
-				<p className="categories">
+				<p className="categories" onClick={toggleCategoriesViewHandler}>
 					<img src={categoriesIcon} alt="filter" />
 					Categories
 				</p>
-				<ul className="categories-list">
+				<ul
+					className={
+						isCategoriesShown
+							? "categories-list"
+							: "categories-list cat-hide"
+					}
+				>
 					{categories.map((cat) => (
 						<li
 							key={cat.category_id}
