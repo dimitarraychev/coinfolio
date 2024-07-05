@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "./Navbar.css";
@@ -11,6 +11,8 @@ import { navbarLinks } from "../../constants";
 const Navbar = () => {
 	const { setCurrency } = useContext(CoinContext);
 	const { pathname } = useLocation();
+
+	const [isMenuShown, setIsMenuShown] = useState(false);
 
 	const currencyHandler = (e) => {
 		switch (e.target.value) {
@@ -29,18 +31,22 @@ const Navbar = () => {
 		}
 	};
 
+	const userMenuHandler = () => {
+		setIsMenuShown((state) => !state);
+	};
+
 	return (
 		<div className="navbar">
 			<Link to={"/"}>
 				<img src={logo} alt="logo" className="logo" />
 			</Link>
-			<ul>
+			<ul className="navbar-links">
 				{navbarLinks.map((link) => {
 					const isActive = pathname === link.route;
 
 					return (
-						<Link to={link.route}>
-							<li className={isActive && "link-active"}>
+						<Link to={link.route} key={link.label}>
+							<li className={isActive ? "link-active" : ""}>
 								<img
 									src={isActive ? link.svgActive : link.svg}
 									alt={link.label}
@@ -58,9 +64,19 @@ const Navbar = () => {
 					<option value="usd">$USD</option>
 					<option value="eur">€EUR</option>
 				</select>
-				<div className="user">
+				<div className="user" onClick={userMenuHandler}>
 					<p>Guest</p>
 					<img src={userPlaceholder} alt="user" />
+					<ul
+						className={isMenuShown ? "user-menu show" : "user-menu"}
+					>
+						<Link to={"/register"}>
+							<li>Register</li>
+						</Link>
+						<Link to={"/login"}>
+							<li>Login</li>
+						</Link>
+					</ul>
 				</div>
 			</div>
 		</div>

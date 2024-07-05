@@ -11,7 +11,7 @@
 	width: max(12vw, 120px);
 }
 
-.navbar ul {
+.navbar ul.navbar-links {
 	display: flex;
 	gap: 40px;
 	list-style: none;
@@ -35,8 +35,8 @@
 }
 
 .navbar select {
-	padding: 5px 8px;
-	border-radius: 6px;
+	padding: 0.3rem 0.5rem;
+	border-radius: 0.4rem;
 	border: 2px solid white;
 	background: transparent;
 	color: white;
@@ -50,6 +50,31 @@
 .user {
 	display: flex;
 	align-items: center;
+	position: relative;
+}
+
+.user-menu {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	display: none;
+}
+
+.user-menu.show {
+	display: flex;
+	flex-direction: column;
+	gap: 0.05rem;
+}
+
+.user-menu li {
+	padding: 0.3rem 0.5rem;
+	border-radius: 0.4rem;
+	border: 2px solid white;
+	background: transparent;
+}
+
+.user-menu li:hover {
+	filter: brightness(1.2);
 }
 
 .user img {
