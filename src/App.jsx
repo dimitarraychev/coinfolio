@@ -7,6 +7,7 @@ import Rankings from "./pages/Rankings/Rankings";
 import Explore from "./pages/Explore/Explore";
 import Footer from "./components/Footer/Footer";
 import Register from "./pages/Register/Register";
+import Login from "./pages/Login/Login";
 
 const App = () => {
 	return (
@@ -18,6 +19,7 @@ const App = () => {
 				<Route path="/explore" element={<Explore />} />
 				<Route path="/coin/:coinId" element={<Coin />} />
 				<Route path="/register" element={<Register />} />
+				<Route path="/login" element={<Login />} />
 			</Routes>
 			<Footer />
 		</div>

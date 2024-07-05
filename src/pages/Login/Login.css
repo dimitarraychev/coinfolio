@@ -1,0 +1,60 @@
+section.login {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem;
+	min-height: 80vh;
+}
+
+section.login form {
+	display: flex;
+	width: 22rem;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+section.login form .header-wrapper {
+	align-self: center;
+}
+
+section.login .form-input {
+	width: 100%;
+	margin-bottom: 0.5rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	color: black;
+}
+
+section.login .login-img {
+	height: 30vw;
+	aspect-ratio: 1/1;
+}
+
+section.login form .link {
+	align-self: center;
+	margin-top: 0.3rem;
+}
+
+section.login form .link span {
+	color: var(--btn-color);
+	text-decoration: underline;
+}
+
+section.login form .actions-wrapper {
+	display: flex;
+	font-size: 14px;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+
+section.login form .remember-me {
+	display: flex;
+}
+
+section.login form .remember-me input:hover,
+section.login form .remember-me label:hover,
+section.login form .actions-wrapper p:hover {
+	cursor: pointer;
+	filter: brightness(0.8);
+}
