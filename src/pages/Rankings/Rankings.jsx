@@ -3,13 +3,13 @@ import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 
 import rankIcon from "../../assets/icons/rank-icon-white.svg";
 import Loader from "../../components/Loader/Loader";
 
 import { CoinContext } from "../../context/CoinContext";
 import { useInView } from "react-intersection-observer";
-import { CoinTableRow } from "../../components/CoinTableRow/CoinTableRow";
 
 const Rankings = () => {
 	const { allCoins, globalMarketData } = useContext(CoinContext);

@@ -1,13 +1,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
+import categoriesIcon from "../../assets/icons/categories-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
-import { Link } from "react-router-dom";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 
 const Explore = () => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { allCoins } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [input, setInput] = useState("");
 
@@ -39,6 +40,7 @@ const Explore = () => {
 				<img src={exploreIcon} alt="explore" />
 				<h2>Explore</h2>
 			</div>
+
 			<div className="search">
 				<form onSubmit={searchHandler}>
 					<input
@@ -58,37 +60,26 @@ const Explore = () => {
 				</form>
 			</div>
 
+			<div className="categories-wrapper">
+				<p className="categories">
+					<img src={categoriesIcon} alt="filter" />
+					Categories
+				</p>
+				<ul className="categories-list">
+					<li>All</li>
+					<li>Layer 1</li>
+					<li>Layer 2</li>
+					<li>DeFi</li>
+					<li>Stablecoins</li>
+					<li>AI</li>
+					<li>Storage</li>
+					<li>Meme</li>
+				</ul>
+			</div>
+
 			<CryptoTable>
 				{displayCoins.slice(0, 10).map((item, index) => (
-					<Link
-						to={`/coin/${item.id}`}
-						className="table-layout"
-						key={index}
-					>
-						<p>{item.market_cap_rank}</p>
-						<div>
-							<img src={item.image} alt={item.symbol} />
-							<p>{item.name + " - " + item.symbol}</p>
-						</div>
-						<p>
-							{currency.symbol}{" "}
-							{item.current_price.toLocaleString()}
-						</p>
-						<p
-							className={
-								item.price_change_percentage_24h > 0
-									? "green"
-									: "red"
-							}
-						>
-							{Math.floor(
-								item.price_change_percentage_24h * 100
-							) / 100}
-						</p>
-						<p className="market-cap">
-							{currency.symbol} {item.market_cap.toLocaleString()}
-						</p>
-					</Link>
+					<CoinTableRow item={item} key={index} />
 				))}
 			</CryptoTable>
 		</section>

@@ -8,7 +8,7 @@ import homePortfolio from "../../assets/images/home-portfolio.svg";
 import homeExplore from "../../assets/images/home-explore.svg";
 
 import { CoinContext } from "../../context/CoinContext";
-import { CoinTableRow } from "../../components/CoinTableRow/CoinTableRow";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import Button from "../../components/Button/Button";
 

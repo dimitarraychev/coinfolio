@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
 import formatPrice from "../../utils/index";
 
-export const CoinTableRow = ({ item }) => {
+const CoinTableRow = ({ item }) => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const isPositivePriceChange = item.price_change_percentage_24h > 0;
 
@@ -37,3 +37,5 @@ export const CoinTableRow = ({ item }) => {
 		</Link>
 	);
 };
+
+export default CoinTableRow;
