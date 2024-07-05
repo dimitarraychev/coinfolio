@@ -25,7 +25,7 @@ const Register = () => {
 		<section className="register">
 			<form onSubmit={handleSubmit}>
 				<div className="header-wrapper">
-					<img src={registerIcon} alt="rankings" />
+					<img src={registerIcon} alt="register" />
 					<h2>Register</h2>
 				</div>
 
@@ -33,6 +33,9 @@ const Register = () => {
 				<input
 					type="text"
 					name="username"
+					id="username"
+					className="form-input"
+					autoComplete="username"
 					placeholder="Your username..."
 					value={inputs.username || ""}
 					onChange={handleChange}
@@ -42,6 +45,9 @@ const Register = () => {
 				<input
 					type="email"
 					name="email"
+					id="email"
+					className="form-input"
+					autoComplete="email"
 					placeholder="Your email address..."
 					value={inputs.email || ""}
 					onChange={handleChange}
@@ -51,6 +57,9 @@ const Register = () => {
 				<input
 					type="password"
 					name="password"
+					id="password"
+					className="form-input"
+					autoComplete="new-password"
 					placeholder="Set your password..."
 					value={inputs.password || ""}
 					onChange={handleChange}
@@ -58,14 +67,18 @@ const Register = () => {
 
 				<label htmlFor="re_password">Repeat Password:</label>
 				<input
-					type="number"
+					type="password"
 					name="re_password"
+					id="re_password"
+					className="form-input"
+					autoComplete="new-password"
 					placeholder="Repeat your password..."
 					value={inputs.re_password || ""}
 					onChange={handleChange}
 				/>
 
 				<Button text="sign up" svg={arrowRight} isWide={true} />
+
 				<p className="link">
 					Already have an account?{" "}
 					<Link to={"/login"}>
@@ -73,6 +86,7 @@ const Register = () => {
 					</Link>
 				</p>
 			</form>
+
 			<img src={registerImg} alt="register" className="register-img" />
 		</section>
 	);
