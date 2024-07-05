@@ -16,8 +16,23 @@ const Footer = () => {
 				</p>
 
 				<div className="logos-wrapper">
-					<img src={githubLogo} alt="github" />
-					<img src={linkedInLogo} alt="linkedin" />
+					<Link
+						to={"https://github.com/dimitarraychev"}
+						target="_blank"
+					>
+						<img
+							src={githubLogo}
+							alt="github"
+							className="github-link"
+						/>
+					</Link>
+
+					<Link
+						to={"https://www.linkedin.com/in/dimitaraychev/"}
+						target="_blank"
+					>
+						<img src={linkedInLogo} alt="linkedin" />
+					</Link>
 				</div>
 
 				<p className="coingecko">
@@ -61,7 +76,7 @@ const Footer = () => {
 					<Link to={"login"}>
 						<p>Login</p>
 					</Link>
-					<Link to={"My Portfolios"}>
+					<Link to={"hub/username"}>
 						<p>My Portfolios</p>
 					</Link>
 					<Link to={"logout"}>
