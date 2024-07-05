@@ -4,6 +4,8 @@ import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
+import loginIcon from "../../assets/icons/login-icon.svg";
+import registerIcon from "../../assets/icons/register-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
 import { navbarLinks } from "../../constants";
@@ -64,17 +66,37 @@ const Navbar = () => {
 					<option value="usd">$USD</option>
 					<option value="eur">€EUR</option>
 				</select>
+
 				<div className="user" onClick={userMenuHandler}>
 					<p>Guest</p>
-					<img src={userPlaceholder} alt="user" />
+					<img
+						src={userPlaceholder}
+						alt="user"
+						className="user-image"
+					/>
+
 					<ul
 						className={isMenuShown ? "user-menu show" : "user-menu"}
 					>
 						<Link to={"/register"}>
-							<li>Register</li>
+							<li>
+								<img
+									src={registerIcon}
+									alt="register"
+									className="link-img"
+								/>
+								<p>Register</p>
+							</li>
 						</Link>
 						<Link to={"/login"}>
-							<li>Login</li>
+							<li>
+								<img
+									src={loginIcon}
+									alt="login"
+									className="link-img"
+								/>
+								<p>Login</p>
+							</li>
 						</Link>
 					</ul>
 				</div>

@@ -17,7 +17,7 @@
 	list-style: none;
 }
 
-.navbar li {
+.navbar-links li {
 	cursor: pointer;
 	display: flex;
 	flex-direction: column;
@@ -71,13 +71,22 @@
 	border-radius: 0.4rem;
 	border: 2px solid white;
 	background: transparent;
+	display: flex;
+	gap: 0.2rem;
+	justify-content: flex-start;
+	align-items: center;
 }
 
 .user-menu li:hover {
 	filter: brightness(1.2);
 }
 
-.user img {
+.user-menu .link-img {
+	height: 1em;
+	aspect-ratio: 1/1;
+}
+
+.user .user-image {
 	height: 3em;
 	aspect-ratio: 1/1;
 	cursor: pointer;
