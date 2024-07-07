@@ -30,6 +30,7 @@
 
 .table-layout p:last-of-type {
 	text-align: right;
+	justify-self: flex-end;
 }
 
 .table-layout:last-child {

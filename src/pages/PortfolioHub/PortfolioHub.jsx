@@ -1,7 +1,8 @@
 import React from "react";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
-import PortfolioCard from "../../components/PortfolioCard/PortfolioCard";
+import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 
 const PortfolioHub = () => {
 	return (
@@ -12,10 +13,14 @@ const PortfolioHub = () => {
 			</h2>
 
 			<div className="portfolios-wrapper">
-				<PortfolioCard />
-				<PortfolioCard />
-				<PortfolioCard />
-				<PortfolioCard />
+				<CryptoTable
+					columns={["#", "Title", "Followers", "Total P/L", "Action"]}
+				>
+					<PortfolioTableRow />
+					<PortfolioTableRow />
+					<PortfolioTableRow />
+					<PortfolioTableRow />
+				</CryptoTable>
 			</div>
 		</section>
 	);
