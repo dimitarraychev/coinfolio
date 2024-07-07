@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { CoinContext } from "../../context/CoinContext";
-import LineChart from "../../components/LineChart/LineChart";
+import LineChart from "../../components/LineChart";
 import Loader from "../../components/Loader/Loader";
 import formatPrice from "../../utils/index";
 import { fetchCoinData, fetchHistoricalData } from "../../api/coinGecko";

@@ -5,8 +5,8 @@ import categoriesIcon from "../../assets/icons/categories-icon.svg";
 import { categories } from "../../constants/index";
 
 import { CoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
+import CryptoTable from "../../components/CryptoTable";
+import CoinTableRow from "../../components/CoinTableRow";
 import { fetchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
 

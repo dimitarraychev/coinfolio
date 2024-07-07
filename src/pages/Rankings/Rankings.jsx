@@ -2,8 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
+import CryptoTable from "../../components/CryptoTable";
+import CoinTableRow from "../../components/CoinTableRow";
 
 import rankIcon from "../../assets/icons/rank-icon-white.svg";
 import Loader from "../../components/Loader/Loader";

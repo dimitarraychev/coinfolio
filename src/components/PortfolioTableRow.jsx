@@ -1,7 +1,7 @@
 import React from "react";
-import Button from "../Button/Button";
+import Button from "./Button/Button";
 import { Link } from "react-router-dom";
-import plusIcon from "../../assets/icons/plus-icon.svg";
+import plusIcon from "../assets/icons/plus-icon.svg";
 
 const PortfolioTableRow = () => {
 	return (

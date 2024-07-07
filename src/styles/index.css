@@ -1,6 +1,7 @@
 @import "./typography.css";
 @import "./animations.css";
 @import "./auth.css";
+@import "./table.css";
 @import "./details.css";
 
 body {
@@ -34,8 +35,6 @@ body {
 	color: white;
 	background: linear-gradient(var(--deep-blue), var(--dark), var(--light));
 }
-
-/* Scrollbar */
 
 ::-webkit-scrollbar {
 	width: 0.5rem;

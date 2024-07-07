@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
-import arrowUp from "../../assets/icons/arrow-up.svg";
-import arrowDown from "../../assets/icons/arrow-down.svg";
+import arrowUp from "../assets/icons/arrow-up.svg";
+import arrowDown from "../assets/icons/arrow-down.svg";
 
 import { Link } from "react-router-dom";
-import { CoinContext } from "../../context/CoinContext";
-import formatPrice from "../../utils/index";
+import { CoinContext } from "../context/CoinContext";
+import formatPrice from "../utils/index";
 
 const CoinTableRow = ({ item }) => {
 	const { allCoins, currency } = useContext(CoinContext);

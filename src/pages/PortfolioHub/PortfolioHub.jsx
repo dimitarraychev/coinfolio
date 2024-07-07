@@ -1,8 +1,8 @@
 import React from "react";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
-import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
+import PortfolioTableRow from "../../components/PortfolioTableRow";
+import CryptoTable from "../../components/CryptoTable";
 
 const PortfolioHub = () => {
 	return (

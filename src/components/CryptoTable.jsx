@@ -1,5 +1,4 @@
 import React from "react";
-import "./CryptoTable.css";
 
 const CryptoTable = (props) => {
 	return (
