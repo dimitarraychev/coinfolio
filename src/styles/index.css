@@ -1,0 +1,56 @@
+@import "./typography.css";
+@import "./animations.css";
+@import "./auth.css";
+@import "./details.css";
+
+body {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+*,
+*::before,
+*::after {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+:root {
+	--deep-blue: #05014a;
+	--dark: #0d1421;
+	--light: #222531;
+	--dark-gray: #8e8e93;
+	--light-gray: #aeaeb2;
+	--btn-color: #486dfb;
+	--separator-line: #3c3c3c;
+	--green: #34c759;
+	--red: #ff3b30;
+}
+
+.app {
+	min-height: 100vh;
+	color: white;
+	background: linear-gradient(var(--deep-blue), var(--dark), var(--light));
+}
+
+/* Scrollbar */
+
+::-webkit-scrollbar {
+	width: 0.5rem;
+	height: 0.5rem;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--dark);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--light);
+	border-radius: 1rem;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: #4a506a;
+}
