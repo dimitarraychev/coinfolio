@@ -10,6 +10,7 @@ import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import PortfolioHub from "./pages/PortfolioHub/PortfolioHub";
 import Portfolio from "./pages/Portfolio/Portfolio";
+import Create from "./pages/Create/Create";
 
 const App = () => {
 	return (
@@ -24,6 +25,7 @@ const App = () => {
 				<Route path="/login" element={<Login />} />
 				<Route path="/hub" element={<PortfolioHub />} />
 				<Route path="/portfolio/:portfolioId" element={<Portfolio />} />
+				<Route path="/portfolio/create" element={<Create />} />
 			</Routes>
 			<Footer />
 		</div>
