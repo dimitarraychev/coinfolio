@@ -4,6 +4,15 @@ import Chart from "react-google-charts";
 const LineChart = ({ historicalData }) => {
 	const [data, setData] = useState([["Date", "Prices"]]);
 
+	const options = {
+		backgroundColor: "transparent",
+		legendTextStyle: { color: "#FFF" },
+		hAxis: {
+			textStyle: { color: "#FFF" },
+		},
+		lineWidth: 5,
+	};
+
 	useEffect(() => {
 		let dataCopy = [["Date", "Prices"]];
 		if (historicalData.prices) {
@@ -23,14 +32,7 @@ const LineChart = ({ historicalData }) => {
 			data={data}
 			height="100%"
 			legendToggle
-			options={{
-				backgroundColor: "transparent",
-				legendTextStyle: { color: "#FFF" },
-				hAxis: {
-					textStyle: { color: "#FFF" },
-				},
-				lineWidth: 5,
-			}}
+			options={options}
 		/>
 	);
 };
