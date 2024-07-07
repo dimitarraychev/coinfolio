@@ -61,7 +61,7 @@ const Footer = () => {
 				<div className="footer-portfolio">
 					<h6>Portfolio</h6>
 					<Link to={"/hub"}>
-						<p>Porfolio Hub</p>
+						<p>Portfolio Hub</p>
 					</Link>
 					<Link to={"/hub/create"}>
 						<p>Create</p>
