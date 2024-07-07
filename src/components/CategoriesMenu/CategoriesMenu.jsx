@@ -3,7 +3,7 @@ import "./CategoriesMenu.css";
 import categoriesIcon from "../../assets/icons/categories-icon.svg";
 import { categories } from "../../constants/index";
 
-const CategoriesMenu = ({ category, categoriesHandler }) => {
+const CategoriesMenu = ({ category, onCategoryChange }) => {
 	const [isCategoriesShown, setIsCategoriesShown] = useState(true);
 
 	const toggleCategoriesViewHandler = (e) => {
@@ -26,7 +26,7 @@ const CategoriesMenu = ({ category, categoriesHandler }) => {
 				{categories.map((cat) => (
 					<li
 						key={cat.category_id}
-						onClick={() => categoriesHandler(cat.category_id)}
+						onClick={() => onCategoryChange(cat.category_id)}
 						className={
 							category == cat.category_id ? "category-active" : ""
 						}

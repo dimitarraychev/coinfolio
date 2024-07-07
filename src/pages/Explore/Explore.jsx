@@ -88,7 +88,7 @@ const Explore = () => {
 
 			<CategoriesMenu
 				category={category}
-				categoriesHandler={categoriesHandler}
+				onCategoryChange={categoriesHandler}
 			/>
 
 			<CryptoTable
