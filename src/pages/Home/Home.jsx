@@ -48,7 +48,15 @@ const Home = () => {
 				<p className="subheading">global rankings</p>
 				<h2>Top Cryptocurrencies By Market Cap</h2>
 
-				<CryptoTable>
+				<CryptoTable
+					columns={[
+						"#",
+						"Coins",
+						"Price",
+						"24H Change",
+						"Market Cap",
+					]}
+				>
 					{allCoins.slice(0, 3).map((item, index) => (
 						<CoinTableRow item={item} key={index} />
 					))}

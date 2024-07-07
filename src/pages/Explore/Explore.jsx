@@ -93,10 +93,13 @@ const Explore = () => {
 			</div>
 
 			<div className="categories-wrapper">
-				<p className="categories" onClick={toggleCategoriesViewHandler}>
+				<label
+					className="categories"
+					onClick={toggleCategoriesViewHandler}
+				>
 					<img src={categoriesIcon} alt="filter" />
 					Categories
-				</p>
+				</label>
 				<ul
 					className={
 						isCategoriesShown
@@ -120,7 +123,9 @@ const Explore = () => {
 				</ul>
 			</div>
 
-			<CryptoTable>
+			<CryptoTable
+				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+			>
 				{isLoading ? (
 					<div className="loader-wrapper">
 						<Loader size="10rem" />

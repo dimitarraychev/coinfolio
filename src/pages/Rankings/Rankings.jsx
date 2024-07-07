@@ -59,7 +59,9 @@ const Rankings = () => {
 				</h5>
 			</div>
 
-			<CryptoTable>
+			<CryptoTable
+				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+			>
 				{displayCoins.map((item, index) => (
 					<CoinTableRow item={item} key={index} />
 				))}

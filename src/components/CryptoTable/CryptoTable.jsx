@@ -5,11 +5,9 @@ const CryptoTable = (props) => {
 	return (
 		<div className="crypto-table">
 			<div className="table-layout">
-				<p>#</p>
-				<p>Coins</p>
-				<p>Price</p>
-				<p style={{ textAlign: "center" }}>24H Change</p>
-				<p className="market-cap">Market Cap</p>
+				{props.columns.map((col) => (
+					<p>{col}</p>
+				))}
 			</div>
 			{props.children}
 		</div>
