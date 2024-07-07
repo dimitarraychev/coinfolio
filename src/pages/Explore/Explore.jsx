@@ -1,14 +1,13 @@
 import React, { useContext, useEffect, useState } from "react";
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
-import categoriesIcon from "../../assets/icons/categories-icon.svg";
-import { categories } from "../../constants/index";
 
 import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
 import { fetchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
+import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
@@ -16,7 +15,6 @@ const Explore = () => {
 	const [input, setInput] = useState("");
 	const [category, setCategory] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-	const [isCategoriesShown, setIsCategoriesShown] = useState(true);
 
 	const inputHandler = (e) => {
 		setInput(e.target.value);
@@ -35,10 +33,6 @@ const Explore = () => {
 		e.preventDefault();
 		setIsLoading(true);
 		fetchCoins();
-	};
-
-	const toggleCategoriesViewHandler = (e) => {
-		setIsCategoriesShown((state) => !state);
 	};
 
 	const fetchCoins = async () => {
@@ -92,36 +86,10 @@ const Explore = () => {
 				</form>
 			</div>
 
-			<div className="categories-wrapper">
-				<label
-					className="categories"
-					onClick={toggleCategoriesViewHandler}
-				>
-					<img src={categoriesIcon} alt="filter" />
-					Categories
-				</label>
-				<ul
-					className={
-						isCategoriesShown
-							? "categories-list"
-							: "categories-list cat-hide"
-					}
-				>
-					{categories.map((cat) => (
-						<li
-							key={cat.category_id}
-							onClick={() => categoriesHandler(cat.category_id)}
-							className={
-								category == cat.category_id
-									? "category-active"
-									: ""
-							}
-						>
-							{cat.name}
-						</li>
-					))}
-				</ul>
-			</div>
+			<CategoriesMenu
+				category={category}
+				categoriesHandler={categoriesHandler}
+			/>
 
 			<CryptoTable
 				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}

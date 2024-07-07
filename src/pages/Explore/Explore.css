@@ -42,50 +42,6 @@
 	cursor: pointer;
 }
 
-.explore .categories-wrapper {
-	width: 70%;
-	margin: 0 auto;
-	padding: 1rem 0 2rem 0;
-}
-
-.explore .categories-wrapper .categories {
-	cursor: pointer;
-}
-
-.explore .categories-list.cat-hide {
-	display: none;
-}
-
-.explore .categories-wrapper img {
-	height: 1em;
-	aspect-ratio: 1/1;
-}
-
-.explore .categories-list {
-	padding-top: 0.5rem;
-	font-size: 16px;
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: 1rem;
-	list-style: none;
-}
-
-.explore .categories-list li {
-	border: 1px solid var(--btn-color);
-	border-radius: 0.5rem;
-	padding: 0.2rem 1rem;
-	cursor: pointer;
-}
-.explore .categories-list li:hover {
-	filter: brightness(1.2);
-}
-
-.explore .categories-list li.category-active {
-	border: none;
-	background-color: var(--btn-color);
-}
-
 .explore .loader-wrapper {
 	width: 100%;
 	display: flex;
