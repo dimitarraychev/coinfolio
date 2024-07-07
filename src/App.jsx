@@ -8,6 +8,8 @@ import Explore from "./pages/Explore/Explore";
 import Footer from "./components/Footer/Footer";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
+import PortfolioHub from "./pages/PortfolioHub/PortfolioHub";
+import Portfolio from "./pages/Portfolio/Portfolio";
 
 const App = () => {
 	return (
@@ -20,6 +22,8 @@ const App = () => {
 				<Route path="/coin/:coinId" element={<Coin />} />
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
+				<Route path="/hub" element={<PortfolioHub />} />
+				<Route path="/portfolio/:portfolioId" element={<Portfolio />} />
 			</Routes>
 			<Footer />
 		</div>
