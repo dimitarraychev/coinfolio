@@ -1,6 +1,7 @@
 .home {
 	display: flex;
 	flex-direction: column;
+	padding: 2rem 2rem 4rem 2rem;
 }
 
 section.hero {
@@ -9,7 +10,6 @@ section.hero {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	/* Remove later */
 	min-height: 75vh;
 }
 
@@ -111,7 +111,7 @@ section.home-explore img {
 
 section.home-cta {
 	width: 80%;
-	margin: 1rem auto 8rem auto;
+	margin: 1rem auto;
 	padding: 3rem;
 	display: flex;
 	align-items: center;

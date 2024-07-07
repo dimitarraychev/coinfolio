@@ -1,5 +1,5 @@
 .rankings {
-	padding: 2rem;
+	padding: 2rem 2rem 4rem 2rem;
 }
 
 .rankings .market-data {
@@ -9,6 +9,12 @@
 	justify-content: space-around;
 	gap: 1rem;
 	margin-bottom: 1em;
+}
+
+.rankings .data-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
 .rankings .market-data .arrow {

@@ -38,9 +38,10 @@ const Rankings = () => {
 			</h2>
 
 			<div className="market-data">
-				<h5>
-					Global Market Cap 24H:{" "}
-					<span className={isPositiveCapChange ? "green" : "red"}>
+				<div className="data-wrapper">
+					<h6>Global Market Cap 24H: </h6>
+
+					<h3 className={isPositiveCapChange ? "green" : "red"}>
 						{Math.floor(
 							globalMarketData.data
 								.market_cap_change_percentage_24h_usd * 100
@@ -51,12 +52,13 @@ const Rankings = () => {
 							src={isPositiveCapChange ? arrowUp : arrowDown}
 							alt="arrow"
 						/>
-					</span>
-				</h5>
-				<h5>
-					Active Cryptocurrencies:{" "}
-					{globalMarketData.data.active_cryptocurrencies}
-				</h5>
+					</h3>
+				</div>
+
+				<div className="data-wrapper">
+					<h6>Active Cryptocurrencies: </h6>
+					<h3>{globalMarketData.data.active_cryptocurrencies}</h3>
+				</div>
 			</div>
 
 			<CryptoTable
