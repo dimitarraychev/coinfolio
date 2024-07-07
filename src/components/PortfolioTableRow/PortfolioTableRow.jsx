@@ -1,5 +1,4 @@
 import React from "react";
-import "./PortfolioTableRow.css";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
 import plusIcon from "../../assets/icons/plus-icon.svg";

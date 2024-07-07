@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./Register.css";
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 import arrowRight from "../../assets/icons/arrow-right.svg";
@@ -22,7 +21,7 @@ const Register = () => {
 	};
 
 	return (
-		<section className="register">
+		<section className="auth">
 			<form onSubmit={handleSubmit}>
 				<h2 className="page-header">
 					<img src={registerIcon} alt="register" />
@@ -87,7 +86,7 @@ const Register = () => {
 				</p>
 			</form>
 
-			<img src={registerImg} alt="register" className="register-img" />
+			<img src={registerImg} alt="register" className="auth-img" />
 		</section>
 	);
 };

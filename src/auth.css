@@ -1,4 +1,4 @@
-section.login {
+section.auth {
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -6,18 +6,18 @@ section.login {
 	min-height: 85vh;
 }
 
-section.login form {
+section.auth form {
 	display: flex;
 	width: 22rem;
 	flex-direction: column;
 	align-items: flex-start;
 }
 
-section.login form .page-header {
+section.auth form .page-header {
 	align-self: center;
 }
 
-section.login .form-input {
+section.auth .form-input {
 	width: 100%;
 	margin-bottom: 0.5rem;
 	height: 2.5rem;
@@ -25,22 +25,22 @@ section.login .form-input {
 	color: black;
 }
 
-section.login .login-img {
+section.auth .auth-img {
 	height: 30vw;
 	aspect-ratio: 1/1;
 }
 
-section.login form .link {
+section.auth form .link {
 	align-self: center;
 	margin-top: 0.3rem;
 }
 
-section.login form .link span {
+section.auth form .link span {
 	color: var(--btn-color);
 	text-decoration: underline;
 }
 
-section.login form .actions-wrapper {
+section.auth form .actions-wrapper {
 	display: flex;
 	font-size: 14px;
 	width: 100%;
@@ -48,7 +48,7 @@ section.login form .actions-wrapper {
 	margin-bottom: 2rem;
 }
 
-section.login form .remember-me {
+section.auth form .remember-me {
 	display: flex;
 }
 
@@ -74,9 +74,13 @@ section.login form .remember-me {
 	scale: 1.2;
 }
 
-section.login form .remember-me input:hover,
-section.login form .remember-me label:hover,
-section.login form .actions-wrapper p:hover {
+section.auth form .remember-me input:hover,
+section.auth form .remember-me label:hover,
+section.auth form .actions-wrapper p:hover {
 	cursor: pointer;
 	filter: brightness(0.8);
+}
+
+section.auth #re_password {
+	margin-bottom: 2rem;
 }

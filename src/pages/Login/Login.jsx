@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import "./Login.css";
 import loginImg from "../../assets/images/login-register.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
 import arrowRight from "../../assets/icons/arrow-right.svg";
@@ -27,7 +26,7 @@ const Login = () => {
 	};
 
 	return (
-		<section className="login">
+		<section className="auth">
 			<form onSubmit={handleSubmit}>
 				<h2 className="page-header">
 					<img src={loginIcon} alt="login" />
@@ -81,7 +80,7 @@ const Login = () => {
 				</p>
 			</form>
 
-			<img src={loginImg} alt="login" className="login-img" />
+			<img src={loginImg} alt="login" className="auth-img" />
 		</section>
 	);
 };
