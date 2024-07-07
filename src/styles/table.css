@@ -48,14 +48,6 @@
 	aspect-ratio: 1/1;
 }
 
-.table-layout .green {
-	color: var(--green);
-}
-
-.table-layout .red {
-	color: var(--red);
-}
-
 .crypto-table .loading {
 	display: flex;
 	align-items: center;

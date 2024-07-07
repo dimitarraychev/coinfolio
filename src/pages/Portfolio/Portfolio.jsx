@@ -16,23 +16,25 @@ const Portfolio = () => {
 
 	return (
 		<section className="details">
-			<div className="details-title">
-				<h2>{mockedPortfolio.title}</h2>
-			</div>
+			<h2 className="details-title">{mockedPortfolio.title}</h2>
+
 			<div className="details-chart">
 				<PieChart />
 			</div>
+
 			<div className="details-info">
 				<ul>
 					<li>Current Balance</li>
-					<li>
+					<li className="green">
 						{currency.symbol}
 						{mockedPortfolio.currentBalance}
 					</li>
 				</ul>
 				<ul>
 					<li>Alltime Profit/Loss</li>
-					<li>{mockedPortfolio.alltimeProfitLoss}</li>
+					<li className="green">
+						{mockedPortfolio.alltimeProfitLoss}
+					</li>
 				</ul>
 				<ul>
 					<li>Total Allocation</li>
@@ -46,21 +48,17 @@ const Portfolio = () => {
 					<li>ETH, CRO, ADA</li>
 				</ul>
 			</div>
-			<div className="details-assets">
-				<CryptoTable
-					columns={[
-						"#",
-						"Coins",
-						"Price",
-						"24H Change",
-						"Market Cap",
-					]}
-				>
-					{allCoins.slice(0, 3).map((item, index) => (
-						<CoinTableRow item={item} key={index} />
-					))}
-				</CryptoTable>
-			</div>
+
+			<h3 className="details-title">Assets</h3>
+
+			<CryptoTable
+				className="details-assets"
+				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+			>
+				{allCoins.slice(0, 3).map((item, index) => (
+					<CoinTableRow item={item} key={index} />
+				))}
+			</CryptoTable>
 		</section>
 	);
 };

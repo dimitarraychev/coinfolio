@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart";
 import Loader from "../../components/Loader/Loader";
-import formatPrice from "../../utils/index";
+import formatPrice from "../../utils/helpers";
 import { fetchCoinData, fetchHistoricalData } from "../../api/coinGecko";
 
 const Coin = () => {
@@ -34,7 +34,7 @@ const Coin = () => {
 
 	if (coinData && historicalData) {
 		return (
-			<div className="details">
+			<section className="details">
 				<div className="details-title">
 					<img src={coinData.image.large} alt={coinData.id} />
 					<h2>
@@ -88,15 +88,15 @@ const Coin = () => {
 						</li>
 					</ul>
 				</div>
-			</div>
+			</section>
 		);
 	} else {
 		return (
-			<div className="details">
+			<section className="details">
 				<div className="loading">
 					<Loader size="15rem" />
 				</div>
-			</div>
+			</section>
 		);
 	}
 };

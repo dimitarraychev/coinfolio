@@ -4,10 +4,10 @@ import arrowDown from "../assets/icons/arrow-down.svg";
 
 import { Link } from "react-router-dom";
 import { CoinContext } from "../context/CoinContext";
-import formatPrice from "../utils/index";
+import formatPrice from "../utils/helpers";
 
 const CoinTableRow = ({ item }) => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { currency } = useContext(CoinContext);
 	const isPositivePriceChange = item.price_change_percentage_24h > 0;
 
 	return (

@@ -36,6 +36,14 @@ body {
 	background: linear-gradient(var(--deep-blue), var(--dark), var(--light));
 }
 
+.green {
+	color: var(--green);
+}
+
+.red {
+	color: var(--red);
+}
+
 ::-webkit-scrollbar {
 	width: 0.5rem;
 	height: 0.5rem;

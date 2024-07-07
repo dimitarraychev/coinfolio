@@ -18,9 +18,6 @@ const PieChart = () => {
 			textStyle: { color: "#FFF" },
 		},
 		is3D: true,
-		// legend: { position: "none" },
-		// height: 400,
-		// width: 400,
 	};
 
 	return (

@@ -30,9 +30,9 @@ const LineChart = ({ historicalData }) => {
 		<Chart
 			chartType="LineChart"
 			data={data}
+			options={options}
 			height="100%"
 			legendToggle
-			options={options}
 		/>
 	);
 };
