@@ -1,0 +1,24 @@
+.portfolio-card {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	gap: 2rem;
+	border-bottom: 1px solid var(--separator-line);
+}
+
+.portfolio-card:hover {
+	filter: brightness(1.2);
+}
+
+.portfolio-card:last-child {
+	border: none;
+}
+
+.portfolio-card .cryptos-list {
+	gap: 1rem;
+	list-style: none;
+}
+
+.portfolio-card .cryptos-list li {
+	margin: 0.2rem 0;
+}
