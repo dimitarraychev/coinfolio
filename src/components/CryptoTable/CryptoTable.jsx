@@ -6,7 +6,7 @@ const CryptoTable = (props) => {
 		<div className="crypto-table">
 			<div className="table-layout">
 				{props.columns.map((col) => (
-					<p>{col}</p>
+					<p key={col}>{col}</p>
 				))}
 			</div>
 			{props.children}
