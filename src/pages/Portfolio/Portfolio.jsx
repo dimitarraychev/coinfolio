@@ -4,6 +4,9 @@ import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
 import "./Portfolio.css";
+import arrowUp from "../../assets/icons/arrow-up.svg";
+import arrowDown from "../../assets/icons/arrow-down.svg";
+
 import Button from "../../components/Button/Button";
 
 const mockedPortfolio = {
@@ -16,6 +19,8 @@ const mockedPortfolio = {
 
 const Portfolio = () => {
 	const { allCoins, currency } = useContext(CoinContext);
+	const isPositivePriceChange =
+		mockedPortfolio.currentBalance >= mockedPortfolio.totalAllocation;
 
 	return (
 		<section className="portfolio-details">
@@ -41,17 +46,32 @@ const Portfolio = () => {
 					<label className="balance-label" htmlFor="current-balance">
 						Current Balance
 					</label>
-					<h3 className="green" id="current-balance">
+					<h3
+						className={isPositivePriceChange ? "green" : "red"}
+						id="current-balance"
+					>
 						{currency.symbol}
 						{mockedPortfolio.currentBalance}
+						<img
+							src={isPositivePriceChange ? arrowUp : arrowDown}
+							alt="arrow"
+							className="arrow"
+						/>
 					</h3>
 				</div>
 
 				<div className="info">
 					<ul>
 						<li>Alltime Profit/Loss</li>
-						<li className="green">
+						<li className={isPositivePriceChange ? "green" : "red"}>
 							{mockedPortfolio.alltimeProfitLoss}
+							<img
+								src={
+									isPositivePriceChange ? arrowUp : arrowDown
+								}
+								alt="arrow"
+								className="arrow"
+							/>
 						</li>
 					</ul>
 					<ul>

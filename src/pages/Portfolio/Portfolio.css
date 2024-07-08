@@ -41,6 +41,10 @@ section.portfolio-details {
 	cursor: pointer;
 }
 
+.portfolio-details img.arrow {
+	height: 1em;
+}
+
 .portfolio-details .user-btn-wrapper {
 	display: flex;
 	gap: 0.5rem;
