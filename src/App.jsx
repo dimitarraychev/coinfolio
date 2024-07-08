@@ -24,8 +24,8 @@ const App = () => {
 				<Route path="/register" element={<Register />} />
 				<Route path="/login" element={<Login />} />
 				<Route path="/hub" element={<PortfolioHub />} />
-				<Route path="/portfolio/:portfolioId" element={<Portfolio />} />
-				<Route path="/portfolio/create" element={<Create />} />
+				<Route path="/hub/:portfolioId" element={<Portfolio />} />
+				<Route path="/hub/create" element={<Create />} />
 			</Routes>
 			<Footer />
 		</div>
