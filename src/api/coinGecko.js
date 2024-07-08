@@ -68,6 +68,8 @@ export const fetchHistoricalData = async (coinId, currency) => {
 	if (!response.ok) {
 		throw new Error("Failed to fetch historical data");
 	}
+
+	return response.json();
 };
 
 export const searchAllCoins = async (query) => {
