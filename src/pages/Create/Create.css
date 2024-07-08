@@ -1,0 +1,40 @@
+.create {
+	padding: 2rem 2rem 4rem 2rem;
+}
+
+.create form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+}
+
+.create .title-wrapper {
+	width: 30%;
+	margin: auto;
+}
+
+.create .form-input {
+	width: 100%;
+	margin-bottom: 0.75rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	color: black;
+	padding-left: 0.3rem;
+}
+
+.create-chart {
+	height: 40vh;
+	width: 40vw;
+	align-self: center;
+}
+
+.create .crypto-table {
+	min-width: 60%;
+	margin: auto;
+}
+
+.create .assets-title {
+	align-self: center;
+	margin-bottom: 1rem;
+}
