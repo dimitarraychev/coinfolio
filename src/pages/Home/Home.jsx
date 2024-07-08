@@ -33,10 +33,10 @@ const Home = () => {
 
 					<div className="btn-container">
 						<Link to={"/register"}>
-							<Button text="Get Started" />
+							<Button text="get started" />
 						</Link>
 						<Link to={"/explore"}>
-							<Button text="Explore" isGhost={true} />
+							<Button text="explore" isGhost={true} />
 						</Link>
 					</div>
 				</article>
@@ -63,7 +63,7 @@ const Home = () => {
 				</CryptoTable>
 
 				<Link to={"/rankings"} className="home-btn-rankings">
-					<Button text="Check Rankings" />
+					<Button text="check rankings" />
 				</Link>
 			</section>
 
@@ -79,7 +79,7 @@ const Home = () => {
 					</p>
 
 					<Link to={"/hub"} className="home-btn-portfolio">
-						<Button text="Portfolio Hub" />
+						<Button text="portfolio hub" />
 					</Link>
 				</div>
 
@@ -100,7 +100,7 @@ const Home = () => {
 					</p>
 
 					<Link to={"/explore"} className="home-btn-explore">
-						<Button text="Explore" />
+						<Button text="explore" />
 					</Link>
 				</div>
 			</section>
@@ -118,7 +118,7 @@ const Home = () => {
 					</p>
 				</div>
 				<Link to={"/register"}>
-					<Button text="Join Our Platform Now"></Button>
+					<Button text="join our platform now"></Button>
 				</Link>
 			</section>
 		</div>

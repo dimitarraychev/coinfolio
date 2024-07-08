@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import loginImg from "../../assets/images/login-register.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
-import arrowRight from "../../assets/icons/arrow-right.svg";
 import Button from "../../components/Button/Button";
 
 const Login = () => {
@@ -70,7 +69,7 @@ const Login = () => {
 					<p>Forgot Password?</p>
 				</div>
 
-				<Button text="sign in" svg={arrowRight} isWide={true} />
+				<Button text="sign in" isWide={true} />
 
 				<p className="link">
 					Don't have an account?{" "}

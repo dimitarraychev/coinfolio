@@ -1,7 +1,6 @@
 import React from "react";
 import Button from "./Button/Button";
 import { Link } from "react-router-dom";
-import plusIcon from "../assets/icons/plus-icon.svg";
 
 const PortfolioTableRow = () => {
 	return (
@@ -16,7 +15,7 @@ const PortfolioTableRow = () => {
 			<p className="green">16,70%</p>
 
 			<p>
-				<Button text={"follow"} svg={plusIcon} />
+				<Button text={"follow"} />
 			</p>
 		</Link>
 	);

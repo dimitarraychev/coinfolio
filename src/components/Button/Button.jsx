@@ -1,19 +1,18 @@
 import React from "react";
 import "./Button.css";
+import { buttonIcons } from "../../constants/button";
 
-const Button = (props) => {
+const Button = ({ text, isGhost, isWide }) => {
+	const hasSVG = buttonIcons.find((btn) => btn.text.includes(text));
+
 	return (
 		<button
 			className={
-				props.isGhost
-					? "btn btn-ghost"
-					: props.isWide
-					? "btn btn-wide"
-					: "btn"
+				isGhost ? "btn btn-ghost" : isWide ? "btn btn-wide" : "btn"
 			}
 		>
-			{props.text}
-			{props.svg && <img src={props.svg} />}
+			{text}
+			{hasSVG && <img src={hasSVG.svg} />}
 		</button>
 	);
 };

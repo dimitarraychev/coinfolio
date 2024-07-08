@@ -37,7 +37,7 @@ const PortfolioHub = () => {
 					</p>
 				</div>
 				<Link to={"/hub/create"}>
-					<Button text="Create Portfolio"></Button>
+					<Button text="create portfolio"></Button>
 				</Link>
 			</section>
 

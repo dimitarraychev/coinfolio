@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
-import arrowRight from "../../assets/icons/arrow-right.svg";
 import Button from "../../components/Button/Button";
 
 const Register = () => {
@@ -76,7 +75,7 @@ const Register = () => {
 					onChange={handleChange}
 				/>
 
-				<Button text="sign up" svg={arrowRight} isWide={true} />
+				<Button text="sign up" isWide={true} />
 
 				<p className="link">
 					Already have an account?{" "}
