@@ -15,6 +15,10 @@ export const portfolioCategories = [
 		category_id: "following",
 		name: "Following",
 	},
+	{
+		category_id: "owned",
+		name: "Owned",
+	},
 ];
 
 export const exploreCategories = [
