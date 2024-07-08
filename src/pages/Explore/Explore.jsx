@@ -5,48 +5,49 @@ import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
-import { fetchAllCoins } from "../../api/coinGecko";
+import { fetchAllCoins, searchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import { exploreCategories } from "../../constants/categories";
+import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
-	const [input, setInput] = useState("");
 	const [category, setCategory] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
-
-	const inputHandler = (e) => {
-		setInput(e.target.value);
-
-		if (e.target.value === "") {
-			setDisplayCoins(allCoins);
-		}
-	};
 
 	const categoriesHandler = (value) => {
 		setIsLoading(true);
 		setCategory(value);
 	};
 
-	const searchHandler = (e) => {
-		e.preventDefault();
+	const searchHandler = (input) => {
 		setIsLoading(true);
-		fetchCoins();
+		searchCoins(input);
+	};
+
+	const searchCoins = async (input) => {
+		if (input) {
+			const filteredCoins = displayCoins.filter((coin) =>
+				coin.name.toLowerCase().includes(input.toLowerCase())
+			);
+			setDisplayCoins(filteredCoins);
+			setIsLoading(false);
+		}
+		// try {
+		// 	const search = await searchAllCoins(input);
+		// 	setDisplayCoins(search.coins);
+		// 	setIsLoading(false);
+		// } catch (error) {
+		// 	console.error("Failed to fetch coins:", error);
+		// }
 	};
 
 	const fetchCoins = async () => {
 		try {
 			const coins = await fetchAllCoins(currency.name, category);
-			if (input) {
-				const filteredCoins = coins.filter((item) =>
-					item.name.toLowerCase().includes(input.toLowerCase())
-				);
-				setDisplayCoins(filteredCoins);
-			} else {
-				setDisplayCoins(coins);
-			}
+			setDisplayCoins(coins);
 			setIsLoading(false);
 		} catch (error) {
 			console.error("Failed to fetch coins:", error);
@@ -68,24 +69,10 @@ const Explore = () => {
 				Explore
 			</h2>
 
-			<div className="search">
-				<form onSubmit={searchHandler}>
-					<input
-						onChange={inputHandler}
-						value={input}
-						list="coinlist"
-						type="text"
-						placeholder="Search crypto..."
-						required
-					/>
-					<datalist id="coinlist">
-						{displayCoins.map((item, index) => (
-							<option key={index} value={item.name} />
-						))}
-					</datalist>
-					<button type="submit">Search</button>
-				</form>
-			</div>
+			<SearchBar
+				autofillSuggestions={allCoins}
+				onSearch={searchHandler}
+			/>
 
 			<CategoriesMenu
 				categories={exploreCategories}

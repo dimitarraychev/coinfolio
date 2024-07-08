@@ -68,5 +68,22 @@ export const fetchHistoricalData = async (coinId, currency) => {
 	if (!response.ok) {
 		throw new Error("Failed to fetch historical data");
 	}
+};
+
+export const searchAllCoins = async (query) => {
+	const options = {
+		method: "GET",
+		headers: { accept: "application/json", "x-cg-demo-api-key": API_KEY },
+	};
+
+	const response = await fetch(
+		`${API_BASE_URL}/search?query=${query}`,
+		options
+	);
+
+	if (!response.ok) {
+		throw new Error("Failed to fetch search data");
+	}
+
 	return response.json();
 };
