@@ -18,6 +18,15 @@ const PieChart = () => {
 			textStyle: { color: "#FFF" },
 		},
 		is3D: true,
+		chartArea: {
+			left: "3%",
+			top: "3%",
+			height: "94%",
+			width: "94%",
+		},
+		legend: {
+			position: "labeled",
+		},
 	};
 
 	return (
@@ -26,6 +35,7 @@ const PieChart = () => {
 			data={data}
 			options={options}
 			height="100%"
+			width="100%"
 		/>
 	);
 };
