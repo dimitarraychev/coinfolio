@@ -31,7 +31,7 @@ const CoinTableRow = ({ item }) => {
 			</p>
 			<p>
 				{currency.symbol}
-				{item.market_cap.toLocaleString()}
+				{item.market_cap?.toLocaleString()}
 			</p>
 		</Link>
 	);
