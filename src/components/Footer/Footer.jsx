@@ -64,7 +64,10 @@ const Footer = () => {
 						<p>Portfolio Hub</p>
 					</Link>
 					<Link to={"/hub/create"}>
-						<p>Create</p>
+						<p>Create Portfolio</p>
+					</Link>
+					<Link to={"hub/username"}>
+						<p>My Portfolios</p>
 					</Link>
 				</div>
 
@@ -75,9 +78,6 @@ const Footer = () => {
 					</Link>
 					<Link to={"login"}>
 						<p>Login</p>
-					</Link>
-					<Link to={"hub/username"}>
-						<p>My Portfolios</p>
 					</Link>
 					<Link to={"logout"}>
 						<p>Logout</p>
