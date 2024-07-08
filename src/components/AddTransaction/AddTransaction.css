@@ -1,0 +1,89 @@
+.add-coin-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1000;
+}
+
+.add-coin-wrapper {
+	background: var(--deep-blue);
+	padding: 2rem;
+	border-radius: 0.5rem;
+	box-shadow: 0.1rem 0.1rem 0.1rem black;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.modal-header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.modal-header img {
+	height: 2rem;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+.add-coin-wrapper .actions-list {
+	list-style: none;
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+	/* border: 2px solid var(--dark-gray); */
+	border-radius: 0.7rem;
+	margin: 0.75rem 0;
+	gap: 0.75rem;
+}
+
+.add-coin-wrapper .actions-list li {
+	padding: 0.5em 1em;
+	outline: 2px solid var(--btn-color);
+	border-radius: 0.5rem;
+	flex-grow: 1;
+	text-align: center;
+}
+
+.add-coin-wrapper .actions-list li:hover,
+.selected {
+	cursor: pointer;
+	background: var(--btn-color);
+}
+
+.add-coin-wrapper .inputs-container {
+	display: flex;
+	gap: 0.3rem;
+}
+
+.add-coin-wrapper .input-wrapper {
+	width: 18ch;
+}
+
+.add-coin-wrapper .select-coin,
+.add-coin-wrapper .form-input {
+	width: 100%;
+	margin-bottom: 0.75rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	color: black;
+	padding-left: 0.3rem;
+}
+
+.add-coin-wrapper .total-wrapper label {
+	color: var(--dark-gray);
+}
+
+#total-spent {
+	font-size: 1.6rem;
+	font-weight: bold;
+	margin-bottom: 0.75rem;
+}

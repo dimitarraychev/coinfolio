@@ -5,15 +5,26 @@ import Button from "../../components/Button/Button";
 import PieChart from "../../components/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
+import AddTransaction from "../../components/AddTransaction/AddTransaction";
 
 const Create = () => {
 	const [inputs, setInputs] = useState({});
 	const [allocations, setAllocations] = useState([
 		["Crypto", "Allocation"],
-		["none", 100],
+		["none", 1],
 	]);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
+	const closeModalHandler = (e) => {
+		setIsModalOpen(false);
+	};
+
+	const openModalHandler = (e) => {
+		setIsModalOpen(true);
+	};
 
 	const handleSubmit = (e) => {
+		e.preventDefault();
 		console.log(e);
 	};
 
@@ -53,7 +64,13 @@ const Create = () => {
 					columns={["#", "Coins", "Price", "24H Change", "Action"]}
 				></CryptoTable>
 
-				<Button text={"add coin"} />
+				<Button
+					text={"add coin"}
+					isGhost={true}
+					onClick={openModalHandler}
+				/>
+
+				{isModalOpen && <AddTransaction onClose={closeModalHandler} />}
 			</form>
 		</section>
 	);
