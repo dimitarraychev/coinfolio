@@ -1,36 +1,32 @@
-section.details {
+section.coin-details {
 	padding: 2rem 2rem 4rem 2rem;
 }
 
-section.details h3 {
-	margin-bottom: 1rem;
-}
-
-.details-title {
+.coin-details-title {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	gap: 20px;
 }
 
-.detials-title img {
+.coin-details-title img {
 	max-width: 12rem;
 }
 
-.details-chart {
+.coin-details-chart {
 	width: 80%;
 	height: 20rem;
 	margin: auto;
 }
 
-.details-info {
+.coin-details-info {
 	width: 40%;
 	margin: 2em auto 4em auto;
 	display: flex;
 	flex-direction: column;
 }
 
-.details-info ul {
+.coin-details-info ul {
 	display: flex;
 	justify-content: space-between;
 	padding: 10px 0;
@@ -38,11 +34,11 @@ section.details h3 {
 	list-style: none;
 }
 
-.details-info ul li:last-child {
+.coin-details-info ul li:last-child {
 	font-weight: 300;
 }
 
-.details .loading {
+.coin-details .loading {
 	display: flex;
 	align-items: center;
 	justify-content: center;

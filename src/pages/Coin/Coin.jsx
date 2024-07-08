@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./Coin.css";
 
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart";
@@ -34,17 +35,17 @@ const Coin = () => {
 
 	if (coinData && historicalData) {
 		return (
-			<section className="details">
-				<div className="details-title">
+			<section className="coin-details">
+				<div className="coin-details-title">
 					<img src={coinData.image.large} alt={coinData.id} />
 					<h2>
 						{coinData.name} ({coinData.symbol.toUpperCase()})
 					</h2>
 				</div>
-				<div className="details-chart">
+				<div className="coin-details-chart">
 					<LineChart historicalData={historicalData} />
 				</div>
-				<div className="details-info">
+				<div className="coin-details-info">
 					<ul>
 						<li>Crypto Market Rank</li>
 						<li>{coinData.market_cap_rank}</li>
@@ -92,7 +93,7 @@ const Coin = () => {
 		);
 	} else {
 		return (
-			<section className="details">
+			<section className="coin-details">
 				<div className="loading">
 					<Loader size="15rem" />
 				</div>
