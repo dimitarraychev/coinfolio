@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import PieChart from "../../components/PieChart";
 import { CoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
 
 const mockedPortfolio = {

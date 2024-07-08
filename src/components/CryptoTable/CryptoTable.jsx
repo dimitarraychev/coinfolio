@@ -1,14 +1,15 @@
 import React from "react";
+import "./CryptoTable.css";
 
-const CryptoTable = (props) => {
+const CryptoTable = ({ columns, children }) => {
 	return (
 		<div className="crypto-table">
 			<div className="table-layout">
-				{props.columns.map((col) => (
+				{columns.map((col) => (
 					<p key={col}>{col}</p>
 				))}
 			</div>
-			{props.children}
+			{children}
 		</div>
 	);
 };

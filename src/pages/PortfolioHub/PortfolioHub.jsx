@@ -2,7 +2,7 @@ import React from "react";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
 import PortfolioTableRow from "../../components/PortfolioTableRow";
-import CryptoTable from "../../components/CryptoTable";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 
 const PortfolioHub = () => {
 	return (
@@ -14,7 +14,13 @@ const PortfolioHub = () => {
 
 			<div className="portfolios-wrapper">
 				<CryptoTable
-					columns={["#", "Title", "Followers", "Total P/L", "Action"]}
+					columns={[
+						"#",
+						"Portfolios",
+						"Followers",
+						"Total P/L",
+						"Action",
+					]}
 				>
 					<PortfolioTableRow />
 					<PortfolioTableRow />

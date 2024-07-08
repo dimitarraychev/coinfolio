@@ -3,7 +3,7 @@ import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 
 import { CoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
 import { fetchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";

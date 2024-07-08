@@ -2,8 +2,7 @@ section.auth {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	padding: 2rem;
-	min-height: 85vh;
+	padding: 2rem 2rem 6rem 2rem;
 }
 
 section.auth form {
@@ -19,10 +18,11 @@ section.auth form .page-header {
 
 section.auth .form-input {
 	width: 100%;
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.75rem;
 	height: 2.5rem;
 	border-radius: 0.5rem;
 	color: black;
+	padding-left: 0.3rem;
 }
 
 section.auth .auth-img {

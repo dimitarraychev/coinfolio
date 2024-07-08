@@ -9,7 +9,7 @@ import homeExplore from "../../assets/images/home-explore.svg";
 
 import { CoinContext } from "../../context/CoinContext";
 import CoinTableRow from "../../components/CoinTableRow";
-import CryptoTable from "../../components/CryptoTable";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import Button from "../../components/Button/Button";
 
 const Home = () => {
