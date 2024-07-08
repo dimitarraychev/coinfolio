@@ -4,12 +4,16 @@ export const portfolioCategories = [
 		name: "All",
 	},
 	{
-		category_id: "following",
-		name: "Following",
+		category_id: "newest",
+		name: "Newest",
 	},
 	{
-		category_id: "trending",
+		category_id: "popular",
 		name: "Popular",
+	},
+	{
+		category_id: "following",
+		name: "Following",
 	},
 ];
 
