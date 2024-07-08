@@ -17,6 +17,10 @@
 		0.1rem 0.1rem 0.1rem black, inset 0 -1rem 1rem rgba(0, 0, 0, 0.1);
 }
 
+.btn-del {
+	background: var(--red);
+}
+
 .btn:hover {
 	filter: brightness(1.2);
 }
