@@ -15,6 +15,14 @@ const mockedPortfolio = {
 	totalAllocation: 5000,
 	alltimeProfitLoss: "$835.47 (16.70%)",
 	currentBalance: 5835.47,
+	allocations: [
+		["Crypto", "Allocation"],
+		["ETH", 2000],
+		["SOL", 1000],
+		["ADA", 500],
+		["CRO", 300],
+		["DOGE", 200],
+	],
 };
 
 const Portfolio = () => {
@@ -98,7 +106,7 @@ const Portfolio = () => {
 
 			<div className="details-right">
 				<div className="portfolio-chart">
-					<PieChart />
+					<PieChart data={mockedPortfolio.allocations} />
 				</div>
 
 				<h3 className="assets-title">Assets</h3>

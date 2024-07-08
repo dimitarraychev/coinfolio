@@ -1,16 +1,7 @@
 import React from "react";
 import { Chart } from "react-google-charts";
 
-const data = [
-	["Crypto", "Allocation"],
-	["ETH", 2000],
-	["SOL", 1000],
-	["ADA", 500],
-	["CRO", 300],
-	["DOGE", 200],
-];
-
-const PieChart = () => {
+const PieChart = ({ data }) => {
 	const options = {
 		backgroundColor: "transparent",
 		legendTextStyle: { color: "#FFF" },
