@@ -13,16 +13,14 @@ section.hero {
 	min-height: 75vh;
 }
 
-section.hero img {
-	height: 25vw;
-}
-
 section.hero .img-right {
 	animation: slideLeft 0.5s linear;
+	height: 27vw;
 }
 
 section.hero .img-left {
 	animation: slideRight 0.5s linear;
+	height: 27vw;
 }
 
 section.hero .hero-text {
@@ -51,6 +49,10 @@ section.home-rankings {
 	margin-bottom: 5rem;
 }
 
+section.home-rankings .crypto-table {
+	width: 80%;
+}
+
 section.home-rankings .home-btn-rankings {
 	margin-top: 0.5rem;
 }
@@ -67,7 +69,7 @@ section.home-portfolio h2 {
 	margin-bottom: 1rem;
 }
 
-section.home-portfolio img {
+section.home .home-section-img {
 	height: 25vw;
 }
 
@@ -92,10 +94,6 @@ section.home-explore {
 
 section.home-explore h2 {
 	margin-bottom: 1rem;
-}
-
-section.home-explore img {
-	height: 25vw;
 }
 
 .home-explore-text {

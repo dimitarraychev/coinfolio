@@ -2,12 +2,7 @@
 	padding: 2rem 2rem 4rem 2rem;
 }
 
-.portfolios-wrapper {
-	display: flex;
-	flex-direction: column;
-}
-
-section.portfolio-cta {
+.portfolio-cta-wrapper {
 	width: 80%;
 	margin: 1rem auto;
 	padding: 1rem;
@@ -19,13 +14,23 @@ section.portfolio-cta {
 	background: linear-gradient(to right, var(--deep-blue), var(--light));
 }
 
-section.portfolio-cta .cta-text {
+.portfolio-cta-wrapper .cta-text {
 	flex: 0 0 60%;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 }
 
-section.portfolio-cta .cta-text p {
+.portfolio-cta-wrapper .cta-text p {
 	max-width: 66ch;
+}
+
+.hub .crypto-table {
+	width: 80%;
+	margin: auto;
+}
+
+.portfolios-wrapper {
+	display: flex;
+	flex-direction: column;
 }

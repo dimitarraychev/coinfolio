@@ -79,15 +79,23 @@ const Home = () => {
 					</p>
 
 					<Link to={"/hub"} className="home-btn-portfolio">
-						<Button text="portfolio hub" />
+						<Button text="check portfolios" />
 					</Link>
 				</div>
 
-				<img src={homePortfolio} alt="portfolio" />
+				<img
+					src={homePortfolio}
+					alt="portfolio"
+					className="home-section-img"
+				/>
 			</section>
 
 			<section className="home-explore">
-				<img src={homeExplore} alt="portfolio" />
+				<img
+					src={homeExplore}
+					alt="portfolio"
+					className="home-section-img"
+				/>
 
 				<div className="home-explore-text">
 					<p className="subheading">monitor markets</p>
