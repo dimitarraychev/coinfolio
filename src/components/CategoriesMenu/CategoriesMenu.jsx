@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "./CategoriesMenu.css";
 import categoriesIcon from "../../assets/icons/categories-icon.svg";
-import { categories } from "../../constants/index";
 
-const CategoriesMenu = ({ category, onCategoryChange }) => {
+const CategoriesMenu = ({ categories, category, onCategoryChange }) => {
 	const [isCategoriesShown, setIsCategoriesShown] = useState(true);
 
 	const toggleCategoriesViewHandler = (e) => {

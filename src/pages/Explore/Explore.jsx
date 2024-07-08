@@ -8,6 +8,7 @@ import CoinTableRow from "../../components/CoinTableRow";
 import { fetchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
+import { exploreCategories } from "../../constants/categories";
 
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
@@ -87,6 +88,7 @@ const Explore = () => {
 			</div>
 
 			<CategoriesMenu
+				categories={exploreCategories}
 				category={category}
 				onCategoryChange={categoriesHandler}
 			/>
