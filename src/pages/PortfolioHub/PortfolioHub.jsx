@@ -28,7 +28,7 @@ const PortfolioHub = () => {
 				Portfolio Hub
 			</h2>
 
-			<section className="portfolio-cta">
+			<div className="portfolio-cta-wrapper">
 				<div className="cta-text">
 					<h3>Join The Crypto Community</h3>
 					<p>
@@ -39,7 +39,7 @@ const PortfolioHub = () => {
 				<Link to={"/hub/create"}>
 					<Button text="create portfolio"></Button>
 				</Link>
-			</section>
+			</div>
 
 			<CategoriesMenu
 				categories={portfolioCategories}
