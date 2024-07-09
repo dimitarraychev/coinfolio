@@ -8,7 +8,7 @@ import loginIcon from "../../assets/icons/login-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
-import { navbarLinks } from "../../constants";
+import { navbarLinks } from "../../constants/links";
 
 const Navbar = () => {
 	const { setCurrency } = useContext(CoinContext);

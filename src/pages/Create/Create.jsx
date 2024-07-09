@@ -29,7 +29,9 @@ const Create = () => {
 	};
 
 	const handleChange = (e) => {
-		console.log(e);
+		const name = e.target.name;
+		const value = e.target.value;
+		setInputs((values) => ({ ...values, [name]: value }));
 	};
 
 	return (
@@ -43,7 +45,7 @@ const Create = () => {
 				<div className="title-wrapper">
 					<label htmlFor="title">Title:</label>
 					<input
-						type="title"
+						type="text"
 						name="title"
 						id="title"
 						className="form-input"

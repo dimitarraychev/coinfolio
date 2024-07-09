@@ -8,14 +8,14 @@ import Button from "../../components/Button/Button";
 const Register = () => {
 	const [inputs, setInputs] = useState({});
 
-	const handleChange = (event) => {
-		const name = event.target.name;
-		const value = event.target.value;
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
 		setInputs((values) => ({ ...values, [name]: value }));
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		console.log(inputs);
 	};
 

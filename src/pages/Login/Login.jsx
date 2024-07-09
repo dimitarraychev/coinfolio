@@ -9,9 +9,9 @@ const Login = () => {
 	const [inputs, setInputs] = useState({});
 	const [rememberMe, setRememberMe] = useState(false);
 
-	const handleChange = (event) => {
-		const name = event.target.name;
-		const value = event.target.value;
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
 		setInputs((values) => ({ ...values, [name]: value }));
 	};
 
@@ -19,8 +19,8 @@ const Login = () => {
 		setRememberMe(!rememberMe);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = (e) => {
+		e.preventDefault();
 		console.log(inputs);
 	};
 
