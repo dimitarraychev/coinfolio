@@ -141,15 +141,15 @@ const Create = () => {
 					text={"publish portfolio"}
 					isDisabled={isSubmitButtonDisabled}
 				/>
-
-				{isModalOpen && (
-					<AddCoin
-						allCoins={allCoins}
-						onAddCoin={addCoinHandler}
-						onClose={closeModalHandler}
-					/>
-				)}
 			</form>
+
+			{isModalOpen && (
+				<AddCoin
+					allCoins={allCoins}
+					onAddCoin={addCoinHandler}
+					onClose={closeModalHandler}
+				/>
+			)}
 		</section>
 	);
 };
