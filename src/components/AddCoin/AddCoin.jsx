@@ -4,12 +4,26 @@ import closeIcon from "../../assets/icons/close-icon.svg";
 import Button from "../Button/Button";
 
 const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
-	const [inputs, setInputs] = useState({});
+	const [inputs, setInputs] = useState({
+		coinId: "",
+		quantity: 0,
+		price: 0,
+		total: 0,
+	});
 
 	const handleChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setInputs((values) => ({ ...values, [name]: value }));
+		const { name, value } = e.target;
+		setInputs((prevInputs) => {
+			let newInputs = { ...prevInputs, [name]: value };
+
+			const quantity = parseFloat(newInputs.quantity) || 0;
+			const price = parseFloat(newInputs.price) || 0;
+			const total = quantity * price;
+
+			newInputs = { ...newInputs, total };
+
+			return newInputs;
+		});
 	};
 
 	const handleWrapperClick = (e) => {
@@ -72,7 +86,7 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 
 				<div className="total-wrapper">
 					<label htmlFor="total-spent">Total Spent:</label>
-					<p id="total-spent">0$</p>
+					<p id="total-spent">${inputs.total}</p>
 				</div>
 				<Button text={"add coin"} onClick={() => onAddCoin(inputs)} />
 			</div>
