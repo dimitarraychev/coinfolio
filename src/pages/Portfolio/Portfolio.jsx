@@ -16,10 +16,10 @@ const mockedPortfolio = {
 	alltimeProfitLoss: "$835.47 (16.70%)",
 	currentBalance: 5835.47,
 	allocations: [
-		{ coinId: "ethereum", total: 3000 },
-		{ coinId: "bitcoin", total: 1000 },
-		{ coinId: "cronos", total: 800 },
-		{ coinId: "cardano", total: 200 },
+		{ name: "Ethereum", total: 3000 },
+		{ name: "Bitcoin", total: 1000 },
+		{ name: "Cronos", total: 800 },
+		{ name: "Cardano", total: 200 },
 	],
 };
 

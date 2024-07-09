@@ -10,7 +10,7 @@ const PieChart = ({ data }) => {
 	useEffect(() => {
 		let dataCopy = [["Crypto", "Allocation"]];
 		if (data.length > 0) {
-			data.map((coin) => dataCopy.push([coin.coinId, coin.total]));
+			data.map((coin) => dataCopy.push([coin.name, coin.total]));
 			setChartData(dataCopy);
 		}
 	}, [data]);

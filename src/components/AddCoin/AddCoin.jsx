@@ -6,6 +6,7 @@ import Button from "../Button/Button";
 const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 	const [inputs, setInputs] = useState({
 		coinId: "",
+		name: "",
 		quantity: 0,
 		price: 0,
 		total: 0,
@@ -15,6 +16,12 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 		const { name, value } = e.target;
 		setInputs((prevInputs) => {
 			let newInputs = { ...prevInputs, [name]: value };
+
+			if (name === "coinId") {
+				const selectedOption = e.target.selectedOptions[0];
+				const coinName = selectedOption ? selectedOption.text : "";
+				newInputs = { ...newInputs, name: coinName };
+			}
 
 			const quantity = parseFloat(newInputs.quantity) || 0;
 			const price = parseFloat(newInputs.price) || 0;
