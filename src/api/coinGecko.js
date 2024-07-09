@@ -1,7 +1,7 @@
 const API_BASE_URL = "https://api.coingecko.com/api/v3";
 const API_KEY = "CG-m1zpVwoWPMSFhtQz7E1tRbYe";
 
-export const fetchAllCoins = async (currency, category) => {
+export const fetchAllCoins = async (currency, category, page = 1) => {
 	const options = {
 		method: "GET",
 		headers: {
@@ -10,7 +10,7 @@ export const fetchAllCoins = async (currency, category) => {
 		},
 	};
 
-	let URL = `${API_BASE_URL}/coins/markets?vs_currency=${currency}`;
+	let URL = `${API_BASE_URL}/coins/markets?vs_currency=${currency}&per_page=250&page=${page}`;
 	if (category && category != null) URL = URL + `&category=${category}`;
 
 	const response = await fetch(URL, options);

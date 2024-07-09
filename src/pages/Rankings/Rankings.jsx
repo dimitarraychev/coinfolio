@@ -16,7 +16,7 @@ const Rankings = () => {
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const { ref, inView } = useInView();
 	const [page, setPage] = useState(1);
-	const coinsPerPage = 10;
+	const coinsPerPage = 50;
 	const isPositiveCapChange =
 		globalMarketData.data.market_cap_change_percentage_24h_usd > 0;
 
@@ -25,7 +25,7 @@ const Rankings = () => {
 	}, [allCoins, page]);
 
 	useEffect(() => {
-		if (inView && page < 10) {
+		if (inView && page < 5) {
 			setTimeout(() => setPage((prevPage) => prevPage + 1), 1000);
 		}
 	}, [inView]);
@@ -67,7 +67,7 @@ const Rankings = () => {
 				{displayCoins.map((item, index) => (
 					<CoinTableRow item={item} key={index} />
 				))}
-				{page < 10 && (
+				{page < 5 && (
 					<div ref={ref} className="loading">
 						<Loader />
 					</div>
