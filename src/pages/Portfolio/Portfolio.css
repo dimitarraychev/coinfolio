@@ -36,19 +36,25 @@ section.portfolio-details {
 	gap: 0.2rem;
 }
 
+.portfolio-details .title-wrapper .edit-img {
+	display: none;
+	height: 0.75em;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+.portfolio-details .title-wrapper h2:hover .edit-img {
+	display: inline;
+}
+
 .portfolio-details .owner {
 	color: var(--btn-color);
 	cursor: pointer;
+	margin-bottom: 0.75rem;
 }
 
 .portfolio-details img.arrow {
 	height: 1em;
-}
-
-.portfolio-details .user-btn-wrapper {
-	display: flex;
-	gap: 0.5rem;
-	margin-top: 0.5rem;
 }
 
 .portfolio-details .info {
@@ -77,6 +83,23 @@ section.portfolio-details {
 
 .portfolio-details .info ul li:first-child {
 	color: var(--dark-gray);
+}
+
+.portfolio-details .portfolio-row-wrapper {
+	position: relative;
+}
+
+.portfolio-details .remove-coin-img {
+	position: absolute;
+	top: calc(50% - 1.25rem);
+	right: -2.5rem;
+	height: 2.5rem;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+.portfolio-details .remove-coin-img:hover {
+	filter: brightness(0.8);
 }
 
 .portfolio-details .loading {

@@ -1,13 +1,16 @@
-import React, { useContext } from "react";
-import PieChart from "../../components/PieChart";
-import { CoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow";
+import React, { useContext, useState } from "react";
 import "./Portfolio.css";
+import minusIcon from "../../assets/icons/minus-icon.svg";
+import editIcon from "../../assets/icons/edit-icon.svg";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
+import { CoinContext } from "../../context/CoinContext";
+import PieChart from "../../components/PieChart";
+import CryptoTable from "../../components/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/CoinTableRow";
 import Button from "../../components/Button/Button";
+import AddCoin from "../../components/AddCoin/AddCoin";
 
 const mockedPortfolio = {
 	title: "Low Risk Classic Portfolio",
@@ -25,19 +28,66 @@ const mockedPortfolio = {
 
 const Portfolio = () => {
 	const { allCoins, currency } = useContext(CoinContext);
+	const [isModalOpen, setIsModalOpen] = useState(false);
+
 	const isPositivePriceChange =
 		mockedPortfolio.currentBalance >= mockedPortfolio.totalAllocation;
+
+	const closeModalHandler = (e) => {
+		setIsModalOpen(false);
+	};
+
+	const openModalHandler = (e) => {
+		setIsModalOpen(true);
+	};
+
+	const addCoinHandler = (coin) => {
+		setIsModalOpen(false);
+		console.log(coin);
+
+		// const existingCoin = inputCoins.find((c) => c.id === coin.id);
+
+		// if (existingCoin) {
+		// 	const updatedCoins = inputCoins.map((c) => {
+		// 		if (c.id !== coin.id) return c;
+
+		// 		return {
+		// 			...c,
+		// 			quantity: c.quantity + coin.quantity,
+		// 			total: c.total + coin.total,
+		// 			price: calculateAveragePrice(
+		// 				c.price,
+		// 				c.quantity,
+		// 				coin.price,
+		// 				coin.quantity
+		// 			),
+		// 		};
+		// 	});
+		// 	return setInputCoins(updatedCoins);
+		// }
+
+		// setInputCoins((prevCoins) => [...prevCoins, coin]);
+	};
+
+	const removeCoinHandler = (coinToRemove) => {
+		console.log(coinToRemove);
+		// const updatedInputCoins = inputCoins.filter(
+		// 	(coin) => coin.id !== coinToRemove.id
+		// );
+
+		// setInputCoins(updatedInputCoins);
+	};
 
 	return (
 		<section className="portfolio-details">
 			<div className="details-left">
 				<div className="title-wrapper">
-					<h2>{mockedPortfolio.title}</h2>
+					<h2>
+						{mockedPortfolio.title}{" "}
+						<img src={editIcon} alt="edit" className="edit-img" />
+					</h2>
 					<p className="owner">@{mockedPortfolio.owner}</p>
-					<div className="user-btn-wrapper">
-						<Button text={"edit"} />
-						<Button text={"delete"} />
-					</div>
+					<Button text={"delete"} />
 				</div>
 
 				<div className="followers-wrapper">
@@ -109,6 +159,12 @@ const Portfolio = () => {
 
 				<h3 className="assets-title">Assets</h3>
 
+				<Button
+					text={"add coin"}
+					isGhost={true}
+					onClick={openModalHandler}
+				/>
+
 				<CryptoTable
 					className="portfolio-assets"
 					columns={[
@@ -120,10 +176,26 @@ const Portfolio = () => {
 					]}
 				>
 					{allCoins.slice(0, 3).map((coin) => (
-						<CoinTableRow coin={coin} key={coin.id} />
+						<div className="portfolio-row-wrapper" key={coin.id}>
+							<CoinTableRow coin={coin} />
+							<img
+								src={minusIcon}
+								alt="remove"
+								className="remove-coin-img"
+								onClick={() => removeCoinHandler(coin)}
+							/>
+						</div>
 					))}
 				</CryptoTable>
 			</div>
+
+			{isModalOpen && (
+				<AddCoin
+					allCoins={allCoins}
+					onAddCoin={addCoinHandler}
+					onClose={closeModalHandler}
+				/>
+			)}
 		</section>
 	);
 };
