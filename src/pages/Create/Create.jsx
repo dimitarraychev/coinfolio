@@ -1,18 +1,19 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
+import minusIcon from "../../assets/icons/minus-icon.svg";
+
+import { CoinContext } from "../../context/CoinContext";
 import Button from "../../components/Button/Button";
 import PieChart from "../../components/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
-import AddTransaction from "../../components/AddTransaction/AddTransaction";
+import AddCoin from "../../components/AddCoin/AddCoin";
 
 const Create = () => {
-	const [inputs, setInputs] = useState({});
-	const [allocations, setAllocations] = useState([
-		["Crypto", "Allocation"],
-		["none", 1],
-	]);
+	const { allCoins } = useContext(CoinContext);
+	const [inputTitle, setInputTitle] = useState("");
+	const [inputCoins, setInputCoins] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 
 	const closeModalHandler = (e) => {
@@ -23,15 +24,28 @@ const Create = () => {
 		setIsModalOpen(true);
 	};
 
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		console.log(e);
+	const addCoinHandler = (coin) => {
+		setInputCoins((prevCoins) => [...prevCoins, coin]);
+		setIsModalOpen(false);
 	};
 
-	const handleChange = (e) => {
-		const name = e.target.name;
+	const removeCoinHandler = (coinToRemove) => {
+		const updatedInputCoins = inputCoins.filter(
+			(coin) => coin.id !== coinToRemove.id
+		);
+
+		setInputCoins(updatedInputCoins);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		console.log("title", inputTitle);
+		console.log("coins", inputCoins);
+	};
+
+	const handleTitleChange = (e) => {
 		const value = e.target.value;
-		setInputs((values) => ({ ...values, [name]: value }));
+		setInputTitle(value);
 	};
 
 	return (
@@ -51,20 +65,16 @@ const Create = () => {
 						className="form-input"
 						autoComplete="title"
 						placeholder="Your portfolio title..."
-						value={inputs.title || ""}
-						onChange={handleChange}
+						value={inputTitle}
+						onChange={handleTitleChange}
 					/>
 				</div>
 
 				<div className="create-chart">
-					<PieChart data={allocations} />
+					<PieChart data={inputCoins} />
 				</div>
 
 				<h3 className="assets-title">Assets</h3>
-
-				<CryptoTable
-					columns={["#", "Coins", "Price", "24H Change", "Action"]}
-				></CryptoTable>
 
 				<Button
 					text={"add coin"}
@@ -72,7 +82,38 @@ const Create = () => {
 					onClick={openModalHandler}
 				/>
 
-				{isModalOpen && <AddTransaction onClose={closeModalHandler} />}
+				<CryptoTable
+					columns={[
+						"#",
+						"Coins",
+						"Price",
+						"24H Change",
+						"Market Cap",
+					]}
+				>
+					{inputCoins.length > 0 &&
+						inputCoins.map((coin) => (
+							<div className="create-row-wrapper" key={coin.id}>
+								<CoinTableRow coin={coin} />
+								<img
+									src={minusIcon}
+									alt="remove"
+									className="remove-coin-img"
+									onClick={() => removeCoinHandler(coin)}
+								/>
+							</div>
+						))}
+				</CryptoTable>
+
+				<Button type={"submit"} text={"publish portfolio"} />
+
+				{isModalOpen && (
+					<AddCoin
+						allCoins={allCoins}
+						onAddCoin={addCoinHandler}
+						onClose={closeModalHandler}
+					/>
+				)}
 			</form>
 		</section>
 	);

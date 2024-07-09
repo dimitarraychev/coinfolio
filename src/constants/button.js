@@ -17,7 +17,13 @@ export const buttonIcons = [
 		svg: plusIcon,
 	},
 	{
-		text: ["sign up", "sign in", "get started", "join our platform now"],
+		text: [
+			"sign up",
+			"sign in",
+			"get started",
+			"join our platform now",
+			"publish portfolio",
+		],
 		svg: arrowRight,
 	},
 	{

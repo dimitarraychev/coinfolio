@@ -11,8 +11,12 @@ const PieChart = ({ data }) => {
 		let dataCopy = [["Crypto", "Allocation"]];
 		if (data.length > 0) {
 			data.map((coin) => dataCopy.push([coin.name, coin.total]));
-			setChartData(dataCopy);
+			return setChartData(dataCopy);
 		}
+		setChartData([
+			["Crypto", "Allocation"],
+			["none", 1],
+		]);
 	}, [data]);
 
 	const options = {

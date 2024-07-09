@@ -32,6 +32,24 @@
 .create .crypto-table {
 	min-width: 60%;
 	margin: 0 auto 0.75rem auto;
+	padding-right: 2.5rem;
+}
+
+.create .create-row-wrapper {
+	position: relative;
+}
+
+.create .remove-coin-img {
+	position: absolute;
+	top: calc(50% - 1.25rem);
+	right: -2.5rem;
+	height: 2.5rem;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+.create .remove-coin-img:hover {
+	filter: brightness(0.8);
 }
 
 .create .assets-title {

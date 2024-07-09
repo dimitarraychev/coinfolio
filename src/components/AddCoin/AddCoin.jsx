@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 
 const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 	const [inputs, setInputs] = useState({
-		coinId: "",
+		id: "",
 		name: "",
 		quantity: 0,
 		price: 0,
@@ -17,14 +17,25 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 		setInputs((prevInputs) => {
 			let newInputs = { ...prevInputs, [name]: value };
 
-			if (name === "coinId") {
-				const selectedOption = e.target.selectedOptions[0];
-				const coinName = selectedOption ? selectedOption.text : "";
-				newInputs = { ...newInputs, name: coinName };
+			if (name === "id") {
+				const currentCoin = allCoins.find((coin) => coin.id === value);
+
+				newInputs = {
+					...newInputs,
+					name: currentCoin.name,
+					price: currentCoin.current_price,
+					market_cap_rank: currentCoin.market_cap_rank,
+					image: currentCoin.image,
+					symbol: currentCoin.symbol,
+					current_price: currentCoin.current_price,
+					price_change_percentage_24h:
+						currentCoin.price_change_percentage_24h,
+					market_cap: currentCoin.market_cap,
+				};
 			}
 
-			const quantity = parseFloat(newInputs.quantity) || 0;
-			const price = parseFloat(newInputs.price) || 0;
+			const quantity = newInputs.quantity;
+			const price = newInputs.price;
 			const total = quantity * price;
 
 			newInputs = { ...newInputs, total };
@@ -46,9 +57,9 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 				</div>
 
 				<select
-					name="coinId"
+					name="id"
 					className="select-coin"
-					value={inputs.coinId || ""}
+					value={inputs.id}
 					onChange={handleChange}
 				>
 					<option value="" disabled>
@@ -66,12 +77,13 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 						<label htmlFor="quantity">Quantity:</label>
 						<input
 							type="number"
+							min="0"
 							name="quantity"
 							id="quantity"
 							className="form-input"
 							autoComplete="quantity"
 							placeholder="0.00"
-							value={inputs.quantity || ""}
+							value={inputs.quantity}
 							onChange={handleChange}
 						/>
 					</div>
@@ -80,12 +92,13 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 						<label htmlFor="price">Price Per Coin:</label>
 						<input
 							type="number"
+							min="0"
 							name="price"
 							id="price"
 							className="form-input"
 							autoComplete="price"
 							placeholder="Price Per Coin..."
-							value={inputs.price || ""}
+							value={inputs.price}
 							onChange={handleChange}
 						/>
 					</div>

@@ -33,7 +33,8 @@
 	justify-self: flex-end;
 }
 
-.table-layout:last-child {
+.table-layout:last-child,
+.create-row-wrapper:last-child .table-layout {
 	border: none;
 }
 
