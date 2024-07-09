@@ -6,23 +6,23 @@ import { Link } from "react-router-dom";
 import { CoinContext } from "../context/CoinContext";
 import formatPrice from "../utils/helpers";
 
-const CoinTableRow = ({ item }) => {
+const CoinTableRow = ({ coin }) => {
 	const { currency } = useContext(CoinContext);
-	const isPositivePriceChange = item.price_change_percentage_24h > 0;
+	const isPositivePriceChange = coin.price_change_percentage_24h > 0;
 
 	return (
-		<Link to={`/coin/${item.id}`} className="table-layout">
-			<p>{item.market_cap_rank}</p>
+		<Link to={`/coin/${coin.id}`} className="table-layout">
+			<p>{coin.market_cap_rank}</p>
 			<div>
-				<img src={item.image} alt={item.symbol} />
-				<p>{item.name + " - " + item.symbol.toUpperCase()}</p>
+				<img src={coin.image} alt={coin.symbol} />
+				<p>{coin.name + " - " + coin.symbol.toUpperCase()}</p>
 			</div>
 			<p>
 				{currency.symbol}
-				{formatPrice(item.current_price)}
+				{formatPrice(coin.current_price)}
 			</p>
 			<p className={isPositivePriceChange ? "green" : "red"}>
-				{Math.floor(item.price_change_percentage_24h * 100) / 100}%
+				{Math.floor(coin.price_change_percentage_24h * 100) / 100}%
 				<img
 					className="arrow"
 					src={isPositivePriceChange ? arrowUp : arrowDown}
@@ -31,7 +31,7 @@ const CoinTableRow = ({ item }) => {
 			</p>
 			<p>
 				{currency.symbol}
-				{item.market_cap?.toLocaleString()}
+				{coin.market_cap?.toLocaleString()}
 			</p>
 		</Link>
 	);

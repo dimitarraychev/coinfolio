@@ -64,8 +64,8 @@ const Rankings = () => {
 			<CryptoTable
 				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
 			>
-				{displayCoins.map((item, index) => (
-					<CoinTableRow item={item} key={index} />
+				{displayCoins.map((coin) => (
+					<CoinTableRow coin={coin} key={coin.id} />
 				))}
 				{page < 5 && (
 					<div ref={ref} className="loading">

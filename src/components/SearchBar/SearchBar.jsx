@@ -27,7 +27,7 @@ const SearchBar = ({ onSearch, autofillSuggestions }) => {
 				/>
 				<datalist id="coinlist">
 					{autofillSuggestions.map((item) => (
-						<option key={item.name} value={item.name} />
+						<option key={item.id} value={item.name} />
 					))}
 				</datalist>
 				<button type="submit">Search</button>

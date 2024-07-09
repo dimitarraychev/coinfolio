@@ -88,8 +88,8 @@ const Explore = () => {
 						<Loader size="10rem" />
 					</div>
 				) : (
-					displayCoins.map((item, index) => (
-						<CoinTableRow item={item} key={index} />
+					displayCoins.map((coin) => (
+						<CoinTableRow coin={coin} key={coin.id} />
 					))
 				)}
 			</CryptoTable>

@@ -121,8 +121,8 @@ const Portfolio = () => {
 						"Market Cap",
 					]}
 				>
-					{allCoins.slice(0, 3).map((item, index) => (
-						<CoinTableRow item={item} key={index} />
+					{allCoins.slice(0, 3).map((coin) => (
+						<CoinTableRow coin={coin} key={coin.id} />
 					))}
 				</CryptoTable>
 			</div>
