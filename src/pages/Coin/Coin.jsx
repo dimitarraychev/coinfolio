@@ -5,7 +5,7 @@ import "./Coin.css";
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart";
 import Loader from "../../components/Loader/Loader";
-import formatPrice from "../../utils/helpers";
+import { formatPrice } from "../../utils/helpers";
 import { fetchCoinData, fetchHistoricalData } from "../../api/coinGecko";
 
 const Coin = () => {

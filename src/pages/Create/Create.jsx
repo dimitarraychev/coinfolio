@@ -9,6 +9,7 @@ import PieChart from "../../components/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
+import { calculateAveragePrice } from "../../utils/helpers";
 
 const Create = () => {
 	const { allCoins } = useContext(CoinContext);
@@ -36,6 +37,12 @@ const Create = () => {
 							...c,
 							quantity: c.quantity + coin.quantity,
 							total: c.total + coin.total,
+							price: calculateAveragePrice(
+								c.price,
+								c.quantity,
+								coin.price,
+								coin.quantity
+							),
 					  }
 					: c;
 			});

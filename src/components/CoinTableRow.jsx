@@ -4,7 +4,7 @@ import arrowDown from "../assets/icons/arrow-down.svg";
 
 import { Link } from "react-router-dom";
 import { CoinContext } from "../context/CoinContext";
-import formatPrice from "../utils/helpers";
+import { formatPrice } from "../utils/helpers";
 
 const CoinTableRow = ({ coin }) => {
 	const { currency } = useContext(CoinContext);
