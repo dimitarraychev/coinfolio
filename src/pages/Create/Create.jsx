@@ -32,19 +32,19 @@ const Create = () => {
 
 		if (existingCoin) {
 			const updatedCoins = inputCoins.map((c) => {
-				return c.id === coin.id
-					? {
-							...c,
-							quantity: c.quantity + coin.quantity,
-							total: c.total + coin.total,
-							price: calculateAveragePrice(
-								c.price,
-								c.quantity,
-								coin.price,
-								coin.quantity
-							),
-					  }
-					: c;
+				if (c.id !== coin.id) return c;
+
+				return {
+					...c,
+					quantity: c.quantity + coin.quantity,
+					total: c.total + coin.total,
+					price: calculateAveragePrice(
+						c.price,
+						c.quantity,
+						coin.price,
+						coin.quantity
+					),
+				};
 			});
 			return setInputCoins(updatedCoins);
 		}

@@ -10,7 +10,7 @@ export function formatPrice(price) {
 	});
 }
 
-const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
+export const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
 	if (quantity1 + quantity2 === 0) return 0;
 
 	const totalCost = price1 * quantity1 + price2 * quantity2;
