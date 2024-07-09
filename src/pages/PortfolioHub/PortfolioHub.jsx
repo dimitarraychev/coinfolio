@@ -9,7 +9,7 @@ import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import { portfolioCategories } from "../../constants/categories";
 
 const PortfolioHub = () => {
-	const [category, setCategory] = useState("all");
+	const [category, setCategory] = useState("newest");
 	const [isLoading, setIsLoading] = useState(false);
 
 	const categoriesHandler = (value) => {

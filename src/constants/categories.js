@@ -1,9 +1,5 @@
 export const portfolioCategories = [
 	{
-		category_id: "all",
-		name: "All",
-	},
-	{
 		category_id: "newest",
 		name: "Newest",
 	},
