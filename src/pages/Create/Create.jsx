@@ -25,8 +25,24 @@ const Create = () => {
 	};
 
 	const addCoinHandler = (coin) => {
-		setInputCoins((prevCoins) => [...prevCoins, coin]);
 		setIsModalOpen(false);
+
+		const existingCoin = inputCoins.find((c) => c.id === coin.id);
+
+		if (existingCoin) {
+			const updatedCoins = inputCoins.map((c) => {
+				return c.id === coin.id
+					? {
+							...c,
+							quantity: c.quantity + coin.quantity,
+							total: c.total + coin.total,
+					  }
+					: c;
+			});
+			return setInputCoins(updatedCoins);
+		}
+
+		setInputCoins((prevCoins) => [...prevCoins, coin]);
 	};
 
 	const removeCoinHandler = (coinToRemove) => {

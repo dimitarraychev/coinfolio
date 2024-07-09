@@ -34,12 +34,11 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 				};
 			}
 
-			const quantity = newInputs.quantity;
-			const price = newInputs.price;
-			const total = quantity * price;
+			newInputs.quantity = parseFloat(newInputs.quantity) || 0;
+			newInputs.price = parseFloat(newInputs.price) || 0;
+			const total = newInputs.quantity * newInputs.price;
 
 			newInputs = { ...newInputs, total };
-
 			return newInputs;
 		});
 	};
