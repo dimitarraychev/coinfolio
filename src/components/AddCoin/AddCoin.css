@@ -38,31 +38,6 @@
 	margin-bottom: 0.75rem;
 }
 
-.add-coin-wrapper .actions-list {
-	list-style: none;
-	display: flex;
-	align-items: center;
-	justify-content: space-evenly;
-	/* border: 2px solid var(--dark-gray); */
-	border-radius: 0.7rem;
-	margin: 0.75rem 0;
-	gap: 0.75rem;
-}
-
-.add-coin-wrapper .actions-list li {
-	padding: 0.5em 1em;
-	outline: 2px solid var(--btn-color);
-	border-radius: 0.5rem;
-	flex-grow: 1;
-	text-align: center;
-}
-
-.add-coin-wrapper .actions-list li:hover,
-.selected {
-	cursor: pointer;
-	background: var(--btn-color);
-}
-
 .add-coin-wrapper .inputs-container {
 	display: flex;
 	gap: 0.3rem;

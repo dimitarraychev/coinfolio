@@ -1,11 +1,16 @@
-import React, { useContext } from "react";
-import "./AddTransaction.css";
+import React, { useState } from "react";
+import "./AddCoin.css";
 import closeIcon from "../../assets/icons/close-icon.svg";
-import { CoinContext } from "../../context/CoinContext";
 import Button from "../Button/Button";
 
-const AddTransaction = ({ onClose }) => {
-	const { allCoins } = useContext(CoinContext);
+const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
+	const [inputs, setInputs] = useState({});
+
+	const handleChange = (e) => {
+		const name = e.target.name;
+		const value = e.target.value;
+		setInputs((values) => ({ ...values, [name]: value }));
+	};
 
 	const handleWrapperClick = (e) => {
 		if (e.target === e.currentTarget) onClose();
@@ -18,14 +23,16 @@ const AddTransaction = ({ onClose }) => {
 					<h5>Add Transaction</h5>
 					<img src={closeIcon} alt="close" onClick={onClose} />
 				</div>
-				{/* 
-				<ul className="actions-list">
-					<li className="selected">Buy</li>
-					<li>Sell</li>
-					<li>Transfer</li>
-				</ul> */}
 
-				<select className="select-coin">
+				<select
+					name="coinId"
+					className="select-coin"
+					value={inputs.coinId || ""}
+					onChange={handleChange}
+				>
+					<option value="" disabled>
+						Select a coin...
+					</option>
 					{allCoins.map((coin) => (
 						<option value={coin.id} key={coin.id}>
 							{coin.name}
@@ -43,8 +50,8 @@ const AddTransaction = ({ onClose }) => {
 							className="form-input"
 							autoComplete="quantity"
 							placeholder="0.00"
-							// value={inputs.title || ""}
-							// onChange={handleChange}
+							value={inputs.quantity || ""}
+							onChange={handleChange}
 						/>
 					</div>
 
@@ -57,8 +64,8 @@ const AddTransaction = ({ onClose }) => {
 							className="form-input"
 							autoComplete="price"
 							placeholder="Price Per Coin..."
-							// value={inputs.title || ""}
-							// onChange={handleChange}
+							value={inputs.price || ""}
+							onChange={handleChange}
 						/>
 					</div>
 				</div>
@@ -67,10 +74,10 @@ const AddTransaction = ({ onClose }) => {
 					<label htmlFor="total-spent">Total Spent:</label>
 					<p id="total-spent">0$</p>
 				</div>
-				<Button text={"add coin"} />
+				<Button text={"add coin"} onClick={() => onAddCoin(inputs)} />
 			</div>
 		</div>
 	);
 };
 
-export default AddTransaction;
+export default AddCoin;
