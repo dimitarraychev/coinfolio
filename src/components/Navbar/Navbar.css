@@ -59,7 +59,7 @@
 	top: 110%;
 	left: -15%;
 	display: none;
-	border: 2px solid var(--btn-color);
+	border: 2px solid var(--separator-line);
 	border-top: none;
 	border-radius: 0.4rem;
 }
@@ -93,6 +93,10 @@
 .user .user-image {
 	height: 3em;
 	aspect-ratio: 1/1;
+	cursor: pointer;
+}
+
+.user p {
 	cursor: pointer;
 }
 

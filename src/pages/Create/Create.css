@@ -31,7 +31,7 @@
 
 .create .crypto-table {
 	min-width: 60%;
-	margin: auto;
+	margin: 0 auto 0.75rem auto;
 }
 
 .create .assets-title {

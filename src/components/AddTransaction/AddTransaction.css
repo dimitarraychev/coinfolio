@@ -34,6 +34,10 @@
 	cursor: pointer;
 }
 
+.modal-header {
+	margin-bottom: 0.75rem;
+}
+
 .add-coin-wrapper .actions-list {
 	list-style: none;
 	display: flex;

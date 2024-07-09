@@ -115,7 +115,7 @@ const Home = () => {
 
 			<section className="home-cta">
 				<div className="cta-text">
-					<h2>Elevate Your Crypto Journey with Our Tools</h2>
+					<h2>Elevate Your Crypto Journey With Our Tools</h2>
 					<p>
 						Receive real-time updates, create and manage your
 						personalized cryptocurrency portfolio, compare its

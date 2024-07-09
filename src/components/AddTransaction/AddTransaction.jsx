@@ -18,12 +18,12 @@ const AddTransaction = ({ onClose }) => {
 					<h5>Add Transaction</h5>
 					<img src={closeIcon} alt="close" onClick={onClose} />
 				</div>
-
+				{/* 
 				<ul className="actions-list">
 					<li className="selected">Buy</li>
 					<li>Sell</li>
 					<li>Transfer</li>
-				</ul>
+				</ul> */}
 
 				<select className="select-coin">
 					{allCoins.map((coin) => (
