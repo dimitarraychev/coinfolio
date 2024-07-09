@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
@@ -16,6 +16,7 @@ const Create = () => {
 	const [inputTitle, setInputTitle] = useState("");
 	const [inputCoins, setInputCoins] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
 	const closeModalHandler = (e) => {
 		setIsModalOpen(false);
@@ -62,6 +63,7 @@ const Create = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
+		if (isSubmitButtonDisabled) return;
 		console.log("title", inputTitle);
 		console.log("coins", inputCoins);
 	};
@@ -70,6 +72,12 @@ const Create = () => {
 		const value = e.target.value;
 		setInputTitle(value);
 	};
+
+	useEffect(() => {
+		if (inputTitle !== "" && inputCoins.length > 0)
+			return setIsSubmitButtonDisabled(false);
+		setIsSubmitButtonDisabled(true);
+	}, [inputTitle, inputCoins]);
 
 	return (
 		<section className="create">
@@ -128,7 +136,11 @@ const Create = () => {
 						))}
 				</CryptoTable>
 
-				<Button type={"submit"} text={"publish portfolio"} />
+				<Button
+					type={"submit"}
+					text={"publish portfolio"}
+					isDisabled={isSubmitButtonDisabled}
+				/>
 
 				{isModalOpen && (
 					<AddCoin

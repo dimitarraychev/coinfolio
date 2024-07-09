@@ -2,14 +2,25 @@ import React from "react";
 import "./Button.css";
 import { buttonIcons } from "../../constants/button";
 
-const Button = ({ text, isGhost, isWide, type, onClick }) => {
+const Button = ({
+	text,
+	type = null,
+	isDisabled = false,
+	isGhost,
+	isWide,
+	onClick,
+}) => {
 	const hasSVG = buttonIcons.find((btn) => btn.text.includes(text));
 	const isDelete = text === "delete";
+
+	const clickHandler = (e) => {
+		if (!isDisabled && onClick) onClick(e);
+	};
 
 	return (
 		<button
 			type={type != null ? type : "button"}
-			onClick={onClick}
+			onClick={clickHandler}
 			className={
 				isGhost
 					? "btn btn-ghost"
@@ -17,6 +28,8 @@ const Button = ({ text, isGhost, isWide, type, onClick }) => {
 					? "btn btn-wide"
 					: isDelete
 					? "btn btn-del"
+					: isDisabled
+					? "btn btn-disabled"
 					: "btn"
 			}
 		>

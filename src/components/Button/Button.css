@@ -46,3 +46,12 @@
 .btn-wide {
 	width: 100%;
 }
+
+.btn-disabled {
+	background: var(--dark-gray);
+	cursor: not-allowed;
+}
+
+.btn-disabled:hover {
+	filter: brightness(1);
+}
