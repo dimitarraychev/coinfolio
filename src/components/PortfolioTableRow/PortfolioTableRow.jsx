@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
+import { CoinContext } from "../../context/CoinContext";
 
 const PortfolioTableRow = () => {
+	const { currency } = useContext(CoinContext);
+
+	const followHandler = (e) => {
+		e.preventDefault();
+	};
+
 	return (
 		<Link className="table-layout" to={"/hub/1"}>
 			<p>1</p>
@@ -10,13 +17,14 @@ const PortfolioTableRow = () => {
 				<p>Low Risk Classic Porfolio</p>
 			</div>
 
-			<p>1,239</p>
+			<p>{currency.symbol}5000</p>
 
-			<p className="green">16,70%</p>
+			<p className="change green">16,70%</p>
 
-			<p>
-				<Button text={"follow"} />
-			</p>
+			<div className="last-column">
+				<p>1,239</p>
+				<Button text={"follow"} onClick={followHandler} />
+			</div>
 		</Link>
 	);
 };
