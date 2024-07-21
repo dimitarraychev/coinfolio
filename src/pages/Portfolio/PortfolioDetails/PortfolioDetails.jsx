@@ -92,7 +92,7 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 							portfolio.isPositivePriceChange ? "green" : "red"
 						}
 					>
-						{portfolio.alltimeProfitLoss}
+						{`${portfolio.alltimeProfitLoss} (${portfolio.alltimeProfitLossPercentage}%)`}
 						<img
 							src={
 								portfolio.isPositivePriceChange
@@ -106,7 +106,7 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 				</ul>
 				<ul>
 					<li>Top Performers</li>
-					<li>ETH, CRO, ADA</li>
+					<li>{portfolio.topPerformers.join(", ")}</li>
 				</ul>
 				<ul>
 					<li>Total Allocation</li>

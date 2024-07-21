@@ -9,7 +9,12 @@ import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
-import { calculateAveragePrice } from "../../utils/helpers";
+import {
+	calculateAveragePrice,
+	calculateCurrentBalance,
+	calculatePriceChangePercentage,
+	findTopPerformers,
+} from "../../utils/helpers";
 import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
 
 const Portfolio = () => {
@@ -20,8 +25,8 @@ const Portfolio = () => {
 		title: "Low Risk Classic Portfolio",
 		owner: "username",
 		totalAllocation: 5000,
-		alltimeProfitLoss: "$835.47 (16.70%)",
-		currentBalance: 5835.47,
+		alltimeProfitLoss: 0,
+		currentBalance: 0,
 		createdOn: "1717699200",
 		updatedOn: "1717699200",
 		followers: 1389,
@@ -59,9 +64,6 @@ const Portfolio = () => {
 
 	const selectionRef = useRef(null);
 
-	portfolio.isPositivePriceChange =
-		portfolio.currentBalance >= portfolio.totalAllocation;
-
 	const closeModalHandler = (e) => setIsModalOpen(false);
 
 	const openModalHandler = (e) => setIsModalOpen(true);
@@ -93,12 +95,17 @@ const Portfolio = () => {
 					}
 				);
 
-				return { ...prevPortfolio, allocations: updatedAllocations };
+				return {
+					...prevPortfolio,
+					allocations: updatedAllocations,
+					totalAllocation: portfolio.totalAllocation + coin.total,
+				};
 			}
 
 			return {
 				...prevPortfolio,
 				allocations: [...prevPortfolio.allocations, coin],
+				totalAllocation: portfolio.totalAllocation + coin.total,
 			};
 		});
 	};
@@ -111,6 +118,7 @@ const Portfolio = () => {
 		setPortfolio((prevPortfolio) => ({
 			...prevPortfolio,
 			allocations: updatedAllocations,
+			totalAllocation: portfolio.totalAllocation - coinToRemove.total,
 		}));
 	};
 
@@ -138,10 +146,34 @@ const Portfolio = () => {
 				const matchingAllocation = portfolio.allocations.find(
 					(allocation) => allocation.id === coin.id
 				);
-				return { ...coin, allocation: matchingAllocation };
+				return {
+					...matchingAllocation,
+					market_data: {
+						...coin,
+						price_change_alltime: calculatePriceChangePercentage(
+							matchingAllocation.price,
+							coin.current_price
+						),
+					},
+				};
 			});
 
 		setMatchingCoins(updatedMatchingCoins);
+
+		const currentBalance = calculateCurrentBalance(updatedMatchingCoins);
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			currentBalance,
+			isPositivePriceChange: currentBalance >= portfolio.totalAllocation,
+			alltimeProfitLoss: (
+				currentBalance - portfolio.totalAllocation
+			).toFixed(2),
+			alltimeProfitLossPercentage: calculatePriceChangePercentage(
+				portfolio.totalAllocation,
+				currentBalance
+			),
+			topPerformers: findTopPerformers(updatedMatchingCoins),
+		}));
 	}, [allCoins, portfolio.allocations]);
 
 	return (
@@ -171,8 +203,8 @@ const Portfolio = () => {
 					{matchingCoins.map((coin) => (
 						<div className="portfolio-row-wrapper" key={coin.id}>
 							<CoinTableRow
-								coin={coin}
-								allocation={coin.allocation}
+								coin={coin.market_data}
+								allocation={coin}
 							/>
 							<img
 								src={minusIcon}

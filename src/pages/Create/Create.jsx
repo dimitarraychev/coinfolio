@@ -15,6 +15,7 @@ const Create = () => {
 	const { allCoins } = useContext(CoinContext);
 	const [inputTitle, setInputTitle] = useState("");
 	const [inputCoins, setInputCoins] = useState([]);
+	const [matchingCoins, setMatchingCoins] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
@@ -74,6 +75,19 @@ const Create = () => {
 	};
 
 	useEffect(() => {
+		const updatedMatchingCoins = allCoins
+			.filter((coin) =>
+				inputCoins.some((allocation) => allocation.id === coin.id)
+			)
+			.map((coin) => {
+				const matchingAllocation = inputCoins.find(
+					(allocation) => allocation.id === coin.id
+				);
+				return { ...matchingAllocation, market_data: coin };
+			});
+
+		setMatchingCoins(updatedMatchingCoins);
+
 		if (inputTitle !== "" && inputCoins.length > 0)
 			return setIsSubmitButtonDisabled(false);
 		setIsSubmitButtonDisabled(true);
@@ -123,9 +137,12 @@ const Create = () => {
 					]}
 				>
 					{inputCoins.length > 0 &&
-						inputCoins.map((coin) => (
+						matchingCoins.map((coin) => (
 							<div className="create-row-wrapper" key={coin.id}>
-								<CoinTableRow coin={coin} />
+								<CoinTableRow
+									allocation={coin}
+									coin={coin.market_data}
+								/>
 								<img
 									src={minusIcon}
 									alt="remove"

@@ -4,10 +4,7 @@ import arrowDown from "../../assets/icons/arrow-down.svg";
 
 import { Link } from "react-router-dom";
 import { CoinContext } from "../../context/CoinContext";
-import {
-	calculatePriceChangePercentage,
-	formatPrice,
-} from "../../utils/helpers";
+import { formatPrice } from "../../utils/helpers";
 
 const CoinTableRow = ({ coin, allocation }) => {
 	const { currency } = useContext(CoinContext);
@@ -28,10 +25,7 @@ const CoinTableRow = ({ coin, allocation }) => {
 			</p>
 			<p className={isPositivePriceChange ? "green" : "red"}>
 				{allocation
-					? calculatePriceChangePercentage(
-							allocation.price,
-							coin.current_price
-					  )
+					? coin.price_change_alltime
 					: Math.floor(coin.price_change_percentage_24h * 100) / 100}
 				%
 				<img
