@@ -16,11 +16,13 @@ section.hero {
 section.hero .img-right {
 	animation: slideLeft 0.5s linear;
 	height: 27vw;
+	animation: bounce 2s infinite;
 }
 
 section.hero .img-left {
 	animation: slideRight 0.5s linear;
 	height: 27vw;
+	animation: bounce 1.8s infinite ease-in;
 }
 
 section.hero .hero-text {
