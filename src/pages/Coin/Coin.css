@@ -21,7 +21,7 @@ section.coin-details {
 
 .coin-details-info {
 	width: 40%;
-	margin: 2em auto 4em auto;
+	margin: 1em auto 4em auto;
 	display: flex;
 	flex-direction: column;
 }
@@ -34,8 +34,8 @@ section.coin-details {
 	list-style: none;
 }
 
-.coin-details-info ul li:last-child {
-	font-weight: 300;
+.coin-details-info ul li:first-child {
+	color: var(--dark-gray);
 }
 
 .coin-details .loading {
@@ -43,4 +43,32 @@ section.coin-details {
 	align-items: center;
 	justify-content: center;
 	height: 80vh;
+}
+
+.coin-details .statistics-title {
+	text-align: center;
+}
+
+.coin-details .current-price {
+	width: fit-content;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0;
+	margin: 0 auto 2em auto;
+}
+
+.coin-details .price {
+	text-align: center;
+	font-size: 2.4rem;
+	font-weight: 500;
+}
+
+.coin-details .current-price label {
+	color: var(--dark-gray);
+}
+
+.coin-details .arrow {
+	height: 1em;
+	aspect-ratio: 1/1;
 }

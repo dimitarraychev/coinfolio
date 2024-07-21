@@ -1,6 +1,8 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Coin.css";
+import arrowUp from "../../assets/icons/arrow-up.svg";
+import arrowDown from "../../assets/icons/arrow-down.svg";
 
 import { CoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
@@ -13,6 +15,7 @@ const Coin = () => {
 	const [coinData, setCoinData] = useState();
 	const [historicalData, setHistoricalData] = useState();
 	const { currency } = useContext(CoinContext);
+	console.log(coinData);
 
 	const getData = async () => {
 		try {
@@ -42,24 +45,43 @@ const Coin = () => {
 						{coinData.name} ({coinData.symbol.toUpperCase()})
 					</h2>
 				</div>
+
 				<div className="coin-details-chart">
 					<LineChart historicalData={historicalData} />
 				</div>
+
+				<div className="current-price">
+					<label className="price-label">Current Price</label>
+					<p
+						className={
+							coinData.market_data.price_change_percentage_24h > 0
+								? "price green"
+								: "price red"
+						}
+					>
+						{currency.symbol}
+						{formatPrice(
+							coinData.market_data.current_price[currency.name]
+						)}
+						<img
+							src={
+								coinData.market_data
+									.price_change_percentage_24h > 0
+									? arrowUp
+									: arrowDown
+							}
+							alt="arrow"
+							className="arrow"
+						/>
+					</p>
+				</div>
+
+				<h3 className="statistics-title">Statistics</h3>
+
 				<div className="coin-details-info">
 					<ul>
 						<li>Crypto Market Rank</li>
-						<li>{coinData.market_cap_rank}</li>
-					</ul>
-					<ul>
-						<li>Current Price</li>
-						<li>
-							{currency.symbol}
-							{formatPrice(
-								coinData.market_data.current_price[
-									currency.name
-								]
-							)}
-						</li>
+						<li>#{coinData.market_cap_rank}</li>
 					</ul>
 					<ul>
 						<li>Market Cap</li>
@@ -68,6 +90,18 @@ const Coin = () => {
 							{coinData.market_data.market_cap[
 								currency.name
 							].toLocaleString()}
+						</li>
+					</ul>
+					<ul>
+						<li>Total Supply</li>
+						<li>
+							{`${coinData.market_data.total_supply.toLocaleString()} ${coinData.symbol.toUpperCase()}`}
+						</li>
+					</ul>
+					<ul>
+						<li>Circulating Supply</li>
+						<li>
+							{`${coinData.market_data.circulating_supply.toLocaleString()} ${coinData.symbol.toUpperCase()}`}
 						</li>
 					</ul>
 					<ul>
@@ -86,6 +120,30 @@ const Coin = () => {
 							{formatPrice(
 								coinData.market_data.low_24h[currency.name]
 							)}
+						</li>
+					</ul>
+					<ul>
+						<li>All Time High</li>
+						<li>
+							{currency.symbol}
+							{formatPrice(
+								coinData.market_data.ath[currency.name]
+							)}
+							{` on ${new Date(
+								coinData.market_data.ath_date[currency.name]
+							).toLocaleDateString()}`}
+						</li>
+					</ul>
+					<ul>
+						<li>All Time Low</li>
+						<li>
+							{currency.symbol}
+							{formatPrice(
+								coinData.market_data.atl[currency.name]
+							)}
+							{` on ${new Date(
+								coinData.market_data.atl_date[currency.name]
+							).toLocaleDateString()}`}
 						</li>
 					</ul>
 				</div>
