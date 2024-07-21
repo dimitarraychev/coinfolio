@@ -35,14 +35,20 @@ export const calculateCurrentBalance = (coins) => {
 };
 
 export const findTopPerformers = (coins) => {
-	const sortedCoins = coins
+	return coins
 		.filter((c) => c.market_data.price_change_alltime >= 0)
 		.sort(
 			(a, b) =>
 				a.market_data.price_change_alltime >
 				b.market_data.price_change_alltime
 		)
-		.slice(0, 3);
+		.slice(0, 3)
+		.map((c) => c.market_data.symbol.toUpperCase());
+};
 
-	return sortedCoins.map((c) => c.market_data.symbol.toUpperCase());
+export const calculateCoinProfitLoss = (qty, initialPrice, currentPrice) => {
+	const oldTotal = qty * initialPrice;
+	const newTotal = qty * currentPrice;
+
+	return formatPrice(newTotal - oldTotal);
 };
