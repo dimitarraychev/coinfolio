@@ -23,3 +23,26 @@ export const calculatePriceChangePercentage = (oldPrice, newPrice) => {
 	const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
 	return percentageChange.toFixed(2);
 };
+
+export const calculateCurrentBalance = (coins) => {
+	let currentBalance = 0;
+
+	for (const coin of coins) {
+		currentBalance += coin.quantity * coin.market_data.current_price;
+	}
+
+	return currentBalance.toFixed(2);
+};
+
+export const findTopPerformers = (coins) => {
+	const sortedCoins = coins
+		.filter((c) => c.market_data.price_change_alltime >= 0)
+		.sort(
+			(a, b) =>
+				a.market_data.price_change_alltime >
+				b.market_data.price_change_alltime
+		)
+		.slice(0, 3);
+
+	return sortedCoins.map((c) => c.market_data.symbol.toUpperCase());
+};
