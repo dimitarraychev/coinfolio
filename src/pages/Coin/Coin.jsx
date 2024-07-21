@@ -15,7 +15,6 @@ const Coin = () => {
 	const [coinData, setCoinData] = useState();
 	const [historicalData, setHistoricalData] = useState();
 	const { currency } = useContext(CoinContext);
-	console.log(coinData);
 
 	const getData = async () => {
 		try {
@@ -52,7 +51,7 @@ const Coin = () => {
 
 				<div className="current-price">
 					<label className="price-label">Current Price</label>
-					<p
+					<h3
 						className={
 							coinData.market_data.price_change_percentage_24h > 0
 								? "price green"
@@ -73,6 +72,20 @@ const Coin = () => {
 							alt="arrow"
 							className="arrow"
 						/>
+					</h3>
+					<p
+						className={
+							coinData.market_data.price_change_percentage_24h > 0
+								? "percentage green"
+								: "percentage red"
+						}
+					>
+						{coinData.market_data.price_change_percentage_24h > 0 &&
+							"+"}
+						{`${formatPrice(
+							coinData.market_data.price_change_percentage_24h
+						)}%`}
+						(24h)
 					</p>
 				</div>
 

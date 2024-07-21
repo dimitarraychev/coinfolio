@@ -9,8 +9,8 @@ import { formatPrice } from "../../utils/helpers";
 const CoinTableRow = ({ coin, allocation }) => {
 	const { currency } = useContext(CoinContext);
 	const isPositivePriceChange = allocation
-		? coin.price_change_alltime > 0
-		: coin.price_change_percentage_24h > 0;
+		? coin.price_change_alltime >= 0
+		: coin.price_change_percentage_24h >= 0;
 
 	return (
 		<Link to={`/coin/${coin.id}`} className="table-layout">
@@ -38,9 +38,9 @@ const CoinTableRow = ({ coin, allocation }) => {
 					>
 						{isPositivePriceChange
 							? `+${currency.symbol}${coin.alltime_profit_loss}`
-							: `-${
-									currency.symbol
-							  }${coin.alltime_profit_loss.slice(1)}`}
+							: `-${currency.symbol}${coin.alltime_profit_loss
+									.toString()
+									.substr(1)}`}
 					</p>
 
 					<p

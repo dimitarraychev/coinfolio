@@ -58,14 +58,12 @@ section.coin-details {
 	margin: 0 auto 2em auto;
 }
 
-.coin-details .price {
-	text-align: center;
-	font-size: 2.4rem;
-	font-weight: 500;
-}
-
 .coin-details .current-price label {
 	color: var(--dark-gray);
+}
+
+.coin-details .current-price .percentage {
+	align-self: flex-end;
 }
 
 .coin-details .arrow {

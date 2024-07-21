@@ -12,11 +12,14 @@ import AddCoin from "../../components/AddCoin/AddCoin";
 import {
 	calculateAveragePrice,
 	calculatePriceChangePercentage,
+	calculateCoinProfitLoss,
+	formatPrice,
 } from "../../utils/helpers";
 
 const Create = () => {
-	const { allCoins } = useContext(CoinContext);
+	const { allCoins, currency } = useContext(CoinContext);
 	const [inputTitle, setInputTitle] = useState("");
+	const [totalAllocation, setTotalAllocation] = useState(0);
 	const [inputCoins, setInputCoins] = useState([]);
 	const [matchingCoins, setMatchingCoins] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
@@ -32,6 +35,8 @@ const Create = () => {
 
 	const addCoinHandler = (coin) => {
 		setIsModalOpen(false);
+
+		setTotalAllocation((state) => state + coin.total);
 
 		const existingCoin = inputCoins.find((c) => c.id === coin.id);
 
@@ -58,6 +63,8 @@ const Create = () => {
 	};
 
 	const removeCoinHandler = (coinToRemove) => {
+		setTotalAllocation((state) => state - coinToRemove.total);
+
 		const updatedInputCoins = inputCoins.filter(
 			(coin) => coin.id !== coinToRemove.id
 		);
@@ -91,6 +98,11 @@ const Create = () => {
 					market_data: {
 						...coin,
 						price_change_alltime: calculatePriceChangePercentage(
+							matchingAllocation.price,
+							coin.current_price
+						),
+						alltime_profit_loss: calculateCoinProfitLoss(
+							matchingAllocation.quantity,
 							matchingAllocation.price,
 							coin.current_price
 						),
@@ -129,6 +141,14 @@ const Create = () => {
 
 				<div className="create-chart">
 					<PieChart data={inputCoins} />
+				</div>
+
+				<div className="allocation">
+					<label>Total Allocation</label>
+					<h3>
+						{currency.symbol}
+						{formatPrice(totalAllocation)}
+					</h3>
 				</div>
 
 				<h3 className="assets-title">Assets</h3>

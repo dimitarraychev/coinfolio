@@ -1,12 +1,13 @@
 export function formatPrice(price) {
-	const minimumFractionDigits = 2;
-	const maximumFractionDigits = 8;
+	let fractionDigits = 2;
 
-	if (price == null) return 0;
+	if (price < 0.01) fractionDigits = 8;
+
+	if (price === null || price === 0) return 0;
 
 	return price.toLocaleString(undefined, {
-		minimumFractionDigits,
-		maximumFractionDigits,
+		minimumFractionDigits: fractionDigits,
+		maximumFractionDigits: fractionDigits,
 	});
 }
 
