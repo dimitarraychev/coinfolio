@@ -4,7 +4,7 @@ import "./CryptoTable.css";
 const CryptoTable = ({ columns, children }) => {
 	return (
 		<div className="crypto-table">
-			<div className="table-layout">
+			<div className="table-header">
 				{columns.map((col) => (
 					<p key={col}>{col}</p>
 				))}

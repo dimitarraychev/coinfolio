@@ -52,9 +52,9 @@ const PortfolioHub = () => {
 					columns={[
 						"#",
 						"Portfolios",
+						"Allocation",
+						"Profit/Loss",
 						"Followers",
-						"Total P/L",
-						"Action",
 					]}
 				>
 					<PortfolioTableRow />

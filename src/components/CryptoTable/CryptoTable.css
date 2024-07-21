@@ -1,14 +1,9 @@
-/* .crypto-table {
-	width: 70%;
-	margin: auto;
-	border-radius: 15px;
-} */
-
 .crypto-table .arrow {
 	height: 1em;
 	aspect-ratio: 1/1;
 }
 
+.table-header,
 .table-layout {
 	display: grid;
 	grid-template-columns: 0.3fr 2fr 1fr 1fr 1.5fr;
@@ -21,17 +16,38 @@
 	gap: 0.5em;
 }
 
+.table-layout .name-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 0.1em;
+}
+
+.table-layout .name-wrapper .symbol,
+.table-layout .last-column .quantity {
+	color: var(--dark-gray);
+}
+
 .table-layout:hover {
 	filter: brightness(1.2);
 }
 
-.table-layout p:nth-last-of-type(2) {
+.table-header p:nth-last-of-type(2),
+.table-layout .change {
 	text-align: center;
 }
 
-.table-layout > p:last-of-type {
+.table-header > p:last-of-type,
+.table-layout .last-column {
 	text-align: right;
 	justify-self: flex-end;
+}
+
+.table-layout .last-column {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	gap: 0.1em;
 }
 
 .table-layout:last-child,
@@ -45,13 +61,16 @@
 	gap: 0.5em;
 }
 
-.table-layout div p {
-	justify-self: flex-start;
+.table-layout div .coin-img {
+	height: 2.5em;
+	aspect-ratio: 1/1;
 }
 
-.table-layout div img {
-	height: 2.5rem;
-	aspect-ratio: 1/1;
+.table-layout .profit-loss-wrapper {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 0.1em;
 }
 
 .crypto-table .loading {
