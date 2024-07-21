@@ -24,13 +24,6 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 					...newInputs,
 					name: currentCoin.name,
 					price: currentCoin.current_price,
-					market_cap_rank: currentCoin.market_cap_rank,
-					image: currentCoin.image,
-					symbol: currentCoin.symbol,
-					current_price: currentCoin.current_price,
-					price_change_percentage_24h:
-						currentCoin.price_change_percentage_24h,
-					market_cap: currentCoin.market_cap,
 				};
 			}
 
