@@ -9,7 +9,10 @@ import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
-import { calculateAveragePrice } from "../../utils/helpers";
+import {
+	calculateAveragePrice,
+	calculatePriceChangePercentage,
+} from "../../utils/helpers";
 
 const Create = () => {
 	const { allCoins } = useContext(CoinContext);
@@ -83,7 +86,16 @@ const Create = () => {
 				const matchingAllocation = inputCoins.find(
 					(allocation) => allocation.id === coin.id
 				);
-				return { ...matchingAllocation, market_data: coin };
+				return {
+					...matchingAllocation,
+					market_data: {
+						...coin,
+						price_change_alltime: calculatePriceChangePercentage(
+							matchingAllocation.price,
+							coin.current_price
+						),
+					},
+				};
 			});
 
 		setMatchingCoins(updatedMatchingCoins);
@@ -128,13 +140,7 @@ const Create = () => {
 				/>
 
 				<CryptoTable
-					columns={[
-						"#",
-						"Coins",
-						"Price",
-						"24H Change",
-						"Market Cap",
-					]}
+					columns={["#", "Coins", "Price", "Change", "Allocation"]}
 				>
 					{inputCoins.length > 0 &&
 						matchingCoins.map((coin) => (

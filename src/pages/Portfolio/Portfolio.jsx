@@ -11,6 +11,7 @@ import AddCoin from "../../components/AddCoin/AddCoin";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 import {
 	calculateAveragePrice,
+	calculateCoinProfitLoss,
 	calculateCurrentBalance,
 	calculatePriceChangePercentage,
 	findTopPerformers,
@@ -27,6 +28,7 @@ const Portfolio = () => {
 		totalAllocation: 5000,
 		alltimeProfitLoss: 0,
 		currentBalance: 0,
+		topPerformers: [],
 		createdOn: "1717699200",
 		updatedOn: "1717699200",
 		followers: 1389,
@@ -154,6 +156,11 @@ const Portfolio = () => {
 							matchingAllocation.price,
 							coin.current_price
 						),
+						alltime_profit_loss: calculateCoinProfitLoss(
+							matchingAllocation.quantity,
+							matchingAllocation.price,
+							coin.current_price
+						),
 					},
 				};
 			});
@@ -198,7 +205,13 @@ const Portfolio = () => {
 
 				<CryptoTable
 					className="portfolio-table"
-					columns={["#", "Coins", "Price", "Change", "Allocation"]}
+					columns={[
+						"#",
+						"Coins",
+						"Price",
+						"Profit/Loss",
+						"Allocation",
+					]}
 				>
 					{matchingCoins.map((coin) => (
 						<div className="portfolio-row-wrapper" key={coin.id}>
