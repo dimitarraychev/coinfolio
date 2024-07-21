@@ -18,3 +18,8 @@ export const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
 
 	return totalCost / totalQuantity;
 };
+
+export const calculatePriceChangePercentage = (oldPrice, newPrice) => {
+	const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
+	return percentageChange.toFixed(2);
+};
