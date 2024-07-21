@@ -1,160 +1,159 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useRef, useEffect } from "react";
 import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
-import editIcon from "../../assets/icons/edit-icon.svg";
-import arrowUp from "../../assets/icons/arrow-up.svg";
-import arrowDown from "../../assets/icons/arrow-down.svg";
 
 import { CoinContext } from "../../context/CoinContext";
-import PieChart from "../../components/PieChart";
+import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
-
-const mockedPortfolio = {
-	title: "Low Risk Classic Portfolio",
-	owner: "username",
-	totalAllocation: 5000,
-	alltimeProfitLoss: "$835.47 (16.70%)",
-	currentBalance: 5835.47,
-	allocations: [
-		{ name: "Ethereum", total: 3000 },
-		{ name: "Bitcoin", total: 1000 },
-		{ name: "Cronos", total: 800 },
-		{ name: "Cardano", total: 200 },
-	],
-};
+import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
+import { calculateAveragePrice } from "../../utils/helpers";
+import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
 
 const Portfolio = () => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { allCoins } = useContext(CoinContext);
+	const [matchingCoins, setMatchingCoins] = useState([]);
 	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [portfolio, setPortfolio] = useState({
+		title: "Low Risk Classic Portfolio",
+		owner: "username",
+		totalAllocation: 5000,
+		alltimeProfitLoss: "$835.47 (16.70%)",
+		currentBalance: 5835.47,
+		createdOn: "1717699200",
+		updatedOn: "1717699200",
+		followers: 1389,
+		allocations: [
+			{
+				name: "Ethereum",
+				total: 3000,
+				id: "ethereum",
+				price: 3000,
+				quantity: 1,
+			},
+			{
+				name: "Bitcoin",
+				total: 1000,
+				id: "bitcoin",
+				price: 10000,
+				quantity: 0.1,
+			},
+			{
+				name: "Cronos",
+				total: 800,
+				id: "crypto-com-chain",
+				price: 0.8,
+				quantity: 1000,
+			},
+			{
+				name: "Cardano",
+				total: 200,
+				id: "cardano",
+				price: 2,
+				quantity: 100,
+			},
+		],
+	});
 
-	const isPositivePriceChange =
-		mockedPortfolio.currentBalance >= mockedPortfolio.totalAllocation;
+	const selectionRef = useRef(null);
 
-	const closeModalHandler = (e) => {
-		setIsModalOpen(false);
-	};
+	portfolio.isPositivePriceChange =
+		portfolio.currentBalance >= portfolio.totalAllocation;
 
-	const openModalHandler = (e) => {
-		setIsModalOpen(true);
-	};
+	const closeModalHandler = (e) => setIsModalOpen(false);
+
+	const openModalHandler = (e) => setIsModalOpen(true);
 
 	const addCoinHandler = (coin) => {
 		setIsModalOpen(false);
-		console.log(coin);
 
-		// const existingCoin = inputCoins.find((c) => c.id === coin.id);
+		setPortfolio((prevPortfolio) => {
+			const existingCoin = prevPortfolio.allocations.find(
+				(c) => c.id === coin.id
+			);
 
-		// if (existingCoin) {
-		// 	const updatedCoins = inputCoins.map((c) => {
-		// 		if (c.id !== coin.id) return c;
+			if (existingCoin) {
+				const updatedAllocations = prevPortfolio.allocations.map(
+					(c) => {
+						if (c.id !== coin.id) return c;
 
-		// 		return {
-		// 			...c,
-		// 			quantity: c.quantity + coin.quantity,
-		// 			total: c.total + coin.total,
-		// 			price: calculateAveragePrice(
-		// 				c.price,
-		// 				c.quantity,
-		// 				coin.price,
-		// 				coin.quantity
-		// 			),
-		// 		};
-		// 	});
-		// 	return setInputCoins(updatedCoins);
-		// }
+						return {
+							...c,
+							quantity: c.quantity + coin.quantity,
+							total: c.total + coin.total,
+							price: calculateAveragePrice(
+								c.price,
+								c.quantity,
+								coin.price,
+								coin.quantity
+							),
+						};
+					}
+				);
 
-		// setInputCoins((prevCoins) => [...prevCoins, coin]);
+				return { ...prevPortfolio, allocations: updatedAllocations };
+			}
+
+			return {
+				...prevPortfolio,
+				allocations: [...prevPortfolio.allocations, coin],
+			};
+		});
 	};
 
 	const removeCoinHandler = (coinToRemove) => {
-		console.log(coinToRemove);
-		// const updatedInputCoins = inputCoins.filter(
-		// 	(coin) => coin.id !== coinToRemove.id
-		// );
+		const updatedAllocations = portfolio.allocations.filter(
+			(coin) => coin.id !== coinToRemove.id
+		);
 
-		// setInputCoins(updatedInputCoins);
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			allocations: updatedAllocations,
+		}));
 	};
 
+	const titleChangeHandler = (e) => {
+		saveCursorPosition(selectionRef);
+
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			title: e.target.textContent,
+		}));
+
+		restoreCursorPosition(selectionRef);
+	};
+
+	useEffect(() => restoreCursorPosition(selectionRef), [portfolio.title]);
+
+	useEffect(() => {
+		const updatedMatchingCoins = allCoins
+			.filter((coin) =>
+				portfolio.allocations.some(
+					(allocation) => allocation.id === coin.id
+				)
+			)
+			.map((coin) => {
+				const matchingAllocation = portfolio.allocations.find(
+					(allocation) => allocation.id === coin.id
+				);
+				return { ...coin, allocation: matchingAllocation };
+			});
+
+		setMatchingCoins(updatedMatchingCoins);
+	}, [allCoins, portfolio.allocations]);
+
 	return (
-		<section className="portfolio-details">
-			<div className="details-left">
-				<div className="title-wrapper">
-					<h2>
-						{mockedPortfolio.title}{" "}
-						<img src={editIcon} alt="edit" className="edit-img" />
-					</h2>
-					<p className="owner">@{mockedPortfolio.owner}</p>
-					<Button text={"delete"} />
-				</div>
+		<section className="portfolio">
+			<PortfolioDetails
+				portfolio={portfolio}
+				onTitleChange={titleChangeHandler}
+			/>
 
-				<div className="followers-wrapper">
-					<label htmlFor="portfolio-followers">Followers</label>
-					<div className="follower-bottom">
-						<h5>312</h5>
-						<Button text={"follow"} />
-					</div>
-				</div>
-
-				<div className="current-balance-wrapper">
-					<label className="balance-label" htmlFor="current-balance">
-						Current Balance
-					</label>
-					<h3
-						className={isPositivePriceChange ? "green" : "red"}
-						id="current-balance"
-					>
-						{currency.symbol}
-						{mockedPortfolio.currentBalance}
-						<img
-							src={isPositivePriceChange ? arrowUp : arrowDown}
-							alt="arrow"
-							className="arrow"
-						/>
-					</h3>
-				</div>
-
-				<div className="info">
-					<ul>
-						<li>Alltime Profit/Loss</li>
-						<li className={isPositivePriceChange ? "green" : "red"}>
-							{mockedPortfolio.alltimeProfitLoss}
-							<img
-								src={
-									isPositivePriceChange ? arrowUp : arrowDown
-								}
-								alt="arrow"
-								className="arrow"
-							/>
-						</li>
-					</ul>
-					<ul>
-						<li>Top Performers</li>
-						<li>ETH, CRO, ADA</li>
-					</ul>
-					<ul>
-						<li>Total Allocation</li>
-						<li>
-							{currency.symbol}
-							{mockedPortfolio.totalAllocation}
-						</li>
-					</ul>
-					<ul>
-						<li>Created On</li>
-						<li>07 July 2024</li>
-					</ul>
-					<ul>
-						<li>Edited On</li>
-						<li>08 July 2024</li>
-					</ul>
-				</div>
-			</div>
-
-			<div className="details-right">
+			<div className="portfolio-assets">
 				<div className="portfolio-chart">
-					<PieChart data={mockedPortfolio.allocations} />
+					<PieChart data={portfolio.allocations} />
 				</div>
 
 				<h3 className="assets-title">Assets</h3>
@@ -166,18 +165,15 @@ const Portfolio = () => {
 				/>
 
 				<CryptoTable
-					className="portfolio-assets"
-					columns={[
-						"#",
-						"Coins",
-						"Price",
-						"24H Change",
-						"Market Cap",
-					]}
+					className="portfolio-table"
+					columns={["#", "Coins", "Price", "Change", "Allocation"]}
 				>
-					{allCoins.slice(0, 3).map((coin) => (
+					{matchingCoins.map((coin) => (
 						<div className="portfolio-row-wrapper" key={coin.id}>
-							<CoinTableRow coin={coin} />
+							<CoinTableRow
+								coin={coin}
+								allocation={coin.allocation}
+							/>
 							<img
 								src={minusIcon}
 								alt="remove"

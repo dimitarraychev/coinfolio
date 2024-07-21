@@ -1,4 +1,4 @@
-section.portfolio-details {
+section.portfolio {
 	padding: 2rem 2rem 4rem 2rem;
 	display: flex;
 	align-items: flex-start;
@@ -6,21 +6,14 @@ section.portfolio-details {
 	gap: 3rem;
 }
 
-.portfolio-details .details-left {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	flex: 0 1 25%;
-	gap: 2rem;
-}
-
-.portfolio-details .details-right {
+.portfolio .portfolio-assets {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	flex: 0 0 60%;
 }
 
-.portfolio-details label {
+.portfolio label {
 	color: var(--dark-gray);
 }
 
@@ -29,67 +22,20 @@ section.portfolio-details {
 	width: 40vw;
 }
 
-.portfolio-details .title-wrapper {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	gap: 0.2rem;
-}
-
-.portfolio-details .title-wrapper .edit-img {
-	display: none;
-	height: 0.75em;
-	aspect-ratio: 1/1;
-	cursor: pointer;
-}
-
-.portfolio-details .title-wrapper h2:hover .edit-img {
-	display: inline;
-}
-
-.portfolio-details .owner {
-	color: var(--btn-color);
-	cursor: pointer;
-	margin-bottom: 0.75rem;
-}
-
-.portfolio-details img.arrow {
+.portfolio img.arrow {
 	height: 1em;
 }
 
-.portfolio-details .info {
-	display: flex;
-	flex-direction: column;
-}
-
-.portfolio-details .info ul {
-	display: flex;
-	justify-content: space-between;
-	padding: 10px 0;
-	border-bottom: 1px solid #5f5d5f;
-	list-style: none;
-}
-
-.portfolio-details .follower-bottom {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-}
-
-.portfolio-details .assets-title {
+.portfolio .assets-title {
 	align-self: center;
 	margin-bottom: 1rem;
 }
 
-.portfolio-details .info ul li:first-child {
-	color: var(--dark-gray);
-}
-
-.portfolio-details .portfolio-row-wrapper {
+.portfolio .portfolio-row-wrapper {
 	position: relative;
 }
 
-.portfolio-details .remove-coin-img {
+.portfolio .remove-coin-img {
 	position: absolute;
 	top: calc(50% - 1.25rem);
 	right: -2.5rem;
@@ -98,13 +44,19 @@ section.portfolio-details {
 	cursor: pointer;
 }
 
-.portfolio-details .remove-coin-img:hover {
+.portfolio .remove-coin-img:hover {
 	filter: brightness(0.8);
 }
 
-.portfolio-details .loading {
+.portfolio .loading {
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	height: 80vh;
+}
+
+.portfolio .crypto-table {
+	width: 100%;
+	margin: 0 auto 0.75rem auto;
+	padding-right: 2.5rem;
 }
