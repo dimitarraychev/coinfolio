@@ -4,7 +4,7 @@ import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 
 import { CoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import { fetchAllCoins, searchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";

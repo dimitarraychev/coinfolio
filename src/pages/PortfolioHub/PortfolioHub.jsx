@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
-import PortfolioTableRow from "../../components/PortfolioTableRow";
+import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";

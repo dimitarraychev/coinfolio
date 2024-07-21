@@ -5,9 +5,9 @@ import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
 import Button from "../../components/Button/Button";
-import PieChart from "../../components/PieChart";
+import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow";
+import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import { calculateAveragePrice } from "../../utils/helpers";
 
