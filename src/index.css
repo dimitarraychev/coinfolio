@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
-@import "./styles/auth.css";
 
 body {
 	margin: 0;
@@ -99,6 +98,95 @@ h6 {
 
 .red {
 	color: var(--red);
+}
+
+/* Authentication forms */
+
+section.auth {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 2rem 2rem 6rem 2rem;
+}
+
+section.auth form {
+	display: flex;
+	width: 22rem;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+section.auth form .page-header {
+	align-self: center;
+}
+
+section.auth .form-input {
+	width: 100%;
+	margin-bottom: 0.75rem;
+	height: 2.5rem;
+	border-radius: 0.5rem;
+	color: black;
+	padding-left: 0.3rem;
+}
+
+section.auth .auth-img {
+	height: 30vw;
+	aspect-ratio: 1/1;
+}
+
+section.auth form .link {
+	align-self: center;
+	margin-top: 0.3rem;
+}
+
+section.auth form .link span {
+	color: var(--btn-color);
+	text-decoration: underline;
+}
+
+section.auth form .actions-wrapper {
+	display: flex;
+	font-size: 0.9em;
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 2rem;
+}
+
+section.auth form .remember-me {
+	display: flex;
+}
+
+.remember-me input[type="checkbox"] {
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	width: 1rem;
+	aspect-ratio: 1/1;
+	border: 2px solid var(--light-gray);
+	background-color: transparent;
+	cursor: pointer;
+	position: relative;
+	border-radius: 0.3rem;
+	margin-right: 0.1rem;
+}
+
+.remember-me input[type="checkbox"]:checked::before {
+	content: "✔";
+	position: absolute;
+	top: -0.25rem;
+	left: 0.04rem;
+	scale: 1.2;
+}
+
+section.auth form .remember-me input:hover,
+section.auth form .remember-me label:hover,
+section.auth form .actions-wrapper p:hover {
+	cursor: pointer;
+	filter: brightness(0.8);
+}
+
+section.auth #re_password {
+	margin-bottom: 2rem;
 }
 
 /* Scrollbar */
