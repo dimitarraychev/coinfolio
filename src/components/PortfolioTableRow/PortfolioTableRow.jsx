@@ -13,8 +13,9 @@ const PortfolioTableRow = () => {
 	return (
 		<Link className="table-layout" to={"/hub/1"}>
 			<p>1</p>
-			<div>
+			<div className="portfolio-title">
 				<p>Low Risk Classic Porfolio</p>
+				<p className="owner">@username</p>
 			</div>
 
 			<p>{currency.symbol}5000</p>

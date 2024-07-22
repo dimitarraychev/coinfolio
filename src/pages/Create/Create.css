@@ -45,6 +45,9 @@
 
 .create .create-row-wrapper {
 	position: relative;
+	animation: appear linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 20%;
 }
 
 .create .remove-coin-img {
