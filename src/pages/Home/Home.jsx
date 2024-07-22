@@ -72,10 +72,11 @@ const Home = () => {
 					<p className="subheading">global rankings</p>
 					<h2>Build Your Portfolio & Monitor Performance</h2>
 					<p>
-						Easily create your personalized crypto portfolio and
-						stay updated on its performance. Our intuitive platform
-						allows you to track price changes, monitor market
-						trends, and manage your investments all in one place.
+						Easily create your personalized crypto portfolio from
+						the top 250 cryptocurrencies and stay updated on its
+						performance. Our intuitive platform allows you to track
+						price changes and monitor market trends all in one
+						place.
 					</p>
 
 					<Link to={"/hub"} className="home-btn-portfolio">
@@ -101,10 +102,10 @@ const Home = () => {
 					<p className="subheading">monitor markets</p>
 					<h2>Discover Crypto Sectors & Market Trends</h2>
 					<p>
-						Easily create your personalized crypto portfolio and
-						stay updated on its performance. Our intuitive platform
-						allows you to track price changes, monitor market
-						trends, and manage your investments all in one place.
+						Access relevant data and in-depth insights into the
+						crypto market. Analyze emerging trends across various
+						sectors to make informed investment decisions and
+						capitalize on market opportunities.
 					</p>
 
 					<Link to={"/explore"} className="home-btn-explore">
