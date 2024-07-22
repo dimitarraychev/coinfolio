@@ -35,7 +35,7 @@ export const buttonIcons = [
 		svg: editIcon,
 	},
 	{
-		text: ["explore"],
+		text: ["explore", "search"],
 		svg: exploreIcon,
 	},
 	{
