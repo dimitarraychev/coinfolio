@@ -7,11 +7,17 @@ import confirmIcon from "../../../assets/icons/confirm-icon.svg";
 
 import { CoinContext } from "../../../context/CoinContext";
 import Button from "../../../components/Button/Button";
+import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal";
 
 const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 	const { currency } = useContext(CoinContext);
-	const editableTitleRef = useRef(null);
 	const [isEditingTitle, setIsEditingTitle] = useState(false);
+	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+	const editableTitleRef = useRef(null);
+
+	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
+
+	const openConfirmModalHandler = (e) => setIsConfirmModalOpen(true);
 
 	const editTitleHandler = (e) => {
 		const title = editableTitleRef.current;
@@ -49,9 +55,8 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 					/>
 				</div>
 				<p className="owner">@{portfolio.owner}</p>
-				<Button text={"delete"} />
+				<Button text={"delete"} onClick={openConfirmModalHandler} />
 			</div>
-
 			<div className="followers-wrapper">
 				<label htmlFor="portfolio-followers">Followers</label>
 				<div className="follower-bottom">
@@ -59,7 +64,6 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 					<Button text={"follow"} />
 				</div>
 			</div>
-
 			<div className="current-balance-wrapper">
 				<label className="balance-label" htmlFor="current-balance">
 					Current Balance
@@ -83,7 +87,6 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 					/>
 				</h3>
 			</div>
-
 			<div className="info">
 				<ul>
 					<li>Alltime Profit/Loss</li>
@@ -132,6 +135,12 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 					</li>
 				</ul>
 			</div>
+			{isConfirmModalOpen && (
+				<ConfirmModal
+					onClose={closeConfirmModalHandler}
+					onConfirm={closeConfirmModalHandler}
+				/>
+			)}
 		</div>
 	);
 };

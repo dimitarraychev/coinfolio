@@ -9,6 +9,7 @@ import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import {
 	calculateAveragePrice,
 	calculateCoinProfitLoss,
@@ -21,7 +22,9 @@ import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
 const Portfolio = () => {
 	const { allCoins } = useContext(CoinContext);
 	const [matchingCoins, setMatchingCoins] = useState([]);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [coinToRemove, setCoinToRemove] = useState({});
+	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
+	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
 		owner: "username",
@@ -66,12 +69,19 @@ const Portfolio = () => {
 
 	const selectionRef = useRef(null);
 
-	const closeModalHandler = (e) => setIsModalOpen(false);
+	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
 
-	const openModalHandler = (e) => setIsModalOpen(true);
+	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
+
+	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
+
+	const openConfirmModalHandler = (coin) => {
+		setCoinToRemove(coin);
+		setIsConfirmModalOpen(true);
+	};
 
 	const addCoinHandler = (coin) => {
-		setIsModalOpen(false);
+		setIsAddCoinOpen(false);
 
 		setPortfolio((prevPortfolio) => {
 			const existingCoin = prevPortfolio.allocations.find(
@@ -112,7 +122,9 @@ const Portfolio = () => {
 		});
 	};
 
-	const removeCoinHandler = (coinToRemove) => {
+	const removeCoinHandler = () => {
+		setIsConfirmModalOpen(false);
+
 		const updatedAllocations = portfolio.allocations.filter(
 			(coin) => coin.id !== coinToRemove.id
 		);
@@ -122,6 +134,7 @@ const Portfolio = () => {
 			allocations: updatedAllocations,
 			totalAllocation: portfolio.totalAllocation - coinToRemove.total,
 		}));
+		setCoinToRemove({});
 	};
 
 	const titleChangeHandler = (e) => {
@@ -200,7 +213,7 @@ const Portfolio = () => {
 				<Button
 					text={"add coin"}
 					isGhost={true}
-					onClick={openModalHandler}
+					onClick={openAddCoinHandler}
 				/>
 
 				<CryptoTable
@@ -223,18 +236,25 @@ const Portfolio = () => {
 								src={minusIcon}
 								alt="remove"
 								className="remove-coin-img"
-								onClick={() => removeCoinHandler(coin)}
+								onClick={() => openConfirmModalHandler(coin)}
 							/>
 						</div>
 					))}
 				</CryptoTable>
 			</div>
 
-			{isModalOpen && (
+			{isAddCoinOpen && (
 				<AddCoin
 					allCoins={allCoins}
 					onAddCoin={addCoinHandler}
-					onClose={closeModalHandler}
+					onClose={closeAddCoinHandler}
+				/>
+			)}
+
+			{isConfirmModalOpen && (
+				<ConfirmModal
+					onClose={closeConfirmModalHandler}
+					onConfirm={removeCoinHandler}
 				/>
 			)}
 		</section>

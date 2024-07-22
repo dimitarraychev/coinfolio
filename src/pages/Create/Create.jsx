@@ -22,19 +22,19 @@ const Create = () => {
 	const [totalAllocation, setTotalAllocation] = useState(0);
 	const [inputCoins, setInputCoins] = useState([]);
 	const [matchingCoins, setMatchingCoins] = useState([]);
-	const [isModalOpen, setIsModalOpen] = useState(false);
+	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
-	const closeModalHandler = (e) => {
-		setIsModalOpen(false);
+	const closeAddCoinHandler = (e) => {
+		setIsAddCoinOpen(false);
 	};
 
-	const openModalHandler = (e) => {
-		setIsModalOpen(true);
+	const openAddCoinHandler = (e) => {
+		setIsAddCoinOpen(true);
 	};
 
 	const addCoinHandler = (coin) => {
-		setIsModalOpen(false);
+		setIsAddCoinOpen(false);
 
 		setTotalAllocation((state) => state + coin.total);
 
@@ -156,7 +156,7 @@ const Create = () => {
 				<Button
 					text={"add coin"}
 					isGhost={true}
-					onClick={openModalHandler}
+					onClick={openAddCoinHandler}
 				/>
 
 				<CryptoTable
@@ -186,11 +186,11 @@ const Create = () => {
 				/>
 			</form>
 
-			{isModalOpen && (
+			{isAddCoinOpen && (
 				<AddCoin
 					allCoins={allCoins}
 					onAddCoin={addCoinHandler}
-					onClose={closeModalHandler}
+					onClose={closeAddCoinHandler}
 				/>
 			)}
 		</section>
