@@ -28,12 +28,16 @@
 }
 
 .portfolio .title-wrapper .edit-img {
-	display: none;
+	display: inline;
 	right: -2.4em;
 	position: absolute;
 	height: 2.4em;
 	aspect-ratio: 1/1;
-	cursor: pointer;
+}
+
+.portfolio .btn-wrapper {
+	display: flex;
+	gap: 1rem;
 }
 
 .portfolio .title-wrapper:hover .edit-img {

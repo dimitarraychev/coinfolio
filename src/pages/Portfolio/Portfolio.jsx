@@ -23,6 +23,7 @@ const Portfolio = () => {
 	const { allCoins } = useContext(CoinContext);
 	const [matchingCoins, setMatchingCoins] = useState([]);
 	const [coinToRemove, setCoinToRemove] = useState({});
+	const [isEditMode, setIsEditMode] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [portfolio, setPortfolio] = useState({
@@ -148,6 +149,13 @@ const Portfolio = () => {
 		restoreCursorPosition(selectionRef);
 	};
 
+	const toggleEditModeHandler = () => setIsEditMode(true);
+
+	const saveChangesHandler = () => {
+		if (portfolio.title === "" || portfolio.allocations < 1) return;
+		setIsEditMode(false);
+	};
+
 	useEffect(() => restoreCursorPosition(selectionRef), [portfolio.title]);
 
 	useEffect(() => {
@@ -199,8 +207,11 @@ const Portfolio = () => {
 	return (
 		<section className="portfolio">
 			<PortfolioDetails
+				isEditMode={isEditMode}
 				portfolio={portfolio}
 				onTitleChange={titleChangeHandler}
+				onEditModeToggle={toggleEditModeHandler}
+				onSave={saveChangesHandler}
 			/>
 
 			<div className="portfolio-assets">
@@ -210,11 +221,13 @@ const Portfolio = () => {
 
 				<h3 className="assets-title">Assets</h3>
 
-				<Button
-					text={"add coin"}
-					isGhost={true}
-					onClick={openAddCoinHandler}
-				/>
+				{isEditMode && (
+					<Button
+						text={"add coin"}
+						isGhost={true}
+						onClick={openAddCoinHandler}
+					/>
+				)}
 
 				<CryptoTable
 					className="portfolio-table"
@@ -226,20 +239,32 @@ const Portfolio = () => {
 						"Allocation",
 					]}
 				>
-					{matchingCoins.map((coin) => (
-						<div className="portfolio-row-wrapper" key={coin.id}>
+					{matchingCoins.map((coin) =>
+						isEditMode ? (
+							<div
+								className="portfolio-row-wrapper"
+								key={coin.id}
+							>
+								<CoinTableRow
+									coin={coin.market_data}
+									allocation={coin}
+								/>
+								<img
+									src={minusIcon}
+									alt="remove"
+									className="remove-coin-img"
+									onClick={() =>
+										openConfirmModalHandler(coin)
+									}
+								/>
+							</div>
+						) : (
 							<CoinTableRow
 								coin={coin.market_data}
 								allocation={coin}
 							/>
-							<img
-								src={minusIcon}
-								alt="remove"
-								className="remove-coin-img"
-								onClick={() => openConfirmModalHandler(coin)}
-							/>
-						</div>
-					))}
+						)
+					)}
 				</CryptoTable>
 			</div>
 

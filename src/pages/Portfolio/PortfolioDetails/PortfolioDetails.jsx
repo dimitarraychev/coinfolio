@@ -3,37 +3,25 @@ import "./PortfolioDetails.css";
 import arrowUp from "../../../assets/icons/arrow-up.svg";
 import arrowDown from "../../../assets/icons/arrow-down.svg";
 import editIcon from "../../../assets/icons/edit-icon.svg";
-import confirmIcon from "../../../assets/icons/confirm-icon.svg";
 
 import { CoinContext } from "../../../context/CoinContext";
 import Button from "../../../components/Button/Button";
 import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal";
 
-const PortfolioDetails = ({ portfolio, onTitleChange }) => {
+const PortfolioDetails = ({
+	isEditMode,
+	onEditModeToggle,
+	portfolio,
+	onTitleChange,
+	onSave,
+}) => {
 	const { currency } = useContext(CoinContext);
-	const [isEditingTitle, setIsEditingTitle] = useState(false);
 	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const editableTitleRef = useRef(null);
 
 	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
 
 	const openConfirmModalHandler = (e) => setIsConfirmModalOpen(true);
-
-	const editTitleHandler = (e) => {
-		const title = editableTitleRef.current;
-
-		if (title.isContentEditable) {
-			setIsEditingTitle(false);
-			title.contentEditable = "false";
-			e.target.src = editIcon;
-			return;
-		}
-
-		setIsEditingTitle(true);
-		title.contentEditable = "true";
-		e.target.src = confirmIcon;
-		title.focus();
-	};
 
 	return (
 		<div className="portfolio-details">
@@ -42,20 +30,31 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 					<h2
 						ref={editableTitleRef}
 						className="editable-title"
-						contentEditable={false}
+						contentEditable={isEditMode ? true : false}
 						onInput={onTitleChange}
 					>
 						{portfolio.title}
 					</h2>
-					<img
-						src={editIcon}
-						alt="edit"
-						className={`edit-img ${isEditingTitle && "shown"}`}
-						onClick={editTitleHandler}
-					/>
+					{isEditMode && (
+						<img src={editIcon} alt="edit" className="edit-img" />
+					)}
 				</div>
 				<p className="owner">@{portfolio.owner}</p>
-				<Button text={"delete"} onClick={openConfirmModalHandler} />
+				{isEditMode ? (
+					<div className="btn-wrapper">
+						<Button text={"save"} onClick={onSave} />
+						<Button
+							text={"delete"}
+							onClick={openConfirmModalHandler}
+						/>
+					</div>
+				) : (
+					<Button
+						text={"edit"}
+						isGhost={true}
+						onClick={onEditModeToggle}
+					/>
+				)}
 			</div>
 			<div className="followers-wrapper">
 				<label htmlFor="portfolio-followers">Followers</label>
@@ -95,6 +94,7 @@ const PortfolioDetails = ({ portfolio, onTitleChange }) => {
 							portfolio.isPositivePriceChange ? "green" : "red"
 						}
 					>
+						{currency.symbol}
 						{`${portfolio.alltimeProfitLoss} (${portfolio.alltimeProfitLossPercentage}%)`}
 						<img
 							src={
