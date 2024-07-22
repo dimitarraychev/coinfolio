@@ -29,7 +29,7 @@ const Explore = () => {
 
 	const searchCoins = async (input) => {
 		if (input) {
-			const filteredCoins = displayCoins.filter((coin) =>
+			const filteredCoins = allCoins.filter((coin) =>
 				coin.name.toLowerCase().includes(input.toLowerCase())
 			);
 			setDisplayCoins(filteredCoins);

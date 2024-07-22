@@ -30,7 +30,7 @@ const SearchBar = ({ onSearch, autofillSuggestions }) => {
 						<option key={item.id} value={item.name} />
 					))}
 				</datalist>
-				<button type="submit">Search</button>
+				<Button text={"search"} type={"submit"} />
 			</form>
 		</div>
 	);

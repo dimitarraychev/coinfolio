@@ -4,7 +4,7 @@ import { buttonIcons } from "../../constants/button";
 
 const Button = ({
 	text,
-	type = null,
+	type,
 	isDisabled = false,
 	isGhost,
 	isWide,
@@ -19,7 +19,7 @@ const Button = ({
 
 	return (
 		<button
-			type={type != null ? type : "button"}
+			type={type ? type : "button"}
 			onClick={clickHandler}
 			className={
 				isGhost
