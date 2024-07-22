@@ -6,6 +6,7 @@ import editIcon from "../assets/icons/edit-icon.svg";
 import exploreIcon from "../assets/icons/explore-icon-white.svg";
 import rankingsIcon from "../assets/icons/rank-icon-white.svg";
 import portfolioIcon from "../assets/icons/portfolio-icon-white.svg";
+import confirmIcon from "../assets/icons/confirm-icon.svg";
 
 export const buttonIcons = [
 	{
@@ -41,6 +42,10 @@ export const buttonIcons = [
 	{
 		text: ["check rankings"],
 		svg: rankingsIcon,
+	},
+	{
+		text: ["save"],
+		svg: confirmIcon,
 	},
 	{
 		text: ["check portfolios"],
