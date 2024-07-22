@@ -1,7 +1,10 @@
 export function formatPrice(price) {
+	if (price === null || price === 0) return 0;
+
 	let fractionDigits = 2;
 
-	if (price < 0.01) fractionDigits = 8;
+	if (price < 0.01 && price > -0.01) fractionDigits = 4;
+	if (price < 0.0001 && price > -0.01) fractionDigits = 8;
 
 	if (price === null || price === 0) return 0;
 
