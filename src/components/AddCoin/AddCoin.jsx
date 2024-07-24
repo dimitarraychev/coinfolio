@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./AddCoin.css";
 import closeIcon from "../../assets/icons/close-icon.svg";
 import Button from "../Button/Button";
@@ -14,6 +14,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 		price: 0,
 		total: 0,
 	});
+	const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
@@ -44,8 +45,6 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 	};
 
 	const addCoinHandler = () => {
-		if (coin.quantity <= 0 || coin.id === "") return;
-
 		const { price, total, ...updatedCoin } = coin;
 		updatedCoin.price = { usd: 0, eur: 0 };
 		updatedCoin.total = { usd: 0, eur: 0 };
@@ -62,6 +61,12 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 
 		onAddCoin(updatedCoin);
 	};
+
+	useEffect(() => {
+		coin.quantity <= 0 || coin.id === ""
+			? setIsAddButtonDisabled(true)
+			: setIsAddButtonDisabled(false);
+	}, [coin]);
 
 	return (
 		<div className="add-coin-overlay" onClick={handleWrapperClick}>
@@ -126,7 +131,11 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 						{coin.total}
 					</p>
 				</div>
-				<Button text={"add coin"} onClick={addCoinHandler} />
+				<Button
+					text={"add coin"}
+					onClick={addCoinHandler}
+					isDisabled={isAddButtonDisabled}
+				/>
 			</div>
 		</div>
 	);
