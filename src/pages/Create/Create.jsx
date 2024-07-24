@@ -9,6 +9,7 @@ import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
+import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { formatPrice } from "../../utils/helpers";
 import {
 	addCoinToPortfolio,
@@ -28,12 +29,20 @@ const Create = () => {
 		allocations: [],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
+	const [coinToRemove, setCoinToRemove] = useState({});
 
+	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
 	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
 	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
+
+	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
+	const openConfirmModalHandler = (coin) => {
+		setCoinToRemove(coin);
+		setIsConfirmModalOpen(true);
+	};
 
 	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
@@ -42,7 +51,9 @@ const Create = () => {
 		);
 	};
 
-	const removeCoinHandler = (coinToRemove) => {
+	const removeCoinHandler = () => {
+		setIsConfirmModalOpen(false);
+
 		setPortfolio((prevPortfolio) =>
 			removeCoinFromPortfolio(prevPortfolio, coinToRemove)
 		);
@@ -128,7 +139,9 @@ const Create = () => {
 									src={minusIcon}
 									alt="remove"
 									className="remove-coin-img"
-									onClick={() => removeCoinHandler(coin)}
+									onClick={() =>
+										openConfirmModalHandler(coin)
+									}
 								/>
 							</div>
 						))}
@@ -145,6 +158,14 @@ const Create = () => {
 				<AddCoin
 					onAddCoin={addCoinHandler}
 					onClose={closeAddCoinHandler}
+				/>
+			)}
+
+			{isConfirmModalOpen && (
+				<ConfirmModal
+					onClose={closeConfirmModalHandler}
+					onConfirm={removeCoinHandler}
+					message={"Are you sure you want to remove this allocation?"}
 				/>
 			)}
 		</section>
