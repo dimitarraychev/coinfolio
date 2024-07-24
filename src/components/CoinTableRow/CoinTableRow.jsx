@@ -42,7 +42,7 @@ const CoinTableRow = ({ coin, allocation }) => {
 							  )}`
 							: `-${currency.symbol}${formatPrice(
 									coin.alltime_profit_loss[currency.name]
-							  ).substr(1)}`}
+							  ).slice(1)}`}
 					</p>
 
 					<p
