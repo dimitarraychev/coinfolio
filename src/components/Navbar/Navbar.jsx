@@ -44,7 +44,11 @@ const Navbar = () => {
 			</Link>
 			<ul className="navbar-links">
 				{navbarLinks.map((link) => {
-					const isActive = pathname === link.route;
+					// const isActive = pathname === link.route;
+					const isHomeRoute = link.route === "/";
+					const isActive = isHomeRoute
+						? pathname === "/"
+						: pathname.startsWith(link.route) && link.route !== "/";
 
 					return (
 						<Link to={link.route} key={link.label}>
