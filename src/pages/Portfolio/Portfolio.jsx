@@ -141,7 +141,7 @@ const Portfolio = () => {
 			return;
 		}
 
-		if (portfolio.allocations < 1) {
+		if (portfolio.allocations.length < 1) {
 			toast.error("Error! Having at least one allocation is required.");
 			return;
 		}

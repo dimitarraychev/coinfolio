@@ -1,4 +1,6 @@
 import React, { useContext, useState, useEffect } from "react";
+import { toast } from "react-toastify";
+
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
@@ -16,7 +18,6 @@ import {
 	removeCoinFromPortfolio,
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
-import { toast } from "react-toastify";
 
 const Create = () => {
 	const { currency } = useContext(CoinContext);
@@ -60,7 +61,17 @@ const Create = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		if (isSubmitButtonDisabled) return;
+
+		if (portfolio.title.length < 3 || portfolio.title.length > 66) {
+			toast.error("Error! Title should be between 3 and 66 characters.");
+			return;
+		}
+
+		if (portfolio.allocations.length < 1) {
+			toast.error("Error! Having at least one allocation is required.");
+			return;
+		}
+
 		console.log("title", portfolio.title);
 		console.log("coins", portfolio.allocations);
 	};
