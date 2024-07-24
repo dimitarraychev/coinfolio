@@ -2,7 +2,9 @@ import React from "react";
 import "./ConfirmModal.css";
 import Button from "../Button/Button";
 
-const ConfirmModal = ({ onConfirm, onClose, message }) => {
+const ConfirmModal = ({ isOpen, message, onConfirm, onClose }) => {
+	if (!isOpen) return null;
+
 	const handleWrapperClick = (e) => {
 		if (e.target === e.currentTarget) onClose();
 	};

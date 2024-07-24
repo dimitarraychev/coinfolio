@@ -4,18 +4,27 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 import Home from "./pages/Home/Home";
 import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
 import Explore from "./pages/Explore/Explore";
-import Footer from "./components/Footer/Footer";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
 import PortfolioHub from "./pages/PortfolioHub/PortfolioHub";
 import Portfolio from "./pages/Portfolio/Portfolio";
 import Create from "./pages/Create/Create";
+import { useConfirmModalContext } from "./context/ConfirmModalContext";
+import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 
 const App = () => {
+	const {
+		isConfirmModalOpen,
+		confirmModalMessage,
+		closeConfirmModal,
+		confirmAction,
+	} = useConfirmModalContext();
+
 	return (
 		<div className="app">
 			<Navbar />
@@ -43,6 +52,12 @@ const App = () => {
 				pauseOnHover
 				theme="dark"
 				transition:Bounce
+			/>
+			<ConfirmModal
+				isOpen={isConfirmModalOpen}
+				message={confirmModalMessage}
+				onClose={closeConfirmModal}
+				onConfirm={confirmAction}
 			/>
 		</div>
 	);
