@@ -20,10 +20,6 @@ import useMatchingCoins from "../../hooks/useMatchingCoins";
 
 const Portfolio = () => {
 	const { allCoins, currency } = useContext(CoinContext);
-	const [coinToRemove, setCoinToRemove] = useState({});
-	const [isEditMode, setIsEditMode] = useState(false);
-	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
-	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
 		owner: "username",
@@ -94,6 +90,11 @@ const Portfolio = () => {
 		],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
+	const [coinToRemove, setCoinToRemove] = useState({});
+
+	const [isEditMode, setIsEditMode] = useState(false);
+	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
+	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
 	const selectionRef = useRef(null);
 
@@ -227,6 +228,7 @@ const Portfolio = () => {
 				<ConfirmModal
 					onClose={closeConfirmModalHandler}
 					onConfirm={removeCoinHandler}
+					message={"Are you sure you want to remove this allocation?"}
 				/>
 			)}
 		</section>

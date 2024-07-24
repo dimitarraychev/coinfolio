@@ -2,7 +2,7 @@ import React from "react";
 import "./ConfirmModal.css";
 import Button from "../Button/Button";
 
-const ConfirmModal = ({ onConfirm, onClose }) => {
+const ConfirmModal = ({ onConfirm, onClose, message }) => {
 	const handleWrapperClick = (e) => {
 		if (e.target === e.currentTarget) onClose();
 	};
@@ -10,7 +10,7 @@ const ConfirmModal = ({ onConfirm, onClose }) => {
 	return (
 		<div className="modal-overlay" onClick={handleWrapperClick}>
 			<div className="modal-wrapper">
-				<p>Are you sure you want to delete this portfolio?</p>
+				<p>{message}</p>
 
 				<p>This action is permanent and cannot be undone.</p>
 				<div className="btn-wrapper">

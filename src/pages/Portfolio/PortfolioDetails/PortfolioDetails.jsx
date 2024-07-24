@@ -144,6 +144,7 @@ const PortfolioDetails = ({
 				<ConfirmModal
 					onClose={closeConfirmModalHandler}
 					onConfirm={closeConfirmModalHandler}
+					message={"Are you sure you want to delete this portfolio?"}
 				/>
 			)}
 		</div>
