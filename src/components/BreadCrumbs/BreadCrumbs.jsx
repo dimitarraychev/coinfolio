@@ -10,8 +10,10 @@ const routes = [
 	{ path: "/register", name: "Register" },
 	{ path: "/rankings", name: "Rankings" },
 	{ path: "/explore", name: "Explore" },
+	{ path: "/explore/:id", name: "Coin" },
 	{ path: "/hub", name: "Hub" },
 	{ path: "/hub/create", name: "Create" },
+	{ path: "/hub/:id", name: "Portfolio" },
 ];
 
 const BreadCrumbs = () => {
@@ -39,9 +41,31 @@ const BreadCrumbs = () => {
 				{pathnames.map((value, index) => {
 					const last = index === pathnames.length - 1;
 					const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-					const routeName = routes.find(
+					let routeName = routes.find(
 						(route) => route.path === to
 					)?.name;
+
+					if (
+						!routeName &&
+						to.startsWith("/hub/") &&
+						pathnames.length > 1
+					) {
+						routeName = routes.find(
+							(route) => route.path === "/hub/:id"
+						)?.name;
+					}
+
+					if (
+						!routeName &&
+						to.startsWith("/explore/") &&
+						pathnames.length > 1
+					) {
+						routeName = pathnames[pathnames.length - 1];
+						routeName = routeName
+							.split("-")
+							.map((e) => e[0].toUpperCase() + e.substring(1))
+							.join(" ");
+					}
 
 					return (
 						<li className="crumb" key={to}>

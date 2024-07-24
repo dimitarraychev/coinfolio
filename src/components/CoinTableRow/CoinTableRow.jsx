@@ -13,7 +13,7 @@ const CoinTableRow = ({ coin, allocation }) => {
 		: coin.price_change_percentage_24h >= 0;
 
 	return (
-		<Link to={`/coin/${coin.id}`} className="table-layout">
+		<Link to={`/explore/${coin.id}`} className="table-layout">
 			<p>{coin.market_cap_rank}</p>
 			<div>
 				<img src={coin.image} alt={coin.symbol} className="coin-img" />
