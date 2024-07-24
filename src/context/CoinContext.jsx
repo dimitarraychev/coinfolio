@@ -1,6 +1,7 @@
 import { createContext, useState, useEffect } from "react";
 import { fetchAllCoins, fetchGlobalMarketData } from "../api/coinGecko";
 import { getUsdToEurRate } from "../api/freecurrencyapi";
+import { formatNumber } from "../utils/helpers";
 
 export const CoinContext = createContext();
 
@@ -46,8 +47,11 @@ const CoinContextProvider = (props) => {
 		loadAllCoins();
 	}, [currency]);
 
-	const convertUsdToEur = (priceInUsd) => priceInUsd * usdToEurRate;
-	const convertEurToUsd = (priceInEur) => priceInEur * (1 / usdToEurRate);
+	const convertUsdToEur = (priceInUsd) =>
+		formatNumber(priceInUsd * usdToEurRate);
+
+	const convertEurToUsd = (priceInEur) =>
+		formatNumber(priceInEur * (1 / usdToEurRate));
 
 	const contextValue = {
 		allCoins,
