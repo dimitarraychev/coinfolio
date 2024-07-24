@@ -1,4 +1,6 @@
 import React, { useState, useRef, useContext } from "react";
+import { toast } from "react-toastify";
+
 import "./PortfolioDetails.css";
 import arrowUp from "../../../assets/icons/arrow-up.svg";
 import arrowDown from "../../../assets/icons/arrow-down.svg";
@@ -61,7 +63,14 @@ const PortfolioDetails = ({
 				<label>Followers</label>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.toLocaleString()}</h5>
-					<Button text={"follow"} />
+					<Button
+						text={"follow"}
+						onClick={() =>
+							toast.success(
+								`Success! You are now following ${portfolio.title}.`
+							)
+						}
+					/>
 				</div>
 			</div>
 			<div className="current-balance-wrapper">

@@ -1,6 +1,9 @@
 import React from "react";
-import Navbar from "./components/Navbar/Navbar";
 import { Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+import Navbar from "./components/Navbar/Navbar";
 import Home from "./pages/Home/Home";
 import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
@@ -28,6 +31,19 @@ const App = () => {
 				<Route path="/hub/create" element={<Create />} />
 			</Routes>
 			<Footer />
+			<ToastContainer
+				position="top-right"
+				autoClose={5000}
+				hideProgressBar={false}
+				newestOnTop={false}
+				closeOnClick
+				rtl={false}
+				pauseOnFocusLoss
+				draggable
+				pauseOnHover
+				theme="dark"
+				transition:Bounce
+			/>
 		</div>
 	);
 };
