@@ -25,6 +25,9 @@ const PortfolioDetails = ({
 	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
 	const openConfirmModalHandler = (e) => setIsConfirmModalOpen(true);
 
+	const followHandler = () =>
+		toast.success(`Success! You are now following ${portfolio.title}.`);
+
 	return (
 		<div className="portfolio-details">
 			<div className="title-wrapper">
@@ -63,14 +66,7 @@ const PortfolioDetails = ({
 				<label>Followers</label>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.toLocaleString()}</h5>
-					<Button
-						text={"follow"}
-						onClick={() =>
-							toast.success(
-								`Success! You are now following ${portfolio.title}.`
-							)
-						}
-					/>
+					<Button text={"follow"} onClick={followHandler} />
 				</div>
 			</div>
 			<div className="current-balance-wrapper">

@@ -1,4 +1,6 @@
 import React, { useContext, useState, useRef, useEffect } from "react";
+import { toast } from "react-toastify";
+
 import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
@@ -136,7 +138,14 @@ const Portfolio = () => {
 	};
 
 	const saveChangesHandler = () => {
-		if (portfolio.title === "" || portfolio.allocations < 1) return;
+		if (portfolio.title === "" || portfolio.allocations < 1) {
+			toast.error(
+				"Error! Title cannot be empty and at least one coin is required."
+			);
+			return;
+		}
+
+		toast.success(`Success! ${portfolio.title} has been saved.`);
 		setIsEditMode(false);
 	};
 
