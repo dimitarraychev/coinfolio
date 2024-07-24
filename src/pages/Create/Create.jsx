@@ -4,21 +4,24 @@ import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
+import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import Button from "../../components/Button/Button";
 import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
-import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { formatPrice } from "../../utils/helpers";
 import {
 	addCoinToPortfolio,
 	removeCoinFromPortfolio,
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
+import { toast } from "react-toastify";
 
 const Create = () => {
 	const { currency } = useContext(CoinContext);
+	const { openConfirmModal } = useConfirmModalContext();
+
 	const [portfolio, setPortfolio] = useState({
 		title: "",
 		owner: "username",
@@ -29,20 +32,12 @@ const Create = () => {
 		allocations: [],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
-	const [coinToRemove, setCoinToRemove] = useState({});
 
-	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
 	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
 	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
-
-	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
-	const openConfirmModalHandler = (coin) => {
-		setCoinToRemove(coin);
-		setIsConfirmModalOpen(true);
-	};
 
 	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
@@ -51,11 +46,15 @@ const Create = () => {
 		);
 	};
 
-	const removeCoinHandler = () => {
-		setIsConfirmModalOpen(false);
-
-		setPortfolio((prevPortfolio) =>
-			removeCoinFromPortfolio(prevPortfolio, coinToRemove)
+	const removeCoinHandler = (coinToRemove) => {
+		openConfirmModal(
+			"Are you sure you want to remove this allocation?",
+			() => {
+				setPortfolio((prevPortfolio) =>
+					removeCoinFromPortfolio(prevPortfolio, coinToRemove)
+				);
+				toast.success("Success! Allocation successfully removed.");
+			}
 		);
 	};
 
@@ -117,7 +116,7 @@ const Create = () => {
 					</h3>
 				</div>
 
-				<h3 className="assets-title">Assets</h3>
+				<h3 className="assets-title">Allocations</h3>
 
 				<Button
 					text={"add coin"}
@@ -139,9 +138,7 @@ const Create = () => {
 									src={minusIcon}
 									alt="remove"
 									className="remove-coin-img"
-									onClick={() =>
-										openConfirmModalHandler(coin)
-									}
+									onClick={() => removeCoinHandler(coin)}
 								/>
 							</div>
 						))}
@@ -158,14 +155,6 @@ const Create = () => {
 				<AddCoin
 					onAddCoin={addCoinHandler}
 					onClose={closeAddCoinHandler}
-				/>
-			)}
-
-			{isConfirmModalOpen && (
-				<ConfirmModal
-					onClose={closeConfirmModalHandler}
-					onConfirm={removeCoinHandler}
-					message={"Are you sure you want to remove this allocation?"}
 				/>
 			)}
 		</section>

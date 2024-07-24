@@ -7,8 +7,8 @@ import arrowDown from "../../../assets/icons/arrow-down.svg";
 import editIcon from "../../../assets/icons/edit-icon.svg";
 
 import { CoinContext } from "../../../context/CoinContext";
+import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
-import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal";
 import { formatPrice } from "../../../utils/helpers";
 
 const PortfolioDetails = ({
@@ -19,11 +19,12 @@ const PortfolioDetails = ({
 	onSave,
 }) => {
 	const { currency } = useContext(CoinContext);
-	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
+	const { openConfirmModal } = useConfirmModalContext();
+
 	const editableTitleRef = useRef(null);
 
-	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
-	const openConfirmModalHandler = (e) => setIsConfirmModalOpen(true);
+	const portfolioDeleteHandler = (e) =>
+		openConfirmModal("Are you sure you want to delete this portfolio?");
 
 	const followHandler = () =>
 		toast.success(`Success! You are now following ${portfolio.title}.`);
@@ -51,7 +52,7 @@ const PortfolioDetails = ({
 						<Button text={"save"} onClick={onSave} />
 						<Button
 							text={"delete"}
-							onClick={openConfirmModalHandler}
+							onClick={portfolioDeleteHandler}
 						/>
 					</div>
 				) : (
@@ -146,13 +147,13 @@ const PortfolioDetails = ({
 				</ul>
 			</div>
 
-			{isConfirmModalOpen && (
+			{/* {isConfirmModalOpen && (
 				<ConfirmModal
 					onClose={closeConfirmModalHandler}
 					onConfirm={closeConfirmModalHandler}
 					message={"Are you sure you want to delete this portfolio?"}
 				/>
-			)}
+			)} */}
 		</div>
 	);
 };

@@ -5,13 +5,13 @@ import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { CoinContext } from "../../context/CoinContext";
+import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
-import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
 import {
 	addCoinToPortfolio,
@@ -22,12 +22,14 @@ import useMatchingCoins from "../../hooks/useMatchingCoins";
 
 const Portfolio = () => {
 	const { allCoins, currency } = useContext(CoinContext);
+	const { openConfirmModal } = useConfirmModalContext();
+
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
 		owner: "username",
 		totalAllocation: {
-			usd: 5000,
-			eur: 4612,
+			usd: 9262.28,
+			eur: 8538.85,
 		},
 		alltimeProfitLoss: 0,
 		alltimeProfitLossPercentage: 0,
@@ -92,11 +94,9 @@ const Portfolio = () => {
 		],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
-	const [coinToRemove, setCoinToRemove] = useState({});
 
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
-	const [isConfirmModalOpen, setIsConfirmModalOpen] = useState(false);
 
 	const selectionRef = useRef(null);
 
@@ -105,12 +105,6 @@ const Portfolio = () => {
 
 	const toggleEditModeHandler = () => setIsEditMode(true);
 
-	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
-	const openConfirmModalHandler = (coin) => {
-		setCoinToRemove(coin);
-		setIsConfirmModalOpen(true);
-	};
-
 	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
 		setPortfolio((prevPortfolio) =>
@@ -118,11 +112,15 @@ const Portfolio = () => {
 		);
 	};
 
-	const removeCoinHandler = () => {
-		setIsConfirmModalOpen(false);
-
-		setPortfolio((prevPortfolio) =>
-			removeCoinFromPortfolio(prevPortfolio, coinToRemove)
+	const removeCoinHandler = (coinToRemove) => {
+		openConfirmModal(
+			"Are you sure you want to remove this allocation?",
+			() => {
+				setPortfolio((prevPortfolio) =>
+					removeCoinFromPortfolio(prevPortfolio, coinToRemove)
+				);
+				toast.success("Success! Allocation successfully removed.");
+			}
 		);
 	};
 
@@ -138,10 +136,13 @@ const Portfolio = () => {
 	};
 
 	const saveChangesHandler = () => {
-		if (portfolio.title === "" || portfolio.allocations < 1) {
-			toast.error(
-				"Error! Title cannot be empty and at least one coin is required."
-			);
+		if (portfolio.title.length < 3 || portfolio.title.length > 66) {
+			toast.error("Error! Title should be between 3 and 66 characters.");
+			return;
+		}
+
+		if (portfolio.allocations < 1) {
+			toast.error("Error! Having at least one allocation is required.");
 			return;
 		}
 
@@ -175,7 +176,7 @@ const Portfolio = () => {
 					/>
 				</div>
 
-				<h3 className="assets-title">Assets</h3>
+				<h3 className="assets-title">Allocations</h3>
 
 				{isEditMode && (
 					<Button
@@ -209,9 +210,7 @@ const Portfolio = () => {
 									src={minusIcon}
 									alt="remove"
 									className="remove-coin-img"
-									onClick={() =>
-										openConfirmModalHandler(coin)
-									}
+									onClick={() => removeCoinHandler(coin)}
 								/>
 							</div>
 						) : (
@@ -230,14 +229,6 @@ const Portfolio = () => {
 					allCoins={allCoins}
 					onAddCoin={addCoinHandler}
 					onClose={closeAddCoinHandler}
-				/>
-			)}
-
-			{isConfirmModalOpen && (
-				<ConfirmModal
-					onClose={closeConfirmModalHandler}
-					onConfirm={removeCoinHandler}
-					message={"Are you sure you want to remove this allocation?"}
 				/>
 			)}
 		</section>
