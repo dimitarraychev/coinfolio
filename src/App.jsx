@@ -16,6 +16,7 @@ import Portfolio from "./pages/Portfolio/Portfolio";
 import Create from "./pages/Create/Create";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 
 const App = () => {
 	const {
@@ -39,7 +40,7 @@ const App = () => {
 				<Route path="/hub/:portfolioId" element={<Portfolio />} />
 				<Route path="/hub/create" element={<Create />} />
 			</Routes>
-			<Footer />
+			<ScrollToTop />
 			<ToastContainer
 				position="top-right"
 				autoClose={5000}
@@ -59,6 +60,7 @@ const App = () => {
 				onClose={closeConfirmModal}
 				onConfirm={confirmAction}
 			/>
+			<Footer />
 		</div>
 	);
 };
