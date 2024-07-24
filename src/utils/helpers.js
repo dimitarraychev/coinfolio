@@ -6,12 +6,23 @@ export function formatPrice(price) {
 	if (price < 0.01 && price > -0.01) fractionDigits = 4;
 	if (price < 0.0001 && price > -0.01) fractionDigits = 8;
 
-	if (price === null || price === 0) return 0;
-
 	return price.toLocaleString(undefined, {
 		minimumFractionDigits: fractionDigits,
 		maximumFractionDigits: fractionDigits,
 	});
+}
+
+export function formatNumber(number) {
+	if (number === null || number === 0) return 0;
+
+	let fractionDigits = 2;
+
+	if (number < 0.01 && number > -0.01) fractionDigits = 4;
+	if (number < 0.0001 && number > -0.01) fractionDigits = 8;
+
+	const factor = Math.pow(10, fractionDigits);
+
+	return Math.ceil(number * factor) / factor;
 }
 
 export const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
@@ -25,7 +36,7 @@ export const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
 
 export const calculatePriceChangePercentage = (oldPrice, newPrice) => {
 	const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
-	return percentageChange.toFixed(2);
+	return percentageChange;
 };
 
 export const calculateCurrentBalance = (coins) => {
@@ -35,16 +46,16 @@ export const calculateCurrentBalance = (coins) => {
 		currentBalance += coin.quantity * coin.market_data.current_price;
 	}
 
-	return currentBalance.toFixed(2);
+	return currentBalance;
 };
 
-export const findTopPerformers = (coins) => {
+export const findTopPerformers = (coins, currency) => {
 	return coins
-		.filter((c) => c.market_data.price_change_alltime >= 0)
+		.filter((c) => c.market_data.price_change_alltime[currency.name] >= 0)
 		.sort(
 			(a, b) =>
-				a.market_data.price_change_alltime >
-				b.market_data.price_change_alltime
+				a.market_data.price_change_alltime[currency.name] >
+				b.market_data.price_change_alltime[currency.name]
 		)
 		.slice(0, 3)
 		.map((c) => c.market_data.symbol.toUpperCase());
@@ -54,5 +65,5 @@ export const calculateCoinProfitLoss = (qty, initialPrice, currentPrice) => {
 	const oldTotal = qty * initialPrice;
 	const newTotal = qty * currentPrice;
 
-	return formatPrice(newTotal - oldTotal);
+	return newTotal - oldTotal;
 };
