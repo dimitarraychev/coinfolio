@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import "./AddCoin.css";
 import closeIcon from "../../assets/icons/close-icon.svg";
 import Button from "../Button/Button";
+import { CoinContext } from "../../context/CoinContext";
 
-const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
-	const [inputs, setInputs] = useState({
+const AddCoin = ({ onAddCoin, onClose }) => {
+	const { allCoins, currency, convertUsdToEur, convertEurToUsd } =
+		useContext(CoinContext);
+	const [coin, setCoin] = useState({
 		id: "",
 		name: "",
 		quantity: 0,
@@ -14,30 +17,50 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 
 	const handleChange = (e) => {
 		const { name, value } = e.target;
-		setInputs((prevInputs) => {
-			let newInputs = { ...prevInputs, [name]: value };
+		setCoin((prevCoin) => {
+			let updatedCoin = { ...prevCoin, [name]: value };
 
 			if (name === "id") {
 				const currentCoin = allCoins.find((coin) => coin.id === value);
 
-				newInputs = {
-					...newInputs,
+				updatedCoin = {
+					...updatedCoin,
 					name: currentCoin.name,
 					price: currentCoin.current_price,
 				};
 			}
 
-			newInputs.quantity = parseFloat(newInputs.quantity) || 0;
-			newInputs.price = parseFloat(newInputs.price) || 0;
-			const total = newInputs.quantity * newInputs.price;
+			updatedCoin.quantity = parseFloat(updatedCoin.quantity) || 0;
+			updatedCoin.price = parseFloat(updatedCoin.price) || 0;
+			const total = updatedCoin.quantity * updatedCoin.price;
 
-			newInputs = { ...newInputs, total };
-			return newInputs;
+			updatedCoin = { ...updatedCoin, total };
+			return updatedCoin;
 		});
 	};
 
 	const handleWrapperClick = (e) => {
 		if (e.target === e.currentTarget) onClose();
+	};
+
+	const addCoinHandler = () => {
+		if (coin.quantity <= 0 || coin.id === "") return;
+
+		const { price, total, ...updatedCoin } = coin;
+		updatedCoin.price = { usd: 0, eur: 0 };
+		updatedCoin.total = { usd: 0, eur: 0 };
+		updatedCoin.price[currency.name] = price;
+		updatedCoin.total[currency.name] = total;
+
+		if (currency.name === "usd") {
+			updatedCoin.price.eur = convertUsdToEur(updatedCoin.price.usd);
+			updatedCoin.total.eur = convertUsdToEur(updatedCoin.total.usd);
+		} else if (currency.name === "eur") {
+			updatedCoin.price.usd = convertEurToUsd(updatedCoin.price.eur);
+			updatedCoin.total.usd = convertEurToUsd(updatedCoin.total.eur);
+		}
+
+		onAddCoin(updatedCoin);
 	};
 
 	return (
@@ -51,7 +74,7 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 				<select
 					name="id"
 					className="select-coin"
-					value={inputs.id}
+					value={coin.id}
 					onChange={handleChange}
 				>
 					<option value="" disabled>
@@ -75,7 +98,7 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 							className="form-input"
 							autoComplete="quantity"
 							placeholder="0.00"
-							value={inputs.quantity}
+							value={coin.quantity}
 							onChange={handleChange}
 						/>
 					</div>
@@ -90,17 +113,20 @@ const AddCoin = ({ allCoins, onAddCoin, onClose }) => {
 							className="form-input"
 							autoComplete="price"
 							placeholder="Price Per Coin..."
-							value={inputs.price}
+							value={coin.price}
 							onChange={handleChange}
 						/>
 					</div>
 				</div>
 
 				<div className="total-wrapper">
-					<label htmlFor="total-spent">Total Spent:</label>
-					<p id="total-spent">${inputs.total}</p>
+					<label>Total Spent:</label>
+					<p id="total-spent">
+						{currency.symbol}
+						{coin.total}
+					</p>
 				</div>
-				<Button text={"add coin"} onClick={() => onAddCoin(inputs)} />
+				<Button text={"add coin"} onClick={addCoinHandler} />
 			</div>
 		</div>
 	);

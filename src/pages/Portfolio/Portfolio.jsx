@@ -10,18 +10,16 @@ import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
-import {
-	calculateAveragePrice,
-	calculateCoinProfitLoss,
-	calculateCurrentBalance,
-	calculatePriceChangePercentage,
-	findTopPerformers,
-} from "../../utils/helpers";
 import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
+import {
+	addCoinToPortfolio,
+	removeCoinFromPortfolio,
+	updatePortfolioMetrics,
+} from "../../utils/portfolio";
+import useMatchingCoins from "../../hooks/useMatchingCoins";
 
 const Portfolio = () => {
-	const { allCoins } = useContext(CoinContext);
-	const [matchingCoins, setMatchingCoins] = useState([]);
+	const { allCoins, currency } = useContext(CoinContext);
 	const [coinToRemove, setCoinToRemove] = useState({});
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
@@ -29,8 +27,12 @@ const Portfolio = () => {
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
 		owner: "username",
-		totalAllocation: 5000,
+		totalAllocation: {
+			usd: 5000,
+			eur: 4612,
+		},
 		alltimeProfitLoss: 0,
+		alltimeProfitLossPercentage: 0,
 		currentBalance: 0,
 		topPerformers: [],
 		createdOn: "1717699200",
@@ -39,103 +41,86 @@ const Portfolio = () => {
 		allocations: [
 			{
 				name: "Ethereum",
-				total: 3000,
 				id: "ethereum",
-				price: 3000,
+				total: {
+					usd: 3462.28,
+					eur: 3189.61,
+				},
+				price: {
+					usd: 3462.28,
+					eur: 3189.61,
+				},
 				quantity: 1,
 			},
 			{
 				name: "Bitcoin",
-				total: 1000,
 				id: "bitcoin",
-				price: 10000,
-				quantity: 0.1,
+				total: {
+					usd: 5000,
+					eur: 4614.4,
+				},
+				price: {
+					usd: 10000,
+					eur: 9228.7,
+				},
+				quantity: 0.5,
 			},
 			{
 				name: "Cronos",
-				total: 800,
+				total: {
+					usd: 400,
+					eur: 370,
+				},
 				id: "crypto-com-chain",
-				price: 0.8,
+				price: {
+					usd: 0.4,
+					eur: 0.37,
+				},
 				quantity: 1000,
 			},
 			{
 				name: "Cardano",
-				total: 200,
+				total: {
+					usd: 400,
+					eur: 370,
+				},
 				id: "cardano",
-				price: 2,
+				price: {
+					usd: 2,
+					eur: 1.85,
+				},
 				quantity: 100,
 			},
 		],
 	});
+	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 
 	const selectionRef = useRef(null);
 
 	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
-
 	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
 
-	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
+	const toggleEditModeHandler = () => setIsEditMode(true);
 
+	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
 	const openConfirmModalHandler = (coin) => {
 		setCoinToRemove(coin);
 		setIsConfirmModalOpen(true);
 	};
 
-	const addCoinHandler = (coin) => {
+	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
-
-		setPortfolio((prevPortfolio) => {
-			const existingCoin = prevPortfolio.allocations.find(
-				(c) => c.id === coin.id
-			);
-
-			if (existingCoin) {
-				const updatedAllocations = prevPortfolio.allocations.map(
-					(c) => {
-						if (c.id !== coin.id) return c;
-
-						return {
-							...c,
-							quantity: c.quantity + coin.quantity,
-							total: c.total + coin.total,
-							price: calculateAveragePrice(
-								c.price,
-								c.quantity,
-								coin.price,
-								coin.quantity
-							),
-						};
-					}
-				);
-
-				return {
-					...prevPortfolio,
-					allocations: updatedAllocations,
-					totalAllocation: portfolio.totalAllocation + coin.total,
-				};
-			}
-
-			return {
-				...prevPortfolio,
-				allocations: [...prevPortfolio.allocations, coin],
-				totalAllocation: portfolio.totalAllocation + coin.total,
-			};
-		});
+		setPortfolio((prevPortfolio) =>
+			addCoinToPortfolio(prevPortfolio, coinToAdd)
+		);
 	};
 
 	const removeCoinHandler = () => {
 		setIsConfirmModalOpen(false);
 
-		const updatedAllocations = portfolio.allocations.filter(
-			(coin) => coin.id !== coinToRemove.id
+		setPortfolio((prevPortfolio) =>
+			removeCoinFromPortfolio(prevPortfolio, coinToRemove)
 		);
-
-		setPortfolio((prevPortfolio) => ({
-			...prevPortfolio,
-			allocations: updatedAllocations,
-			totalAllocation: portfolio.totalAllocation - coinToRemove.total,
-		}));
-		setCoinToRemove({});
 	};
 
 	const titleChangeHandler = (e) => {
@@ -149,8 +134,6 @@ const Portfolio = () => {
 		restoreCursorPosition(selectionRef);
 	};
 
-	const toggleEditModeHandler = () => setIsEditMode(true);
-
 	const saveChangesHandler = () => {
 		if (portfolio.title === "" || portfolio.allocations < 1) return;
 		setIsEditMode(false);
@@ -159,50 +142,10 @@ const Portfolio = () => {
 	useEffect(() => restoreCursorPosition(selectionRef), [portfolio.title]);
 
 	useEffect(() => {
-		const updatedMatchingCoins = allCoins
-			.filter((coin) =>
-				portfolio.allocations.some(
-					(allocation) => allocation.id === coin.id
-				)
-			)
-			.map((coin) => {
-				const matchingAllocation = portfolio.allocations.find(
-					(allocation) => allocation.id === coin.id
-				);
-				return {
-					...matchingAllocation,
-					market_data: {
-						...coin,
-						price_change_alltime: calculatePriceChangePercentage(
-							matchingAllocation.price,
-							coin.current_price
-						),
-						alltime_profit_loss: calculateCoinProfitLoss(
-							matchingAllocation.quantity,
-							matchingAllocation.price,
-							coin.current_price
-						),
-					},
-				};
-			});
-
-		setMatchingCoins(updatedMatchingCoins);
-
-		const currentBalance = calculateCurrentBalance(updatedMatchingCoins);
-		setPortfolio((prevPortfolio) => ({
-			...prevPortfolio,
-			currentBalance,
-			isPositivePriceChange: currentBalance >= portfolio.totalAllocation,
-			alltimeProfitLoss: (
-				currentBalance - portfolio.totalAllocation
-			).toFixed(2),
-			alltimeProfitLossPercentage: calculatePriceChangePercentage(
-				portfolio.totalAllocation,
-				currentBalance
-			),
-			topPerformers: findTopPerformers(updatedMatchingCoins),
-		}));
-	}, [allCoins, portfolio.allocations]);
+		setPortfolio((prevPortfolio) =>
+			updatePortfolioMetrics(prevPortfolio, matchingCoins, currency)
+		);
+	}, [matchingCoins, currency]);
 
 	return (
 		<section className="portfolio">
@@ -216,7 +159,10 @@ const Portfolio = () => {
 
 			<div className="portfolio-assets">
 				<div className="portfolio-chart">
-					<PieChart data={portfolio.allocations} />
+					<PieChart
+						data={portfolio.allocations}
+						currency={currency}
+					/>
 				</div>
 
 				<h3 className="assets-title">Assets</h3>
@@ -262,6 +208,7 @@ const Portfolio = () => {
 							<CoinTableRow
 								coin={coin.market_data}
 								allocation={coin}
+								key={coin.id}
 							/>
 						)
 					)}

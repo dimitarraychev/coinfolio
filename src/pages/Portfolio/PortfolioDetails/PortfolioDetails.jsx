@@ -7,6 +7,7 @@ import editIcon from "../../../assets/icons/edit-icon.svg";
 import { CoinContext } from "../../../context/CoinContext";
 import Button from "../../../components/Button/Button";
 import ConfirmModal from "../../../components/ConfirmModal/ConfirmModal";
+import { formatPrice } from "../../../utils/helpers";
 
 const PortfolioDetails = ({
 	isEditMode,
@@ -20,7 +21,6 @@ const PortfolioDetails = ({
 	const editableTitleRef = useRef(null);
 
 	const closeConfirmModalHandler = (e) => setIsConfirmModalOpen(false);
-
 	const openConfirmModalHandler = (e) => setIsConfirmModalOpen(true);
 
 	return (
@@ -57,7 +57,7 @@ const PortfolioDetails = ({
 				)}
 			</div>
 			<div className="followers-wrapper">
-				<label htmlFor="portfolio-followers">Followers</label>
+				<label>Followers</label>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.toLocaleString()}</h5>
 					<Button text={"follow"} />
@@ -74,7 +74,7 @@ const PortfolioDetails = ({
 					id="current-balance"
 				>
 					{currency.symbol}
-					{portfolio.currentBalance}
+					{formatPrice(portfolio.currentBalance)}
 					<img
 						src={
 							portfolio.isPositivePriceChange
@@ -95,7 +95,11 @@ const PortfolioDetails = ({
 						}
 					>
 						{currency.symbol}
-						{`${portfolio.alltimeProfitLoss} (${portfolio.alltimeProfitLossPercentage}%)`}
+						{`${formatPrice(
+							portfolio.alltimeProfitLoss
+						)} (${formatPrice(
+							portfolio.alltimeProfitLossPercentage
+						)}%)`}
 						<img
 							src={
 								portfolio.isPositivePriceChange
@@ -115,7 +119,7 @@ const PortfolioDetails = ({
 					<li>Total Allocation</li>
 					<li>
 						{currency.symbol}
-						{portfolio.totalAllocation}
+						{formatPrice(portfolio.totalAllocation[currency.name])}
 					</li>
 				</ul>
 				<ul>
@@ -135,6 +139,7 @@ const PortfolioDetails = ({
 					</li>
 				</ul>
 			</div>
+
 			{isConfirmModalOpen && (
 				<ConfirmModal
 					onClose={closeConfirmModalHandler}

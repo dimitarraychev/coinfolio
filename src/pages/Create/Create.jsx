@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
@@ -9,113 +9,63 @@ import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
+import { formatPrice } from "../../utils/helpers";
 import {
-	calculateAveragePrice,
-	calculatePriceChangePercentage,
-	calculateCoinProfitLoss,
-	formatPrice,
-} from "../../utils/helpers";
+	addCoinToPortfolio,
+	removeCoinFromPortfolio,
+} from "../../utils/portfolio";
+import useMatchingCoins from "../../hooks/useMatchingCoins";
 
 const Create = () => {
-	const { allCoins, currency } = useContext(CoinContext);
-	const [inputTitle, setInputTitle] = useState("");
-	const [totalAllocation, setTotalAllocation] = useState(0);
-	const [inputCoins, setInputCoins] = useState([]);
-	const [matchingCoins, setMatchingCoins] = useState([]);
+	const { currency } = useContext(CoinContext);
+	const [portfolio, setPortfolio] = useState({
+		title: "",
+		owner: "username",
+		totalAllocation: {
+			usd: 0,
+			eur: 0,
+		},
+		allocations: [],
+	});
+	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
+
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 
-	const closeAddCoinHandler = (e) => {
+	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
+	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
+
+	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
-	};
-
-	const openAddCoinHandler = (e) => {
-		setIsAddCoinOpen(true);
-	};
-
-	const addCoinHandler = (coin) => {
-		setIsAddCoinOpen(false);
-
-		setTotalAllocation((state) => state + coin.total);
-
-		const existingCoin = inputCoins.find((c) => c.id === coin.id);
-
-		if (existingCoin) {
-			const updatedCoins = inputCoins.map((c) => {
-				if (c.id !== coin.id) return c;
-
-				return {
-					...c,
-					quantity: c.quantity + coin.quantity,
-					total: c.total + coin.total,
-					price: calculateAveragePrice(
-						c.price,
-						c.quantity,
-						coin.price,
-						coin.quantity
-					),
-				};
-			});
-			return setInputCoins(updatedCoins);
-		}
-
-		setInputCoins((prevCoins) => [...prevCoins, coin]);
+		setPortfolio((prevPortfolio) =>
+			addCoinToPortfolio(prevPortfolio, coinToAdd)
+		);
 	};
 
 	const removeCoinHandler = (coinToRemove) => {
-		setTotalAllocation((state) => state - coinToRemove.total);
-
-		const updatedInputCoins = inputCoins.filter(
-			(coin) => coin.id !== coinToRemove.id
+		setPortfolio((prevPortfolio) =>
+			removeCoinFromPortfolio(prevPortfolio, coinToRemove)
 		);
-
-		setInputCoins(updatedInputCoins);
 	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		if (isSubmitButtonDisabled) return;
-		console.log("title", inputTitle);
-		console.log("coins", inputCoins);
+		console.log("title", portfolio.title);
+		console.log("coins", portfolio.allocations);
 	};
 
-	const handleTitleChange = (e) => {
-		const value = e.target.value;
-		setInputTitle(value);
-	};
+	const handleTitleChange = (e) =>
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			title: e.target.value,
+		}));
 
 	useEffect(() => {
-		const updatedMatchingCoins = allCoins
-			.filter((coin) =>
-				inputCoins.some((allocation) => allocation.id === coin.id)
-			)
-			.map((coin) => {
-				const matchingAllocation = inputCoins.find(
-					(allocation) => allocation.id === coin.id
-				);
-				return {
-					...matchingAllocation,
-					market_data: {
-						...coin,
-						price_change_alltime: calculatePriceChangePercentage(
-							matchingAllocation.price,
-							coin.current_price
-						),
-						alltime_profit_loss: calculateCoinProfitLoss(
-							matchingAllocation.quantity,
-							matchingAllocation.price,
-							coin.current_price
-						),
-					},
-				};
-			});
-
-		setMatchingCoins(updatedMatchingCoins);
-
-		if (inputTitle !== "" && inputCoins.length > 0)
-			return setIsSubmitButtonDisabled(false);
-		setIsSubmitButtonDisabled(true);
-	}, [inputTitle, inputCoins]);
+		portfolio.title !== "" && portfolio.allocations.length > 0
+			? setIsSubmitButtonDisabled(false)
+			: setIsSubmitButtonDisabled(true);
+	}, [portfolio]);
 
 	return (
 		<section className="create">
@@ -134,20 +84,25 @@ const Create = () => {
 						className="form-input"
 						autoComplete="title"
 						placeholder="Your portfolio title..."
-						value={inputTitle}
+						value={portfolio.title}
 						onChange={handleTitleChange}
 					/>
 				</div>
 
 				<div className="create-chart">
-					<PieChart data={inputCoins} />
+					<PieChart
+						data={portfolio.allocations}
+						currency={currency}
+					/>
 				</div>
 
 				<div className="allocation">
 					<label>Total Allocation</label>
 					<h3>
 						{currency.symbol}
-						{formatPrice(totalAllocation)}
+						{currency.name === "usd"
+							? formatPrice(portfolio.totalAllocation.usd)
+							: formatPrice(portfolio.totalAllocation.eur)}
 					</h3>
 				</div>
 
@@ -162,7 +117,7 @@ const Create = () => {
 				<CryptoTable
 					columns={["#", "Coins", "Price", "Change", "Allocation"]}
 				>
-					{inputCoins.length > 0 &&
+					{portfolio.allocations.length > 0 &&
 						matchingCoins.map((coin) => (
 							<div className="create-row-wrapper" key={coin.id}>
 								<CoinTableRow
@@ -188,7 +143,6 @@ const Create = () => {
 
 			{isAddCoinOpen && (
 				<AddCoin
-					allCoins={allCoins}
 					onAddCoin={addCoinHandler}
 					onClose={closeAddCoinHandler}
 				/>
