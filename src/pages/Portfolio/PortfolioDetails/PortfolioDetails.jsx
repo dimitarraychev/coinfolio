@@ -32,6 +32,7 @@ const PortfolioDetails = ({
 						className="editable-title"
 						contentEditable={isEditMode ? true : false}
 						onInput={onTitleChange}
+						suppressContentEditableWarning={true}
 					>
 						{portfolio.title}
 					</h2>
