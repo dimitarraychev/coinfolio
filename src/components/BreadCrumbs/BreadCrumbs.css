@@ -1,0 +1,38 @@
+.breadcrumbs {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 1rem;
+}
+
+.breadcrumbs img {
+	height: 1em;
+	aspect-ratio: 1/1;
+}
+
+.crumb-wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5em;
+}
+
+.crumb-wrapper a {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.crumb-wrapper a {
+	justify-self: center;
+}
+
+.crumb-wrapper > a:hover {
+	color: var(--btn-color);
+}
+
+.crumb > span {
+	filter: brightness(0.8);
+}

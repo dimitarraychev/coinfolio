@@ -17,6 +17,7 @@ import Create from "./pages/Create/Create";
 import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
+import BreadCrumbs from "./components/BreadCrumbs/BreadCrumbs";
 
 const App = () => {
 	const {
@@ -29,6 +30,7 @@ const App = () => {
 	return (
 		<div className="app">
 			<Navbar />
+			<BreadCrumbs />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/rankings" element={<Rankings />} />
