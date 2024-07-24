@@ -1,23 +1,30 @@
 import React, { useState, useEffect } from "react";
 import { Chart } from "react-google-charts";
 
-const PieChart = ({ data }) => {
+const PieChart = ({ data, currency }) => {
 	const [chartData, setChartData] = useState([
 		["Crypto", "Allocation"],
 		["none", 1],
 	]);
 
 	useEffect(() => {
-		let dataCopy = [["Crypto", "Allocation"]];
-		if (data.length > 0) {
-			data.map((coin) => dataCopy.push([coin.name, coin.total]));
-			return setChartData(dataCopy);
+		if (data.length < 1) {
+			setChartData([
+				["Crypto", "Allocation"],
+				["none", 1],
+			]);
+			return;
 		}
-		setChartData([
-			["Crypto", "Allocation"],
-			["none", 1],
-		]);
-	}, [data]);
+
+		let dataCopy = [["Crypto", "Allocation"]];
+
+		data.map((coin) => {
+			const total =
+				currency.name === "usd" ? coin.total.usd : coin.total.eur;
+			dataCopy.push([coin.name, total]);
+		});
+		setChartData(dataCopy);
+	}, [data, currency]);
 
 	const options = {
 		backgroundColor: "transparent",
