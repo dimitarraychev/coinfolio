@@ -5,7 +5,7 @@ import { formatNumber } from "../utils/helpers";
 
 export const CoinContext = createContext();
 
-const CoinContextProvider = (props) => {
+const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
 	const [globalMarketData, setGlobalMarketData] = useState([]);
 	const [usdToEurRate, setUsdToEurRate] = useState([]);
@@ -64,7 +64,7 @@ const CoinContextProvider = (props) => {
 
 	return (
 		<CoinContext.Provider value={contextValue}>
-			{props.children}
+			{children}
 		</CoinContext.Provider>
 	);
 };

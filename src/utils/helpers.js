@@ -35,8 +35,11 @@ export const calculateAveragePrice = (price1, quantity1, price2, quantity2) => {
 };
 
 export const calculatePriceChangePercentage = (oldPrice, newPrice) => {
+	if (oldPrice === 0) return 0;
+
 	const percentageChange = ((newPrice - oldPrice) / oldPrice) * 100;
-	return percentageChange;
+
+	return isNaN(percentageChange) ? 0 : percentageChange;
 };
 
 export const calculateCurrentBalance = (coins) => {
