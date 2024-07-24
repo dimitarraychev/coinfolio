@@ -62,7 +62,7 @@ const Navbar = () => {
 			</ul>
 
 			<div className="nav-right">
-				<select onChange={currencyHandler}>
+				<select onChange={currencyHandler} name="currency">
 					<option value="usd">$USD</option>
 					<option value="eur">€EUR</option>
 				</select>
