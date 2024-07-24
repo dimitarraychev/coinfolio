@@ -28,6 +28,8 @@ body {
 	--separator-line: #3c3c3c;
 	--green: #34c759;
 	--red: #ff3b30;
+	--toastify-color-success: var(--green);
+	--toastify-color-warning: var(--red);
 }
 
 .app {
