@@ -14,9 +14,9 @@ import Login from "./pages/Login/Login";
 import PortfolioHub from "./pages/PortfolioHub/PortfolioHub";
 import Portfolio from "./pages/Portfolio/Portfolio";
 import Create from "./pages/Create/Create";
-import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+import { useConfirmModalContext } from "./context/ConfirmModalContext";
 
 const App = () => {
 	const {
@@ -43,16 +43,16 @@ const App = () => {
 			<ScrollToTop />
 			<ToastContainer
 				position="top-right"
+				theme="dark"
+				transition:Bounce
 				autoClose={5000}
 				hideProgressBar={false}
 				newestOnTop={false}
-				closeOnClick
 				rtl={false}
-				pauseOnFocusLoss
+				closeOnClick
 				draggable
+				pauseOnFocusLoss
 				pauseOnHover
-				theme="dark"
-				transition:Bounce
 			/>
 			<ConfirmModal
 				isOpen={isConfirmModalOpen}
