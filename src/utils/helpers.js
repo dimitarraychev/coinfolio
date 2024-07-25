@@ -4,7 +4,8 @@ export function formatPrice(price) {
 	let fractionDigits = 2;
 
 	if (price < 0.01 && price > -0.01) fractionDigits = 4;
-	if (price < 0.0001 && price > -0.01) fractionDigits = 8;
+	if (price < 0.0001 && price > -0.0001) fractionDigits = 6;
+	if (price < 0.000001 && price > -0.000001) fractionDigits = 8;
 
 	return price.toLocaleString(undefined, {
 		minimumFractionDigits: fractionDigits,
