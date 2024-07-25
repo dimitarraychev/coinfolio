@@ -65,7 +65,7 @@ const Rankings = () => {
 						<h3 className={isPositiveCapChange ? "green" : "red"}>
 							{formatPrice(
 								globalMarketData.data
-									.market_cap_change_percentage_24h_usd * 100
+									.market_cap_change_percentage_24h_usd
 							)}
 							%
 							<img
@@ -99,14 +99,21 @@ const Rankings = () => {
 						<h3>
 							{formatPrice(
 								globalMarketData.data?.active_cryptocurrencies
-							)}
+							).slice(0, -3)}
 						</h3>
 					)}
 				</div>
 			</div>
 
 			<CryptoTable
-				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+				columns={[
+					"#",
+					"Coins",
+					"Price",
+					"24h Change",
+					"7d Change",
+					"Market Cap",
+				]}
 			>
 				{displayCoins.map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />
