@@ -10,7 +10,7 @@ export const fetchAllCoins = async (currency, category, page = 1) => {
 		},
 	};
 
-	let URL = `${API_BASE_URL}/coins/markets?vs_currency=${currency}&per_page=250&page=${page}`;
+	let URL = `${API_BASE_URL}/coins/markets?vs_currency=${currency}&per_page=250&page=${page}&price_change_percentage=7d`;
 	if (category && category != null) URL = URL + `&category=${category}`;
 
 	const response = await fetch(URL, options);

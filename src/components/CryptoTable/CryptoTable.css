@@ -16,6 +16,11 @@
 	gap: 0.5em;
 }
 
+.table-header.six-col,
+.table-layout.six-col {
+	grid-template-columns: 0.3fr 2fr 1fr 1fr 1fr 1.5fr;
+}
+
 .table-layout .name-wrapper,
 .table-layout .portfolio-title {
 	display: flex;
@@ -37,7 +42,7 @@
 	filter: brightness(1.2);
 }
 
-.table-header p:nth-last-of-type(2),
+.table-header .change,
 .table-layout .change {
 	text-align: center;
 }

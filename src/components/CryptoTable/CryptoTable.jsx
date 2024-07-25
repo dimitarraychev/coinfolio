@@ -4,9 +4,20 @@ import "./CryptoTable.css";
 const CryptoTable = ({ columns, children }) => {
 	return (
 		<div className="crypto-table">
-			<div className="table-header">
+			<div
+				className={
+					columns.length <= 5
+						? "table-header"
+						: "table-header six-col"
+				}
+			>
 				{columns.map((col) => (
-					<p key={col}>{col}</p>
+					<p
+						className={col.includes("Change") ? "change" : ""}
+						key={col}
+					>
+						{col}
+					</p>
 				))}
 			</div>
 			{children}

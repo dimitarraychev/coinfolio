@@ -13,7 +13,10 @@ const CoinTableRow = ({ coin, allocation }) => {
 		: coin.price_change_percentage_24h >= 0;
 
 	return (
-		<Link to={`/explore/${coin.id}`} className="table-layout">
+		<Link
+			to={`/explore/${coin.id}`}
+			className={allocation ? "table-layout" : "table-layout six-col"}
+		>
 			<p>{coin.market_cap_rank}</p>
 			<div>
 				<img src={coin.image} alt={coin.symbol} className="coin-img" />
@@ -26,6 +29,26 @@ const CoinTableRow = ({ coin, allocation }) => {
 				{currency.symbol}
 				{formatPrice(coin.current_price)}
 			</p>
+			{!allocation && (
+				<p
+					className={
+						coin.price_change_percentage_7d_in_currency >= 0
+							? " change green"
+							: "change red"
+					}
+				>
+					{formatPrice(coin.price_change_percentage_7d_in_currency)}%
+					<img
+						className="arrow"
+						src={
+							coin.price_change_percentage_7d_in_currency >= 0
+								? arrowUp
+								: arrowDown
+						}
+						alt="arrow"
+					/>
+				</p>
+			)}
 
 			{allocation ? (
 				<div className="profit-loss-wrapper">
