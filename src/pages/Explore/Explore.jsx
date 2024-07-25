@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 
@@ -14,12 +15,14 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const Explore = () => {
 	const { allCoins, currency } = useContext(CoinContext);
 	const [displayCoins, setDisplayCoins] = useState([]);
-	const [category, setCategory] = useState(null);
 	const [isLoading, setIsLoading] = useState(false);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const category = searchParams.get("category");
 
 	const categoriesHandler = (value) => {
+		if (searchParams.get("category") === value) return;
 		setIsLoading(true);
-		setCategory(value);
+		setSearchParams({ category: value });
 	};
 
 	const searchHandler = (input) => {
@@ -55,12 +58,14 @@ const Explore = () => {
 	};
 
 	useEffect(() => {
-		fetchCoins();
-	}, [category]);
+		if (category === "all") {
+			setDisplayCoins(allCoins);
+			setIsLoading(false);
+			return;
+		}
 
-	useEffect(() => {
-		setDisplayCoins(allCoins);
-	}, [allCoins]);
+		fetchCoins();
+	}, [category, allCoins, currency]);
 
 	return (
 		<section className="explore">

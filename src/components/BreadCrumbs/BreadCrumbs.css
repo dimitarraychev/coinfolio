@@ -33,6 +33,6 @@
 	color: var(--btn-color);
 }
 
-.crumb > span {
+.crumb span {
 	filter: brightness(0.8);
 }

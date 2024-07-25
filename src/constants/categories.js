@@ -19,7 +19,7 @@ export const portfolioCategories = [
 
 export const exploreCategories = [
 	{
-		category_id: null,
+		category_id: "all",
 		name: "All",
 	},
 	{

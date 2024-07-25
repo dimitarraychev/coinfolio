@@ -1,5 +1,5 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 import "./BreadCrumbs.css";
 import arrowCrumb from "../../assets/icons/arrow-crumb.svg";
@@ -17,9 +17,17 @@ const routes = [
 	{ path: "/404", name: "404" },
 ];
 
+const convertKebabCase = (string) =>
+	string
+		.split("-")
+		.map((e) => e[0].toUpperCase() + e.substring(1))
+		.join(" ");
+
 const BreadCrumbs = () => {
 	const location = useLocation();
 	const pathnames = location.pathname.split("/").filter((x) => x);
+	const [searchParams, setSearchParams] = useSearchParams();
+	const categoryQuery = searchParams.get("category");
 
 	return (
 		<nav aria-label="breadcrumbs">
@@ -62,15 +70,14 @@ const BreadCrumbs = () => {
 						pathnames.length > 1
 					) {
 						routeName = pathnames[pathnames.length - 1];
-						routeName = routeName
-							.split("-")
-							.map((e) => e[0].toUpperCase() + e.substring(1))
-							.join(" ");
+						routeName = convertKebabCase(routeName);
 					}
 
 					return (
 						<li className="crumb" key={to}>
-							{last ? (
+							{last &&
+							(categoryQuery === null ||
+								categoryQuery === "all") ? (
 								<span>{routeName}</span>
 							) : (
 								<div className="crumb-wrapper">
@@ -81,6 +88,11 @@ const BreadCrumbs = () => {
 						</li>
 					);
 				})}
+				{categoryQuery && categoryQuery !== "all" && (
+					<li className="crumb">
+						<span>{convertKebabCase(categoryQuery)}</span>
+					</li>
+				)}
 			</ol>
 		</nav>
 	);
