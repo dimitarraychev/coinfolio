@@ -2,6 +2,7 @@ import { createContext, useState, useEffect } from "react";
 import { fetchAllCoins, fetchGlobalMarketData } from "../api/coinGecko";
 import { getUsdToEurRate } from "../api/freecurrencyapi";
 import { formatNumber } from "../utils/helpers";
+import { toast } from "react-toastify";
 
 export const CoinContext = createContext();
 
@@ -16,7 +17,7 @@ const CoinContextProvider = ({ children }) => {
 			const coins = await fetchAllCoins(currency.name);
 			setAllCoins(coins);
 		} catch (err) {
-			console.error(err);
+			toast.error(err);
 		}
 	};
 
@@ -25,7 +26,7 @@ const CoinContextProvider = ({ children }) => {
 			const marketData = await fetchGlobalMarketData();
 			setGlobalMarketData(marketData);
 		} catch (err) {
-			console.error(err);
+			toast.error(err);
 		}
 	};
 
@@ -34,7 +35,7 @@ const CoinContextProvider = ({ children }) => {
 			const rate = await getUsdToEurRate();
 			setUsdToEurRate(rate);
 		} catch (err) {
-			console.error(err);
+			toast.error(err);
 		}
 	};
 
