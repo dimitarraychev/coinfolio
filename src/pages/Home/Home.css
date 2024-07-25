@@ -59,14 +59,16 @@ section.home-rankings .home-btn-rankings {
 	margin-top: 0.5rem;
 }
 
+section.home-explore,
 section.home-portfolio {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 60%;
+	max-width: 70%;
 	margin: 0 auto;
 }
 
+section.home-explore h2,
 section.home-portfolio h2 {
 	margin-bottom: 1rem;
 }
@@ -82,27 +84,15 @@ section.home .home-section-img {
 	text-align: right;
 }
 
-.home-portfolio-text .home-btn-portfolio {
-	margin-top: 1rem;
-}
-
-section.home-explore {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	max-width: 60%;
-	margin: 0 auto;
-}
-
-section.home-explore h2 {
-	margin-bottom: 1rem;
-}
-
 .home-explore-text {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
 	text-align: left;
+	align-items: flex-start;
+}
+
+.home-portfolio-text .home-btn-portfolio {
+	margin-top: 1rem;
 }
 
 .home-explore-text .home-btn-explore {
