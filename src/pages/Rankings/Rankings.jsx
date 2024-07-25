@@ -25,6 +25,15 @@ const Rankings = () => {
 	const isPositiveCapChange =
 		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
 
+	const loadGlobalMarketData = async () => {
+		try {
+			const marketData = await fetchGlobalMarketData();
+			setGlobalMarketData(marketData);
+		} catch (err) {
+			toast.error(err);
+		}
+	};
+
 	useEffect(() => {
 		setDisplayCoins(allCoins.slice(0, coinsPerPage * page));
 	}, [allCoins, page]);
@@ -36,17 +45,11 @@ const Rankings = () => {
 	}, [inView]);
 
 	useEffect(() => {
-		loadGlobalMarketData();
-	}, []);
+		const controller = new AbortController();
+		loadGlobalMarketData(controller.signal);
 
-	const loadGlobalMarketData = async () => {
-		try {
-			const marketData = await fetchGlobalMarketData();
-			setGlobalMarketData(marketData);
-		} catch (err) {
-			toast.error(err);
-		}
-	};
+		return () => controller.abort();
+	}, []);
 
 	return (
 		<section className="rankings">
