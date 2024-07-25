@@ -39,7 +39,7 @@ const Rankings = () => {
 
 			<div className="market-data">
 				<div className="data-wrapper">
-					<h6>Global Market Cap 24H: </h6>
+					<p className="label">Global Market Cap 24H: </p>
 
 					<h3 className={isPositiveCapChange ? "green" : "red"}>
 						{Math.floor(
@@ -56,7 +56,7 @@ const Rankings = () => {
 				</div>
 
 				<div className="data-wrapper">
-					<h6>Active Cryptocurrencies: </h6>
+					<p className="label">Active Cryptocurrencies: </p>
 					<h3>{globalMarketData.data?.active_cryptocurrencies}</h3>
 				</div>
 			</div>

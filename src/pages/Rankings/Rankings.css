@@ -26,3 +26,7 @@
 	width: 80%;
 	margin: auto;
 }
+
+.rankings .label {
+	color: var(--dark-gray);
+}
