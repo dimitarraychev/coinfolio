@@ -28,6 +28,7 @@ const BreadCrumbs = () => {
 	const pathnames = location.pathname.split("/").filter((x) => x);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const categoryQuery = searchParams.get("category");
+	const searchQuery = searchParams.get("search");
 
 	return (
 		<nav aria-label="breadcrumbs">
@@ -77,7 +78,8 @@ const BreadCrumbs = () => {
 						<li className="crumb" key={to}>
 							{last &&
 							(categoryQuery === null ||
-								categoryQuery === "all") ? (
+								categoryQuery === "all") &&
+							!searchQuery ? (
 								<span>{routeName}</span>
 							) : (
 								<div className="crumb-wrapper">
@@ -91,6 +93,11 @@ const BreadCrumbs = () => {
 				{categoryQuery && categoryQuery !== "all" && (
 					<li className="crumb">
 						<span>{convertKebabCase(categoryQuery)}</span>
+					</li>
+				)}
+				{searchQuery && (
+					<li className="crumb">
+						<span>Search</span>
 					</li>
 				)}
 			</ol>

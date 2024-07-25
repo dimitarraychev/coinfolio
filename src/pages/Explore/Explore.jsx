@@ -18,6 +18,7 @@ const Explore = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const category = searchParams.get("category");
+	const searchQuery = searchParams.get("search");
 
 	const categoriesHandler = (value) => {
 		if (searchParams.get("category") === value) return;
@@ -26,18 +27,18 @@ const Explore = () => {
 	};
 
 	const searchHandler = (input) => {
+		if (!input) return;
 		setIsLoading(true);
-		searchCoins(input);
+		setSearchParams({ search: input });
 	};
 
 	const searchCoins = async (input) => {
-		if (input) {
-			const filteredCoins = allCoins.filter((coin) =>
-				coin.name.toLowerCase().includes(input.toLowerCase())
-			);
-			setDisplayCoins(filteredCoins);
-			setIsLoading(false);
-		}
+		const filteredCoins = allCoins.filter((coin) =>
+			coin.name.toLowerCase().includes(input.toLowerCase())
+		);
+		setDisplayCoins(filteredCoins);
+		setIsLoading(false);
+
 		// try {
 		// 	const search = await searchAllCoins(input);
 		// 	setDisplayCoins(search.coins);
@@ -58,6 +59,11 @@ const Explore = () => {
 	};
 
 	useEffect(() => {
+		if (searchQuery) {
+			searchCoins(searchQuery);
+			return;
+		}
+
 		if (category === "all") {
 			setDisplayCoins(allCoins);
 			setIsLoading(false);
@@ -65,7 +71,7 @@ const Explore = () => {
 		}
 
 		fetchCoins();
-	}, [category, allCoins, currency]);
+	}, [category, allCoins, currency, searchParams]);
 
 	return (
 		<section className="explore">

@@ -12,6 +12,7 @@ const SearchBar = ({ onSearch, autofillSuggestions }) => {
 	const submitHandler = (e) => {
 		e.preventDefault();
 		onSearch(input);
+		setInput("");
 	};
 
 	return (
