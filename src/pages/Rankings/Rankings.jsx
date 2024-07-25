@@ -18,7 +18,7 @@ const Rankings = () => {
 	const [page, setPage] = useState(1);
 	const coinsPerPage = 50;
 	const isPositiveCapChange =
-		globalMarketData.data.market_cap_change_percentage_24h_usd > 0;
+		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
 
 	useEffect(() => {
 		setDisplayCoins(allCoins.slice(0, coinsPerPage * page));
@@ -44,7 +44,7 @@ const Rankings = () => {
 					<h3 className={isPositiveCapChange ? "green" : "red"}>
 						{Math.floor(
 							globalMarketData.data
-								.market_cap_change_percentage_24h_usd * 100
+								?.market_cap_change_percentage_24h_usd * 100
 						) / 100}
 						%
 						<img
@@ -57,7 +57,7 @@ const Rankings = () => {
 
 				<div className="data-wrapper">
 					<h6>Active Cryptocurrencies: </h6>
-					<h3>{globalMarketData.data.active_cryptocurrencies}</h3>
+					<h3>{globalMarketData.data?.active_cryptocurrencies}</h3>
 				</div>
 			</div>
 

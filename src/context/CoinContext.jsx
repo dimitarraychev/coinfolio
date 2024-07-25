@@ -7,7 +7,7 @@ export const CoinContext = createContext();
 
 const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
-	const [globalMarketData, setGlobalMarketData] = useState([]);
+	const [globalMarketData, setGlobalMarketData] = useState({});
 	const [usdToEurRate, setUsdToEurRate] = useState([]);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
 
