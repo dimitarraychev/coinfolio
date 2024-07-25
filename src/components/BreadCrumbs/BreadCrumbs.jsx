@@ -14,6 +14,7 @@ const routes = [
 	{ path: "/hub", name: "Hub" },
 	{ path: "/hub/create", name: "Create" },
 	{ path: "/hub/:id", name: "Portfolio" },
+	{ path: "/404", name: "404" },
 ];
 
 const BreadCrumbs = () => {

@@ -1,5 +1,5 @@
 import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -18,6 +18,7 @@ import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import BreadCrumbs from "./components/BreadCrumbs/BreadCrumbs";
+import NotFound from "./pages/NotFound/NotFound";
 
 const App = () => {
 	const {
@@ -41,6 +42,8 @@ const App = () => {
 				<Route path="/hub" element={<PortfolioHub />} />
 				<Route path="/hub/:portfolioId" element={<Portfolio />} />
 				<Route path="/hub/create" element={<Create />} />
+				<Route path="*" element={<Navigate to={"/404"} />} />
+				<Route path="/404" element={<NotFound />} />
 			</Routes>
 			<ScrollToTop />
 			<ToastContainer
