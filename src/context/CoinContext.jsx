@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from "react";
-import { fetchAllCoins, fetchGlobalMarketData } from "../api/coinGecko";
+import { fetchAllCoins } from "../api/coinGecko";
 import { getUsdToEurRate } from "../api/freecurrencyapi";
 import { formatNumber } from "../utils/helpers";
 import { toast } from "react-toastify";
@@ -8,7 +8,6 @@ export const CoinContext = createContext();
 
 const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
-	const [globalMarketData, setGlobalMarketData] = useState({});
 	const [usdToEurRate, setUsdToEurRate] = useState([]);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
 
@@ -16,15 +15,6 @@ const CoinContextProvider = ({ children }) => {
 		try {
 			const coins = await fetchAllCoins(currency.name);
 			setAllCoins(coins);
-		} catch (err) {
-			toast.error(err);
-		}
-	};
-
-	const loadGlobalMarketData = async () => {
-		try {
-			const marketData = await fetchGlobalMarketData();
-			setGlobalMarketData(marketData);
 		} catch (err) {
 			toast.error(err);
 		}
@@ -40,7 +30,6 @@ const CoinContextProvider = ({ children }) => {
 	};
 
 	useEffect(() => {
-		loadGlobalMarketData();
 		loadUsdToEurRate();
 	}, []);
 
@@ -58,7 +47,6 @@ const CoinContextProvider = ({ children }) => {
 		allCoins,
 		currency,
 		setCurrency,
-		globalMarketData,
 		convertUsdToEur,
 		convertEurToUsd,
 	};
