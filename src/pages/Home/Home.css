@@ -14,15 +14,13 @@ section.hero {
 }
 
 section.hero .img-right {
-	animation: slideLeft 0.5s linear;
+	animation: slideLeft 0.5s ease-in-out forwards, bounce 2s infinite 0.5s;
 	height: 27vw;
-	animation: bounce 2s infinite;
 }
 
 section.hero .img-left {
-	animation: slideRight 0.5s linear;
+	animation: slideRight 0.5s ease-in-out forwards, bounce 1.8s infinite 0.5s;
 	height: 27vw;
-	animation: bounce 1.8s infinite ease-in;
 }
 
 section.hero .hero-text {
@@ -68,6 +66,18 @@ section.home-portfolio {
 	margin: 0 auto;
 }
 
+section.home-explore {
+	animation: appearToLeft linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 30%;
+}
+
+section.home-portfolio {
+	animation: appearToRight linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 30%;
+}
+
 section.home-explore h2,
 section.home-portfolio h2 {
 	margin-bottom: 1rem;
@@ -82,6 +92,9 @@ section.home .home-section-img {
 	flex-direction: column;
 	align-items: flex-end;
 	text-align: right;
+	animation: appearToLeft linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 30%;
 }
 
 .home-explore-text {
@@ -89,6 +102,9 @@ section.home .home-section-img {
 	flex-direction: column;
 	text-align: left;
 	align-items: flex-start;
+	animation: appearToRight linear;
+	animation-timeline: view();
+	animation-range: entry 0 cover 30%;
 }
 
 .home-portfolio-text .home-btn-portfolio {

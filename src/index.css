@@ -224,6 +224,28 @@ section.auth #re_password {
 	}
 }
 
+@keyframes appearToRight {
+	from {
+		opacity: 0;
+		transform: translateX(-20rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes appearToLeft {
+	from {
+		opacity: 0;
+		transform: translateX(20rem);
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
 @keyframes slideRight {
 	from {
 		opacity: 0;
