@@ -1,22 +1,36 @@
-import React, { useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 import Button from "../../components/Button/Button";
+import useForm from "../../hooks/useForm";
+import { register } from "../../api/firebase-auth";
+import { toast } from "react-toastify";
 
 const Register = () => {
-	const [inputs, setInputs] = useState({});
+	const { inputs, handleChange } = useForm({
+		username: "",
+		email: "",
+		password: "",
+		re_password: "",
+	});
 
-	const handleChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setInputs((values) => ({ ...values, [name]: value }));
-	};
-
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(inputs);
+
+		const { re_password, ...userData } = inputs;
+
+		if (inputs.password !== re_password) {
+			toast.error("Error! Password and repeat password do not match.");
+			return;
+		}
+
+		try {
+			await register(userData);
+		} catch (error) {
+			toast.error(error);
+		}
 	};
 
 	return (
@@ -35,7 +49,7 @@ const Register = () => {
 					className="form-input"
 					autoComplete="username"
 					placeholder="Your username..."
-					value={inputs.username || ""}
+					value={inputs.username}
 					onChange={handleChange}
 				/>
 
@@ -47,7 +61,7 @@ const Register = () => {
 					className="form-input"
 					autoComplete="email"
 					placeholder="Your email address..."
-					value={inputs.email || ""}
+					value={inputs.email}
 					onChange={handleChange}
 				/>
 
@@ -59,7 +73,7 @@ const Register = () => {
 					className="form-input"
 					autoComplete="new-password"
 					placeholder="Set your password..."
-					value={inputs.password || ""}
+					value={inputs.password}
 					onChange={handleChange}
 				/>
 
@@ -71,11 +85,11 @@ const Register = () => {
 					className="form-input"
 					autoComplete="new-password"
 					placeholder="Repeat your password..."
-					value={inputs.re_password || ""}
+					value={inputs.re_password}
 					onChange={handleChange}
 				/>
 
-				<Button text="sign up" isWide={true} />
+				<Button text="sign up" type={"submit"} isWide={true} />
 
 				<p className="link">
 					Already have an account?{" "}
