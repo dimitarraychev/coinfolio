@@ -16,9 +16,9 @@ import Portfolio from "./pages/Portfolio/Portfolio";
 import Create from "./pages/Create/Create";
 import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
-import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import BreadCrumbs from "./components/BreadCrumbs/BreadCrumbs";
 import NotFound from "./pages/NotFound/NotFound";
+import { useConfirmModalContext } from "./context/ConfirmModalContext";
 
 const App = () => {
 	const {
