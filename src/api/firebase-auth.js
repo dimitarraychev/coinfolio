@@ -37,7 +37,7 @@ export const logout = async () => {
 	try {
 		await signOut(auth);
 
-		toast.success(`Success! "You've logged out, come back soon.`);
+		toast.success(`Success! You have logged out, come back soon.`);
 	} catch (error) {
 		toast.error(`Error! ${error.code}: ${error.message}`);
 		throw error;

@@ -5,10 +5,12 @@ import "./Navbar.css";
 import logo from "../../assets/logo.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
+import logoutIcon from "../../assets/icons/logout-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
 import { navbarLinks } from "../../constants/links";
+import { logout } from "../../api/firebase-auth";
 
 const Navbar = () => {
 	const { setCurrency } = useCoinContext();
@@ -92,6 +94,7 @@ const Navbar = () => {
 								<p>Register</p>
 							</li>
 						</Link>
+
 						<Link to={"/login"}>
 							<li>
 								<img
@@ -102,6 +105,15 @@ const Navbar = () => {
 								<p>Login</p>
 							</li>
 						</Link>
+
+						<li onClick={logout}>
+							<img
+								src={logoutIcon}
+								alt="logout"
+								className="link-img"
+							/>
+							<p>Logout</p>
+						</li>
 					</ul>
 				</div>
 			</div>
