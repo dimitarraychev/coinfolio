@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { checkAuth } from "../api/firebase-auth";
 
 const AuthContext = createContext();
@@ -8,7 +8,8 @@ const AuthContextProvider = ({ children }) => {
 
 	useEffect(() => {
 		const unsubscribe = checkAuth((user) => {
-			setCurrentUser(user);
+			const { uid, email, displayName } = user;
+			setCurrentUser({ uid, email, displayName });
 		});
 
 		return unsubscribe;
