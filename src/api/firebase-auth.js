@@ -8,7 +8,7 @@ import {
 	onAuthStateChanged,
 } from "firebase/auth";
 
-export const register = async (username, email, password) => {
+export const register = async ({ username, email, password }) => {
 	try {
 		await createUserWithEmailAndPassword(auth, email, password);
 		await updateProfile(auth.currentUser, { displayName: username });
@@ -16,10 +16,11 @@ export const register = async (username, email, password) => {
 		toast.success(`Success! Welcome to CoinFol.io, ${username}.`);
 	} catch (error) {
 		toast.error(`Error! ${error.code}: ${error.message}`);
+		throw error;
 	}
 };
 
-export const login = async (email, password) => {
+export const login = async ({ email, password }) => {
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
 
@@ -28,6 +29,7 @@ export const login = async (email, password) => {
 		);
 	} catch (error) {
 		toast.error(`Error! ${error.code}: ${error.message}`);
+		throw error;
 	}
 };
 
@@ -38,6 +40,7 @@ export const logout = async () => {
 		toast.success(`Success! "You've logged out, come back soon.`);
 	} catch (error) {
 		toast.error(`Error! ${error.code}: ${error.message}`);
+		throw error;
 	}
 };
 
