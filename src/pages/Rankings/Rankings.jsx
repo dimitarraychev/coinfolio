@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 
 import "./Rankings.css";
@@ -6,7 +6,7 @@ import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 import rankIcon from "../../assets/icons/rank-icon-white.svg";
 
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import { useInView } from "react-intersection-observer";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
@@ -15,7 +15,7 @@ import { fetchGlobalMarketData } from "../../api/coinGecko";
 import { formatPrice } from "../../utils/helpers";
 
 const Rankings = () => {
-	const { allCoins } = useContext(CoinContext);
+	const { allCoins } = useCoinContext();
 	const [globalMarketData, setGlobalMarketData] = useState({});
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [page, setPage] = useState(1);

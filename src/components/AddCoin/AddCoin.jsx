@@ -1,11 +1,11 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./AddCoin.css";
 import closeIcon from "../../assets/icons/close-icon.svg";
 import Button from "../Button/Button";
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 
 const AddCoin = ({ onAddCoin, onClose }) => {
-	const { allCoins, currency, convertCurrency } = useContext(CoinContext);
+	const { allCoins, currency, convertCurrency } = useCoinContext;
 	const [coin, setCoin] = useState({
 		id: "",
 		name: "",

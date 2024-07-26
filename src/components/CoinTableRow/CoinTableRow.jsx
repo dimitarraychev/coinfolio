@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React from "react";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
 import { Link } from "react-router-dom";
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import { formatPrice } from "../../utils/helpers";
 
 const CoinTableRow = ({ coin, allocation }) => {
-	const { currency } = useContext(CoinContext);
+	const { currency } = useCoinContext();
 	const isPositivePriceChange = allocation
 		? coin.price_change_alltime[currency.name] >= 0
 		: coin.price_change_percentage_24h >= 0;

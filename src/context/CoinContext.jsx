@@ -1,10 +1,10 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import { fetchAllCoins } from "../api/coinGecko";
 import { getUsdToEurRate } from "../api/freecurrencyapi";
 import { formatNumber } from "../utils/helpers";
 import { toast } from "react-toastify";
 
-export const CoinContext = createContext();
+const CoinContext = createContext();
 
 const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
@@ -58,3 +58,5 @@ const CoinContextProvider = ({ children }) => {
 };
 
 export default CoinContextProvider;
+
+export const useCoinContext = () => useContext(CoinContext);

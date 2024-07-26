@@ -1,10 +1,10 @@
-import React, { useContext } from "react";
+import React from "react";
 import Button from "../Button/Button";
 import { Link } from "react-router-dom";
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 
 const PortfolioTableRow = () => {
-	const { currency } = useContext(CoinContext);
+	const { currency } = useCoinContext();
 
 	const followHandler = (e) => {
 		e.preventDefault();

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useContext } from "react";
+import React, { useRef } from "react";
 import { toast } from "react-toastify";
 
 import "./PortfolioDetails.css";
@@ -6,7 +6,7 @@ import arrowUp from "../../../assets/icons/arrow-up.svg";
 import arrowDown from "../../../assets/icons/arrow-down.svg";
 import editIcon from "../../../assets/icons/edit-icon.svg";
 
-import { CoinContext } from "../../../context/CoinContext";
+import { useCoinContext } from "../../../context/CoinContext";
 import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
 import { formatPrice } from "../../../utils/helpers";
@@ -18,7 +18,7 @@ const PortfolioDetails = ({
 	onTitleChange,
 	onSave,
 }) => {
-	const { currency } = useContext(CoinContext);
+	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
 
 	const editableTitleRef = useRef(null);

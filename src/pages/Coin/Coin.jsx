@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import "./Coin.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import LineChart from "../../components/LineChart/LineChart";
 import Loader from "../../components/Loader/Loader";
 import { formatPrice } from "../../utils/helpers";
@@ -14,7 +14,7 @@ const Coin = () => {
 	const { coinId } = useParams();
 	const [coinData, setCoinData] = useState();
 	const [historicalData, setHistoricalData] = useState();
-	const { currency } = useContext(CoinContext);
+	const { currency } = useCoinContext();
 
 	const getData = async () => {
 		try {

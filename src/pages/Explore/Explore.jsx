@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import { fetchAllCoins, searchAllCoins } from "../../api/coinGecko";
@@ -13,7 +13,7 @@ import { exploreCategories } from "../../constants/categories";
 import SearchBar from "../../components/SearchBar/SearchBar";
 
 const Explore = () => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { allCoins, currency } = useCoinContext();
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchParams, setSearchParams] = useSearchParams();

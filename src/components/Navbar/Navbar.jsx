@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
 import "./Navbar.css";
@@ -7,11 +7,11 @@ import userPlaceholder from "../../assets/user-placeholder.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import { navbarLinks } from "../../constants/links";
 
 const Navbar = () => {
-	const { setCurrency } = useContext(CoinContext);
+	const { setCurrency } = useCoinContext();
 	const { pathname } = useLocation();
 
 	const [isMenuShown, setIsMenuShown] = useState(false);

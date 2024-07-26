@@ -1,13 +1,13 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import {
 	calculatePriceChangePercentage,
 	calculateCoinProfitLoss,
 } from "../utils/helpers";
-import { CoinContext } from "../context/CoinContext";
+import { useCoinContext } from "../context/CoinContext";
 
 function useMatchingCoins(inputCoins) {
 	const [matchingCoins, setMatchingCoins] = useState([]);
-	const { allCoins, currency, convertCurrency } = useContext(CoinContext);
+	const { allCoins, currency, convertCurrency } = useCoinContext();
 
 	useEffect(() => {
 		const updatedMatchingCoins = allCoins

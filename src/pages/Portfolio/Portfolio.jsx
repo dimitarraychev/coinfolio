@@ -1,10 +1,10 @@
-import React, { useContext, useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { toast } from "react-toastify";
 
 import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
-import { CoinContext } from "../../context/CoinContext";
+import { useCoinContext } from "../../context/CoinContext";
 import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
@@ -21,7 +21,7 @@ import {
 import useMatchingCoins from "../../hooks/useMatchingCoins";
 
 const Portfolio = () => {
-	const { allCoins, currency } = useContext(CoinContext);
+	const { allCoins, currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
 
 	const [portfolio, setPortfolio] = useState({
