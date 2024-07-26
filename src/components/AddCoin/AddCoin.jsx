@@ -5,8 +5,7 @@ import Button from "../Button/Button";
 import { CoinContext } from "../../context/CoinContext";
 
 const AddCoin = ({ onAddCoin, onClose }) => {
-	const { allCoins, currency, convertUsdToEur, convertEurToUsd } =
-		useContext(CoinContext);
+	const { allCoins, currency, convertCurrency } = useContext(CoinContext);
 	const [coin, setCoin] = useState({
 		id: "",
 		name: "",
@@ -45,19 +44,20 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 	};
 
 	const addCoinHandler = () => {
-		const { price, total, ...updatedCoin } = coin;
-		updatedCoin.price = { usd: 0, eur: 0 };
-		updatedCoin.total = { usd: 0, eur: 0 };
-		updatedCoin.price[currency.name] = price;
-		updatedCoin.total[currency.name] = total;
+		const convertedCurrency = currency.name === "usd" ? "eur" : "usd";
 
-		if (currency.name === "usd") {
-			updatedCoin.price.eur = convertUsdToEur(updatedCoin.price.usd);
-			updatedCoin.total.eur = convertUsdToEur(updatedCoin.total.usd);
-		} else if (currency.name === "eur") {
-			updatedCoin.price.usd = convertEurToUsd(updatedCoin.price.eur);
-			updatedCoin.total.usd = convertEurToUsd(updatedCoin.total.eur);
-		}
+		const { price, total, ...partialCoin } = coin;
+		const updatedCoin = {
+			...partialCoin,
+			price: {
+				[currency.name]: price,
+				[convertedCurrency]: convertCurrency(price, currency.name),
+			},
+			total: {
+				[currency.name]: total,
+				[convertedCurrency]: convertCurrency(total, currency.name),
+			},
+		};
 
 		onAddCoin(updatedCoin);
 	};

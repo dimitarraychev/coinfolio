@@ -7,8 +7,7 @@ import { CoinContext } from "../context/CoinContext";
 
 function useMatchingCoins(inputCoins) {
 	const [matchingCoins, setMatchingCoins] = useState([]);
-	const { allCoins, currency, convertUsdToEur, convertEurToUsd } =
-		useContext(CoinContext);
+	const { allCoins, currency, convertCurrency } = useContext(CoinContext);
 
 	useEffect(() => {
 		const updatedMatchingCoins = allCoins
@@ -20,41 +19,32 @@ function useMatchingCoins(inputCoins) {
 					(allocation) => allocation.id === coin.id
 				);
 
-				const price_change_alltime = {};
-				price_change_alltime[currency.name] =
-					calculatePriceChangePercentage(
+				const convertedCurrency =
+					currency.name === "usd" ? "eur" : "usd";
+
+				const price_change_alltime = {
+					[currency.name]: calculatePriceChangePercentage(
 						matchingAllocation.price[currency.name],
 						coin.current_price
-					);
+					),
+					[convertedCurrency]: calculatePriceChangePercentage(
+						matchingAllocation.price[convertedCurrency],
+						convertCurrency(coin.current_price, currency.name)
+					),
+				};
 
-				const alltime_profit_loss = {};
-				alltime_profit_loss[currency.name] = calculateCoinProfitLoss(
-					matchingAllocation.quantity,
-					matchingAllocation.price[currency.name],
-					coin.current_price
-				);
-
-				if (currency.name === "usd") {
-					price_change_alltime.eur = calculatePriceChangePercentage(
-						matchingAllocation.price.eur,
-						convertUsdToEur(coin.current_price)
-					);
-					alltime_profit_loss.eur = calculateCoinProfitLoss(
+				const alltime_profit_loss = {
+					[currency.name]: calculateCoinProfitLoss(
 						matchingAllocation.quantity,
-						matchingAllocation.price.eur,
-						convertUsdToEur(coin.current_price)
-					);
-				} else if (currency.name === "eur") {
-					price_change_alltime.usd = calculatePriceChangePercentage(
-						matchingAllocation.price.usd,
-						convertEurToUsd(coin.current_price)
-					);
-					alltime_profit_loss.usd = calculateCoinProfitLoss(
+						matchingAllocation.price[currency.name],
+						coin.current_price
+					),
+					[convertedCurrency]: calculateCoinProfitLoss(
 						matchingAllocation.quantity,
-						matchingAllocation.price.usd,
-						convertEurToUsd(coin.current_price)
-					);
-				}
+						matchingAllocation.price[convertCurrency],
+						convertCurrency(coin.current_price, currency.name)
+					),
+				};
 
 				return {
 					...matchingAllocation,

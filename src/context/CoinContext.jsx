@@ -37,18 +37,17 @@ const CoinContextProvider = ({ children }) => {
 		loadAllCoins();
 	}, [currency]);
 
-	const convertUsdToEur = (priceInUsd) =>
-		formatNumber(priceInUsd * usdToEurRate);
-
-	const convertEurToUsd = (priceInEur) =>
-		formatNumber(priceInEur * (1 / usdToEurRate));
+	const convertCurrency = (price, currency) => {
+		return currency === "usd"
+			? formatNumber(price * usdToEurRate)
+			: formatNumber(price * (1 / usdToEurRate));
+	};
 
 	const contextValue = {
 		allCoins,
 		currency,
 		setCurrency,
-		convertUsdToEur,
-		convertEurToUsd,
+		convertCurrency,
 	};
 
 	return (
