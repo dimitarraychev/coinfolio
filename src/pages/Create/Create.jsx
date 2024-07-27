@@ -18,14 +18,19 @@ import {
 	removeCoinFromPortfolio,
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
+import { useCurrentUser } from "../../context/AuthContext";
 
 const Create = () => {
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
+	const { currentUser } = useCurrentUser();
 
 	const [portfolio, setPortfolio] = useState({
 		title: "",
-		owner: "username",
+		owner: {
+			uid: currentUser.uid,
+			displayName: currentUser.displayName,
+		},
 		totalAllocation: {
 			usd: 0,
 			eur: 0,
@@ -72,8 +77,7 @@ const Create = () => {
 			return;
 		}
 
-		console.log("title", portfolio.title);
-		console.log("coins", portfolio.allocations);
+		console.log(portfolio);
 	};
 
 	const handleTitleChange = (e) =>

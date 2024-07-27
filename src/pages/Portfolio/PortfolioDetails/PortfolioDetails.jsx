@@ -46,7 +46,7 @@ const PortfolioDetails = ({
 						<img src={editIcon} alt="edit" className="edit-img" />
 					)}
 				</div>
-				<p className="owner">@{portfolio.owner}</p>
+				<p className="owner">@{portfolio.owner.displayName}</p>
 				{isEditMode ? (
 					<div className="btn-wrapper">
 						<Button text={"save"} onClick={onSave} />

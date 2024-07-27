@@ -26,7 +26,10 @@ const Portfolio = () => {
 
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
-		owner: "username",
+		owner: {
+			uid: "123",
+			displayName: "username",
+		},
 		totalAllocation: {
 			usd: 9262.28,
 			eur: 8538.85,

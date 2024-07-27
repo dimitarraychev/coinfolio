@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import { useCoinContext } from "../../context/CoinContext";
 
 const AddCoin = ({ onAddCoin, onClose }) => {
-	const { allCoins, currency, convertCurrency } = useCoinContext;
+	const { allCoins, currency, convertCurrency } = useCoinContext();
 	const [coin, setCoin] = useState({
 		id: "",
 		name: "",
