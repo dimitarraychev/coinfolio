@@ -83,9 +83,7 @@ const Create = () => {
 
 		try {
 			const portfolioId = await postPortfolio(portfolio);
-			toast.success(
-				`Success! ${portfolio.title} has been published.` + portfolioId
-			);
+			toast.success(`Success! ${portfolio.title} has been published.`);
 			navigate(`/hub/${portfolioId}`);
 		} catch (error) {
 			toast.error(error);
