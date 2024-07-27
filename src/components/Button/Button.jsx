@@ -24,12 +24,10 @@ const Button = ({
 			className={
 				isGhost
 					? "btn btn-ghost"
-					: isWide
-					? "btn btn-wide"
-					: isDelete
-					? "btn btn-del"
 					: isDisabled
 					? "btn btn-disabled"
+					: isDelete
+					? "btn btn-del"
 					: "btn"
 			}
 		>

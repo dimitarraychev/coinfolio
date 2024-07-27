@@ -191,6 +191,10 @@ section.auth #re_password {
 	margin-bottom: 2rem;
 }
 
+section.auth .btn {
+	width: 100%;
+}
+
 /* Scrollbar */
 
 ::-webkit-scrollbar {
