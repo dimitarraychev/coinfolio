@@ -7,6 +7,7 @@ import loginIcon from "../../assets/icons/login-icon.svg";
 import Button from "../../components/Button/Button";
 import useForm from "../../hooks/useForm";
 import { login } from "../../api/firebase-auth";
+import { auth } from "../../config/firebase";
 
 const Login = () => {
 	const { inputs, handleChange } = useForm({
@@ -26,7 +27,7 @@ const Login = () => {
 		try {
 			await login(inputs);
 			toast.success(
-				`Success! Welcome back to CoinFol.io, ${inputs.email}.`
+				`Success! Welcome back to CoinFol.io, ${auth.currentUser.displayName}.`
 			);
 			navigate("/");
 		} catch (error) {

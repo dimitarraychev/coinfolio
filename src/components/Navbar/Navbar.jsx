@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { auth } from "../../config/firebase";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
@@ -13,11 +12,13 @@ import { useCoinContext } from "../../context/CoinContext";
 import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import { navbarLinks } from "../../constants/links";
 import { logout } from "../../api/firebase-auth";
+import { useCurrentUser } from "../../context/AuthContext";
 
 const Navbar = () => {
 	const { setCurrency } = useCoinContext();
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
+	const { currentUser } = useCurrentUser();
 
 	const { openConfirmModal } = useConfirmModalContext();
 	const [isMenuShown, setIsMenuShown] = useState(false);
@@ -84,7 +85,7 @@ const Navbar = () => {
 				</select>
 
 				<div className="user" onClick={userMenuHandler}>
-					<p>{auth.currentUser?.displayName || "Guest"}</p>
+					<p>{currentUser?.displayName || "Guest"}</p>
 					<img
 						src={userPlaceholder}
 						alt="user"

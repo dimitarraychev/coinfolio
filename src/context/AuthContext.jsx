@@ -6,11 +6,13 @@ const AuthContext = createContext();
 
 const AuthContextProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
+	const [shouldRefetch, setShouldRefetch] = useState(false);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				const { uid, email, displayName } = user;
+				!displayName && setShouldRefetch((state) => !state);
 				setCurrentUser({
 					uid,
 					email,
@@ -22,7 +24,7 @@ const AuthContextProvider = ({ children }) => {
 		});
 
 		return () => unsubscribe();
-	}, [auth.currentUser]);
+	}, [shouldRefetch]);
 
 	return (
 		<AuthContext.Provider value={{ currentUser }}>
