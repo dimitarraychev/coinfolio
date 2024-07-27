@@ -14,3 +14,23 @@ export const firebaseErrorHandler = (errorCode) => {
 
 	return "Error! A wild error occurred, please try again.";
 };
+
+export const inputsErrorHandler = (inputs) => {
+	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+	if (!inputs.email) return "Error! Oops, Email is required.";
+
+	if (!emailRegex.test(inputs.email))
+		return "Error! Sorry, email is invalid.";
+
+	if (inputs.password.length < 6)
+		return "Error! Oops, password should be at least 6 characters.";
+
+	if (inputs.re_password && inputs.password !== inputs.re_password)
+		return "Error! Uh-oh, password and repeat password do not match.";
+
+	if (inputs.username && inputs.username.length < 3)
+		return "Error! Sorry, username should be at least 3 characters.";
+
+	return null;
+};

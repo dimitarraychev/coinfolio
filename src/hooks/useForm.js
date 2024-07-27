@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { auth } from "../config/firebase";
-import { firebaseErrorHandler } from "../utils/error";
+import { firebaseErrorHandler, inputsErrorHandler } from "../utils/error";
 
 const useForm = (initialInputs, onSubmit) => {
 	const navigate = useNavigate();
@@ -25,24 +25,23 @@ const useForm = (initialInputs, onSubmit) => {
 		if (isSubmitting) return;
 		setIsSubmitting(true);
 
+		const inputsError = inputsErrorHandler(inputs);
+		if (inputsError) {
+			toast.error(inputsError);
+			setIsSubmitting(false);
+			return;
+		}
+
 		let userData = { ...inputs };
 
 		if (inputs.re_password) {
 			const { re_password, ...cleanInputs } = inputs;
-
-			if (inputs.password !== re_password) {
-				toast.error(
-					"Error! Password and repeat password do not match."
-				);
-				return;
-			}
-
 			userData = cleanInputs;
 		}
 
 		try {
 			await onSubmit(userData);
-			const message = inputs.re_password
+			const message = inputs.username
 				? `Success! Welcome to CoinFol.io, ${inputs.username}.`
 				: `Success! Welcome back to CoinFol.io, ${auth.currentUser.displayName}.`;
 			toast.success(message);
