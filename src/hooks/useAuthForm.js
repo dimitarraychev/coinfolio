@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import { auth } from "../config/firebase";
 import { firebaseErrorHandler, inputsErrorHandler } from "../utils/error";
 
-const useForm = (initialInputs, onSubmit) => {
+const useAuthForm = (initialInputs, onSubmit) => {
 	const navigate = useNavigate();
 
 	const [inputs, setInputs] = useState(initialInputs);
@@ -61,4 +61,4 @@ const useForm = (initialInputs, onSubmit) => {
 	};
 };
 
-export default useForm;
+export default useAuthForm;
