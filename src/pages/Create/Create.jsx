@@ -19,6 +19,7 @@ import {
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
 import { useCurrentUser } from "../../context/AuthContext";
+import { postPortfolio } from "../../api/firebase-db";
 
 const Create = () => {
 	const { currency } = useCoinContext();
@@ -28,8 +29,8 @@ const Create = () => {
 	const [portfolio, setPortfolio] = useState({
 		title: "",
 		owner: {
-			uid: currentUser.uid,
-			displayName: currentUser.displayName,
+			uid: "",
+			displayName: "",
 		},
 		totalAllocation: {
 			usd: 0,
@@ -64,7 +65,7 @@ const Create = () => {
 		);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		if (portfolio.title.length < 3 || portfolio.title.length > 66) {
@@ -77,7 +78,12 @@ const Create = () => {
 			return;
 		}
 
-		console.log(portfolio);
+		try {
+			const portfolioId = await postPortfolio(portfolio);
+			toast.success(portfolioId);
+		} catch (error) {
+			toast.error(error);
+		}
 	};
 
 	const handleTitleChange = (e) =>
@@ -91,6 +97,16 @@ const Create = () => {
 			? setIsSubmitButtonDisabled(false)
 			: setIsSubmitButtonDisabled(true);
 	}, [portfolio]);
+
+	useEffect(() => {
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			owner: {
+				uid: currentUser?.uid || "",
+				displayName: currentUser?.displayName || "",
+			},
+		}));
+	}, [currentUser]);
 
 	return (
 		<section className="create">
