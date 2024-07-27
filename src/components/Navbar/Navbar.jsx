@@ -95,36 +95,40 @@ const Navbar = () => {
 					<ul
 						className={isMenuShown ? "user-menu show" : "user-menu"}
 					>
-						<Link to={"/register"}>
-							<li>
+						{currentUser ? (
+							<li onClick={logoutHandler}>
 								<img
-									src={registerIcon}
-									alt="register"
+									src={logoutIcon}
+									alt="logout"
 									className="link-img"
 								/>
-								<p>Register</p>
+								<p>Logout</p>
 							</li>
-						</Link>
+						) : (
+							<>
+								<Link to={"/register"}>
+									<li>
+										<img
+											src={registerIcon}
+											alt="register"
+											className="link-img"
+										/>
+										<p>Register</p>
+									</li>
+								</Link>
 
-						<Link to={"/login"}>
-							<li>
-								<img
-									src={loginIcon}
-									alt="login"
-									className="link-img"
-								/>
-								<p>Login</p>
-							</li>
-						</Link>
-
-						<li onClick={logoutHandler}>
-							<img
-								src={logoutIcon}
-								alt="logout"
-								className="link-img"
-							/>
-							<p>Logout</p>
-						</li>
+								<Link to={"/login"}>
+									<li>
+										<img
+											src={loginIcon}
+											alt="login"
+											className="link-img"
+										/>
+										<p>Login</p>
+									</li>
+								</Link>
+							</>
+						)}
 					</ul>
 				</div>
 			</div>
