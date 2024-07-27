@@ -57,7 +57,7 @@
 .user-menu {
 	position: absolute;
 	top: 110%;
-	left: -15%;
+	right: 0;
 	display: none;
 	border: 2px solid var(--separator-line);
 	border-top: none;
@@ -92,10 +92,18 @@
 	aspect-ratio: 1/1;
 }
 
-.user .user-image {
+.user .user-img {
 	height: 3em;
 	aspect-ratio: 1/1;
 	cursor: pointer;
+}
+
+.user .user-img-google {
+	height: 2.2em;
+	aspect-ratio: 1/1;
+	cursor: pointer;
+	border-radius: 50%;
+	margin-left: 0.3em;
 }
 
 .user p {

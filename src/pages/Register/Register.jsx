@@ -6,6 +6,7 @@ import registerIcon from "../../assets/icons/register-icon.svg";
 import Button from "../../components/Button/Button";
 import useAuthForm from "../../hooks/useAuthForm";
 import { register } from "../../api/firebase-auth";
+import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 
 const Register = () => {
 	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(
@@ -79,6 +80,8 @@ const Register = () => {
 					type={"submit"}
 					isDisabled={isSubmitting}
 				/>
+
+				<ButtonGoogle />
 
 				<p className="link">
 					Already have an account?{" "}

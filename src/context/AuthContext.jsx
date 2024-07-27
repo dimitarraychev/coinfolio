@@ -11,12 +11,13 @@ const AuthContextProvider = ({ children }) => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				const { uid, email, displayName } = user;
-				!displayName && setShouldRefetch((state) => !state);
+				const { uid, email, displayName, photoURL } = user;
+				if (!displayName) return setShouldRefetch((state) => !state);
 				setCurrentUser({
 					uid,
 					email,
 					displayName,
+					photoURL,
 				});
 			} else {
 				setCurrentUser(null);

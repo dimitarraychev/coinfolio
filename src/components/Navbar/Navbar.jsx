@@ -86,10 +86,15 @@ const Navbar = () => {
 
 				<div className="user" onClick={userMenuHandler}>
 					<p>{currentUser?.displayName || "Guest"}</p>
+
 					<img
-						src={userPlaceholder}
+						src={currentUser?.photoURL || userPlaceholder}
 						alt="user"
-						className="user-image"
+						className={
+							currentUser?.photoURL
+								? "user-img-google"
+								: "user-img"
+						}
 					/>
 
 					<ul

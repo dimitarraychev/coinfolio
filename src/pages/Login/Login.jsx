@@ -6,6 +6,7 @@ import loginIcon from "../../assets/icons/login-icon.svg";
 import Button from "../../components/Button/Button";
 import useAuthForm from "../../hooks/useAuthForm";
 import { login } from "../../api/firebase-auth";
+import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 
 const Login = () => {
 	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(
@@ -71,6 +72,8 @@ const Login = () => {
 					type={"submit"}
 					isDisabled={isSubmitting}
 				/>
+
+				<ButtonGoogle />
 
 				<p className="link">
 					Don't have an account?{" "}

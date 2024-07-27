@@ -146,6 +146,10 @@ section.auth form .link span {
 	text-decoration: underline;
 }
 
+section.auth form .link span:hover {
+	filter: brightness(1.2);
+}
+
 section.auth form .actions-wrapper {
 	display: flex;
 	font-size: 0.9em;

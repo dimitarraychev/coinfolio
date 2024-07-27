@@ -1,10 +1,11 @@
-import { auth } from "../config/firebase";
+import { auth, provider } from "../config/firebase";
 import { toast } from "react-toastify";
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
 	updateProfile,
+	signInWithPopup,
 } from "firebase/auth";
 
 export const register = async ({ username, email, password }) => {
@@ -19,6 +20,14 @@ export const register = async ({ username, email, password }) => {
 export const login = async ({ email, password }) => {
 	try {
 		await signInWithEmailAndPassword(auth, email, password);
+	} catch (error) {
+		throw error;
+	}
+};
+
+export const googleLogin = async () => {
+	try {
+		await signInWithPopup(auth, provider);
 	} catch (error) {
 		throw error;
 	}
