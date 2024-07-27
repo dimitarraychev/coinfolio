@@ -9,6 +9,7 @@ import editIcon from "../../../assets/icons/edit-icon.svg";
 import { useCoinContext } from "../../../context/CoinContext";
 import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
+import Loader from "../../../components/Loader/Loader";
 import { formatPrice } from "../../../utils/helpers";
 
 const PortfolioDetails = ({
@@ -28,6 +29,8 @@ const PortfolioDetails = ({
 
 	const followHandler = () =>
 		toast.success(`Success! You are now following ${portfolio.title}.`);
+
+	if (!portfolio.currentBalance) return <Loader />;
 
 	return (
 		<div className="portfolio-details">
@@ -66,7 +69,7 @@ const PortfolioDetails = ({
 			<div className="followers-wrapper">
 				<label>Followers</label>
 				<div className="follower-bottom">
-					<h5>{portfolio.followers.toLocaleString()}</h5>
+					<h5>{portfolio.followers.length.toLocaleString()}</h5>
 					<Button text={"follow"} onClick={followHandler} />
 				</div>
 			</div>
@@ -132,17 +135,13 @@ const PortfolioDetails = ({
 				<ul>
 					<li>Created On</li>
 					<li>
-						{new Date(
-							portfolio.createdOn * 1000
-						).toLocaleDateString()}
+						{new Date(portfolio.createdOn).toLocaleDateString()}
 					</li>
 				</ul>
 				<ul>
 					<li>Updated On</li>
 					<li>
-						{new Date(
-							portfolio.updatedOn * 1000
-						).toLocaleDateString()}
+						{new Date(portfolio.updatedOn).toLocaleDateString()}
 					</li>
 				</ul>
 			</div>

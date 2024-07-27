@@ -19,10 +19,15 @@ import {
 	updatePortfolioMetrics,
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
+import { useNavigate, useParams } from "react-router-dom";
+import { getPortfolio } from "../../api/firebase-db";
+import Loader from "../../components/Loader/Loader";
 
 const Portfolio = () => {
 	const { allCoins, currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
+	const { portfolioId } = useParams();
+	const navigate = useNavigate();
 
 	const [portfolio, setPortfolio] = useState({
 		title: "Low Risk Classic Portfolio",
@@ -40,7 +45,7 @@ const Portfolio = () => {
 		topPerformers: [],
 		createdOn: "1717699200",
 		updatedOn: "1717699200",
-		followers: 1389,
+		followers: [],
 		allocations: [
 			{
 				name: "Ethereum",
@@ -55,51 +60,13 @@ const Portfolio = () => {
 				},
 				quantity: 1,
 			},
-			{
-				name: "Bitcoin",
-				id: "bitcoin",
-				total: {
-					usd: 5000,
-					eur: 4614.4,
-				},
-				price: {
-					usd: 10000,
-					eur: 9228.7,
-				},
-				quantity: 0.5,
-			},
-			{
-				name: "Cronos",
-				total: {
-					usd: 400,
-					eur: 370,
-				},
-				id: "crypto-com-chain",
-				price: {
-					usd: 0.4,
-					eur: 0.37,
-				},
-				quantity: 1000,
-			},
-			{
-				name: "Cardano",
-				total: {
-					usd: 400,
-					eur: 370,
-				},
-				id: "cardano",
-				price: {
-					usd: 2,
-					eur: 1.85,
-				},
-				quantity: 100,
-			},
 		],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
 	const selectionRef = useRef(null);
 
@@ -153,6 +120,19 @@ const Portfolio = () => {
 		setIsEditMode(false);
 	};
 
+	const getPortfolioData = async () => {
+		setIsLoading(true);
+		try {
+			const portfolio = await getPortfolio(portfolioId);
+
+			portfolio ? setPortfolio(portfolio) : navigate("/404");
+		} catch (error) {
+			toast.error(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	useEffect(() => restoreCursorPosition(selectionRef), [portfolio.title]);
 
 	useEffect(() => {
@@ -160,6 +140,19 @@ const Portfolio = () => {
 			updatePortfolioMetrics(prevPortfolio, matchingCoins, currency)
 		);
 	}, [matchingCoins, currency]);
+
+	useEffect(() => {
+		getPortfolioData();
+	}, [portfolioId]);
+
+	if (isLoading)
+		return (
+			<section className="portfolio">
+				<div className="loading">
+					<Loader size="10rem" />
+				</div>
+			</section>
+		);
 
 	return (
 		<section className="portfolio">

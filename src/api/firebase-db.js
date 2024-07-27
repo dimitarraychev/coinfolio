@@ -8,6 +8,7 @@ export const postPortfolio = async (portfolio) => {
 		const timestampedPortfolio = {
 			...portfolio,
 			createdOn: new Date().toISOString(),
+			updatedOn: new Date().toISOString(),
 		};
 
 		const docRef = await addDoc(
@@ -24,15 +25,9 @@ export const postPortfolio = async (portfolio) => {
 export const getPortfolio = async (portfolioId) => {
 	const docRef = doc(db, PORTFOLIOS_COLLECTION_ID, portfolioId);
 
-	try {
-		const docSnap = await getDoc(docRef);
+	const docSnap = await getDoc(docRef);
 
-		if (docSnap.exists()) {
-			return docSnap.data();
-		} else {
-			throw new Error("Error! Oops, this portfolio is missing.");
-		}
-	} catch (error) {
-		throw error;
-	}
+	const portfolio = docSnap.exists() ? docSnap.data() : null;
+
+	return portfolio;
 };

@@ -20,11 +20,13 @@ import {
 import useMatchingCoins from "../../hooks/useMatchingCoins";
 import { useCurrentUser } from "../../context/AuthContext";
 import { postPortfolio } from "../../api/firebase-db";
+import { useNavigate } from "react-router-dom";
 
 const Create = () => {
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
 	const { currentUser } = useCurrentUser();
+	const navigate = useNavigate();
 
 	const [portfolio, setPortfolio] = useState({
 		title: "",
@@ -37,6 +39,7 @@ const Create = () => {
 			eur: 0,
 		},
 		allocations: [],
+		followers: [],
 	});
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 
@@ -80,7 +83,10 @@ const Create = () => {
 
 		try {
 			const portfolioId = await postPortfolio(portfolio);
-			toast.success(portfolioId);
+			toast.success(
+				`Success! ${portfolio.title} has been published.` + portfolioId
+			);
+			navigate(`/hub/${portfolioId}`);
 		} catch (error) {
 			toast.error(error);
 		}
