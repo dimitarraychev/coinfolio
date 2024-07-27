@@ -7,6 +7,7 @@ import userPlaceholder from "../../assets/user-placeholder.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
 import logoutIcon from "../../assets/icons/logout-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
+import profileIcon from "../../assets/icons/profile-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
 import { useConfirmModalContext } from "../../context/ConfirmModalContext";
@@ -101,14 +102,27 @@ const Navbar = () => {
 						className={isMenuShown ? "user-menu show" : "user-menu"}
 					>
 						{currentUser ? (
-							<li onClick={logoutHandler}>
-								<img
-									src={logoutIcon}
-									alt="logout"
-									className="link-img"
-								/>
-								<p>Logout</p>
-							</li>
+							<>
+								<Link to={"/profile"}>
+									<li>
+										<img
+											src={profileIcon}
+											alt="profile"
+											className="link-img"
+										/>
+										<p>Profile</p>
+									</li>
+								</Link>
+
+								<li onClick={logoutHandler}>
+									<img
+										src={logoutIcon}
+										alt="logout"
+										className="link-img"
+									/>
+									<p>Logout</p>
+								</li>
+							</>
 						) : (
 							<>
 								<Link to={"/register"}>
