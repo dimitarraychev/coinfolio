@@ -51,4 +51,8 @@ export const buttonIcons = [
 		text: ["check portfolios"],
 		svg: portfolioIcon,
 	},
+	{
+		text: ["back to home"],
+		svg: arrowRight,
+	},
 ];
