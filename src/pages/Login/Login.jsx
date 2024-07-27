@@ -1,27 +1,37 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import loginImg from "../../assets/images/login-register.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
 import Button from "../../components/Button/Button";
+import useForm from "../../hooks/useForm";
+import { login } from "../../api/firebase-auth";
 
 const Login = () => {
-	const [inputs, setInputs] = useState({});
-	const [rememberMe, setRememberMe] = useState(false);
-
-	const handleChange = (e) => {
-		const name = e.target.name;
-		const value = e.target.value;
-		setInputs((values) => ({ ...values, [name]: value }));
-	};
+	const { inputs, handleChange } = useForm({
+		email: "",
+		password: "",
+	});
+	const [rememberMe, setRememberMe] = useState(true);
+	const navigate = useNavigate();
 
 	const handleRememberMeChange = () => {
 		setRememberMe(!rememberMe);
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(inputs);
+
+		try {
+			await login(inputs);
+			toast.success(
+				`Success! Welcome back to CoinFol.io, ${inputs.email}.`
+			);
+			navigate("/");
+		} catch (error) {
+			toast.error(`Error! ${error.code}: ${error.message}`);
+		}
 	};
 
 	return (
@@ -69,7 +79,7 @@ const Login = () => {
 					<p>Forgot Password?</p>
 				</div>
 
-				<Button text="sign in" isWide={true} />
+				<Button text="sign in" type={"submit"} isWide={true} />
 
 				<p className="link">
 					Don't have an account?{" "}

@@ -1,14 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 import Button from "../../components/Button/Button";
 import useForm from "../../hooks/useForm";
 import { register } from "../../api/firebase-auth";
-import { toast } from "react-toastify";
 
 const Register = () => {
+	const navigate = useNavigate();
+
 	const { inputs, handleChange } = useForm({
 		username: "",
 		email: "",
@@ -28,8 +30,12 @@ const Register = () => {
 
 		try {
 			await register(userData);
+			toast.success(
+				`Success! Welcome to CoinFol.io, ${inputs.username}.`
+			);
+			navigate("/");
 		} catch (error) {
-			toast.error(error);
+			toast.error(`Error! ${error.code}: ${error.message}`);
 		}
 	};
 

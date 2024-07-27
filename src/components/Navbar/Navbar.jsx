@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { auth } from "../../config/firebase";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
@@ -9,13 +10,16 @@ import logoutIcon from "../../assets/icons/logout-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
+import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import { navbarLinks } from "../../constants/links";
 import { logout } from "../../api/firebase-auth";
 
 const Navbar = () => {
 	const { setCurrency } = useCoinContext();
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
+	const { openConfirmModal } = useConfirmModalContext();
 	const [isMenuShown, setIsMenuShown] = useState(false);
 
 	const currencyHandler = (e) => {
@@ -39,6 +43,13 @@ const Navbar = () => {
 		setIsMenuShown((state) => !state);
 	};
 
+	const logoutHandler = () => {
+		openConfirmModal(
+			"Are you sure you want to sign off from your account?",
+			() => logout(navigate)
+		);
+	};
+
 	return (
 		<div className="navbar">
 			<Link to={"/"}>
@@ -46,7 +57,6 @@ const Navbar = () => {
 			</Link>
 			<ul className="navbar-links">
 				{navbarLinks.map((link) => {
-					// const isActive = pathname === link.route;
 					const isHomeRoute = link.route === "/";
 					const isActive = isHomeRoute
 						? pathname === "/"
@@ -74,7 +84,7 @@ const Navbar = () => {
 				</select>
 
 				<div className="user" onClick={userMenuHandler}>
-					<p>Guest</p>
+					<p>{auth.currentUser?.displayName || "Guest"}</p>
 					<img
 						src={userPlaceholder}
 						alt="user"
@@ -106,7 +116,7 @@ const Navbar = () => {
 							</li>
 						</Link>
 
-						<li onClick={logout}>
+						<li onClick={logoutHandler}>
 							<img
 								src={logoutIcon}
 								alt="logout"
