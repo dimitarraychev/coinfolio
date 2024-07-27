@@ -15,7 +15,7 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 const Explore = () => {
 	const { allCoins, currency } = useCoinContext();
 	const [displayCoins, setDisplayCoins] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [searchParams, setSearchParams] = useSearchParams();
 	const category = searchParams.get("category");
 	const searchQuery = searchParams.get("search");
@@ -95,8 +95,8 @@ const Explore = () => {
 				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
 			>
 				{isLoading ? (
-					<div className="loader-wrapper">
-						<Loader size="10rem" />
+					<div className="loading">
+						<Loader />
 					</div>
 				) : (
 					displayCoins.map((coin) => (

@@ -1,3 +1,9 @@
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
 .dot-spinner {
 	--uib-size: 2.8rem;
 	--uib-speed: 0.9s;
@@ -8,6 +14,7 @@
 	justify-content: flex-start;
 	height: var(--uib-size);
 	width: var(--uib-size);
+	margin: 0.5rem;
 }
 
 .dot-spinner__dot {

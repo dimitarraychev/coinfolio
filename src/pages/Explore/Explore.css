@@ -2,14 +2,6 @@
 	padding: 2rem 2rem 4rem 2rem;
 }
 
-.explore .loader-wrapper {
-	width: 100%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	padding: 1rem;
-}
-
 .explore .crypto-table {
 	width: 80%;
 	margin: auto;

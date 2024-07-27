@@ -39,7 +39,7 @@ const Coin = () => {
 		return (
 			<section className="coin-details">
 				<div className="loading">
-					<Loader size="20vw" />
+					<Loader size="10rem" />
 				</div>
 			</section>
 		);

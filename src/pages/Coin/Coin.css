@@ -38,13 +38,6 @@ section.coin-details {
 	color: var(--dark-gray);
 }
 
-.coin-details .loading {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80vh;
-}
-
 .coin-details .statistics-title {
 	text-align: center;
 }

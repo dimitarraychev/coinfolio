@@ -51,13 +51,6 @@ section.portfolio {
 	filter: brightness(0.8);
 }
 
-.portfolio .loading {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 80vh;
-}
-
 .portfolio .crypto-table {
 	width: 100%;
 	margin: 0 auto 0.75rem auto;
