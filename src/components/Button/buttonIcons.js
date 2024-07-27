@@ -1,12 +1,12 @@
-import plusIcon from "../assets/icons/plus-icon.svg";
-import arrowRight from "../assets/icons/arrow-right.svg";
-import followIcon from "../assets/icons/follow-icon.svg";
-import deleteIcon from "../assets/icons/delete-icon.svg";
-import editIcon from "../assets/icons/edit-icon.svg";
-import exploreIcon from "../assets/icons/explore-icon-white.svg";
-import rankingsIcon from "../assets/icons/rank-icon-white.svg";
-import portfolioIcon from "../assets/icons/portfolio-icon-white.svg";
-import confirmIcon from "../assets/icons/confirm-icon.svg";
+import plusIcon from "../../assets/icons/plus-icon.svg";
+import arrowRight from "../../assets/icons/arrow-right.svg";
+import followIcon from "../../assets/icons/follow-icon.svg";
+import deleteIcon from "../../assets/icons/delete-icon.svg";
+import editIcon from "../../assets/icons/edit-icon.svg";
+import exploreIcon from "../../assets/icons/explore-icon-white.svg";
+import rankingsIcon from "../../assets/icons/rank-icon-white.svg";
+import portfolioIcon from "../../assets/icons/portfolio-icon-white.svg";
+import confirmIcon from "../../assets/icons/confirm-icon.svg";
 
 export const buttonIcons = [
 	{

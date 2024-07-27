@@ -1,15 +1,8 @@
 import React from "react";
 import "./Button.css";
-import { buttonIcons } from "../../constants/button";
+import { buttonIcons } from "./buttonIcons";
 
-const Button = ({
-	text,
-	type,
-	isDisabled = false,
-	isGhost,
-	isWide,
-	onClick,
-}) => {
+const Button = ({ text, type, isDisabled = false, isGhost, onClick }) => {
 	const hasSVG = buttonIcons.find((btn) => btn.text.includes(text));
 	const isDelete = text === "delete";
 

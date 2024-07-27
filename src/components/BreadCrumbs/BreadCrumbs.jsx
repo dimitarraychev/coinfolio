@@ -4,24 +4,8 @@ import { Link, useLocation, useSearchParams } from "react-router-dom";
 import "./BreadCrumbs.css";
 import arrowCrumb from "../../assets/icons/arrow-crumb.svg";
 import homeIcon from "../../assets/icons/home-icon-white.svg";
-
-const routes = [
-	{ path: "/login", name: "Login" },
-	{ path: "/register", name: "Register" },
-	{ path: "/rankings", name: "Rankings" },
-	{ path: "/explore", name: "Explore" },
-	{ path: "/explore/:id", name: "Coin" },
-	{ path: "/hub", name: "Hub" },
-	{ path: "/hub/create", name: "Create" },
-	{ path: "/hub/:id", name: "Portfolio" },
-	{ path: "/404", name: "404" },
-];
-
-const convertKebabCase = (string) =>
-	string
-		.split("-")
-		.map((e) => e[0].toUpperCase() + e.substring(1))
-		.join(" ");
+import { routeCrumbs } from "./routeCrumbs";
+import { convertKebabCase } from "../../utils/helpers";
 
 const BreadCrumbs = () => {
 	const location = useLocation();
@@ -51,7 +35,7 @@ const BreadCrumbs = () => {
 				{pathnames.map((value, index) => {
 					const last = index === pathnames.length - 1;
 					const to = `/${pathnames.slice(0, index + 1).join("/")}`;
-					let routeName = routes.find(
+					let routeName = routeCrumbs.find(
 						(route) => route.path === to
 					)?.name;
 
@@ -60,7 +44,7 @@ const BreadCrumbs = () => {
 						to.startsWith("/hub/") &&
 						pathnames.length > 1
 					) {
-						routeName = routes.find(
+						routeName = routeCrumbs.find(
 							(route) => route.path === "/hub/:id"
 						)?.name;
 					}

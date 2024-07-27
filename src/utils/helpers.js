@@ -71,3 +71,9 @@ export const calculateCoinProfitLoss = (qty, initialPrice, currentPrice) => {
 
 	return newTotal - oldTotal;
 };
+
+export const convertKebabCase = (string) =>
+	string
+		.split("-")
+		.map((e) => e[0].toUpperCase() + e.substring(1))
+		.join(" ");
