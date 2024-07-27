@@ -47,9 +47,11 @@
 
 .btn-disabled {
 	background: var(--dark-gray);
+	opacity: 0.7;
 	cursor: not-allowed;
 }
 
 .btn-disabled:hover {
 	filter: brightness(1);
+	transform: scale(1);
 }

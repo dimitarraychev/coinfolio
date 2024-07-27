@@ -18,6 +18,9 @@ const Login = () => {
 	);
 	const [rememberMe, setRememberMe] = useState(true);
 
+	const isSubmitBtnDisabled =
+		isSubmitting || inputs.email === "" || inputs.password === "";
+
 	const handleRememberMeChange = () => {
 		setRememberMe(!rememberMe);
 	};
@@ -69,8 +72,8 @@ const Login = () => {
 
 				<Button
 					text="sign in"
-					type={"submit"}
-					isDisabled={isSubmitting}
+					type={isSubmitBtnDisabled ? "button" : "submit"}
+					isDisabled={isSubmitBtnDisabled}
 				/>
 
 				<ButtonGoogle />

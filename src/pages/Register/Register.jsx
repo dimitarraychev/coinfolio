@@ -19,6 +19,13 @@ const Register = () => {
 		register
 	);
 
+	const isSubmitBtnDisabled =
+		isSubmitting ||
+		inputs.username === "" ||
+		inputs.email === "" ||
+		inputs.password === "" ||
+		inputs.re_password === "";
+
 	return (
 		<section className="auth">
 			<form onSubmit={handleSubmit}>
@@ -77,8 +84,8 @@ const Register = () => {
 
 				<Button
 					text="sign up"
-					type={"submit"}
-					isDisabled={isSubmitting}
+					type={isSubmitBtnDisabled ? "button" : "submit"}
+					isDisabled={isSubmitBtnDisabled}
 				/>
 
 				<ButtonGoogle />
