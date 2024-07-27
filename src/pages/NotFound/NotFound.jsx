@@ -11,7 +11,7 @@ const NotFound = () => {
 			<img src={notFound} alt="404" className="not-found-img" />
 			<h4>Oops! You found a dead end...</h4>
 			<Link to={"/"}>
-				<Button text={"back to home"} />
+				<Button text={"back to home"} isGhost={true} />
 			</Link>
 		</section>
 	);
