@@ -30,7 +30,7 @@
 	margin: auto;
 }
 
-.portfolios-wrapper {
+.hub .portfolios-wrapper {
 	display: flex;
 	flex-direction: column;
 }
