@@ -1,6 +1,5 @@
 import React from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
@@ -9,35 +8,15 @@ import useForm from "../../hooks/useForm";
 import { register } from "../../api/firebase-auth";
 
 const Register = () => {
-	const navigate = useNavigate();
-
-	const { inputs, handleChange } = useForm({
-		username: "",
-		email: "",
-		password: "",
-		re_password: "",
-	});
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		const { re_password, ...userData } = inputs;
-
-		if (inputs.password !== re_password) {
-			toast.error("Error! Password and repeat password do not match.");
-			return;
-		}
-
-		try {
-			await register(userData);
-			toast.success(
-				`Success! Welcome to CoinFol.io, ${inputs.username}.`
-			);
-			navigate("/");
-		} catch (error) {
-			toast.error(`Error! ${error.code}: ${error.message}`);
-		}
-	};
+	const { inputs, isSubmitting, handleChange, handleSubmit } = useForm(
+		{
+			username: "",
+			email: "",
+			password: "",
+			re_password: "",
+		},
+		register
+	);
 
 	return (
 		<section className="auth">
@@ -95,7 +74,11 @@ const Register = () => {
 					onChange={handleChange}
 				/>
 
-				<Button text="sign up" type={"submit"} isWide={true} />
+				<Button
+					text="sign up"
+					type={"submit"}
+					isDisabled={isSubmitting}
+				/>
 
 				<p className="link">
 					Already have an account?{" "}
