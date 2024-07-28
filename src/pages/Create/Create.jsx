@@ -1,116 +1,44 @@
-import React, { useState, useEffect } from "react";
-import { toast } from "react-toastify";
+import React from "react";
 
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import Button from "../../components/Button/Button";
 import PieChart from "../../components/PieChart/PieChart";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import { formatPrice } from "../../utils/helpers";
-import {
-	addCoinToPortfolio,
-	removeCoinFromPortfolio,
-} from "../../utils/portfolio";
-import useMatchingCoins from "../../hooks/useMatchingCoins";
 import { useCurrentUser } from "../../context/AuthContext";
-import { postPortfolio } from "../../api/firebase-db";
-import { useNavigate } from "react-router-dom";
+import usePortfolioForm from "../../hooks/usePortfolioForm";
 
 const Create = () => {
 	const { currency } = useCoinContext();
-	const { openConfirmModal } = useConfirmModalContext();
 	const { currentUser } = useCurrentUser();
-	const navigate = useNavigate();
+	const {
+		portfolio,
+		matchingCoins,
+		isSubmitButtonDisabled,
+		isAddCoinOpen,
+		handleTitleChange,
+		closeAddCoinHandler,
+		openAddCoinHandler,
+		addCoinHandler,
+		removeCoinHandler,
+		handleSubmit,
+	} = usePortfolioForm();
 
-	const [portfolio, setPortfolio] = useState({
-		title: "",
-		owner: {
-			uid: "",
-			displayName: "",
-		},
-		totalAllocation: {
-			usd: 0,
-			eur: 0,
-		},
-		allocations: [],
-		followers: [],
-	});
-	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
-
-	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
-	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
-
-	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
-	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
-
-	const addCoinHandler = (coinToAdd) => {
-		setIsAddCoinOpen(false);
-		setPortfolio((prevPortfolio) =>
-			addCoinToPortfolio(prevPortfolio, coinToAdd)
-		);
-	};
-
-	const removeCoinHandler = (coinToRemove) => {
-		openConfirmModal(
-			"Are you sure you want to remove this allocation?",
-			() => {
-				setPortfolio((prevPortfolio) =>
-					removeCoinFromPortfolio(prevPortfolio, coinToRemove)
-				);
-				toast.success("Success! Allocation successfully removed.");
-			}
-		);
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		if (portfolio.title.length < 3 || portfolio.title.length > 66) {
-			toast.error("Error! Title should be between 3 and 66 characters.");
-			return;
-		}
-
-		if (portfolio.allocations.length < 1) {
-			toast.error("Error! Having at least one allocation is required.");
-			return;
-		}
-
-		try {
-			const portfolioId = await postPortfolio(portfolio);
-			toast.success(`Success! ${portfolio.title} has been published.`);
-			navigate(`/hub/${portfolioId}`);
-		} catch (error) {
-			toast.error(error);
-		}
-	};
-
-	const handleTitleChange = (e) =>
-		setPortfolio((prevPortfolio) => ({
-			...prevPortfolio,
-			title: e.target.value,
-		}));
-
-	useEffect(() => {
-		portfolio.title !== "" && portfolio.allocations.length > 0
-			? setIsSubmitButtonDisabled(false)
-			: setIsSubmitButtonDisabled(true);
-	}, [portfolio]);
-
-	useEffect(() => {
-		setPortfolio((prevPortfolio) => ({
-			...prevPortfolio,
-			owner: {
-				uid: currentUser?.uid || "",
-				displayName: currentUser?.displayName || "",
-			},
-		}));
-	}, [currentUser]);
+	// useEffect(() => {
+	// 	setPortfolio((prevPortfolio) => ({
+	// 		...prevPortfolio,
+	// 		owner: {
+	// 			uid: currentUser?.uid || "",
+	// 			displayName: currentUser?.displayName || "",
+	// 		},
+	// 	}));
+	// }, [currentUser]);
 
 	return (
 		<section className="create">
@@ -180,7 +108,7 @@ const Create = () => {
 				</CryptoTable>
 
 				<Button
-					type={"submit"}
+					type={isSubmitButtonDisabled ? "button" : "submit"}
 					text={"publish portfolio"}
 					isDisabled={isSubmitButtonDisabled}
 				/>
