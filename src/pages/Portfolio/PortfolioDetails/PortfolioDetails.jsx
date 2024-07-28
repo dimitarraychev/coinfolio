@@ -13,11 +13,12 @@ import Loader from "../../../components/Loader/Loader";
 import { formatPrice } from "../../../utils/helpers";
 
 const PortfolioDetails = ({
+	portfolio,
 	isEditMode,
 	onEditModeToggle,
-	portfolio,
 	onTitleChange,
 	onSave,
+	isSaveButtonDisabled,
 }) => {
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
@@ -28,7 +29,8 @@ const PortfolioDetails = ({
 	const followHandler = () =>
 		toast.success(`Success! You are now following ${portfolio.title}.`);
 
-	if (!portfolio.currentBalance) return <Loader />;
+	if (!portfolio.currentBalance && portfolio.currentBalance !== 0)
+		return <Loader />;
 
 	return (
 		<div className="portfolio-details">
@@ -49,7 +51,11 @@ const PortfolioDetails = ({
 				<p className="owner">@{portfolio.owner.displayName}</p>
 				{isEditMode ? (
 					<div className="btn-wrapper">
-						<Button text={"save"} onClick={onSave} />
+						<Button
+							text={"save"}
+							onClick={onSave}
+							isDisabled={isSaveButtonDisabled}
+						/>
 						<Button
 							text={"delete"}
 							onClick={portfolioDeleteHandler}
