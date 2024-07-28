@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { useInView } from "react-intersection-observer";
 
 import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
@@ -7,12 +8,11 @@ import arrowDown from "../../assets/icons/arrow-down.svg";
 import rankIcon from "../../assets/icons/rank-icon-white.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import { useInView } from "react-intersection-observer";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Loader from "../../components/Loader/Loader";
-import { fetchGlobalMarketData } from "../../api/coinGecko";
 import { formatPrice } from "../../utils/helpers";
+import { fetchGlobalMarketData } from "../../api/coinGecko";
 
 const Rankings = () => {
 	const { allCoins } = useCoinContext();

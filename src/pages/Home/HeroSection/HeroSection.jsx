@@ -1,8 +1,8 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import heroLeft from "../../../assets/images/hero-left.svg";
 import heroRight from "../../../assets/images/hero-right.svg";
+
 import Button from "../../../components/Button/Button";
 
 const HeroSection = () => {

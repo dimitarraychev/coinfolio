@@ -1,11 +1,10 @@
-import React from "react";
 import "./Profile.css";
 import profileIcon from "../../assets/icons/profile-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
+import { useCurrentUser } from "../../context/AuthContext";
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import { useCurrentUser } from "../../context/AuthContext";
 
 const Profile = () => {
 	const { currentUser } = useCurrentUser();

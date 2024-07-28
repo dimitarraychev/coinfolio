@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+
 import "./AddCoin.css";
 import closeIcon from "../../assets/icons/close-icon.svg";
-import Button from "../Button/Button";
+
 import { useCoinContext } from "../../context/CoinContext";
+import Button from "../Button/Button";
 
 const AddCoin = ({ onAddCoin, onClose }) => {
 	const { allCoins, currency, convertCurrency } = useCoinContext();

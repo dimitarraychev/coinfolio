@@ -1,6 +1,4 @@
-import React from "react";
 import { Link } from "react-router-dom";
-
 import homePortfolio from "../../../assets/images/home-portfolio.svg";
 import Button from "../../../components/Button/Button";
 

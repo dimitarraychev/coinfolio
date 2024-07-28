@@ -3,10 +3,11 @@ import { Link } from "react-router-dom";
 
 import loginImg from "../../assets/images/login-register.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
+
 import Button from "../../components/Button/Button";
+import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 import useAuthForm from "../../hooks/useAuthForm";
 import { login } from "../../api/firebase-auth";
-import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 
 const Login = () => {
 	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(

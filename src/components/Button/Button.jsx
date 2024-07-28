@@ -1,6 +1,5 @@
-import React from "react";
 import "./Button.css";
-import { buttonIcons } from "./buttonIcons";
+import { buttonIcons } from "./button-icons";
 
 const Button = ({ text, type, isDisabled = false, isGhost, onClick }) => {
 	const hasSVG = buttonIcons.find((btn) => btn.text.includes(text));

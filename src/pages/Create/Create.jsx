@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./Create.css";
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";

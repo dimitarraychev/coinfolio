@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
+
 import "./Explore.css";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 
@@ -9,8 +10,8 @@ import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import { fetchAllCoins, searchAllCoins } from "../../api/coinGecko";
 import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
-import { exploreCategories } from "../../constants/categories";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import { exploreCategories } from "../../constants/categories";
 
 const Explore = () => {
 	const { allCoins, currency } = useCoinContext();

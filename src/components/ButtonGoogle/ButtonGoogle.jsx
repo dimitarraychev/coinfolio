@@ -1,7 +1,6 @@
-import React from "react";
+import { toast } from "react-toastify";
 import "./ButtonGoogle.css";
 import { googleLogin } from "../../api/firebase-auth";
-import { toast } from "react-toastify";
 
 const ButtonGoogle = () => {
 	const onContinueWithGoogle = async () => {

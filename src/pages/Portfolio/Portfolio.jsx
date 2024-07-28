@@ -1,5 +1,3 @@
-import React from "react";
-
 import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./SearchBar.css";
 import Button from "../Button/Button";
 
@@ -19,6 +19,7 @@ const SearchBar = ({ onSearch, autofillSuggestions }) => {
 		<div className="search">
 			<form onSubmit={submitHandler}>
 				<input
+					name="search"
 					onChange={inputHandler}
 					value={input}
 					list="coinlist"

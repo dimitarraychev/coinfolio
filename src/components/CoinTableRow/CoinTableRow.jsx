@@ -1,8 +1,8 @@
-import React from "react";
+import { Link } from "react-router-dom";
+
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
-import { Link } from "react-router-dom";
 import { useCoinContext } from "../../context/CoinContext";
 import { formatPrice } from "../../utils/helpers";
 

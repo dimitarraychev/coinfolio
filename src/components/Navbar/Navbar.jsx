@@ -9,11 +9,11 @@ import logoutIcon from "../../assets/icons/logout-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 import profileIcon from "../../assets/icons/profile-icon.svg";
 
+import { useCurrentUser } from "../../context/AuthContext";
 import { useCoinContext } from "../../context/CoinContext";
 import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import { navbarLinks } from "../../constants/links";
 import { logout } from "../../api/firebase-auth";
-import { useCurrentUser } from "../../context/AuthContext";
 
 const Navbar = () => {
 	const { setCurrency } = useCoinContext();

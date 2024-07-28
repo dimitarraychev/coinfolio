@@ -1,11 +1,11 @@
-import React from "react";
 import { Link, useLocation, useSearchParams } from "react-router-dom";
 
 import "./BreadCrumbs.css";
 import arrowCrumb from "../../assets/icons/arrow-crumb.svg";
 import homeIcon from "../../assets/icons/home-icon-white.svg";
-import { routeCrumbs } from "./routeCrumbs";
+
 import { convertKebabCase } from "../../utils/helpers";
+import { routeCrumbs } from "./route-crumbs";
 
 const BreadCrumbs = () => {
 	const location = useLocation();

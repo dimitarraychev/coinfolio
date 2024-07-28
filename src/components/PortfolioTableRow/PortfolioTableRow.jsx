@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
+
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
+import { useCoinContext } from "../../context/CoinContext";
 import Button from "../Button/Button";
 import Loader from "../Loader/Loader";
-import { useCoinContext } from "../../context/CoinContext";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
 import { updatePortfolioMetrics } from "../../utils/portfolio";
 import { formatPrice } from "../../utils/helpers";

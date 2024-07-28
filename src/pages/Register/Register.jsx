@@ -1,12 +1,12 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
+
 import Button from "../../components/Button/Button";
+import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 import useAuthForm from "../../hooks/useAuthForm";
 import { register } from "../../api/firebase-auth";
-import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 
 const Register = () => {
 	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(

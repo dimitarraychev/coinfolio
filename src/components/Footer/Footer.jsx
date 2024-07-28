@@ -1,10 +1,10 @@
-import React from "react";
+import { Link } from "react-router-dom";
+
 import "./Footer.css";
 import logo from "../../assets/logo.svg";
 import githubLogo from "../../assets/logos/github.svg";
 import linkedInLogo from "../../assets/logos/linkedin.svg";
 import coinGeckoLogo from "../../assets/logos/coingecko.svg";
-import { Link } from "react-router-dom";
 
 const Footer = () => {
 	return (

@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
 import "./Coin.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
