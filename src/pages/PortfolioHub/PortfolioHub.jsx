@@ -5,20 +5,36 @@ import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTable
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
+import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import { portfolioCategories } from "../../constants/categories";
+import { getPortfolios } from "../../api/firebase-db";
 
 const PortfolioHub = () => {
 	const [category, setCategory] = useState("newest");
 	const [isLoading, setIsLoading] = useState(false);
+	const [portfolios, setPortfolios] = useState([]);
 
 	const categoriesHandler = (value) => {
 		setIsLoading(true);
 		setCategory(value);
 	};
 
+	const getPortfoliosData = async () => {
+		setIsLoading(true);
+		try {
+			const portfolios = await getPortfolios();
+
+			portfolios ? setPortfolios(portfolios) : navigate("/404");
+		} catch (error) {
+			toast.error(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+
 	useEffect(() => {
-		console.log(category);
+		getPortfoliosData();
 	}, [category]);
 
 	return (
@@ -57,10 +73,19 @@ const PortfolioHub = () => {
 						"Followers",
 					]}
 				>
-					<PortfolioTableRow />
-					<PortfolioTableRow />
-					<PortfolioTableRow />
-					<PortfolioTableRow />
+					{isLoading ? (
+						<div className="loading">
+							<Loader />
+						</div>
+					) : (
+						portfolios.map((portfolio, index) => (
+							<PortfolioTableRow
+								portfolio={portfolio}
+								key={portfolio.id}
+								index={index + 1}
+							/>
+						))
+					)}
 				</CryptoTable>
 			</div>
 		</section>
