@@ -14,14 +14,14 @@ import { saveCursorPosition, restoreCursorPosition } from "../utils/cursor";
 
 const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 	const navigate = useNavigate();
+	const selectionRef = useRef(null);
+	const { currentUser } = useCurrentUser();
+	const { openConfirmModal } = useConfirmModalContext();
 	const [portfolio, setPortfolio] = useState(initialPortfolio);
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
-	const { openConfirmModal } = useConfirmModalContext();
-	const { currentUser } = useCurrentUser();
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
 	const [isEditMode, setIsEditMode] = useState(false);
-	const selectionRef = useRef(null);
 
 	const toggleEditModeHandler = () => setIsEditMode(true);
 	const closeAddCoinHandler = () => setIsAddCoinOpen(false);
@@ -91,9 +91,11 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 		portfolio.title !== "" && portfolio.allocations.length > 0
 			? setIsSubmitButtonDisabled(false)
 			: setIsSubmitButtonDisabled(true);
-	}, [portfolio]);
+	}, [portfolio.title, portfolio.allocations]);
 
 	useEffect(() => {
+		if (currency) return;
+
 		setPortfolio((prevPortfolio) => ({
 			...prevPortfolio,
 			owner: {
