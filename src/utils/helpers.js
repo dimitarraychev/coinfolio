@@ -7,10 +7,14 @@ export function formatPrice(price) {
 	if (price < 0.0001 && price > -0.0001) fractionDigits = 6;
 	if (price < 0.000001 && price > -0.000001) fractionDigits = 8;
 
-	return price.toLocaleString(undefined, {
+	const formattedPrice = price.toLocaleString(undefined, {
 		minimumFractionDigits: fractionDigits,
 		maximumFractionDigits: fractionDigits,
 	});
+
+	return formattedPrice.endsWith(".00")
+		? formattedPrice.slice(0, -3)
+		: formattedPrice;
 }
 
 export function formatNumber(number) {
