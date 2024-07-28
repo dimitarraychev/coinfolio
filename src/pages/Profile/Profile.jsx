@@ -56,12 +56,7 @@ const Profile = () => {
 						"Profit/Loss",
 						"Followers",
 					]}
-				>
-					<PortfolioTableRow />
-					<PortfolioTableRow />
-					<PortfolioTableRow />
-					<PortfolioTableRow />
-				</CryptoTable>
+				></CryptoTable>
 			</div>
 		</section>
 	);

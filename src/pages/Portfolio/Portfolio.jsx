@@ -22,7 +22,7 @@ import {
 import useGetPorfolioById from "../../hooks/useGetPortfolioById";
 
 const Portfolio = () => {
-	const { allCoins, currency } = useCoinContext();
+	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
 	const { portfolio, matchingCoins, isLoading, changePortfolio } =
 		useGetPorfolioById();
@@ -167,7 +167,6 @@ const Portfolio = () => {
 
 			{isAddCoinOpen && (
 				<AddCoin
-					allCoins={allCoins}
 					onAddCoin={addCoinHandler}
 					onClose={closeAddCoinHandler}
 				/>
