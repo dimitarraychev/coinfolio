@@ -92,7 +92,14 @@ const Explore = () => {
 			/>
 
 			<CryptoTable
-				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+				columns={[
+					"#",
+					"Coins",
+					"Price",
+					"24h Change",
+					"7d Change",
+					"Market Cap",
+				]}
 			>
 				{isLoading ? (
 					<div className="loading">
