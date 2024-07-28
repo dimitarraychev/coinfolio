@@ -123,7 +123,11 @@ const PortfolioDetails = ({
 				</ul>
 				<ul>
 					<li>Top Performers</li>
-					<li>{portfolio.topPerformers.join(", ")}</li>
+					<li>
+						{portfolio.topPerformers.length > 0
+							? portfolio.topPerformers.join(", ")
+							: "-"}
+					</li>
 				</ul>
 				<ul>
 					<li>Total Allocation</li>
