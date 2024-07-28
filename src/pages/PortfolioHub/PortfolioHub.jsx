@@ -1,41 +1,19 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
+
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import { Link } from "react-router-dom";
 import Button from "../../components/Button/Button";
 import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import { portfolioCategories } from "../../constants/categories";
-import { getPortfolios } from "../../api/firebase-db";
+import useGetPorfolios from "../../hooks/useGetPortfolios";
 
 const PortfolioHub = () => {
-	const [category, setCategory] = useState("newest");
-	const [isLoading, setIsLoading] = useState(false);
-	const [portfolios, setPortfolios] = useState([]);
-
-	const categoriesHandler = (value) => {
-		setIsLoading(true);
-		setCategory(value);
-	};
-
-	const getPortfoliosData = async () => {
-		setIsLoading(true);
-		try {
-			const portfolios = await getPortfolios();
-
-			portfolios ? setPortfolios(portfolios) : navigate("/404");
-		} catch (error) {
-			toast.error(error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	useEffect(() => {
-		getPortfoliosData();
-	}, [category]);
+	const { portfolios, category, isLoading, changeCategory, hasNoPortfolios } =
+		useGetPorfolios();
 
 	return (
 		<section className="hub">
@@ -60,7 +38,7 @@ const PortfolioHub = () => {
 			<CategoriesMenu
 				categories={portfolioCategories}
 				category={category}
-				onCategoryChange={categoriesHandler}
+				onCategoryChange={changeCategory}
 			/>
 
 			<div className="portfolios-wrapper">
@@ -77,6 +55,10 @@ const PortfolioHub = () => {
 						<div className="loading">
 							<Loader />
 						</div>
+					) : hasNoPortfolios ? (
+						<h6 className="no-portfolios">
+							No portfolios yet, be the first!
+						</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
 							<PortfolioTableRow
