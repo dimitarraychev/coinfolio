@@ -71,7 +71,7 @@ const Create = () => {
 				</div>
 
 				<div className="allocation">
-					<label>Total Allocation</label>
+					<p className="label">Total Allocation</p>
 					<h3>
 						{currency.symbol}
 						{currency.name === "usd"

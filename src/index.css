@@ -94,6 +94,10 @@ h6 {
 	aspect-ratio: 1/1;
 }
 
+.label {
+	color: var(--dark-gray);
+}
+
 .green {
 	color: var(--green);
 }

@@ -59,7 +59,7 @@ const Coin = () => {
 			</div>
 
 			<div className="current-price">
-				<label className="price-label">Current Price</label>
+				<p className="label">Current Price</p>
 				<h3
 					className={
 						coinData.market_data.price_change_percentage_24h > 0

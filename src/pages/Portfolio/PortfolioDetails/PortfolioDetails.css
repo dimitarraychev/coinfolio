@@ -6,10 +6,6 @@
 	gap: 2rem;
 }
 
-.portfolio label {
-	color: var(--dark-gray);
-}
-
 .portfolio .title-wrapper {
 	display: flex;
 	flex-direction: column;

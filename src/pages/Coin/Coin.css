@@ -51,10 +51,6 @@ section.coin-details {
 	margin: 0 auto 2em auto;
 }
 
-.coin-details .current-price label {
-	color: var(--dark-gray);
-}
-
 .coin-details .current-price .percentage {
 	align-self: flex-end;
 }

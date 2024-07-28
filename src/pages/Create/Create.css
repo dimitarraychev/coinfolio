@@ -39,10 +39,6 @@
 	margin-bottom: 1em;
 }
 
-.create .allocation label {
-	color: var(--dark-gray);
-}
-
 .create .create-row-wrapper {
 	position: relative;
 	animation: appear linear;

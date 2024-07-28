@@ -57,10 +57,6 @@
 	padding-left: 0.3rem;
 }
 
-.add-coin-wrapper .total-wrapper label {
-	color: var(--dark-gray);
-}
-
 #total-spent {
 	font-size: 1.6rem;
 	font-weight: bold;

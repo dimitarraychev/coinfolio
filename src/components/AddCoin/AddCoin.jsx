@@ -127,7 +127,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 				</div>
 
 				<div className="total-wrapper">
-					<label>Total Spent:</label>
+					<p className="label">Total Spent:</p>
 					<p id="total-spent">
 						{currency.symbol}
 						{coin.total}

@@ -13,10 +13,6 @@ section.portfolio {
 	flex: 0 0 60%;
 }
 
-.portfolio label {
-	color: var(--dark-gray);
-}
-
 .portfolio-chart {
 	height: 40vh;
 	width: 40vw;

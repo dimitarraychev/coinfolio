@@ -69,16 +69,14 @@ const PortfolioDetails = ({
 				)}
 			</div>
 			<div className="followers-wrapper">
-				<label>Followers</label>
+				<p className="label">Followers</p>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.length.toLocaleString()}</h5>
 					<Button text={"follow"} onClick={followHandler} />
 				</div>
 			</div>
 			<div className="current-balance-wrapper">
-				<label className="balance-label" htmlFor="current-balance">
-					Current Balance
-				</label>
+				<p className="label">Current Balance</p>
 				<h3
 					className={
 						portfolio.isPositivePriceChange ? "green" : "red"
