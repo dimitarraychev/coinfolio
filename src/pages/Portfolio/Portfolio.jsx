@@ -11,6 +11,7 @@ import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Button from "../../components/Button/Button";
 import AddCoin from "../../components/AddCoin/AddCoin";
+import Loader from "../../components/Loader/Loader";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 import { saveCursorPosition, restoreCursorPosition } from "../../utils/cursor";
 import {
@@ -18,55 +19,16 @@ import {
 	removeCoinFromPortfolio,
 	updatePortfolioMetrics,
 } from "../../utils/portfolio";
-import useMatchingCoins from "../../hooks/useMatchingCoins";
-import { useNavigate, useParams } from "react-router-dom";
-import { getPortfolioById } from "../../api/firebase-db";
-import Loader from "../../components/Loader/Loader";
+import useGetPorfolioById from "../../hooks/useGetPortfolioById";
 
 const Portfolio = () => {
 	const { allCoins, currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
-	const { portfolioId } = useParams();
-	const navigate = useNavigate();
-
-	const [portfolio, setPortfolio] = useState({
-		title: "Low Risk Classic Portfolio",
-		owner: {
-			uid: "123",
-			displayName: "username",
-		},
-		totalAllocation: {
-			usd: 9262.28,
-			eur: 8538.85,
-		},
-		alltimeProfitLoss: 0,
-		alltimeProfitLossPercentage: 0,
-		currentBalance: 0,
-		topPerformers: [],
-		createdOn: "1717699200",
-		updatedOn: "1717699200",
-		followers: [],
-		allocations: [
-			{
-				name: "Ethereum",
-				id: "ethereum",
-				total: {
-					usd: 3462.28,
-					eur: 3189.61,
-				},
-				price: {
-					usd: 3462.28,
-					eur: 3189.61,
-				},
-				quantity: 1,
-			},
-		],
-	});
-	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
+	const { portfolio, matchingCoins, isLoading, changePortfolio } =
+		useGetPorfolioById();
 
 	const [isEditMode, setIsEditMode] = useState(false);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
 
 	const selectionRef = useRef(null);
 
@@ -77,7 +39,7 @@ const Portfolio = () => {
 
 	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
-		setPortfolio((prevPortfolio) =>
+		changePortfolio((prevPortfolio) =>
 			addCoinToPortfolio(prevPortfolio, coinToAdd)
 		);
 	};
@@ -86,7 +48,7 @@ const Portfolio = () => {
 		openConfirmModal(
 			"Are you sure you want to remove this allocation?",
 			() => {
-				setPortfolio((prevPortfolio) =>
+				changePortfolio((prevPortfolio) =>
 					removeCoinFromPortfolio(prevPortfolio, coinToRemove)
 				);
 				toast.success("Success! Allocation successfully removed.");
@@ -97,7 +59,7 @@ const Portfolio = () => {
 	const titleChangeHandler = (e) => {
 		saveCursorPosition(selectionRef);
 
-		setPortfolio((prevPortfolio) => ({
+		changePortfolio((prevPortfolio) => ({
 			...prevPortfolio,
 			title: e.target.textContent,
 		}));
@@ -120,30 +82,13 @@ const Portfolio = () => {
 		setIsEditMode(false);
 	};
 
-	const getPortfolio = async () => {
-		setIsLoading(true);
-		try {
-			const portfolio = await getPortfolioById(portfolioId);
-
-			portfolio ? setPortfolio(portfolio) : navigate("/404");
-		} catch (error) {
-			toast.error(error);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
 	useEffect(() => restoreCursorPosition(selectionRef), [portfolio.title]);
 
 	useEffect(() => {
-		setPortfolio((prevPortfolio) =>
+		changePortfolio((prevPortfolio) =>
 			updatePortfolioMetrics(prevPortfolio, matchingCoins, currency)
 		);
 	}, [matchingCoins, currency]);
-
-	useEffect(() => {
-		getPortfolio();
-	}, [portfolioId]);
 
 	if (isLoading)
 		return (
