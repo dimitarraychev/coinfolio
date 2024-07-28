@@ -1,4 +1,13 @@
-import { collection, addDoc, doc, getDoc } from "firebase/firestore";
+import {
+	collection,
+	doc,
+	addDoc,
+	getDoc,
+	getDocs,
+	query,
+	orderBy,
+	where,
+} from "firebase/firestore";
 import { db } from "../config/firebase";
 
 const PORTFOLIOS_COLLECTION_ID = "portfolios";
@@ -30,4 +39,24 @@ export const getPortfolio = async (portfolioId) => {
 	const portfolio = docSnap.exists() ? docSnap.data() : null;
 
 	return portfolio;
+};
+
+export const getPortfolios = async () => {
+	const myQuery = query(
+		collection(db, PORTFOLIOS_COLLECTION_ID),
+		orderBy("createdOn", "desc")
+	);
+
+	try {
+		const snapshot = await getDocs(myQuery);
+		const result = [];
+
+		snapshot.forEach((doc) => {
+			result.push({ id: doc.id, ...doc.data() });
+		});
+
+		return result;
+	} catch (error) {
+		throw error;
+	}
 };
