@@ -11,34 +11,37 @@ import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import AddCoin from "../../components/AddCoin/AddCoin";
 import { formatPrice } from "../../utils/helpers";
-import { useCurrentUser } from "../../context/AuthContext";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
+import { postPortfolio } from "../../api/firebase-db";
+
+const initialPortfolio = {
+	title: "",
+	owner: {
+		uid: "",
+		displayName: "",
+	},
+	totalAllocation: {
+		usd: 0,
+		eur: 0,
+	},
+	allocations: [],
+	followers: [],
+};
 
 const Create = () => {
 	const { currency } = useCoinContext();
-	const { currentUser } = useCurrentUser();
 	const {
 		portfolio,
 		matchingCoins,
 		isSubmitButtonDisabled,
 		isAddCoinOpen,
-		handleTitleChange,
+		titleChangeHandler,
 		closeAddCoinHandler,
 		openAddCoinHandler,
 		addCoinHandler,
 		removeCoinHandler,
-		handleSubmit,
-	} = usePortfolioForm();
-
-	// useEffect(() => {
-	// 	setPortfolio((prevPortfolio) => ({
-	// 		...prevPortfolio,
-	// 		owner: {
-	// 			uid: currentUser?.uid || "",
-	// 			displayName: currentUser?.displayName || "",
-	// 		},
-	// 	}));
-	// }, [currentUser]);
+		submitHandler,
+	} = usePortfolioForm(initialPortfolio, postPortfolio, currency);
 
 	return (
 		<section className="create">
@@ -47,7 +50,7 @@ const Create = () => {
 				Create
 			</h2>
 
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={submitHandler}>
 				<div className="title-wrapper">
 					<label htmlFor="title">Title:</label>
 					<input
@@ -58,7 +61,7 @@ const Create = () => {
 						autoComplete="title"
 						placeholder="Your portfolio title..."
 						value={portfolio.title}
-						onChange={handleTitleChange}
+						onChange={titleChangeHandler}
 					/>
 				</div>
 
