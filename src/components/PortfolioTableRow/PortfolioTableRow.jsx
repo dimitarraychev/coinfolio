@@ -25,7 +25,11 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 		e.preventDefault();
 	};
 
-	if (!updatedPortfolio.alltimeProfitLoss) return <Loader />;
+	if (
+		updatedPortfolio.alltimeProfitLoss !== 0 &&
+		!updatedPortfolio.alltimeProfitLoss
+	)
+		return <Loader />;
 
 	return (
 		<Link className="table-layout" to={`/hub/${portfolio.id}`}>
