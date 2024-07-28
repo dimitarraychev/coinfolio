@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React from "react";
 import { toast } from "react-toastify";
 
 import "./PortfolioDetails.css";
@@ -22,8 +22,6 @@ const PortfolioDetails = ({
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
 
-	const editableTitleRef = useRef(null);
-
 	const portfolioDeleteHandler = (e) =>
 		openConfirmModal("Are you sure you want to delete this portfolio?");
 
@@ -37,7 +35,6 @@ const PortfolioDetails = ({
 			<div className="title-wrapper">
 				<div className="title">
 					<h2
-						ref={editableTitleRef}
 						className="editable-title"
 						contentEditable={isEditMode ? true : false}
 						onInput={onTitleChange}
