@@ -13,7 +13,13 @@ const CryptoTable = ({ columns, children }) => {
 			>
 				{columns.map((col) => (
 					<p
-						className={col.includes("Change") ? "change" : ""}
+						className={
+							col.includes("Change")
+								? "change"
+								: col.includes("Profit/Loss")
+								? "profit-loss"
+								: ""
+						}
 						key={col}
 					>
 						{col}

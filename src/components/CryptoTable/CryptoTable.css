@@ -38,7 +38,7 @@
 	color: var(--dark-gray);
 }
 
-.table-layout:hover {
+.table-header .table-layout:hover {
 	filter: brightness(1.2);
 }
 
@@ -76,9 +76,13 @@
 	aspect-ratio: 1/1;
 }
 
+.table-header .profit-loss {
+	text-align: right;
+}
+
 .table-layout .profit-loss-wrapper {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
+	align-items: flex-end;
 	gap: 0.1em;
 }
