@@ -31,7 +31,7 @@ export const postPortfolio = async (portfolio) => {
 	}
 };
 
-export const getPortfolio = async (portfolioId) => {
+export const getPortfolioById = async (portfolioId) => {
 	const docRef = doc(db, PORTFOLIOS_COLLECTION_ID, portfolioId);
 
 	const docSnap = await getDoc(docRef);

@@ -20,7 +20,7 @@ import {
 } from "../../utils/portfolio";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
 import { useNavigate, useParams } from "react-router-dom";
-import { getPortfolio } from "../../api/firebase-db";
+import { getPortfolioById } from "../../api/firebase-db";
 import Loader from "../../components/Loader/Loader";
 
 const Portfolio = () => {
@@ -120,10 +120,10 @@ const Portfolio = () => {
 		setIsEditMode(false);
 	};
 
-	const getPortfolioData = async () => {
+	const getPortfolio = async () => {
 		setIsLoading(true);
 		try {
-			const portfolio = await getPortfolio(portfolioId);
+			const portfolio = await getPortfolioById(portfolioId);
 
 			portfolio ? setPortfolio(portfolio) : navigate("/404");
 		} catch (error) {
@@ -142,7 +142,7 @@ const Portfolio = () => {
 	}, [matchingCoins, currency]);
 
 	useEffect(() => {
-		getPortfolioData();
+		getPortfolio();
 	}, [portfolioId]);
 
 	if (isLoading)

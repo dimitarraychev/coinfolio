@@ -12,7 +12,7 @@ import { portfolioCategories } from "../../constants/categories";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
 
 const PortfolioHub = () => {
-	const { portfolios, category, isLoading, changeCategory, hasNoPortfolios } =
+	const { portfolios, category, isLoading, hasNoPortfolios, changeCategory } =
 		useGetPorfolios();
 
 	return (
