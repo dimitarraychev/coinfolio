@@ -1,37 +1,31 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import useMatchingCoins from "./useMatchingCoins";
 import { useConfirmModalContext } from "../context/ConfirmModalContext";
+import { useCurrentUser } from "../context/AuthContext";
 import {
 	addCoinToPortfolio,
 	removeCoinFromPortfolio,
+	updatePortfolioMetrics,
 } from "../utils/portfolio";
-import { postPortfolio } from "../api/firebase-db";
+import { saveCursorPosition, restoreCursorPosition } from "../utils/cursor";
 
-const usePortfolioForm = () => {
+const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 	const navigate = useNavigate();
-	const [portfolio, setPortfolio] = useState({
-		title: "",
-		owner: {
-			uid: "",
-			displayName: "",
-		},
-		totalAllocation: {
-			usd: 0,
-			eur: 0,
-		},
-		allocations: [],
-		followers: [],
-	});
+	const [portfolio, setPortfolio] = useState(initialPortfolio);
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 	const { openConfirmModal } = useConfirmModalContext();
+	const { currentUser } = useCurrentUser();
 	const [isSubmitButtonDisabled, setIsSubmitButtonDisabled] = useState(true);
 	const [isAddCoinOpen, setIsAddCoinOpen] = useState(false);
+	const [isEditMode, setIsEditMode] = useState(false);
+	const selectionRef = useRef(null);
 
-	const closeAddCoinHandler = (e) => setIsAddCoinOpen(false);
-	const openAddCoinHandler = (e) => setIsAddCoinOpen(true);
+	const toggleEditModeHandler = () => setIsEditMode(true);
+	const closeAddCoinHandler = () => setIsAddCoinOpen(false);
+	const openAddCoinHandler = () => setIsAddCoinOpen(true);
 
 	const addCoinHandler = (coinToAdd) => {
 		setIsAddCoinOpen(false);
@@ -52,14 +46,20 @@ const usePortfolioForm = () => {
 		);
 	};
 
-	const handleTitleChange = (e) =>
+	const titleChangeHandler = (e) => {
+		isEditMode && saveCursorPosition(selectionRef);
+
 		setPortfolio((prevPortfolio) => ({
 			...prevPortfolio,
-			title: e.target.value,
+			title: isEditMode ? e.target.textContent : e.target.value,
 		}));
 
-	const handleSubmit = async (e) => {
+		isEditMode && restoreCursorPosition(selectionRef);
+	};
+
+	const submitHandler = async (e) => {
 		e.preventDefault();
+		setIsSubmitButtonDisabled(true);
 
 		if (portfolio.title.length < 3 || portfolio.title.length > 66) {
 			toast.error("Error! Title should be between 3 and 66 characters.");
@@ -72,13 +72,20 @@ const usePortfolioForm = () => {
 		}
 
 		try {
-			const portfolioId = await postPortfolio(portfolio);
+			const portfolioId = await onSubmit(portfolio);
 			toast.success(`Success! ${portfolio.title} has been published.`);
 			navigate(`/hub/${portfolioId}`);
 		} catch (error) {
 			toast.error(error);
+		} finally {
+			setIsSubmitButtonDisabled(false);
+			setIsEditMode(false);
 		}
 	};
+
+	useEffect(() => {
+		if (isEditMode) restoreCursorPosition(selectionRef);
+	}, [portfolio.title]);
 
 	useEffect(() => {
 		portfolio.title !== "" && portfolio.allocations.length > 0
@@ -86,17 +93,39 @@ const usePortfolioForm = () => {
 			: setIsSubmitButtonDisabled(true);
 	}, [portfolio]);
 
+	useEffect(() => {
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			owner: {
+				uid: currentUser?.uid || "",
+				displayName: currentUser?.displayName || "",
+			},
+		}));
+	}, [currentUser]);
+
+	useEffect(() => {
+		setPortfolio((prevPortfolio) =>
+			updatePortfolioMetrics(prevPortfolio, matchingCoins, currency)
+		);
+	}, [matchingCoins, currency]);
+
+	useEffect(() => {
+		setPortfolio(initialPortfolio);
+	}, [initialPortfolio]);
+
 	return {
 		portfolio,
 		matchingCoins,
 		isSubmitButtonDisabled,
 		isAddCoinOpen,
-		handleTitleChange,
+		isEditMode,
+		toggleEditModeHandler,
+		titleChangeHandler,
 		closeAddCoinHandler,
 		openAddCoinHandler,
 		addCoinHandler,
 		removeCoinHandler,
-		handleSubmit,
+		submitHandler,
 	};
 };
 

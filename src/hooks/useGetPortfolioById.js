@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-import useMatchingCoins from "./useMatchingCoins";
 import { getPortfolioById } from "../api/firebase-db";
 
 const useGetPorfolioById = () => {
@@ -27,7 +26,6 @@ const useGetPorfolioById = () => {
 		followers: [],
 		allocations: [],
 	});
-	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 
 	const [isLoading, setIsLoading] = useState(false);
 
@@ -45,17 +43,13 @@ const useGetPorfolioById = () => {
 		}
 	};
 
-	const changePortfolio = (value) => setPortfolio(value);
-
 	useEffect(() => {
 		getPortfolio();
 	}, [portfolioId]);
 
 	return {
-		portfolio,
-		matchingCoins,
+		initialPortfolio: portfolio,
 		isLoading,
-		changePortfolio,
 	};
 };
 
