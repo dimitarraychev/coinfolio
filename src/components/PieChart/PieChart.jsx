@@ -9,7 +9,7 @@ const PieChart = ({ allocations, currency }) => {
 	]);
 
 	useEffect(() => {
-		if (allocations.length < 1) {
+		if (!allocations) {
 			setChartData([
 				["Crypto", "Allocation"],
 				["none", 1],
