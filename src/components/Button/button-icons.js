@@ -1,6 +1,7 @@
 import plusIcon from "../../assets/icons/plus-icon.svg";
 import arrowRight from "../../assets/icons/arrow-right.svg";
 import followIcon from "../../assets/icons/follow-icon.svg";
+import followingIcon from "../../assets/icons/following-icon.svg";
 import deleteIcon from "../../assets/icons/delete-icon.svg";
 import editIcon from "../../assets/icons/edit-icon.svg";
 import exploreIcon from "../../assets/icons/explore-icon-white.svg";
@@ -12,6 +13,10 @@ export const buttonIcons = [
 	{
 		text: ["follow"],
 		svg: followIcon,
+	},
+	{
+		text: ["following"],
+		svg: followingIcon,
 	},
 	{
 		text: ["create portfolio", "add coin"],
