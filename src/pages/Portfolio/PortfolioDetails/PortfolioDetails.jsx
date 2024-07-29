@@ -11,7 +11,8 @@ import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
 import Loader from "../../../components/Loader/Loader";
 import { formatPrice } from "../../../utils/helpers";
-import { deletePortfolio } from "../../../api/firebase-db";
+import { deletePortfolio, updatePortfolio } from "../../../api/firebase-db";
+import { useCurrentUser } from "../../../context/AuthContext";
 
 const PortfolioDetails = ({
 	portfolio,
@@ -20,10 +21,14 @@ const PortfolioDetails = ({
 	onTitleChange,
 	onSave,
 	isSaveButtonDisabled,
+	setFollowers,
 }) => {
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
+	const { currentUser } = useCurrentUser();
 	const navigate = useNavigate();
+
+	const isFollowButtonDisabled = currentUser === null;
 
 	const portfolioDeleteHandler = (e) =>
 		openConfirmModal(
@@ -38,8 +43,23 @@ const PortfolioDetails = ({
 			}
 		);
 
-	const followHandler = () =>
-		toast.success(`Success! You are now following ${portfolio.title}.`);
+	const followHandler = async () => {
+		const followers = portfolio.followers.slice(0);
+		followers[0] === undefined && followers.shift();
+		followers.push(currentUser);
+
+		try {
+			await updatePortfolio({
+				...portfolio,
+				followers,
+			});
+
+			setFollowers(followers);
+			toast.success(`Success! You are now following ${portfolio.title}.`);
+		} catch (error) {
+			toast.error(error);
+		}
+	};
 
 	if (!portfolio.currentBalance && portfolio.currentBalance !== 0)
 		return <Loader />;
@@ -85,7 +105,11 @@ const PortfolioDetails = ({
 				<p className="label">Followers</p>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.length.toLocaleString()}</h5>
-					<Button text={"follow"} onClick={followHandler} />
+					<Button
+						text={"follow"}
+						isDisabled={isFollowButtonDisabled}
+						onClick={followHandler}
+					/>
 				</div>
 			</div>
 			<div className="current-balance-wrapper">

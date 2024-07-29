@@ -57,6 +57,13 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 		isEditMode && restoreCursorPosition(selectionRef);
 	};
 
+	const setFollowers = (followers) => {
+		setPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			followers,
+		}));
+	};
+
 	const submitHandler = async (e) => {
 		e.preventDefault();
 		setIsSubmitButtonDisabled(true);
@@ -133,6 +140,7 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 		addCoinHandler,
 		removeCoinHandler,
 		submitHandler,
+		setFollowers,
 	};
 };
 

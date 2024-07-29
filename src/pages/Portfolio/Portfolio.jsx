@@ -29,6 +29,7 @@ const Portfolio = () => {
 		addCoinHandler,
 		removeCoinHandler,
 		submitHandler,
+		setFollowers,
 	} = usePortfolioForm(initialPortfolio, updatePortfolio, currency);
 
 	if (isLoading)
@@ -49,6 +50,7 @@ const Portfolio = () => {
 				onEditModeToggle={toggleEditModeHandler}
 				onSave={submitHandler}
 				isSaveButtonDisabled={isSubmitButtonDisabled}
+				setFollowers={setFollowers}
 			/>
 
 			<div className="portfolio-assets">
