@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 import "./PortfolioDetails.css";
 import arrowUp from "../../../assets/icons/arrow-up.svg";
@@ -10,6 +11,7 @@ import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
 import Loader from "../../../components/Loader/Loader";
 import { formatPrice } from "../../../utils/helpers";
+import { deletePortfolio } from "../../../api/firebase-db";
 
 const PortfolioDetails = ({
 	portfolio,
@@ -21,9 +23,20 @@ const PortfolioDetails = ({
 }) => {
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
+	const navigate = useNavigate();
 
 	const portfolioDeleteHandler = (e) =>
-		openConfirmModal("Are you sure you want to delete this portfolio?");
+		openConfirmModal(
+			"Are you sure you want to delete this portfolio?",
+			async () => {
+				try {
+					await deletePortfolio(portfolio.id);
+					navigate("/hub");
+				} catch (error) {
+					toast.error(error);
+				}
+			}
+		);
 
 	const followHandler = () =>
 		toast.success(`Success! You are now following ${portfolio.title}.`);
