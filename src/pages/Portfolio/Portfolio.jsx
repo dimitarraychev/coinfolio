@@ -53,7 +53,7 @@ const Portfolio = () => {
 			<div className="portfolio-assets">
 				<div className="portfolio-chart">
 					<PieChart
-						data={portfolio.allocations}
+						allocations={portfolio.allocations}
 						currency={currency}
 					/>
 				</div>

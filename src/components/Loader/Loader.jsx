@@ -1,8 +1,8 @@
 import "./Loader.css";
 
-const Loader = (props) => {
+const Loader = ({ size }) => {
 	return (
-		<div className="dot-spinner" style={{ "--uib-size": props.size }}>
+		<div className="dot-spinner" style={{ "--uib-size": size }}>
 			<div className="dot-spinner__dot"></div>
 			<div className="dot-spinner__dot"></div>
 			<div className="dot-spinner__dot"></div>
