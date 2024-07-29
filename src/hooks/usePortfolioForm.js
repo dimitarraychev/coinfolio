@@ -73,8 +73,13 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 
 		try {
 			const portfolioId = await onSubmit(portfolio);
-			toast.success(`Success! ${portfolio.title} has been published.`);
-			navigate(`/hub/${portfolioId}`);
+
+			portfolioId
+				? toast.success(
+						`Success! ${portfolio.title} has been published.`
+				  )
+				: toast.success(`Success! ${portfolio.title} has been edited.`);
+			portfolioId && navigate(`/hub/${portfolioId}`);
 		} catch (error) {
 			toast.error(error);
 		} finally {

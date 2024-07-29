@@ -11,6 +11,7 @@ import Loader from "../../components/Loader/Loader";
 import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 import useGetPorfolioById from "../../hooks/useGetPortfolioById";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
+import { updatePortfolio } from "../../api/firebase-db";
 
 const Portfolio = () => {
 	const { currency } = useCoinContext();
@@ -28,7 +29,7 @@ const Portfolio = () => {
 		addCoinHandler,
 		removeCoinHandler,
 		submitHandler,
-	} = usePortfolioForm(initialPortfolio, () => {}, currency);
+	} = usePortfolioForm(initialPortfolio, updatePortfolio, currency);
 
 	if (isLoading)
 		return (
