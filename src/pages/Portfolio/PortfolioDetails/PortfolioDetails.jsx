@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 
@@ -27,26 +28,43 @@ const PortfolioDetails = ({
 	const { openConfirmModal } = useConfirmModalContext();
 	const { currentUser } = useCurrentUser();
 	const navigate = useNavigate();
+	const [isLoading, setIsLoading] = useState(false);
 
-	const isFollowButtonDisabled = currentUser === null;
+	const isFollowing = portfolio.followers.some((f) => f === currentUser?.uid);
+	const isFollowButtonDisabled =
+		currentUser === null || isFollowing || isLoading;
+	const isEditButtonVisible = currentUser?.uid === portfolio.owner.uid;
+	const isFollowButtonVisible = !isEditButtonVisible;
 
-	const portfolioDeleteHandler = (e) =>
+	const portfolioDeleteHandler = (e) => {
+		if (isLoading) return;
+
 		openConfirmModal(
 			"Are you sure you want to delete this portfolio?",
 			async () => {
+				setIsLoading(true);
+
 				try {
 					await deletePortfolio(portfolio.id);
+					toast.success(
+						`Success! ${portfolio.title} was successfully removed.`
+					);
+
 					navigate("/hub");
 				} catch (error) {
 					toast.error(error);
+				} finally {
+					setIsLoading(false);
 				}
 			}
 		);
+	};
 
 	const followHandler = async () => {
+		setIsLoading(true);
+
 		const followers = portfolio.followers.slice(0);
-		followers[0] === undefined && followers.shift();
-		followers.push(currentUser);
+		followers.push(currentUser.uid);
 
 		try {
 			await updatePortfolio({
@@ -58,6 +76,8 @@ const PortfolioDetails = ({
 			toast.success(`Success! You are now following ${portfolio.title}.`);
 		} catch (error) {
 			toast.error(error);
+		} finally {
+			setIsLoading(false);
 		}
 	};
 
@@ -94,22 +114,26 @@ const PortfolioDetails = ({
 						/>
 					</div>
 				) : (
-					<Button
-						text={"edit"}
-						isGhost={true}
-						onClick={onEditModeToggle}
-					/>
+					isEditButtonVisible && (
+						<Button
+							text={"edit"}
+							isGhost={true}
+							onClick={onEditModeToggle}
+						/>
+					)
 				)}
 			</div>
 			<div className="followers-wrapper">
 				<p className="label">Followers</p>
 				<div className="follower-bottom">
 					<h5>{portfolio.followers.length.toLocaleString()}</h5>
-					<Button
-						text={"follow"}
-						isDisabled={isFollowButtonDisabled}
-						onClick={followHandler}
-					/>
+					{isFollowButtonVisible && (
+						<Button
+							text={isFollowing ? "following" : "follow"}
+							isDisabled={isFollowButtonDisabled}
+							onClick={followHandler}
+						/>
+					)}
 				</div>
 			</div>
 			<div className="current-balance-wrapper">
