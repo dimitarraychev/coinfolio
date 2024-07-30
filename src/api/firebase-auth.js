@@ -1,4 +1,3 @@
-import { auth, provider } from "../config/firebase";
 import { toast } from "react-toastify";
 import {
 	createUserWithEmailAndPassword,
@@ -7,6 +6,7 @@ import {
 	updateProfile,
 	signInWithPopup,
 } from "firebase/auth";
+import { auth, provider } from "../config/firebase";
 
 export const register = async ({ username, email, password }) => {
 	try {
