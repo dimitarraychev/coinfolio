@@ -7,6 +7,7 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [shouldRefetch, setShouldRefetch] = useState(false);
+	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -21,8 +22,10 @@ const AuthContextProvider = ({ children }) => {
 					lastSignIn: metadata.lastSignInTime,
 					createdOn: metadata.creationTime,
 				});
+				setIsAuthenticated(true);
 			} else {
 				setCurrentUser(null);
+				setIsAuthenticated(false);
 			}
 		});
 
@@ -30,7 +33,7 @@ const AuthContextProvider = ({ children }) => {
 	}, [shouldRefetch]);
 
 	return (
-		<AuthContext.Provider value={{ currentUser }}>
+		<AuthContext.Provider value={{ currentUser, isAuthenticated }}>
 			{children}
 		</AuthContext.Provider>
 	);
