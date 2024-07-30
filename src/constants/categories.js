@@ -1,18 +1,25 @@
+export const portfolioCategoriesEnum = {
+	NEWEST: "newest",
+	POPULAR: "popular",
+	FOLLOWING: "following",
+	OWNED: "owned",
+};
+
 export const portfolioCategories = [
 	{
-		category_id: "newest",
+		category_id: portfolioCategoriesEnum.NEWEST,
 		name: "Newest",
 	},
 	{
-		category_id: "popular",
+		category_id: portfolioCategoriesEnum.POPULAR,
 		name: "Popular",
 	},
 	{
-		category_id: "following",
+		category_id: portfolioCategoriesEnum.FOLLOWING,
 		name: "Following",
 	},
 	{
-		category_id: "owned",
+		category_id: portfolioCategoriesEnum.OWNED,
 		name: "Owned",
 	},
 ];
