@@ -28,7 +28,9 @@ const CategoriesMenu = ({ categories, category, onCategoryChange }) => {
 						key={cat.category_id}
 						onClick={() => onCategoryChange(cat.category_id)}
 						className={
-							!category && cat.category_id === "all"
+							!category &&
+							(cat.category_id === "all" ||
+								cat.category_id === "newest")
 								? "category-active"
 								: category === cat.category_id
 								? "category-active"
