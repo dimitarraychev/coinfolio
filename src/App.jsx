@@ -20,6 +20,7 @@ import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import AuthRedirect from "./components/AuthRedirect/AuthRedirect";
 
 const App = () => {
 	const {
@@ -34,23 +35,25 @@ const App = () => {
 			<Navbar />
 			<BreadCrumbs />
 			<Routes>
-				{/* Public */}
 				<Route path="/" element={<Home />} />
 				<Route path="/rankings" element={<Rankings />} />
 				<Route path="/explore" element={<Explore />} />
 				<Route path="/explore/:coinId" element={<Coin />} />
-				<Route path="/register" element={<Register />} />
-				<Route path="/login" element={<Login />} />
 				<Route path="/hub" element={<PortfolioHub />} />
 				<Route path="/hub/:portfolioId" element={<Portfolio />} />
-				<Route path="*" element={<Navigate to={"/404"} />} />
-				<Route path="/404" element={<NotFound />} />
 
-				{/* Private */}
+				<Route element={<AuthRedirect />}>
+					<Route path="/register" element={<Register />} />
+					<Route path="/login" element={<Login />} />
+				</Route>
+
 				<Route element={<ProtectedRoute />}>
 					<Route path="/profile" element={<Profile />} />
 					<Route path="/hub/create" element={<Create />} />
 				</Route>
+
+				<Route path="*" element={<Navigate to={"/404"} />} />
+				<Route path="/404" element={<NotFound />} />
 			</Routes>
 			<ScrollToTop />
 			<ToastContainer
