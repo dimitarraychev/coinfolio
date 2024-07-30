@@ -1,20 +1,40 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { getPortfolios } from "../api/firebase-db";
+import { useCurrentUser } from "../context/AuthContext";
+import { portfolioCategoriesEnum } from "../constants/categories";
 
 const useGetPorfolios = () => {
+	const [searchParams, setSearchParams] = useSearchParams();
+	const category = searchParams.get("category");
+
+	const { currentUser } = useCurrentUser();
 	const [portfolios, setPortfolios] = useState([]);
-	const [category, setCategory] = useState("newest");
 	const [isLoading, setIsLoading] = useState(false);
 
 	const hasNoPortfolios = portfolios.length < 1;
 
+	const hasToLogin =
+		!currentUser &&
+		(category === portfolioCategoriesEnum.FOLLOWING ||
+			category === portfolioCategoriesEnum.OWNED);
+
+	const hasNoFollowing =
+		hasNoPortfolios &&
+		!hasToLogin &&
+		category === portfolioCategoriesEnum.FOLLOWING;
+
+	const hasNoOwned =
+		hasNoPortfolios &&
+		!hasToLogin &&
+		category === portfolioCategoriesEnum.OWNED;
+
 	const getPortfoliosData = async () => {
 		setIsLoading(true);
 		try {
-			const portfolios = await getPortfolios();
-
+			const portfolios = await getPortfolios(category, currentUser?.uid);
 			setPortfolios(portfolios);
 		} catch (error) {
 			toast.error(error);
@@ -24,7 +44,9 @@ const useGetPorfolios = () => {
 	};
 
 	const changeCategory = (value) => {
-		setCategory(value);
+		if (searchParams.get("category") === value) return;
+		setIsLoading(true);
+		setSearchParams({ category: value });
 	};
 
 	useEffect(() => {
@@ -36,6 +58,9 @@ const useGetPorfolios = () => {
 		category,
 		isLoading,
 		hasNoPortfolios,
+		hasToLogin,
+		hasNoFollowing,
+		hasNoOwned,
 		changeCategory,
 	};
 };
