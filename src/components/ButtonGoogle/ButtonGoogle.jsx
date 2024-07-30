@@ -1,11 +1,14 @@
 import { toast } from "react-toastify";
 import "./ButtonGoogle.css";
 import { googleLogin } from "../../api/firebase-auth";
+import { useNavigate } from "react-router-dom";
 
 const ButtonGoogle = () => {
+	const navigate = useNavigate();
 	const onContinueWithGoogle = async () => {
 		try {
 			await googleLogin();
+			navigate("/");
 		} catch (error) {
 			toast.error(error);
 		}
