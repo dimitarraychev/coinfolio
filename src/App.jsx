@@ -19,6 +19,7 @@ import Create from "./pages/Create/Create";
 import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 
 const App = () => {
 	const {
@@ -46,8 +47,10 @@ const App = () => {
 				<Route path="/404" element={<NotFound />} />
 
 				{/* Private */}
-				<Route path="/profile" element={<Profile />} />
-				<Route path="/hub/create" element={<Create />} />
+				<Route element={<ProtectedRoute />}>
+					<Route path="/profile" element={<Profile />} />
+					<Route path="/hub/create" element={<Create />} />
+				</Route>
 			</Routes>
 			<ScrollToTop />
 			<ToastContainer
