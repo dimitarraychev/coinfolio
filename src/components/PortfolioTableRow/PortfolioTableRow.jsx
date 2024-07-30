@@ -8,6 +8,7 @@ import { useCoinContext } from "../../context/CoinContext";
 import Button from "../Button/Button";
 import Loader from "../Loader/Loader";
 import useMatchingCoins from "../../hooks/useMatchingCoins";
+import useFollowPortfolio from "../../hooks/useFollowPortfolio";
 import { updatePortfolioMetrics } from "../../utils/portfolio";
 import { formatPrice } from "../../utils/helpers";
 
@@ -16,15 +17,25 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 	const [updatedPortfolio, setUpdatedPortfolio] = useState({});
 
+	const setFollowers = (followers) => {
+		setUpdatedPortfolio((prevPortfolio) => ({
+			...prevPortfolio,
+			followers,
+		}));
+	};
+
+	const {
+		isFollowing,
+		isFollowButtonVisible,
+		isFollowButtonDisabled,
+		followHandler,
+	} = useFollowPortfolio(updatedPortfolio, setFollowers);
+
 	useEffect(() => {
 		setUpdatedPortfolio((prevPortfolio) =>
 			updatePortfolioMetrics(portfolio, matchingCoins, currency)
 		);
 	}, [matchingCoins, currency]);
-
-	const followHandler = (e) => {
-		e.preventDefault();
-	};
 
 	if (
 		updatedPortfolio.alltimeProfitLoss !== 0 &&
@@ -33,16 +44,16 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 		return <Loader />;
 
 	return (
-		<Link className="table-layout" to={`/hub/${portfolio.id}`}>
+		<Link className="table-layout" to={`/hub/${updatedPortfolio.id}`}>
 			<p>{index}</p>
 			<div className="portfolio-title">
-				<p>{portfolio.title}</p>
-				<p className="owner">@{portfolio.owner.displayName}</p>
+				<p>{updatedPortfolio.title}</p>
+				<p className="owner">@{updatedPortfolio.owner.displayName}</p>
 			</div>
 
 			<p>
 				{currency.symbol}
-				{formatPrice(portfolio.totalAllocation[currency.name])}
+				{formatPrice(updatedPortfolio.totalAllocation[currency.name])}
 			</p>
 
 			<div
@@ -71,8 +82,15 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 			</div>
 
 			<div className="last-column">
-				<p>{portfolio.followers.length}</p>
-				<Button text={"follow"} onClick={followHandler} />
+				<p>{updatedPortfolio.followers.length}</p>
+				{isFollowButtonVisible && (
+					<Button
+						text={isFollowing ? "following" : "follow"}
+						isDisabled={isFollowButtonDisabled}
+						isGhost={isFollowing}
+						onClick={followHandler}
+					/>
+				)}
 			</div>
 		</Link>
 	);

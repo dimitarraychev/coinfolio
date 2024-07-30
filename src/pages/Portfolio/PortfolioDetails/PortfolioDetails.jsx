@@ -11,9 +11,9 @@ import { useCoinContext } from "../../../context/CoinContext";
 import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
 import Button from "../../../components/Button/Button";
 import Loader from "../../../components/Loader/Loader";
+import useFollowPortfolio from "../../../hooks/useFollowPortfolio";
 import { formatPrice } from "../../../utils/helpers";
-import { deletePortfolio, updatePortfolio } from "../../../api/firebase-db";
-import { useCurrentUser } from "../../../context/AuthContext";
+import { deletePortfolio } from "../../../api/firebase-db";
 
 const PortfolioDetails = ({
 	portfolio,
@@ -24,16 +24,18 @@ const PortfolioDetails = ({
 	isSaveButtonDisabled,
 	setFollowers,
 }) => {
+	const navigate = useNavigate();
 	const { currency } = useCoinContext();
 	const { openConfirmModal } = useConfirmModalContext();
-	const { currentUser } = useCurrentUser();
-	const navigate = useNavigate();
 	const [isLoading, setIsLoading] = useState(false);
+	const {
+		isFollowing,
+		isFollowButtonVisible,
+		isFollowButtonDisabled,
+		followHandler,
+	} = useFollowPortfolio(portfolio, setFollowers);
 
-	const isFollowing = portfolio.followers.some((f) => f === currentUser?.uid);
-	const isFollowButtonDisabled = currentUser === null || isLoading;
-	const isEditButtonVisible = currentUser?.uid === portfolio.owner.uid;
-	const isFollowButtonVisible = !isEditButtonVisible;
+	const isEditButtonVisible = !isFollowButtonVisible;
 
 	const portfolioDeleteHandler = (e) => {
 		if (isLoading) return;
@@ -57,33 +59,6 @@ const PortfolioDetails = ({
 				}
 			}
 		);
-	};
-
-	const followHandler = async () => {
-		setIsLoading(true);
-
-		let followers = portfolio.followers.slice(0);
-		isFollowing
-			? (followers = followers.filter((f) => f !== currentUser.uid))
-			: followers.push(currentUser.uid);
-
-		const message = isFollowing
-			? `Success! You have unfollowed ${portfolio.title}.`
-			: `Success! You are now following ${portfolio.title}.`;
-
-		try {
-			await updatePortfolio({
-				...portfolio,
-				followers,
-			});
-
-			setFollowers(followers);
-			toast.success(message);
-		} catch (error) {
-			toast.error(error);
-		} finally {
-			setIsLoading(false);
-		}
 	};
 
 	if (!portfolio.currentBalance && portfolio.currentBalance !== 0)
