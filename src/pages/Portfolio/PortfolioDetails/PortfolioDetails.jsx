@@ -31,8 +31,7 @@ const PortfolioDetails = ({
 	const [isLoading, setIsLoading] = useState(false);
 
 	const isFollowing = portfolio.followers.some((f) => f === currentUser?.uid);
-	const isFollowButtonDisabled =
-		currentUser === null || isFollowing || isLoading;
+	const isFollowButtonDisabled = currentUser === null || isLoading;
 	const isEditButtonVisible = currentUser?.uid === portfolio.owner.uid;
 	const isFollowButtonVisible = !isEditButtonVisible;
 
@@ -63,8 +62,14 @@ const PortfolioDetails = ({
 	const followHandler = async () => {
 		setIsLoading(true);
 
-		const followers = portfolio.followers.slice(0);
-		followers.push(currentUser.uid);
+		let followers = portfolio.followers.slice(0);
+		isFollowing
+			? (followers = followers.filter((f) => f !== currentUser.uid))
+			: followers.push(currentUser.uid);
+
+		const message = isFollowing
+			? `Success! You have unfollowed ${portfolio.title}.`
+			: `Success! You are now following ${portfolio.title}.`;
 
 		try {
 			await updatePortfolio({
@@ -73,7 +78,7 @@ const PortfolioDetails = ({
 			});
 
 			setFollowers(followers);
-			toast.success(`Success! You are now following ${portfolio.title}.`);
+			toast.success(message);
 		} catch (error) {
 			toast.error(error);
 		} finally {
@@ -131,6 +136,7 @@ const PortfolioDetails = ({
 						<Button
 							text={isFollowing ? "following" : "follow"}
 							isDisabled={isFollowButtonDisabled}
+							isGhost={isFollowing}
 							onClick={followHandler}
 						/>
 					)}
