@@ -12,8 +12,26 @@ import { portfolioCategories } from "../../constants/categories";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
 
 const PortfolioHub = () => {
-	const { portfolios, category, isLoading, hasNoPortfolios, changeCategory } =
-		useGetPorfolios();
+	const {
+		portfolios,
+		category,
+		isLoading,
+		hasNoPortfolios,
+		hasToLogin,
+		hasNoFollowing,
+		hasNoOwned,
+		changeCategory,
+	} = useGetPorfolios();
+
+	const noResultsMessage = hasNoFollowing
+		? "You haven't followed any portfolios yet."
+		: hasNoOwned
+		? "You don't have any created portfolios yet."
+		: hasNoPortfolios
+		? "No portfolios yet, be the first!"
+		: hasToLogin
+		? "Please login to view this category."
+		: "";
 
 	return (
 		<section className="hub">
@@ -26,7 +44,7 @@ const PortfolioHub = () => {
 				<div className="cta-text">
 					<h3>Join The Crypto Community</h3>
 					<p>
-						Manage and compare your Portfolio's performance with the
+						Manage and compare your portfolio's performance with the
 						community.
 					</p>
 				</div>
@@ -55,10 +73,8 @@ const PortfolioHub = () => {
 						<div className="loading">
 							<Loader />
 						</div>
-					) : hasNoPortfolios ? (
-						<h6 className="no-portfolios">
-							No portfolios yet, be the first!
-						</h6>
+					) : noResultsMessage !== "" ? (
+						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
 							<PortfolioTableRow
