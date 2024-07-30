@@ -102,7 +102,7 @@ const Rankings = () => {
 						<h3>
 							{formatPrice(
 								globalMarketData.data?.active_cryptocurrencies
-							).slice(0, -3)}
+							)}
 						</h3>
 					)}
 				</div>
