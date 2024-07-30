@@ -3,13 +3,13 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-	apiKey: "AIzaSyAn-9Ourkf8F-7BWuNkHMUQxe_VyPFYbkk",
-	authDomain: "coinfolio-109f2.firebaseapp.com",
-	projectId: "coinfolio-109f2",
-	storageBucket: "coinfolio-109f2.appspot.com",
-	messagingSenderId: "709338014181",
-	appId: "1:709338014181:web:847699798b7c2cf43c4f0c",
-	measurementId: "G-MRSBNL4WKW",
+	apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+	authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+	projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+	storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+	messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+	appId: import.meta.env.VITE_FIREBASE_APP_ID,
+	measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID,
 };
 
 // const analytics = getAnalytics(app);

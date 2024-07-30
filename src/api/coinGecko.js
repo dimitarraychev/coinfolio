@@ -1,5 +1,5 @@
-const API_BASE_URL = "https://api.coingecko.com/api/v3";
-const API_KEY = "CG-m1zpVwoWPMSFhtQz7E1tRbYe";
+const API_BASE_URL = import.meta.env.VITE_COINGECKO_API_URL;
+const API_KEY = import.meta.env.VITE_COINGECKO_API_KEY;
 
 export const fetchAllCoins = async (currency, category, page = 1) => {
 	const options = {
