@@ -7,12 +7,14 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
 	const [currentUser, setCurrentUser] = useState(null);
 	const [shouldRefetch, setShouldRefetch] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
 				const { uid, email, displayName, photoURL, metadata } = user;
+
 				if (!displayName) return setShouldRefetch((state) => !state);
 				setCurrentUser({
 					uid,
@@ -27,13 +29,20 @@ const AuthContextProvider = ({ children }) => {
 				setCurrentUser(null);
 				setIsAuthenticated(false);
 			}
+			setIsLoading(false);
 		});
 
 		return () => unsubscribe();
 	}, [shouldRefetch]);
 
+	const contextValue = {
+		currentUser,
+		isAuthenticated,
+		isLoading,
+	};
+
 	return (
-		<AuthContext.Provider value={{ currentUser, isAuthenticated }}>
+		<AuthContext.Provider value={contextValue}>
 			{children}
 		</AuthContext.Provider>
 	);
