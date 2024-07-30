@@ -8,8 +8,10 @@ import {
 	orderBy,
 	updateDoc,
 	deleteDoc,
+	where,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
+import { portfolioCategoriesEnum } from "../constants/categories";
 
 const PORTFOLIOS_COLLECTION_ID = "portfolios";
 
@@ -44,11 +46,29 @@ export const getPortfolioById = async (portfolioId) => {
 	return portfolio;
 };
 
-export const getPortfolios = async () => {
-	const myQuery = query(
-		collection(db, PORTFOLIOS_COLLECTION_ID),
-		orderBy("createdOn", "desc")
-	);
+export const getPortfolios = async (category, userId) => {
+	const portfoliosRef = collection(db, PORTFOLIOS_COLLECTION_ID);
+
+	let queryParams = orderBy("createdOn", "desc");
+	switch (category) {
+		case portfolioCategoriesEnum.NEWEST:
+			queryParams = orderBy("createdOn", "desc");
+			break;
+		case portfolioCategoriesEnum.POPULAR:
+			queryParams = orderBy("followers", "desc");
+			break;
+		case portfolioCategoriesEnum.FOLLOWING:
+			queryParams = where("followers", "array-contains", userId);
+			break;
+		case portfolioCategoriesEnum.OWNED:
+			queryParams = where("owner.uid", "==", userId);
+			break;
+		default:
+			queryParams = orderBy("createdOn", "desc");
+			break;
+	}
+
+	const myQuery = query(portfoliosRef, queryParams);
 
 	try {
 		const snapshot = await getDocs(myQuery);
