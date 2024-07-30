@@ -16,6 +16,7 @@ const AuthContextProvider = ({ children }) => {
 				const { uid, email, displayName, photoURL, metadata } = user;
 
 				if (!displayName) return setShouldRefetch((state) => !state);
+
 				setCurrentUser({
 					uid,
 					email,
@@ -37,8 +38,8 @@ const AuthContextProvider = ({ children }) => {
 
 	const contextValue = {
 		currentUser,
-		isAuthenticated,
 		isLoading,
+		isAuthenticated,
 	};
 
 	return (
@@ -50,4 +51,4 @@ const AuthContextProvider = ({ children }) => {
 
 export default AuthContextProvider;
 
-export const useCurrentUser = () => useContext(AuthContext);
+export const useAuthContext = () => useContext(AuthContext);

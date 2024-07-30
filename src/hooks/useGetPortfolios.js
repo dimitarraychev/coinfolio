@@ -3,21 +3,21 @@ import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { getPortfolios } from "../api/firebase-db";
-import { useCurrentUser } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import { portfolioCategoriesEnum } from "../constants/categories";
 
 const useGetPorfolios = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const category = searchParams.get("category");
 
-	const { currentUser } = useCurrentUser();
+	const { currentUser, isAuthenticated } = useAuthContext();
 	const [portfolios, setPortfolios] = useState([]);
 	const [isLoading, setIsLoading] = useState(false);
 
 	const hasNoPortfolios = portfolios.length < 1;
 
 	const hasToLogin =
-		!currentUser &&
+		!isAuthenticated &&
 		(category === portfolioCategoriesEnum.FOLLOWING ||
 			category === portfolioCategoriesEnum.OWNED);
 
@@ -51,7 +51,7 @@ const useGetPorfolios = () => {
 
 	useEffect(() => {
 		getPortfoliosData();
-	}, [category, currentUser]);
+	}, [category, isAuthenticated]);
 
 	return {
 		portfolios,

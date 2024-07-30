@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 import useMatchingCoins from "./useMatchingCoins";
 import { useConfirmModalContext } from "../context/ConfirmModalContext";
-import { useCurrentUser } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import {
 	addCoinToPortfolio,
 	removeCoinFromPortfolio,
@@ -15,7 +15,7 @@ import { saveCursorPosition, restoreCursorPosition } from "../utils/cursor";
 const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 	const navigate = useNavigate();
 	const selectionRef = useRef(null);
-	const { currentUser } = useCurrentUser();
+	const { currentUser, isAuthenticated } = useAuthContext();
 	const { openConfirmModal } = useConfirmModalContext();
 	const [portfolio, setPortfolio] = useState(initialPortfolio);
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
@@ -115,7 +115,7 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 				displayName: currentUser?.displayName || "",
 			},
 		}));
-	}, [currentUser]);
+	}, [isAuthenticated]);
 
 	useEffect(() => {
 		setPortfolio((prevPortfolio) =>

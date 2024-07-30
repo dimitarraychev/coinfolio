@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { useCurrentUser } from "../context/AuthContext";
+import { useAuthContext } from "../context/AuthContext";
 import { updatePortfolio } from "../api/firebase-db";
 
 const useFollowPortfolio = (portfolio, setFollowers) => {
-	const { currentUser } = useCurrentUser();
+	const { currentUser, isAuthenticated } = useAuthContext();
 	const [isLoading, setIsLoading] = useState(false);
 
 	const isFollowing = portfolio.followers?.some(
 		(f) => f === currentUser?.uid
 	);
-	const isFollowButtonDisabled = currentUser === null || isLoading;
+	const isFollowButtonDisabled = !isAuthenticated || isLoading;
 	const isFollowButtonVisible = currentUser?.uid !== portfolio.owner?.uid;
 
 	const followHandler = async (e) => {

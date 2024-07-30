@@ -2,12 +2,12 @@ import "./Profile.css";
 import profileIcon from "../../assets/icons/profile-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
-import { useCurrentUser } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 
 const Profile = () => {
-	const { currentUser } = useCurrentUser();
+	const { currentUser } = useAuthContext();
 
 	return (
 		<section className="profile">

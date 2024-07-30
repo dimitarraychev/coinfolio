@@ -1,9 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useCurrentUser } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import Loader from "../Loader/Loader";
 
 const AuthRedirect = () => {
-	const { isAuthenticated, isLoading } = useCurrentUser();
+	const { isAuthenticated, isLoading } = useAuthContext();
 
 	if (isLoading)
 		return (

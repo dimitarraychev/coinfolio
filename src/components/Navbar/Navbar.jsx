@@ -9,7 +9,7 @@ import logoutIcon from "../../assets/icons/logout-icon.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
 import profileIcon from "../../assets/icons/profile-icon.svg";
 
-import { useCurrentUser } from "../../context/AuthContext";
+import { useAuthContext } from "../../context/AuthContext";
 import { useCoinContext } from "../../context/CoinContext";
 import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import { navbarLinks } from "../../constants/links";
@@ -19,7 +19,7 @@ const Navbar = () => {
 	const { setCurrency } = useCoinContext();
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
-	const { currentUser } = useCurrentUser();
+	const { currentUser, isAuthenticated } = useAuthContext();
 
 	const { openConfirmModal } = useConfirmModalContext();
 	const [isMenuShown, setIsMenuShown] = useState(false);
@@ -101,7 +101,7 @@ const Navbar = () => {
 					<ul
 						className={isMenuShown ? "user-menu show" : "user-menu"}
 					>
-						{currentUser ? (
+						{isAuthenticated ? (
 							<>
 								<Link to={"/profile"}>
 									<li>
