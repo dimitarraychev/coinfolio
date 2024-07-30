@@ -51,7 +51,7 @@ const useGetPorfolios = () => {
 
 	useEffect(() => {
 		getPortfoliosData();
-	}, [category]);
+	}, [category, currentUser]);
 
 	return {
 		portfolios,
