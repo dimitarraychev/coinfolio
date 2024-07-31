@@ -65,7 +65,7 @@ const Create = () => {
 
 				<div className="create-chart">
 					<PieChart
-						data={portfolio.allocations}
+						allocations={portfolio.allocations}
 						currency={currency}
 					/>
 				</div>

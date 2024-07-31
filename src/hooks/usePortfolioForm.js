@@ -78,8 +78,15 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 			return;
 		}
 
+		const decoratedPortfolio = { ...portfolio };
+		if (!isEditMode)
+			decoratedPortfolio.owner = {
+				uid: currentUser.uid,
+				displayName: currentUser.displayName,
+			};
+
 		try {
-			const portfolioId = await onSubmit(portfolio);
+			const portfolioId = await onSubmit(decoratedPortfolio);
 
 			portfolioId
 				? toast.success(
@@ -97,25 +104,11 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 
 	useEffect(() => {
 		if (isEditMode) restoreCursorPosition(selectionRef);
-	}, [portfolio.title]);
 
-	useEffect(() => {
 		portfolio.title !== "" && portfolio.allocations.length > 0
 			? setIsSubmitButtonDisabled(false)
 			: setIsSubmitButtonDisabled(true);
-	}, [portfolio.title, portfolio.allocations]);
-
-	useEffect(() => {
-		if (currency) return;
-
-		setPortfolio((prevPortfolio) => ({
-			...prevPortfolio,
-			owner: {
-				uid: currentUser?.uid || "",
-				displayName: currentUser?.displayName || "",
-			},
-		}));
-	}, [isAuthenticated]);
+	}, [portfolio]);
 
 	useEffect(() => {
 		setPortfolio((prevPortfolio) =>
