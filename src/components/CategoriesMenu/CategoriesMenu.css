@@ -33,9 +33,12 @@
 	border-radius: 0.5rem;
 	padding: 0.2rem 1rem;
 	cursor: pointer;
+	transition: scale 0.2s ease-in-out;
 }
+
 .categories-list li:hover {
 	filter: brightness(1.2);
+	scale: 1.02;
 }
 
 .categories-list li.category-active {
