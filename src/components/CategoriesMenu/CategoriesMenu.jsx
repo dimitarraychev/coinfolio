@@ -3,7 +3,12 @@ import { useState } from "react";
 import "./CategoriesMenu.css";
 import categoriesIcon from "../../assets/icons/categories-icon.svg";
 
-const CategoriesMenu = ({ categories, category, onCategoryChange }) => {
+const CategoriesMenu = ({
+	categories,
+	selectedCategory,
+	defaultCategory,
+	onCategoryChange,
+}) => {
 	const [isCategoriesShown, setIsCategoriesShown] = useState(true);
 
 	const toggleCategoriesViewHandler = () =>
@@ -28,11 +33,10 @@ const CategoriesMenu = ({ categories, category, onCategoryChange }) => {
 						key={cat.category_id}
 						onClick={() => onCategoryChange(cat.category_id)}
 						className={
-							!category &&
-							(cat.category_id === "all" ||
-								cat.category_id === "newest")
+							!selectedCategory &&
+							cat.category_id === defaultCategory
 								? "category-active"
-								: category === cat.category_id
+								: selectedCategory === cat.category_id
 								? "category-active"
 								: ""
 						}

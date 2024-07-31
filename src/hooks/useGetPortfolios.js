@@ -6,7 +6,7 @@ import { getPortfolios } from "../api/firebase-db";
 import { useAuthContext } from "../context/AuthContext";
 import { portfolioCategoriesEnum } from "../constants/categories";
 
-const useGetPorfolios = () => {
+const useGetPorfolios = (defaultCategory) => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const category = searchParams.get("category");
 
@@ -34,7 +34,10 @@ const useGetPorfolios = () => {
 	const getPortfoliosData = async () => {
 		setIsLoading(true);
 		try {
-			const portfolios = await getPortfolios(category, currentUser?.uid);
+			const portfolios = await getPortfolios(
+				category || defaultCategory,
+				currentUser?.uid
+			);
 			setPortfolios(portfolios);
 		} catch (error) {
 			toast.error(error);

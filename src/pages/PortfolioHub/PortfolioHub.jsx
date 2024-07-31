@@ -12,6 +12,8 @@ import { portfolioCategories } from "../../constants/categories";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
 
 const PortfolioHub = () => {
+	const defaultCategory = "newest";
+
 	const {
 		portfolios,
 		category,
@@ -21,7 +23,7 @@ const PortfolioHub = () => {
 		hasNoFollowing,
 		hasNoOwned,
 		changeCategory,
-	} = useGetPorfolios();
+	} = useGetPorfolios(defaultCategory);
 
 	const noResultsMessage = hasNoFollowing
 		? "You haven't followed any portfolios yet."
@@ -55,7 +57,8 @@ const PortfolioHub = () => {
 
 			<CategoriesMenu
 				categories={portfolioCategories}
-				category={category}
+				selectedCategory={category}
+				defaultCategory={defaultCategory}
 				onCategoryChange={changeCategory}
 			/>
 

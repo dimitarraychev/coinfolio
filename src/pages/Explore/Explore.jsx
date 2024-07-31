@@ -12,12 +12,14 @@ import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import { exploreCategories } from "../../constants/categories";
+import { toast } from "react-toastify";
 
 const Explore = () => {
 	const { allCoins, currency } = useCoinContext();
 	const [displayCoins, setDisplayCoins] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
 	const [searchParams, setSearchParams] = useSearchParams();
+	const defaultCategory = "all";
 	const category = searchParams.get("category");
 	const searchQuery = searchParams.get("search");
 
@@ -55,7 +57,7 @@ const Explore = () => {
 			setDisplayCoins(coins);
 			setIsLoading(false);
 		} catch (error) {
-			console.error("Failed to fetch coins:", error);
+			toast.error("Error! Failed to fetch coins: ", error);
 		}
 	};
 
@@ -88,7 +90,8 @@ const Explore = () => {
 
 			<CategoriesMenu
 				categories={exploreCategories}
-				category={category}
+				selectedCategory={category}
+				defaultCategory={defaultCategory}
 				onCategoryChange={categoriesHandler}
 			/>
 
