@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
@@ -11,18 +11,15 @@ import profileIcon from "../../assets/icons/profile-icon.svg";
 
 import { useAuthContext } from "../../context/AuthContext";
 import { useCoinContext } from "../../context/CoinContext";
-import { useConfirmModalContext } from "../../context/ConfirmModalContext";
 import { navbarLinks } from "../../constants/links";
-import { logout } from "../../api/firebase-auth";
+import useLogout from "../../hooks/useLogout";
 
 const Navbar = () => {
-	const { setCurrency } = useCoinContext();
 	const { pathname } = useLocation();
-	const navigate = useNavigate();
 	const { currentUser, isAuthenticated } = useAuthContext();
-
-	const { openConfirmModal } = useConfirmModalContext();
+	const { setCurrency } = useCoinContext();
 	const [isMenuShown, setIsMenuShown] = useState(false);
+	const { logoutHandler } = useLogout();
 
 	const currencyHandler = (e) => {
 		switch (e.target.value) {
@@ -43,13 +40,6 @@ const Navbar = () => {
 
 	const userMenuHandler = () => {
 		setIsMenuShown((state) => !state);
-	};
-
-	const logoutHandler = () => {
-		openConfirmModal(
-			"Are you sure you want to sign off from your account?",
-			() => logout(navigate)
-		);
 	};
 
 	return (

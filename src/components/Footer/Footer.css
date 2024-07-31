@@ -68,3 +68,7 @@
 .footer h6 {
 	margin-bottom: 1rem;
 }
+
+.footer .logout {
+	cursor: pointer;
+}
