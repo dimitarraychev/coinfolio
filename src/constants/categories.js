@@ -24,6 +24,17 @@ export const portfolioCategories = [
 	},
 ];
 
+export const profileCategories = [
+	{
+		category_id: portfolioCategoriesEnum.OWNED,
+		name: "Owned",
+	},
+	{
+		category_id: portfolioCategoriesEnum.FOLLOWING,
+		name: "Following",
+	},
+];
+
 export const exploreCategories = [
 	{
 		category_id: "all",
