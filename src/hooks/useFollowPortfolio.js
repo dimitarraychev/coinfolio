@@ -43,6 +43,7 @@ const useFollowPortfolio = (portfolio, setFollowers) => {
 			setIsLoading(false);
 		}
 	};
+
 	return {
 		isFollowing,
 		isFollowButtonVisible,
