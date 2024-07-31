@@ -17,7 +17,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 	});
 	const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
 
-	const handleChange = (e) => {
+	const changeHandler = (e) => {
 		const { name, value } = e.target;
 		setCoin((prevCoin) => {
 			let updatedCoin = { ...prevCoin, [name]: value };
@@ -82,7 +82,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 					name="id"
 					className="select-coin"
 					value={coin.id}
-					onChange={handleChange}
+					onChange={changeHandler}
 				>
 					<option value="" disabled>
 						Select a coin...
@@ -106,7 +106,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 							autoComplete="quantity"
 							placeholder="0.00"
 							value={coin.quantity}
-							onChange={handleChange}
+							onChange={changeHandler}
 						/>
 					</div>
 
@@ -121,7 +121,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 							autoComplete="price"
 							placeholder="Price Per Coin..."
 							value={coin.price}
-							onChange={handleChange}
+							onChange={changeHandler}
 						/>
 					</div>
 				</div>

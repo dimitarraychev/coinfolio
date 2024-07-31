@@ -11,7 +11,7 @@ const useAuthForm = (initialInputs, onSubmit) => {
 	const [inputs, setInputs] = useState(initialInputs);
 	const [isSubmitting, setIsSubmitting] = useState(false);
 
-	const handleChange = (event) => {
+	const changeHandler = (event) => {
 		const { name, value } = event.target;
 		setInputs({
 			...inputs,
@@ -19,7 +19,7 @@ const useAuthForm = (initialInputs, onSubmit) => {
 		});
 	};
 
-	const handleSubmit = async (e) => {
+	const submitHandler = async (e) => {
 		e.preventDefault();
 
 		if (isSubmitting) return;
@@ -56,8 +56,8 @@ const useAuthForm = (initialInputs, onSubmit) => {
 	return {
 		inputs,
 		isSubmitting,
-		handleChange,
-		handleSubmit,
+		changeHandler,
+		submitHandler,
 	};
 };
 

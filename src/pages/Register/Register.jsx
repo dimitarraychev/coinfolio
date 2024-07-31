@@ -9,7 +9,7 @@ import useAuthForm from "../../hooks/useAuthForm";
 import { register } from "../../api/firebase-auth";
 
 const Register = () => {
-	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(
+	const { inputs, isSubmitting, changeHandler, submitHandler } = useAuthForm(
 		{
 			username: "",
 			email: "",
@@ -28,7 +28,7 @@ const Register = () => {
 
 	return (
 		<section className="auth">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={submitHandler}>
 				<h2 className="page-header">
 					<img src={registerIcon} alt="register" />
 					Register
@@ -43,7 +43,7 @@ const Register = () => {
 					autoComplete="username"
 					placeholder="Your username..."
 					value={inputs.username}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 
 				<label htmlFor="email">Email:</label>
@@ -55,7 +55,7 @@ const Register = () => {
 					autoComplete="email"
 					placeholder="Your email address..."
 					value={inputs.email}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 
 				<label htmlFor="password">Password:</label>
@@ -67,7 +67,7 @@ const Register = () => {
 					autoComplete="new-password"
 					placeholder="Set your password..."
 					value={inputs.password}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 
 				<label htmlFor="re_password">Repeat Password:</label>
@@ -79,7 +79,7 @@ const Register = () => {
 					autoComplete="new-password"
 					placeholder="Repeat your password..."
 					value={inputs.re_password}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 
 				<Button

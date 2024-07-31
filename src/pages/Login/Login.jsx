@@ -11,7 +11,7 @@ import { login } from "../../api/firebase-auth";
 import useResetPassword from "../../hooks/useResetPassword";
 
 const Login = () => {
-	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(
+	const { inputs, isSubmitting, changeHandler, submitHandler } = useAuthForm(
 		{
 			email: "",
 			password: "",
@@ -30,7 +30,7 @@ const Login = () => {
 
 	return (
 		<section className="auth">
-			<form onSubmit={handleSubmit}>
+			<form onSubmit={submitHandler}>
 				<h2 className="page-header">
 					<img src={loginIcon} alt="login" />
 					Login
@@ -45,7 +45,7 @@ const Login = () => {
 					autoComplete="email"
 					placeholder="Your email address..."
 					value={inputs.email}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 
 				<label htmlFor="password">Password:</label>
@@ -57,7 +57,7 @@ const Login = () => {
 					autoComplete="current-password"
 					placeholder="Set your password..."
 					value={inputs.password}
-					onChange={handleChange}
+					onChange={changeHandler}
 				/>
 				<div className="actions-wrapper">
 					<div className="remember-me">
