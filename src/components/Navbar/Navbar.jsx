@@ -91,11 +91,7 @@ const Navbar = () => {
 					<img
 						src={currentUser?.photoURL || userPlaceholder}
 						alt="user"
-						className={
-							currentUser?.photoURL
-								? "user-img-google"
-								: "user-img"
-						}
+						className="user-img"
 					/>
 
 					<ul
