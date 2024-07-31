@@ -40,7 +40,7 @@ const Profile = () => {
 				<img
 					src={currentUser?.photoURL || userPlaceholder}
 					alt="profile"
-					className="profile-img"
+					className={"profile-img"}
 				/>
 				<div className="list-wrapper">
 					<ul>
