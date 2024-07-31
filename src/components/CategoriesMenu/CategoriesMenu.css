@@ -6,6 +6,7 @@
 
 .categories-wrapper .categories {
 	cursor: pointer;
+	width: fit-content;
 }
 
 .categories-list.cat-hide {
