@@ -25,9 +25,9 @@ const Rankings = () => {
 	const isPositiveCapChange =
 		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
 
-	const loadGlobalMarketData = async () => {
+	const loadGlobalMarketData = async (signal) => {
 		try {
-			const marketData = await fetchGlobalMarketData();
+			const marketData = await fetchGlobalMarketData(signal);
 			setGlobalMarketData(marketData);
 		} catch (err) {
 			toast.error(err);

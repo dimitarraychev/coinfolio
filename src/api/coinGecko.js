@@ -20,13 +20,14 @@ export const fetchAllCoins = async (currency, category, page = 1) => {
 	return response.json();
 };
 
-export const fetchGlobalMarketData = async () => {
+export const fetchGlobalMarketData = async (signal) => {
 	const options = {
 		method: "GET",
 		headers: {
 			accept: "application/json",
 			"x-cg-demo-api-key": API_KEY,
 		},
+		signal,
 	};
 
 	const response = await fetch(`${API_BASE_URL}/global`, options);
