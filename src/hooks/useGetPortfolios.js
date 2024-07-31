@@ -24,12 +24,15 @@ const useGetPorfolios = (defaultCategory) => {
 	const hasNoFollowing =
 		hasNoPortfolios &&
 		!hasToLogin &&
-		category === portfolioCategoriesEnum.FOLLOWING;
+		(category === portfolioCategoriesEnum.FOLLOWING ||
+			(!category &&
+				defaultCategory === portfolioCategoriesEnum.FOLLOWING));
 
 	const hasNoOwned =
 		hasNoPortfolios &&
 		!hasToLogin &&
-		category === portfolioCategoriesEnum.OWNED;
+		(category === portfolioCategoriesEnum.OWNED ||
+			(!category && defaultCategory === portfolioCategoriesEnum.OWNED));
 
 	const getPortfoliosData = async () => {
 		setIsLoading(true);
