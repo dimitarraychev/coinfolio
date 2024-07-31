@@ -8,6 +8,7 @@ import Button from "../../components/Button/Button";
 import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 import useAuthForm from "../../hooks/useAuthForm";
 import { login } from "../../api/firebase-auth";
+import useResetPassword from "../../hooks/useResetPassword";
 
 const Login = () => {
 	const { inputs, isSubmitting, handleChange, handleSubmit } = useAuthForm(
@@ -17,6 +18,7 @@ const Login = () => {
 		},
 		login
 	);
+	const { resetPasswordHandler } = useResetPassword(inputs);
 	const [rememberMe, setRememberMe] = useState(true);
 
 	const isSubmitBtnDisabled =
@@ -68,7 +70,7 @@ const Login = () => {
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
 
-					<p>Forgot Password?</p>
+					<p onClick={resetPasswordHandler}>Forgot Password?</p>
 				</div>
 
 				<Button
