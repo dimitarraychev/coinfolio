@@ -23,7 +23,7 @@ export const inputsErrorHandler = (inputs) => {
 	if (!emailRegex.test(inputs.email))
 		return "Error! Sorry, email is invalid.";
 
-	if (inputs.password.length < 6)
+	if (inputs.password && inputs.password.length < 6)
 		return "Error! Oops, password should be at least 6 characters.";
 
 	if (inputs.re_password && inputs.password !== inputs.re_password)
