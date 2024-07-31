@@ -1,4 +1,9 @@
-import { Link, useLocation, useSearchParams } from "react-router-dom";
+import {
+	Link,
+	useLocation,
+	useParams,
+	useSearchParams,
+} from "react-router-dom";
 
 import "./BreadCrumbs.css";
 import arrowCrumb from "../../assets/icons/arrow-crumb.svg";
@@ -58,6 +63,15 @@ const BreadCrumbs = () => {
 						routeName = convertKebabCase(routeName);
 					}
 
+					if (
+						!routeName &&
+						to.startsWith("/profile/") &&
+						pathnames.length > 1
+					) {
+						routeName = pathnames[pathnames.length - 1];
+						routeName = convertKebabCase(routeName);
+					}
+
 					return (
 						<li className="crumb" key={to}>
 							{last &&
@@ -74,6 +88,7 @@ const BreadCrumbs = () => {
 						</li>
 					);
 				})}
+
 				{categoryQuery && categoryQuery !== "all" && (
 					<li className="crumb">
 						<span>{convertKebabCase(categoryQuery)}</span>
