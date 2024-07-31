@@ -1,10 +1,10 @@
-import { toast } from "react-toastify";
 import {
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signOut,
 	updateProfile,
 	signInWithPopup,
+	sendPasswordResetEmail,
 } from "firebase/auth";
 import { auth, provider } from "../config/firebase";
 
@@ -33,12 +33,17 @@ export const googleLogin = async () => {
 	}
 };
 
-export const logout = async (navigate) => {
+export const logout = async () => {
 	try {
 		await signOut(auth);
+	} catch (error) {
+		throw error;
+	}
+};
 
-		toast.success(`Success! You have logged out, come back soon.`);
-		navigate("/");
+export const resetPassword = async (email) => {
+	try {
+		await sendPasswordResetEmail(auth, email);
 	} catch (error) {
 		throw error;
 	}
