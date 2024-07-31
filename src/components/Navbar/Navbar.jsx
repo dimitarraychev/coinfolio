@@ -103,7 +103,7 @@ const Navbar = () => {
 					>
 						{isAuthenticated ? (
 							<>
-								<Link to={"/profile"}>
+								<Link to={`/profile/${currentUser.uid}`}>
 									<li>
 										<img
 											src={profileIcon}
