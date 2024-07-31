@@ -5,9 +5,29 @@ import userPlaceholder from "../../assets/user-placeholder.svg";
 import { useAuthContext } from "../../context/AuthContext";
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
+import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
+import Loader from "../../components/Loader/Loader";
+import useGetPorfolios from "../../hooks/useGetPortfolios";
+import { profileCategories } from "../../constants/categories";
 
 const Profile = () => {
 	const { currentUser } = useAuthContext();
+	const defaultCategory = "owned";
+
+	const {
+		portfolios,
+		category,
+		isLoading,
+		hasNoFollowing,
+		hasNoOwned,
+		changeCategory,
+	} = useGetPorfolios(defaultCategory);
+
+	const noResultsMessage = hasNoFollowing
+		? "You haven't followed any portfolios yet."
+		: hasNoOwned
+		? "You don't have any created portfolios yet."
+		: "";
 
 	return (
 		<section className="profile">
@@ -46,6 +66,13 @@ const Profile = () => {
 
 			<h3 className="portfolios-title">Your Porfolios</h3>
 
+			<CategoriesMenu
+				categories={profileCategories}
+				selectedCategory={category}
+				defaultCategory={defaultCategory}
+				onCategoryChange={changeCategory}
+			/>
+
 			<div className="portfolios-wrapper">
 				<CryptoTable
 					columns={[
@@ -55,7 +82,23 @@ const Profile = () => {
 						"Profit/Loss",
 						"Followers",
 					]}
-				></CryptoTable>
+				>
+					{isLoading ? (
+						<div className="loading">
+							<Loader />
+						</div>
+					) : noResultsMessage !== "" ? (
+						<h6 className="no-portfolios">{noResultsMessage}</h6>
+					) : (
+						portfolios.map((portfolio, index) => (
+							<PortfolioTableRow
+								portfolio={portfolio}
+								key={portfolio.id}
+								index={index + 1}
+							/>
+						))
+					)}
+				</CryptoTable>
 			</div>
 		</section>
 	);

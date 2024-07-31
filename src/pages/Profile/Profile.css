@@ -33,7 +33,7 @@
 	list-style: none;
 }
 
-.profile ul li:first-child {
+.profile .list-wrapper ul li:first-child {
 	color: var(--dark-gray);
 }
 
@@ -49,5 +49,4 @@
 
 .profile .portfolios-title {
 	text-align: center;
-	margin-bottom: 1rem;
 }
