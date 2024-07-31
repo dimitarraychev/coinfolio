@@ -9,6 +9,7 @@ import {
 	updateDoc,
 	deleteDoc,
 	where,
+	limit,
 } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { portfolioCategoriesEnum } from "../constants/categories";
@@ -46,8 +47,10 @@ export const getPortfolioById = async (portfolioId) => {
 	return portfolio;
 };
 
-export const getPortfolios = async (category, userId) => {
+export const getPortfolios = async (category, userId, page) => {
 	const portfoliosRef = collection(db, PORTFOLIOS_COLLECTION_ID);
+	const totalLimit = page * 5;
+	const limitQuery = limit(totalLimit);
 
 	let queryParams = orderBy("createdOn", "desc");
 	switch (category) {
@@ -67,18 +70,18 @@ export const getPortfolios = async (category, userId) => {
 			queryParams = orderBy("createdOn", "desc");
 			break;
 	}
-
-	const myQuery = query(portfoliosRef, queryParams);
+	const myQuery = query(portfoliosRef, queryParams, limitQuery);
 
 	try {
 		const snapshot = await getDocs(myQuery);
-		const result = [];
+		const reachedLastPage = snapshot.docs.length < totalLimit;
+		const portfolios = [];
 
 		snapshot.forEach((doc) => {
-			result.push({ id: doc.id, ...doc.data() });
+			portfolios.push({ id: doc.id, ...doc.data() });
 		});
 
-		return result;
+		return { portfolios, reachedLastPage };
 	} catch (error) {
 		throw error;
 	}

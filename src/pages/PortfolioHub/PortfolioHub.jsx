@@ -1,4 +1,6 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { useInView } from "react-intersection-observer";
 
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
@@ -13,6 +15,7 @@ import useGetPorfolios from "../../hooks/useGetPortfolios";
 
 const PortfolioHub = () => {
 	const defaultCategory = "newest";
+	const { ref, inView } = useInView();
 
 	const {
 		portfolios,
@@ -22,7 +25,9 @@ const PortfolioHub = () => {
 		hasToLogin,
 		hasNoFollowing,
 		hasNoOwned,
+		isLastPage,
 		changeCategory,
+		changePage,
 	} = useGetPorfolios(defaultCategory);
 
 	const noResultsMessage = hasNoFollowing
@@ -34,6 +39,12 @@ const PortfolioHub = () => {
 		: hasToLogin
 		? "Please login to view this category."
 		: "";
+
+	useEffect(() => {
+		if (inView && !isLastPage) {
+			changePage((prevPage) => prevPage + 1);
+		}
+	}, [inView]);
 
 	return (
 		<section className="hub">
@@ -72,11 +83,7 @@ const PortfolioHub = () => {
 						"Followers",
 					]}
 				>
-					{isLoading ? (
-						<div className="loading">
-							<Loader />
-						</div>
-					) : noResultsMessage !== "" ? (
+					{!isLoading && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
@@ -86,6 +93,11 @@ const PortfolioHub = () => {
 								index={index + 1}
 							/>
 						))
+					)}
+					{!isLastPage && (
+						<div ref={ref} className="loading">
+							<Loader />
+						</div>
 					)}
 				</CryptoTable>
 			</div>

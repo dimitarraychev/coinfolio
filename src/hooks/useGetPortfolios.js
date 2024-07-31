@@ -12,7 +12,13 @@ const useGetPorfolios = (defaultCategory) => {
 
 	const { currentUser, isAuthenticated } = useAuthContext();
 	const [portfolios, setPortfolios] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
+	const [page, setPage] = useState(1);
+	const [isLastPage, setIsLastPage] = useState(false);
+
+	const changePage = (value) => {
+		if (!isLoading) setPage(value);
+	};
 
 	const hasNoPortfolios = portfolios.length < 1;
 
@@ -37,10 +43,13 @@ const useGetPorfolios = (defaultCategory) => {
 	const getPortfoliosData = async () => {
 		setIsLoading(true);
 		try {
-			const portfolios = await getPortfolios(
+			const { portfolios, reachedLastPage } = await getPortfolios(
 				category || defaultCategory,
-				currentUser?.uid
+				currentUser?.uid,
+				page
 			);
+
+			setIsLastPage(reachedLastPage);
 			setPortfolios(portfolios);
 		} catch (error) {
 			toast.error(error);
@@ -57,7 +66,7 @@ const useGetPorfolios = (defaultCategory) => {
 
 	useEffect(() => {
 		getPortfoliosData();
-	}, [category, isAuthenticated]);
+	}, [category, page, isAuthenticated]);
 
 	return {
 		portfolios,
@@ -67,7 +76,9 @@ const useGetPorfolios = (defaultCategory) => {
 		hasToLogin,
 		hasNoFollowing,
 		hasNoOwned,
+		isLastPage,
 		changeCategory,
+		changePage,
 	};
 };
 
