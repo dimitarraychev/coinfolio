@@ -151,13 +151,13 @@
 
 	.portfolio-table ._allocation,
 	.table-layout ._7d-change,
-	.table-header ._7d-change._24h-change,
+	.table-header ._7d-change,
 	.portfolio-table .total-allocation,
 	.portfolio-coin-table ._price {
 		display: none;
 	}
 
-	.table-layout .profit-loss-wrapper p:first-child,
+	.table-layout .profit-loss-wrapper p,
 	.table-layout.six-col ._24h-change {
 		display: flex;
 		flex-direction: column-reverse;
