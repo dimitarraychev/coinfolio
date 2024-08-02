@@ -35,6 +35,9 @@ const Login = () => {
 					<img src={loginIcon} alt="login" />
 					Login
 				</h2>
+				<p className="auth-subheader">
+					Welcome back, please enter your credentials
+				</p>
 
 				<label htmlFor="email">Email:</label>
 				<input

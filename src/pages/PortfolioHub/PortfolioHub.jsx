@@ -62,7 +62,10 @@ const PortfolioHub = () => {
 					</p>
 				</div>
 				<Link to={"/hub/create"}>
-					<Button text="create portfolio"></Button>
+					<Button text="create portfolio*"></Button>
+					<p className="disclaimer">
+						*Limited to current top 250 coins
+					</p>
 				</Link>
 			</div>
 

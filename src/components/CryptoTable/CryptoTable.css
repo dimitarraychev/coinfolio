@@ -11,7 +11,7 @@
 .table-header,
 .table-layout {
 	display: grid;
-	grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1.5fr;
+	grid-template-columns: 0.2fr 1.5fr 1fr 1fr 1.5fr;
 	padding: 1rem 0;
 	align-items: center;
 	border-bottom: 1px solid var(--separator-line);
@@ -23,7 +23,7 @@
 
 .table-header.six-col,
 .table-layout.six-col {
-	grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1fr 1.5fr;
+	grid-template-columns: 0.2fr 1.5fr 1fr 1fr 1fr 1.5fr;
 }
 
 .table-layout .name-wrapper,
@@ -81,7 +81,7 @@
 }
 
 .table-layout div .coin-img {
-	height: 2.5em;
+	height: 2.5rem;
 	aspect-ratio: 1/1;
 }
 
@@ -106,7 +106,7 @@
 @media (max-width: 900px) {
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
+		grid-template-columns: 0.2fr 1.5fr 1fr 1fr;
 	}
 
 	.table-header ._coin-profit-loss,
@@ -122,17 +122,21 @@
 	.table-layout,
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
+		grid-template-columns: 0.2fr 1.5fr 1fr 1fr;
 	}
 
 	.table-header.six-col,
 	.table-layout.six-col {
-		grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1fr;
+		grid-template-columns: 0.2fr 1.5fr 1fr 1fr 1fr;
 	}
 
 	.table-header ._market-cap,
 	.coin-table .table-layout .last-column {
 		display: none;
+	}
+
+	.table-layout div .coin-img {
+		height: 2rem;
 	}
 }
 
@@ -141,12 +145,12 @@
 	.table-layout,
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.3fr 1.5fr 1fr;
+		grid-template-columns: 0.2fr 1.5fr 1fr;
 	}
 
 	.table-header.six-col,
 	.table-layout.six-col {
-		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
+		grid-template-columns: 0.2fr 1.5fr 1fr 1fr;
 	}
 
 	.portfolio-table ._allocation,

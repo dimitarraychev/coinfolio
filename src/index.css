@@ -130,6 +130,14 @@ section.auth form {
 
 section.auth form .page-header {
 	align-self: center;
+	margin-bottom: 0;
+}
+
+.auth-subheader {
+	color: var(--dark-gray);
+	align-self: center;
+	text-align: center;
+	margin: 0.5rem 0 2rem 0;
 }
 
 section.auth .form-input {
@@ -149,7 +157,7 @@ section.auth .auth-img {
 
 section.auth form .link {
 	align-self: center;
-	margin-top: 0.3rem;
+	margin-top: 0.75rem;
 }
 
 section.auth form .link span {
@@ -171,28 +179,6 @@ section.auth form .actions-wrapper {
 
 section.auth form .remember-me {
 	display: flex;
-}
-
-.remember-me input[type="checkbox"] {
-	appearance: none;
-	-webkit-appearance: none;
-	-moz-appearance: none;
-	width: 1rem;
-	aspect-ratio: 1/1;
-	border: 2px solid var(--light-gray);
-	background-color: transparent;
-	cursor: pointer;
-	position: relative;
-	border-radius: 0.3rem;
-	margin-right: 0.1rem;
-}
-
-.remember-me input[type="checkbox"]:checked::before {
-	content: "✔";
-	position: absolute;
-	top: -0.25rem;
-	left: 0.04rem;
-	scale: 1.2;
 }
 
 section.auth form .remember-me input:hover,

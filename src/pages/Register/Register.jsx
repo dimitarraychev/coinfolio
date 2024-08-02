@@ -33,6 +33,9 @@ const Register = () => {
 					<img src={registerIcon} alt="register" />
 					Register
 				</h2>
+				<p className="auth-subheader">
+					Welcome, please fill in your details to proceed
+				</p>
 
 				<label htmlFor="username">Username:</label>
 				<input

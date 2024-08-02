@@ -19,7 +19,7 @@ export const buttonIcons = [
 		svg: followingIcon,
 	},
 	{
-		text: ["create portfolio", "add coin"],
+		text: ["create portfolio*", "add coin"],
 		svg: plusIcon,
 	},
 	{
