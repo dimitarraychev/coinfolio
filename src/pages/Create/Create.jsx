@@ -89,7 +89,14 @@ const Create = () => {
 				/>
 
 				<CryptoTable
-					columns={["#", "Coins", "Price", "Change", "Allocation"]}
+					columns={[
+						"#",
+						"Coins",
+						"Price",
+						"Coin Profit/Loss",
+						"Allocation",
+					]}
+					type={"portfolio-coin"}
 				>
 					{portfolio.allocations.length > 0 &&
 						matchingCoins.map((coin) => (

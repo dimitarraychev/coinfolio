@@ -1,8 +1,8 @@
 import "./CryptoTable.css";
 
-const CryptoTable = ({ columns, children }) => {
+const CryptoTable = ({ columns, children, type }) => {
 	return (
-		<div className="crypto-table">
+		<div className={"crypto-table " + type + "-table"}>
 			<div
 				className={
 					columns.length <= 5
@@ -13,11 +13,11 @@ const CryptoTable = ({ columns, children }) => {
 				{columns.map((col) => (
 					<p
 						className={
-							col.includes("Change")
-								? "change"
-								: col.includes("Profit/Loss")
-								? "profit-loss"
-								: ""
+							"_" +
+							col
+								.replace("/", "-")
+								.replace(" ", "-")
+								.toLowerCase()
 						}
 						key={col}
 					>

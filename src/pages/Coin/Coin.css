@@ -38,6 +38,10 @@ section.coin-details {
 	color: var(--dark-gray);
 }
 
+.coin-details-info ul li:last-child {
+	text-align: right;
+}
+
 .coin-details .statistics-title {
 	text-align: center;
 }
@@ -48,7 +52,7 @@ section.coin-details {
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 0;
-	margin: 0 auto 2em auto;
+	margin: 2rem auto;
 }
 
 .coin-details .current-price .percentage {
@@ -58,4 +62,24 @@ section.coin-details {
 .coin-details .arrow {
 	height: 1em;
 	aspect-ratio: 1/1;
+}
+
+@media (max-width: 1024px) {
+	section.coin-details {
+		padding: 1rem 1rem 2rem 1rem;
+	}
+
+	.coin-details-chart {
+		width: 100%;
+	}
+
+	.coin-details-info {
+		width: 60%;
+	}
+}
+
+@media (max-width: 700px) {
+	.coin-details-info {
+		width: 90%;
+	}
 }

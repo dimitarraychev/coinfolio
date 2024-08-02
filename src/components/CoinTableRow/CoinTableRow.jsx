@@ -12,12 +12,16 @@ const CoinTableRow = ({ coin, allocation }) => {
 		? coin.price_change_alltime[currency.name] >= 0
 		: coin.price_change_percentage_24h >= 0;
 
+	const isPositivePriceChange7d =
+		coin.price_change_percentage_7d_in_currency >= 0;
+
 	return (
 		<Link
 			to={`/explore/${coin.id}`}
 			className={allocation ? "table-layout" : "table-layout six-col"}
 		>
 			<p>{coin.market_cap_rank}</p>
+
 			<div>
 				<img src={coin.image} alt={coin.symbol} className="coin-img" />
 				<div className="name-wrapper">
@@ -25,23 +29,25 @@ const CoinTableRow = ({ coin, allocation }) => {
 					<p className="symbol">{coin.symbol.toUpperCase()}</p>
 				</div>
 			</div>
-			<p>
+
+			<p className="_price">
 				{currency.symbol}
 				{formatPrice(coin.current_price)}
 			</p>
+
 			{!allocation && (
 				<p
 					className={
-						coin.price_change_percentage_7d_in_currency >= 0
-							? " change green"
-							: "change red"
+						coin.price_change_percentage_24h >= 0
+							? "_24h-change green"
+							: "_24h-change red"
 					}
 				>
-					{formatPrice(coin.price_change_percentage_7d_in_currency)}%
+					{formatPrice(coin.price_change_percentage_24h)}%
 					<img
 						className="arrow"
 						src={
-							coin.price_change_percentage_7d_in_currency >= 0
+							coin.price_change_percentage_24h >= 0
 								? arrowUp
 								: arrowDown
 						}
@@ -51,7 +57,7 @@ const CoinTableRow = ({ coin, allocation }) => {
 			)}
 
 			{allocation ? (
-				<div className="profit-loss-wrapper">
+				<div className="coin-profit-loss-wrapper">
 					<p
 						className={
 							isPositivePriceChange
@@ -71,8 +77,8 @@ const CoinTableRow = ({ coin, allocation }) => {
 					<p
 						className={
 							isPositivePriceChange
-								? "change green"
-								: "change red"
+								? "_alltime-change green"
+								: "_alltime-change red"
 						}
 					>
 						{formatPrice(coin.price_change_alltime[currency.name])}%
@@ -86,17 +92,20 @@ const CoinTableRow = ({ coin, allocation }) => {
 			) : (
 				<p
 					className={
-						isPositivePriceChange ? " change green" : "change red"
+						isPositivePriceChange7d
+							? "_7d-change green"
+							: "_7d-change red"
 					}
 				>
-					{formatPrice(coin.price_change_percentage_24h)}%
+					{formatPrice(coin.price_change_percentage_7d_in_currency)}%
 					<img
 						className="arrow"
-						src={isPositivePriceChange ? arrowUp : arrowDown}
+						src={isPositivePriceChange7d ? arrowUp : arrowDown}
 						alt="arrow"
 					/>
 				</p>
 			)}
+
 			{allocation ? (
 				<div className="last-column">
 					<p>

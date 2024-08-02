@@ -22,6 +22,10 @@
 	align-items: center;
 }
 
+.modal-wrapper p {
+	text-align: center;
+}
+
 .modal-wrapper p ~ p {
 	color: var(--dark-gray);
 	font-size: 0.8em;
@@ -29,13 +33,15 @@
 	text-wrap: wrap;
 }
 
-.modal-wrapper p {
-	text-align: center;
-}
-
 .modal-wrapper .btn-wrapper {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+}
+
+@media (max-width: 500px) {
+	.modal-wrapper {
+		margin: 0 1rem;
+	}
 }

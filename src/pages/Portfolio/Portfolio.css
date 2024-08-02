@@ -2,20 +2,18 @@ section.portfolio {
 	padding: 2rem 2rem 4rem 2rem;
 	display: flex;
 	align-items: flex-start;
-	justify-content: center;
-	gap: 3rem;
+	justify-content: space-around;
 }
 
 .portfolio .portfolio-assets {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	flex: 0 0 60%;
 }
 
 .portfolio-chart {
 	height: 40vh;
-	width: 40vw;
+	width: 45vw;
 }
 
 .portfolio img.arrow {
@@ -37,7 +35,7 @@ section.portfolio {
 .portfolio .remove-coin-img {
 	position: absolute;
 	top: calc(50% - 1.25rem);
-	right: -2.5rem;
+	left: -2.5rem;
 	height: 2.5rem;
 	aspect-ratio: 1/1;
 	cursor: pointer;
@@ -48,7 +46,39 @@ section.portfolio {
 }
 
 .portfolio .crypto-table {
-	width: 100%;
-	margin: 0 auto 0.75rem auto;
-	padding-right: 2.5rem;
+	margin-bottom: 1rem;
+}
+
+@media (max-width: 1024px) {
+	section.portfolio {
+		padding: 1rem 1rem 2rem 1rem;
+		flex-direction: column;
+		gap: 1rem;
+	}
+
+	.portfolio-chart {
+		width: 66vw;
+	}
+
+	.portfolio .portfolio-assets {
+		margin: auto;
+	}
+}
+
+@media (max-width: 700px) {
+	.portfolio-chart {
+		width: 90vw;
+	}
+
+	.portfolio .remove-coin-img {
+		top: calc(50% - 0.9rem);
+		left: -2rem;
+		height: 2rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.portfolio-chart {
+		height: 68vw;
+	}
 }

@@ -82,6 +82,7 @@ const PortfolioHub = () => {
 						"Profit/Loss",
 						"Followers",
 					]}
+					type={"portfolio"}
 				>
 					{!isLoading && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>

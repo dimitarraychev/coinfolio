@@ -21,6 +21,7 @@ import NotFound from "./pages/NotFound/NotFound";
 import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AuthRedirect from "./components/AuthRedirect/AuthRedirect";
+import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
 
 const App = () => {
 	const {
@@ -76,6 +77,7 @@ const App = () => {
 				onConfirm={confirmAction}
 			/>
 			<Footer />
+			<NavbarMobile />
 		</div>
 	);
 };

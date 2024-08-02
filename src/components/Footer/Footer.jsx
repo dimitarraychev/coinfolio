@@ -16,41 +16,45 @@ const Footer = () => {
 	return (
 		<div className="footer">
 			<div className="footer-about">
-				<img src={logo} alt="logo" className="logo" />
-				<p className="motto">
-					Stay Ahead In The Crypto Market With Our Platform
-				</p>
+				<div className="footer-about-wrapper">
+					<img src={logo} alt="logo" className="logo" />
+					<p className="motto">
+						Stay Ahead In The Crypto Market With Our Platform
+					</p>
 
-				<div className="logos-wrapper">
-					<Link
-						to={"https://github.com/dimitarraychev"}
-						target="_blank"
-					>
-						<img
-							src={githubLogo}
-							alt="github"
-							className="github-link"
-						/>
-					</Link>
+					<div className="logos-wrapper">
+						<Link
+							to={"https://github.com/dimitarraychev"}
+							target="_blank"
+						>
+							<img
+								src={githubLogo}
+								alt="github"
+								className="github-link"
+							/>
+						</Link>
 
-					<Link
-						to={"https://www.linkedin.com/in/dimitaraychev/"}
-						target="_blank"
-					>
-						<img src={linkedInLogo} alt="linkedin" />
-					</Link>
+						<Link
+							to={"https://www.linkedin.com/in/dimitaraychev/"}
+							target="_blank"
+						>
+							<img src={linkedInLogo} alt="linkedin" />
+						</Link>
+					</div>
 				</div>
 
-				<p className="coingecko">
-					Powered by{" "}
-					<img
-						src={coinGeckoLogo}
-						alt="coinGecko"
-						className="coingecko-logo"
-					/>
-				</p>
+				<div className="footer-about-wrapper">
+					<p className="coingecko">
+						Powered by{" "}
+						<img
+							src={coinGeckoLogo}
+							alt="coinGecko"
+							className="coingecko-logo"
+						/>
+					</p>
 
-				<p>Copyright @ 2024, CoinFol.io - All Rights Reserved.</p>
+					<p>Copyright @ 2024, CoinFol.io - All Rights Reserved.</p>
+				</div>
 			</div>
 
 			<div className="footer-right">

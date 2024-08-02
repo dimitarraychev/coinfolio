@@ -59,7 +59,7 @@ const Rankings = () => {
 			</h2>
 
 			<div className="market-data">
-				<div className="data-wrapper">
+				<div className="data-wrapper market-cap">
 					<p className="label">Global Market Cap 24H: </p>
 
 					{!globalMarketData.data ? (
@@ -117,6 +117,7 @@ const Rankings = () => {
 					"7d Change",
 					"Market Cap",
 				]}
+				type={"coin"}
 			>
 				{displayCoins.map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />

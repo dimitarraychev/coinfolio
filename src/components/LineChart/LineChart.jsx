@@ -12,6 +12,14 @@ const LineChart = ({ historicalData }) => {
 			textStyle: { color: "#FFF" },
 		},
 		lineWidth: 5,
+		pointSize: 10,
+		legend: {
+			position: "labeled",
+		},
+		chartArea: {
+			top: "10%",
+			height: "80%",
+		},
 	};
 
 	useEffect(() => {

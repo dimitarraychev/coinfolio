@@ -11,7 +11,15 @@ const RankingsSection = ({ allCoins }) => {
 			<h2>Top Cryptocurrencies By Market Cap</h2>
 
 			<CryptoTable
-				columns={["#", "Coins", "Price", "24H Change", "Market Cap"]}
+				columns={[
+					"#",
+					"Coins",
+					"Price",
+					"24h Change",
+					"7d Change",
+					"Market Cap",
+				]}
+				type={"coin"}
 			>
 				{allCoins.slice(0, 3).map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />

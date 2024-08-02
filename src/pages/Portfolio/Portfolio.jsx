@@ -77,9 +77,10 @@ const Portfolio = () => {
 						"#",
 						"Coins",
 						"Price",
-						"Profit/Loss",
+						"Coin Profit/Loss",
 						"Allocation",
 					]}
+					type={"portfolio-coin"}
 				>
 					{matchingCoins.map((coin) =>
 						isEditMode ? (

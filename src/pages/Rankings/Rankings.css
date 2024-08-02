@@ -22,7 +22,23 @@
 	aspect-ratio: 1/1;
 }
 
-.rankings .crypto-table {
-	width: 80%;
-	margin: auto;
+@media (max-width: 1024px) {
+	.rankings {
+		padding: 1rem 1rem 2rem 1rem;
+	}
+
+	.rankings .market-data {
+		width: 80%;
+	}
+}
+
+@media (max-width: 700px) {
+	.rankings .market-data {
+		width: 90%;
+		flex-wrap: wrap;
+	}
+
+	.rankings .data-wrapper.market-cap {
+		flex: 1 1 100%;
+	}
 }

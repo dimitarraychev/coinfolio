@@ -1,3 +1,8 @@
+.crypto-table {
+	width: 80%;
+	margin: auto;
+}
+
 .crypto-table .arrow {
 	height: 1em;
 	aspect-ratio: 1/1;
@@ -7,7 +12,7 @@
 .table-layout {
 	display: grid;
 	grid-template-columns: 0.3fr 2fr 1fr 1fr 1.5fr;
-	padding: 1rem 1.2rem;
+	padding: 1rem 0;
 	align-items: center;
 	border-bottom: 1px solid var(--separator-line);
 	animation: appear linear;
@@ -42,8 +47,10 @@
 	filter: brightness(1.2);
 }
 
-.table-header .change,
-.table-layout .change {
+.table-header ._7d-change,
+.table-layout ._7d-change,
+.table-header ._24h-change,
+.table-layout ._24h-change {
 	text-align: center;
 }
 
@@ -53,6 +60,8 @@
 	justify-self: flex-end;
 }
 
+.table-layout .allocation-last-column,
+.table-layout .followers,
 .table-layout .last-column {
 	display: flex;
 	flex-direction: column;
@@ -76,13 +85,79 @@
 	aspect-ratio: 1/1;
 }
 
-.table-header .profit-loss {
+.table-header ._coin-profit-loss,
+.table-header ._profit-loss {
 	text-align: right;
 }
 
+.table-layout .coin-profit-loss-wrapper,
 .table-layout .profit-loss-wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-end;
 	gap: 0.1em;
+}
+@media (max-width: 1024px) {
+	.crypto-table {
+		width: 90%;
+	}
+}
+
+@media (max-width: 900px) {
+	.table-header,
+	.table-layout {
+		grid-template-columns: 0.3fr 2fr 1fr 1fr;
+	}
+
+	.table-header ._coin-profit-loss,
+	.table-layout .coin-profit-loss-wrapper {
+		display: none;
+	}
+
+	.table-header ._followers,
+	.table-layout .followers {
+		display: none;
+	}
+}
+
+@media (max-width: 700px) {
+	.table-header,
+	.table-layout,
+	.table-header,
+	.table-layout {
+		grid-template-columns: 0.3fr 2fr 1fr;
+	}
+
+	.table-header.six-col,
+	.table-layout.six-col {
+		grid-template-columns: 0.3fr 2fr 1fr 1fr 1fr;
+	}
+
+	.portfolio-table ._allocation,
+	.portfolio-table .total-allocation {
+		text-align: right;
+	}
+
+	.portfolio-coin-table ._price {
+		display: none;
+	}
+
+	.table-header ._market-cap,
+	.table-header ._profit-loss,
+	.coin-table .table-layout .last-column,
+	.table-layout .profit-loss-wrapper {
+		display: none;
+	}
+}
+
+@media (max-width: 500px) {
+	.table-header.six-col,
+	.table-layout.six-col {
+		grid-template-columns: 0.3fr 2fr 1fr 1fr;
+	}
+
+	.table-layout ._7d-change,
+	.table-header ._7d-change {
+		display: none;
+	}
 }

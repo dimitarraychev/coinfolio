@@ -82,6 +82,7 @@ const Profile = () => {
 						"Profit/Loss",
 						"Followers",
 					]}
+					type={"portfolio"}
 				>
 					{isLoading ? (
 						<div className="loading">

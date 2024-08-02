@@ -71,3 +71,21 @@
 .portfolio .info ul li:first-child {
 	color: var(--dark-gray);
 }
+
+.portfolio .info ul li:last-child {
+	text-align: right;
+}
+
+@media (max-width: 1024px) {
+	.portfolio .portfolio-details {
+		margin: auto;
+		width: 70%;
+	}
+}
+
+@media (max-width: 700px) {
+	.portfolio .portfolio-details {
+		margin: auto;
+		width: 90%;
+	}
+}

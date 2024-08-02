@@ -15,12 +15,14 @@ section.hero {
 
 section.hero .img-right {
 	animation: slideLeft 0.5s ease-in-out forwards, bounce 2s infinite 0.5s;
-	height: 27vw;
+	width: 27vw;
+	aspect-ratio: 1/1;
 }
 
 section.hero .img-left {
 	animation: slideRight 0.5s ease-in-out forwards, bounce 1.8s infinite 0.5s;
-	height: 27vw;
+	width: 27vw;
+	aspect-ratio: 1/1;
 }
 
 section.hero .hero-text {
@@ -46,11 +48,11 @@ section.home-rankings {
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	margin-bottom: 5rem;
+	margin-bottom: 2rem;
 }
 
-section.home-rankings .crypto-table {
-	width: 80%;
+section.home-rankings h2 {
+	text-align: center;
 }
 
 section.home-rankings .home-btn-rankings {
@@ -62,8 +64,9 @@ section.home-portfolio {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	max-width: 70%;
+	width: 60%;
 	margin: 0 auto;
+	padding: 1rem 0;
 }
 
 section.home-explore {
@@ -83,8 +86,9 @@ section.home-portfolio h2 {
 	margin-bottom: 1rem;
 }
 
-section.home .home-section-img {
-	height: 25vw;
+.home .home-section-img {
+	width: 27vw;
+	aspect-ratio: 1/1;
 }
 
 .home-portfolio-text {
@@ -117,11 +121,11 @@ section.home .home-section-img {
 
 section.home-cta {
 	width: 80%;
-	margin: 1rem auto;
-	padding: 3rem;
+	margin: 0 auto;
+	padding: 2rem;
 	display: flex;
 	align-items: center;
-	justify-content: center;
+	justify-content: space-around;
 	gap: 3rem;
 	border-radius: 1rem;
 	background: linear-gradient(to right, var(--deep-blue), var(--light));
@@ -136,4 +140,81 @@ section.home-cta .cta-text {
 
 section.home-cta .cta-text p {
 	max-width: 66ch;
+}
+
+@media (max-width: 1024px) {
+	.home {
+		padding: 1rem 1rem 2rem 1rem;
+		gap: 1rem;
+	}
+
+	section.hero {
+		flex-wrap: wrap;
+		justify-content: space-evenly;
+	}
+
+	section.hero .img-right,
+	section.hero .img-left {
+		order: 1;
+	}
+
+	.home-rankings h2 {
+		margin-bottom: 1rem;
+	}
+
+	section.home-explore,
+	section.home-portfolio {
+		width: 80%;
+	}
+}
+
+@media (max-width: 700px) {
+	.home {
+		gap: 2rem;
+	}
+
+	section.home-explore,
+	section.home-portfolio {
+		flex-direction: column;
+		width: 90%;
+	}
+
+	section.hero .img-right,
+	section.hero .img-left {
+		margin-top: 1rem;
+		width: 38vw;
+	}
+
+	.home .home-section-img {
+		width: 45vw;
+	}
+
+	.home-explore-text,
+	.home-portfolio-text {
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+	}
+
+	section.hero {
+		min-height: 70vh;
+		gap: 1rem;
+	}
+
+	.home-portfolio-text {
+		order: 1;
+	}
+
+	section.home-cta {
+		flex-direction: column;
+		width: 90%;
+		padding: 1.5rem;
+	}
+}
+
+@media (max-width: 500px) {
+	.home .home-section-img {
+		width: 50vw;
+	}
 }

@@ -1,7 +1,8 @@
 .categories-wrapper {
-	width: 70%;
+	width: 80%;
 	margin: 0 auto;
 	padding: 1rem 0 2rem 0;
+	font-size: 0.9rem;
 }
 
 .categories-wrapper .categories {
@@ -26,6 +27,7 @@
 	align-items: center;
 	gap: 0.5rem;
 	list-style: none;
+	font-size: 0.9rem;
 }
 
 .categories-list li {
@@ -44,4 +46,10 @@
 .categories-list li.category-active {
 	border: none;
 	background-color: var(--btn-color);
+}
+
+@media (max-width: 1024px) {
+	.categories-wrapper {
+		width: 90%;
+	}
 }

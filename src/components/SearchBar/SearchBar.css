@@ -1,39 +1,30 @@
 .search {
-	width: 40%;
 	margin: 0 auto 1rem auto;
 	display: flex;
-	flex-direction: column;
 	align-items: center;
-	text-align: center;
+	justify-content: center;
 }
 
 .search form {
+	width: 40ch;
 	padding: 0.5rem;
-	width: 80%;
 	background-color: white;
-	border-radius: 5px;
-	font-size: 20px;
+	border-radius: 0.5rem;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	gap: 10px;
-	color: black;
+	gap: 0.5rem;
 }
 
 .search input {
-	flex: 1;
-	font-size: 16px;
 	outline: none;
 	border: none;
-	padding-left: 10px;
+	color: black;
+	width: 70%;
 }
 
-.search button {
-	border: none;
-	background: #7927ff;
-	color: white;
-	font-size: 16px;
-	padding: 10px 30px;
-	border-radius: 5px;
-	cursor: pointer;
+@media (max-width: 700px) {
+	.search form {
+		width: 90%;
+	}
 }

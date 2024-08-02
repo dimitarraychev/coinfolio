@@ -2,7 +2,8 @@
 	padding: 2rem 2rem 4rem 2rem;
 }
 
-.explore .crypto-table {
-	width: 80%;
-	margin: auto;
+@media (max-width: 1024px) {
+	.explore {
+		padding: 1rem 1rem 2rem 1rem;
+	}
 }

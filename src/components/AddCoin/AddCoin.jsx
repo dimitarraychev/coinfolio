@@ -74,7 +74,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 		<div className="add-coin-overlay" onClick={handleWrapperClick}>
 			<div className="add-coin-wrapper">
 				<div className="modal-header">
-					<h5>Add Transaction</h5>
+					<h5>Add Coin</h5>
 					<img src={closeIcon} alt="close" onClick={onClose} />
 				</div>
 

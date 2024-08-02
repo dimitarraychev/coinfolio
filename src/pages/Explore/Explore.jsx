@@ -45,6 +45,7 @@ const Explore = () => {
 					"7d Change",
 					"Market Cap",
 				]}
+				type={"coin"}
 			>
 				{isLoading ? (
 					<div className="loading">

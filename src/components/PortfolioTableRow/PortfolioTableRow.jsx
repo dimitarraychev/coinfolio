@@ -51,7 +51,7 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 				<p className="owner">@{updatedPortfolio.owner.displayName}</p>
 			</div>
 
-			<p>
+			<p className="total-allocation">
 				{currency.symbol}
 				{formatPrice(updatedPortfolio.totalAllocation[currency.name])}
 			</p>
@@ -81,7 +81,7 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 				</p>
 			</div>
 
-			<div className="last-column">
+			<div className="followers">
 				<p>{updatedPortfolio.followers.length}</p>
 				{isFollowButtonVisible && (
 					<Button

@@ -9,8 +9,20 @@
 
 .not-found-img {
 	height: 30rem;
+	aspect-ratio: 1/1;
 }
 
 .not-found h4 {
 	margin-bottom: 0.5rem;
+}
+
+@media (max-width: 700px) {
+	.not-found {
+		width: 90%;
+		margin: auto;
+	}
+
+	.not-found-img {
+		height: 20rem;
+	}
 }
