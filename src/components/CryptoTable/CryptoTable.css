@@ -11,7 +11,7 @@
 .table-header,
 .table-layout {
 	display: grid;
-	grid-template-columns: 0.3fr 2fr 1fr 1fr 1.5fr;
+	grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1.5fr;
 	padding: 1rem 0;
 	align-items: center;
 	border-bottom: 1px solid var(--separator-line);
@@ -23,7 +23,7 @@
 
 .table-header.six-col,
 .table-layout.six-col {
-	grid-template-columns: 0.3fr 2fr 1fr 1fr 1fr 1.5fr;
+	grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1fr 1.5fr;
 }
 
 .table-layout .name-wrapper,
@@ -106,14 +106,11 @@
 @media (max-width: 900px) {
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.3fr 2fr 1fr 1fr;
+		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
 	}
 
 	.table-header ._coin-profit-loss,
-	.table-layout .coin-profit-loss-wrapper {
-		display: none;
-	}
-
+	.table-layout .coin-profit-loss-wrapper,
 	.table-header ._followers,
 	.table-layout .followers {
 		display: none;
@@ -125,39 +122,45 @@
 	.table-layout,
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.3fr 2fr 1fr;
+		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
 	}
 
 	.table-header.six-col,
 	.table-layout.six-col {
-		grid-template-columns: 0.3fr 2fr 1fr 1fr 1fr;
-	}
-
-	.portfolio-table ._allocation,
-	.portfolio-table .total-allocation {
-		text-align: right;
-	}
-
-	.portfolio-coin-table ._price {
-		display: none;
+		grid-template-columns: 0.3fr 1.5fr 1fr 1fr 1fr;
 	}
 
 	.table-header ._market-cap,
-	.table-header ._profit-loss,
-	.coin-table .table-layout .last-column,
-	.table-layout .profit-loss-wrapper {
+	.coin-table .table-layout .last-column {
 		display: none;
 	}
 }
 
 @media (max-width: 500px) {
-	.table-header.six-col,
-	.table-layout.six-col {
-		grid-template-columns: 0.3fr 2fr 1fr 1fr;
+	.table-header,
+	.table-layout,
+	.table-header,
+	.table-layout {
+		grid-template-columns: 0.3fr 1.5fr 1fr;
 	}
 
+	.table-header.six-col,
+	.table-layout.six-col {
+		grid-template-columns: 0.3fr 1.5fr 1fr 1fr;
+	}
+
+	.portfolio-table ._allocation,
 	.table-layout ._7d-change,
-	.table-header ._7d-change {
+	.table-header ._7d-change._24h-change,
+	.portfolio-table .total-allocation,
+	.portfolio-coin-table ._price {
 		display: none;
+	}
+
+	.table-layout .profit-loss-wrapper p:first-child,
+	.table-layout.six-col ._24h-change {
+		display: flex;
+		flex-direction: column-reverse;
+		align-items: flex-end;
 	}
 }

@@ -34,10 +34,10 @@ const PieChart = ({ allocations, currency }) => {
 		},
 		is3D: true,
 		chartArea: {
-			left: "3%",
+			left: "2%",
 			top: "3%",
 			height: "94%",
-			width: "94%",
+			width: "96%",
 		},
 		legend: {
 			position: "labeled",

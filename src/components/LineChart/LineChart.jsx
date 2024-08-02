@@ -19,6 +19,8 @@ const LineChart = ({ historicalData }) => {
 		chartArea: {
 			top: "10%",
 			height: "80%",
+			left: "10%",
+			width: "80%",
 		},
 	};
 
@@ -41,7 +43,6 @@ const LineChart = ({ historicalData }) => {
 			data={data}
 			options={options}
 			height="100%"
-			legendToggle
 			loader={
 				<div className="loading">
 					<Loader />

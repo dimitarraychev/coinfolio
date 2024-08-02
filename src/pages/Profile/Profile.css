@@ -38,9 +38,8 @@
 	color: var(--dark-gray);
 }
 
-.profile .crypto-table {
-	width: 80%;
-	margin: auto;
+.profile .list-wrapper ul li:last-child {
+	text-align: right;
 }
 
 .profile .portfolios-wrapper {
@@ -55,4 +54,20 @@
 .profile .no-portfolios {
 	text-align: center;
 	margin-top: 1rem;
+}
+
+@media (max-width: 1024px) {
+	section.profile {
+		padding: 1rem 1rem 2rem 1rem;
+	}
+
+	.profile .list-wrapper {
+		width: 60%;
+	}
+}
+
+@media (max-width: 700px) {
+	.profile .list-wrapper {
+		width: 90%;
+	}
 }
