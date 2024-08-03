@@ -10,12 +10,22 @@ const AuthContextProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [isAuthenticated, setIsAuthenticated] = useState(false);
 
+	const updateUserData = () => setShouldRefetch((state) => !state);
+
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				const { uid, email, displayName, photoURL, metadata } = user;
+				const {
+					uid,
+					email,
+					displayName,
+					photoURL,
+					metadata,
+					providerData,
+				} = user;
 
-				if (!displayName) return setShouldRefetch((state) => !state);
+				if (!displayName) return updateUserData();
+				const signInMethod = providerData[0]?.providerId;
 
 				setCurrentUser({
 					uid,
@@ -24,6 +34,7 @@ const AuthContextProvider = ({ children }) => {
 					photoURL,
 					lastSignIn: metadata.lastSignInTime,
 					createdOn: metadata.creationTime,
+					signInMethod,
 				});
 				setIsAuthenticated(true);
 			} else {
@@ -40,6 +51,7 @@ const AuthContextProvider = ({ children }) => {
 		currentUser,
 		isLoading,
 		isAuthenticated,
+		updateUserData,
 	};
 
 	return (
