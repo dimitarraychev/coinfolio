@@ -8,15 +8,21 @@ const CoinContext = createContext();
 
 const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
-	const [usdToEurRate, setUsdToEurRate] = useState([]);
+	const [usdToEurRate, setUsdToEurRate] = useState(1);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
+	const [isLoadingCoins, setIsLoadingCoins] = useState(true);
+	const [isLoadingRate, setIsLoadingRate] = useState(true);
+	const [isError, setIsError] = useState(false);
 
 	const loadAllCoins = async () => {
 		try {
 			const coins = await fetchAllCoins(currency.name);
 			setAllCoins(coins);
-		} catch (err) {
-			toast.error(err);
+		} catch (error) {
+			setIsError(true);
+			toast.error(error.message);
+		} finally {
+			setIsLoadingCoins(false);
 		}
 	};
 
@@ -24,8 +30,11 @@ const CoinContextProvider = ({ children }) => {
 		try {
 			const rate = await getUsdToEurRate();
 			setUsdToEurRate(rate);
-		} catch (err) {
-			toast.error(err);
+		} catch (error) {
+			setIsError(true);
+			toast.error(error.message);
+		} finally {
+			setIsLoadingRate(false);
 		}
 	};
 
@@ -46,6 +55,8 @@ const CoinContextProvider = ({ children }) => {
 	const contextValue = {
 		allCoins,
 		currency,
+		isLoading: isLoadingCoins === true || isLoadingRate === true,
+		isError,
 		setCurrency,
 		convertCurrency,
 	};

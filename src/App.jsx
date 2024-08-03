@@ -22,6 +22,8 @@ import { useConfirmModalContext } from "./context/ConfirmModalContext";
 import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
 import AuthRedirect from "./components/AuthRedirect/AuthRedirect";
 import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
+import { useCoinContext } from "./context/CoinContext";
+import Loader from "./components/Loader/Loader";
 
 const App = () => {
 	const {
@@ -30,6 +32,28 @@ const App = () => {
 		closeConfirmModal,
 		confirmAction,
 	} = useConfirmModalContext();
+	const { isLoading, isError } = useCoinContext();
+
+	if (isLoading) {
+		return (
+			<div className="app">
+				<div className="loading loading-full">
+					<Loader size={"15rem"} />
+				</div>
+			</div>
+		);
+	}
+
+	if (isError) {
+		return (
+			<div className="app">
+				<div className="server-error">
+					<h6>404 server not responding</h6>
+					<h6>Please try again later</h6>
+				</div>
+			</div>
+		);
+	}
 
 	return (
 		<div className="app">
