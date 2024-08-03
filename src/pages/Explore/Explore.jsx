@@ -72,7 +72,7 @@ const Explore = () => {
 								})
 							}
 						>
-							Back to top
+							↑
 						</p>
 					</div>
 				)}

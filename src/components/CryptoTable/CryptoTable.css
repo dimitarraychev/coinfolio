@@ -104,19 +104,19 @@
 	margin-top: 1rem;
 	align-items: center;
 	justify-content: center;
+	gap: 1em;
 }
 
 .crypto-table .end-message {
 	color: var(--dark-gray);
-	flex: 1 1 70%;
+	flex: 1 1 100%;
 	text-align: center;
-	padding-left: 11ch;
+	padding-left: 1ch;
 }
 
 .crypto-table .scroll-top {
 	text-align: right;
 	color: var(--btn-color);
-	text-decoration: underline;
 	cursor: pointer;
 }
 

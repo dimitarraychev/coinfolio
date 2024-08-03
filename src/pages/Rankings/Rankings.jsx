@@ -123,7 +123,7 @@ const Rankings = () => {
 							})
 						}
 					>
-						Back to top
+						↑
 					</p>
 				</div>
 			</CryptoTable>

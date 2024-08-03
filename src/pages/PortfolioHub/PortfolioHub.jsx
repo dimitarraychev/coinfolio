@@ -118,7 +118,7 @@ const PortfolioHub = () => {
 									})
 								}
 							>
-								Back to top
+								↑
 							</p>
 						</div>
 					) : (
