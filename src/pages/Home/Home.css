@@ -51,6 +51,19 @@ section.home-rankings {
 	margin-bottom: 2rem;
 }
 
+section.home-rankings .table-layout:last-child {
+	mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 1) 0%,
+		rgba(0, 0, 0, 0)
+	);
+	-webkit-mask-image: linear-gradient(
+		to bottom,
+		rgba(0, 0, 0, 1) 0%,
+		rgba(0, 0, 0, 0)
+	);
+}
+
 section.home-rankings h2 {
 	text-align: center;
 }
