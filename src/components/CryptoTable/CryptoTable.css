@@ -21,6 +21,28 @@
 	gap: 0.5em;
 }
 
+.table-header p {
+	cursor: pointer;
+	position: relative;
+}
+
+.table-header p.unsortable {
+	cursor: default;
+}
+
+.table-header .hashtag {
+	cursor: default;
+}
+
+.crypto-table .arrow-sort {
+	height: 1em;
+	aspect-ratio: 1/1;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	margin-left: 0.1em;
+}
+
 .table-header.six-col,
 .table-layout.six-col {
 	grid-template-columns: 0.2fr 1.5fr 1fr 1fr 1fr 1.5fr;
@@ -32,6 +54,7 @@
 	flex-direction: column;
 	align-items: flex-start;
 	gap: 0.1em;
+	word-break: break-all;
 }
 
 .table-layout .portfolio-title .owner {
@@ -170,12 +193,12 @@
 	.table-layout,
 	.table-header,
 	.table-layout {
-		grid-template-columns: 0.2fr 1.5fr 1fr;
+		grid-template-columns: 0.2fr 2fr 1fr;
 	}
 
 	.table-header.six-col,
 	.table-layout.six-col {
-		grid-template-columns: 0.2fr 1.5fr 1fr 1fr;
+		grid-template-columns: 0.2fr 2fr 1fr 1fr;
 	}
 
 	.portfolio-table ._allocation,
