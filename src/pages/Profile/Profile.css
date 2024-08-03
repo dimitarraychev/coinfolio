@@ -9,10 +9,23 @@
 	justify-content: center;
 }
 
+.profile .image-wrapper {
+	position: relative;
+}
+
 .profile .profile-img {
 	height: 17rem;
 	aspect-ratio: 1/1;
 	border-radius: 50%;
+}
+
+.profile .edit-profile-img-icon {
+	position: absolute;
+	top: 0;
+	right: 0;
+	height: 2.5rem;
+	aspect-ratio: 1/1;
+	cursor: pointer;
 }
 
 .profile .username {
