@@ -10,7 +10,7 @@ const ButtonGoogle = () => {
 			await googleLogin();
 			navigate("/");
 		} catch (error) {
-			toast.error(error);
+			toast.error(error.message);
 		}
 	};
 

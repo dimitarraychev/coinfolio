@@ -53,7 +53,7 @@ const PortfolioDetails = ({
 
 					navigate("/hub");
 				} catch (error) {
-					toast.error(error);
+					toast.error(error.message);
 				} finally {
 					setIsLoading(false);
 				}

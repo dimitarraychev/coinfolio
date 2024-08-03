@@ -95,7 +95,7 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 				: toast.success(`Success! ${portfolio.title} has been edited.`);
 			portfolioId && navigate(`/hub/${portfolioId}`);
 		} catch (error) {
-			toast.error(error);
+			toast.error(error.message);
 		} finally {
 			setIsSubmitButtonDisabled(false);
 			setIsEditMode(false);

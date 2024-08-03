@@ -38,7 +38,7 @@ const useFollowPortfolio = (portfolio, setFollowers) => {
 			setFollowers(followers);
 			toast.success(message);
 		} catch (error) {
-			toast.error(error);
+			toast.error(error.message);
 		} finally {
 			setIsLoading(false);
 		}

@@ -36,7 +36,7 @@ const useGetPorfolioById = () => {
 
 			portfolio ? setPortfolio(portfolio) : navigate("/404");
 		} catch (error) {
-			toast.error(error);
+			toast.error(error.message);
 			navigate("/404");
 		} finally {
 			setIsLoading(false);

@@ -52,7 +52,7 @@ const useGetPorfolios = (defaultCategory) => {
 			setIsLastPage(reachedLastPage);
 			setPortfolios(portfolios);
 		} catch (error) {
-			toast.error(error);
+			toast.error(error.message);
 		} finally {
 			setIsLoading(false);
 		}

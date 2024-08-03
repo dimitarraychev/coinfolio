@@ -45,7 +45,7 @@ const useGetCoins = (defaultCategory, allCoins, currency) => {
 			const coins = await fetchAllCoins(currency.name, category);
 			setCoins(coins);
 		} catch (error) {
-			toast.error("Error! Failed to fetch coins: ", error);
+			toast.error("Error! Failed to fetch coins: ", error.message);
 		} finally {
 			setIsLoading(false);
 		}
