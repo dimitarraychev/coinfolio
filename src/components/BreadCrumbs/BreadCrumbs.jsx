@@ -46,26 +46,9 @@ const BreadCrumbs = () => {
 
 					if (
 						!routeName &&
-						to.startsWith("/hub/") &&
-						pathnames.length > 1
-					) {
-						routeName = routeCrumbs.find(
-							(route) => route.path === "/hub/:id"
-						)?.name;
-					}
-
-					if (
-						!routeName &&
-						to.startsWith("/explore/") &&
-						pathnames.length > 1
-					) {
-						routeName = pathnames[pathnames.length - 1];
-						routeName = convertKebabCase(routeName);
-					}
-
-					if (
-						!routeName &&
-						to.startsWith("/profile/") &&
+						(to.startsWith("/hub/") ||
+							to.startsWith("/explore/") ||
+							to.startsWith("/profile/")) &&
 						pathnames.length > 1
 					) {
 						routeName = pathnames[pathnames.length - 1];
@@ -96,7 +79,7 @@ const BreadCrumbs = () => {
 				)}
 				{searchQuery && (
 					<li className="crumb">
-						<span>Search</span>
+						<span>Search: {searchQuery}</span>
 					</li>
 				)}
 			</ol>

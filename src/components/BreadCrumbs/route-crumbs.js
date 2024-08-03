@@ -7,6 +7,5 @@ export const routeCrumbs = [
 	{ path: "/explore/:id", name: "Coin" },
 	{ path: "/hub", name: "Hub" },
 	{ path: "/hub/create", name: "Create" },
-	{ path: "/hub/:id", name: "Portfolio" },
 	{ path: "/404", name: "404" },
 ];
