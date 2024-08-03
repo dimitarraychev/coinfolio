@@ -35,7 +35,7 @@ section.portfolio {
 .portfolio .remove-coin-img {
 	position: absolute;
 	top: calc(50% - 1.25rem);
-	left: -2.5rem;
+	right: -2.5rem;
 	height: 2.5rem;
 	aspect-ratio: 1/1;
 	cursor: pointer;
@@ -73,8 +73,8 @@ section.portfolio {
 	}
 
 	.portfolio .remove-coin-img {
-		top: calc(50% - 0.9rem);
-		left: -2rem;
+		top: calc(50% - 1rem);
+		right: -2rem;
 		height: 2rem;
 	}
 }

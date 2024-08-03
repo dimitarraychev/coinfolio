@@ -179,6 +179,10 @@ section.home-cta .cta-text p {
 		width: 90%;
 	}
 
+	section.home-rankings {
+		margin-bottom: 1rem;
+	}
+
 	section.hero .img-right,
 	section.hero .img-left {
 		margin-top: 1rem;
