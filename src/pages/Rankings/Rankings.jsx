@@ -5,6 +5,7 @@ import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 import rankIcon from "../../assets/icons/rank-icon-white.svg";
+import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
@@ -114,17 +115,18 @@ const Rankings = () => {
 					<p className="end-message">
 						That's all for now. Check back soon!
 					</p>
-					<p
-						className="scroll-top"
+					<img
+						src={arrowScroll}
+						alt="top"
+						title="Back To Top"
+						className="scroll-top-image"
 						onClick={() =>
 							window.scrollTo({
 								top: 0,
 								behavior: "smooth",
 							})
 						}
-					>
-						↑
-					</p>
+					/>
 				</div>
 			</CryptoTable>
 		</section>

@@ -4,6 +4,7 @@ import { useInView } from "react-intersection-observer";
 
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
+import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
@@ -109,17 +110,18 @@ const PortfolioHub = () => {
 									create a portfolio!
 								</Link>
 							</p>
-							<p
-								className="scroll-top"
+							<img
+								src={arrowScroll}
+								alt="top"
+								title="Back To Top"
+								className="scroll-top-image"
 								onClick={() =>
 									window.scrollTo({
 										top: 0,
 										behavior: "smooth",
 									})
 								}
-							>
-								↑
-							</p>
+							/>
 						</div>
 					) : (
 						<div ref={ref} className="loading">

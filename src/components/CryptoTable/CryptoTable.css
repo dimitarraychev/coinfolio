@@ -114,10 +114,12 @@
 	padding-left: 1ch;
 }
 
-.crypto-table .scroll-top {
+.crypto-table .scroll-top-image {
 	text-align: right;
 	color: var(--btn-color);
 	cursor: pointer;
+	height: 1em;
+	aspect-ratio: 1/1;
 }
 
 @media (max-width: 1024px) {
