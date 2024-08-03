@@ -84,7 +84,7 @@ const Profile = () => {
 						<li>{currentUser?.lastSignIn}</li>
 					</ul>
 					<ul>
-						<li>Created on</li>
+						<li>Created On</li>
 						<li>{currentUser?.createdOn}</li>
 					</ul>
 				</div>
