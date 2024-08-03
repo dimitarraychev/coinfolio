@@ -97,6 +97,13 @@
 	align-items: flex-end;
 	gap: 0.1em;
 }
+
+.crypto-table .end-message {
+	font-size: 0.9rem;
+	color: var(--dark-gray);
+	text-align: center;
+	margin-top: 1rem;
+}
 @media (max-width: 1024px) {
 	.crypto-table {
 		width: 90%;
