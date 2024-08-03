@@ -98,12 +98,28 @@
 	gap: 0.1em;
 }
 
-.crypto-table .end-message {
+.crypto-table .end-message-wrapper {
 	font-size: 0.9rem;
-	color: var(--dark-gray);
-	text-align: center;
+	display: flex;
 	margin-top: 1rem;
+	align-items: center;
+	justify-content: center;
 }
+
+.crypto-table .end-message {
+	color: var(--dark-gray);
+	flex: 1 1 70%;
+	text-align: center;
+	padding-left: 11ch;
+}
+
+.crypto-table .scroll-top {
+	text-align: right;
+	color: var(--btn-color);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
 @media (max-width: 1024px) {
 	.crypto-table {
 		width: 90%;

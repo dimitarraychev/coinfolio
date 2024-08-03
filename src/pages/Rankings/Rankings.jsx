@@ -110,9 +110,22 @@ const Rankings = () => {
 				{allCoins.map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />
 				))}
-				<p className="end-message">
-					That's all for now. Check back soon!
-				</p>
+				<div className="end-message-wrapper">
+					<p className="end-message">
+						That's all for now. Check back soon!
+					</p>
+					<p
+						className="scroll-top"
+						onClick={() =>
+							window.scrollTo({
+								top: 0,
+								behavior: "smooth",
+							})
+						}
+					>
+						Back to top
+					</p>
+				</div>
 			</CryptoTable>
 		</section>
 	);

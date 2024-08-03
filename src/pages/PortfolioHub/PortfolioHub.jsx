@@ -99,12 +99,28 @@ const PortfolioHub = () => {
 						))
 					)}
 					{isLastPage ? (
-						<p className="end-message">
-							You've reached the end. Keep exploring or{" "}
-							<Link to={"/hub/create"} className="create-link">
-								create a portfolio!
-							</Link>
-						</p>
+						<div className="end-message-wrapper">
+							<p className="end-message">
+								You've reached the end. Keep exploring or{" "}
+								<Link
+									to={"/hub/create"}
+									className="create-link"
+								>
+									create a portfolio!
+								</Link>
+							</p>
+							<p
+								className="scroll-top"
+								onClick={() =>
+									window.scrollTo({
+										top: 0,
+										behavior: "smooth",
+									})
+								}
+							>
+								Back to top
+							</p>
+						</div>
 					) : (
 						<div ref={ref} className="loading">
 							<Loader />
