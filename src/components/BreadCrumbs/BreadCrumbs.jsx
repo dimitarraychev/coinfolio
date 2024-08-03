@@ -74,7 +74,7 @@ const BreadCrumbs = () => {
 
 				{categoryQuery && categoryQuery !== "all" && (
 					<li className="crumb">
-						<span>{convertKebabCase(categoryQuery)}</span>
+						<span>Category: {convertKebabCase(categoryQuery)}</span>
 					</li>
 				)}
 				{searchQuery && (
