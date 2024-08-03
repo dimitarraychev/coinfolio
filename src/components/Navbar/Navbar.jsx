@@ -76,10 +76,14 @@ const Navbar = () => {
 				</select>
 
 				<div className="user" onClick={userMenuHandler}>
-					<p>{currentUser?.displayName || "Guest"}</p>
+					<p>{isAuthenticated ? currentUser.displayName : "Guest"}</p>
 
 					<img
-						src={currentUser?.photoURL || userPlaceholder}
+						src={
+							isAuthenticated
+								? currentUser.photoURL
+								: userPlaceholder
+						}
 						alt="user"
 						className="user-img"
 					/>

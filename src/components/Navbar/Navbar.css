@@ -99,6 +99,7 @@
 	cursor: pointer;
 	border-radius: 50%;
 	margin-left: 0.3rem;
+	object-fit: cover;
 }
 
 .user p {
