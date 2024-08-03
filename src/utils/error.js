@@ -29,8 +29,11 @@ export const inputsErrorHandler = (inputs) => {
 	if (inputs.re_password && inputs.password !== inputs.re_password)
 		return "Error! Uh-oh, password and repeat password do not match.";
 
-	if (inputs.username && inputs.username.length < 3)
-		return "Error! Sorry, username should be at least 3 characters.";
+	if (
+		inputs.username &&
+		(inputs.username.length < 3 || inputs.username.length > 20)
+	)
+		return "Error! Sorry, username should be between 3 and 20 characters.";
 
 	return null;
 };
