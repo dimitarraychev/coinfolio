@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useInView } from "react-intersection-observer";
 
 import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
@@ -17,11 +16,8 @@ import { fetchGlobalMarketData } from "../../api/coinGecko";
 const Rankings = () => {
 	const { allCoins } = useCoinContext();
 	const [globalMarketData, setGlobalMarketData] = useState({});
-	const [displayCoins, setDisplayCoins] = useState([]);
-	const [page, setPage] = useState(1);
-	const { ref, inView } = useInView();
+	const [isLoading, setIsLoading] = useState(true);
 
-	const coinsPerPage = 50;
 	const isPositiveCapChange =
 		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
 
@@ -29,20 +25,12 @@ const Rankings = () => {
 		try {
 			const marketData = await fetchGlobalMarketData(signal);
 			setGlobalMarketData(marketData);
-		} catch (err) {
-			toast.error(err);
+		} catch (error) {
+			toast.error(error.mesage);
+		} finally {
+			setIsLoading(false);
 		}
 	};
-
-	useEffect(() => {
-		setDisplayCoins(allCoins.slice(0, coinsPerPage * page));
-	}, [allCoins, page]);
-
-	useEffect(() => {
-		if (inView && page < 5) {
-			setTimeout(() => setPage((prevPage) => prevPage + 1), 1000);
-		}
-	}, [inView]);
 
 	useEffect(() => {
 		const controller = new AbortController();
@@ -62,7 +50,7 @@ const Rankings = () => {
 				<div className="data-wrapper market-cap">
 					<p className="label">Global Market Cap 24H: </p>
 
-					{!globalMarketData.data ? (
+					{isLoading ? (
 						<Loader />
 					) : (
 						<h3 className={isPositiveCapChange ? "green" : "red"}>
@@ -82,7 +70,7 @@ const Rankings = () => {
 
 				<div className="data-wrapper">
 					<p className="label">BTC Dominance: </p>
-					{!globalMarketData.data ? (
+					{isLoading ? (
 						<Loader />
 					) : (
 						<h3>
@@ -96,7 +84,7 @@ const Rankings = () => {
 
 				<div className="data-wrapper">
 					<p className="label">Active Cryptocurrencies: </p>
-					{!globalMarketData.data ? (
+					{isLoading ? (
 						<Loader />
 					) : (
 						<h3>
@@ -119,14 +107,12 @@ const Rankings = () => {
 				]}
 				type={"coin"}
 			>
-				{displayCoins.map((coin) => (
+				{allCoins.map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />
 				))}
-				{page < 5 && (
-					<div ref={ref} className="loading">
-						<Loader />
-					</div>
-				)}
+				<p className="end-message">
+					That's all for now. Check back soon!
+				</p>
 			</CryptoTable>
 		</section>
 	);
