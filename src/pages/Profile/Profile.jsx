@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Avatar from "react-avatar";
 
 import "./Profile.css";
 import profileIcon from "../../assets/icons/profile-icon.svg";
@@ -17,7 +18,7 @@ import FileUploader from "../../components/FileUploader/FileUploader";
 import { useState } from "react";
 
 const Profile = () => {
-	const { currentUser } = useAuthContext();
+	const { currentUser, isAuthenticated } = useAuthContext();
 	const defaultCategory = "owned";
 	const [isUploaderOpen, setIsUploaderOpen] = useState(false);
 
@@ -47,11 +48,31 @@ const Profile = () => {
 
 			<div className="profile-data">
 				<div className="image-wrapper">
-					<img
-						src={currentUser?.photoURL || userPlaceholder}
-						alt="profile"
-						className={"profile-img"}
-					/>
+					{isAuthenticated ? (
+						currentUser.photoURL ? (
+							<img
+								src={currentUser.photoURL}
+								alt="profile"
+								className="profile-img"
+							/>
+						) : (
+							<Avatar
+								name={currentUser.displayName}
+								className="profile-avatar"
+								round={true}
+								maxInitials={2}
+								size="17rem"
+								textSizeRatio={2.5}
+							/>
+						)
+					) : (
+						<img
+							src={userPlaceholder}
+							alt="profile"
+							className="profile-img"
+						/>
+					)}
+
 					{canChangeProfileImage && (
 						<>
 							<img
