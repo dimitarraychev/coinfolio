@@ -38,6 +38,11 @@
 	margin-top: 1rem;
 }
 
+.hub .create-link {
+	color: var(--btn-color);
+	text-decoration: underline;
+}
+
 @media (max-width: 1024px) {
 	.hub {
 		padding: 1rem 1rem 2rem 1rem;

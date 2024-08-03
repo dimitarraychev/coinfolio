@@ -56,6 +56,12 @@ const Explore = () => {
 						<CoinTableRow coin={coin} key={coin.id} />
 					))
 				)}
+				{!isLoading && (
+					<p className="end-message">
+						That's everything! How about trying a different
+						category?
+					</p>
+				)}
 			</CryptoTable>
 		</section>
 	);

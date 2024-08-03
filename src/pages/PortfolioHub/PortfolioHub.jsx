@@ -98,7 +98,14 @@ const PortfolioHub = () => {
 							/>
 						))
 					)}
-					{!isLastPage && (
+					{isLastPage ? (
+						<p className="end-message">
+							You've reached the end. Keep exploring or{" "}
+							<Link to={"/hub/create"} className="create-link">
+								create a portfolio!
+							</Link>
+						</p>
+					) : (
 						<div ref={ref} className="loading">
 							<Loader />
 						</div>
