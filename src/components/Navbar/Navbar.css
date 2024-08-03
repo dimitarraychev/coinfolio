@@ -55,6 +55,10 @@
 	position: relative;
 }
 
+.user-username {
+	word-break: break-all;
+}
+
 .user-menu {
 	position: absolute;
 	top: 110%;

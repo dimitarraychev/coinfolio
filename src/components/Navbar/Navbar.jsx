@@ -76,7 +76,9 @@ const Navbar = () => {
 				</select>
 
 				<div className="user" onClick={userMenuHandler}>
-					<p>{isAuthenticated ? currentUser.displayName : "Guest"}</p>
+					<p className="username">
+						{isAuthenticated ? currentUser.displayName : "Guest"}
+					</p>
 
 					<img
 						src={
