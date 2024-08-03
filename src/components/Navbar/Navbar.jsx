@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
+import Avatar from "react-avatar";
 
 import "./Navbar.css";
 import logo from "../../assets/logo.svg";
@@ -80,15 +81,30 @@ const Navbar = () => {
 						{isAuthenticated ? currentUser.displayName : "Guest"}
 					</p>
 
-					<img
-						src={
-							isAuthenticated
-								? currentUser.photoURL
-								: userPlaceholder
-						}
-						alt="user"
-						className="user-img"
-					/>
+					{isAuthenticated ? (
+						currentUser.photoURL ? (
+							<img
+								src={currentUser.photoURL}
+								alt="user"
+								className="user-img"
+							/>
+						) : (
+							<Avatar
+								name={currentUser.displayName}
+								className="user-avatar"
+								round={true}
+								maxInitials={2}
+								size="2.5rem"
+								textSizeRatio={2.5}
+							/>
+						)
+					) : (
+						<img
+							src={userPlaceholder}
+							alt="user"
+							className="user-img"
+						/>
+					)}
 
 					<ul
 						className={isMenuShown ? "user-menu show" : "user-menu"}
