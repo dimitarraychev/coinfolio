@@ -9,6 +9,11 @@
 	font-size: 0.9rem;
 }
 
+.footer a:hover,
+.footer .logout:hover {
+	color: var(--btn-color);
+}
+
 .footer-about,
 .footer-about-wrapper {
 	display: flex;
@@ -51,6 +56,10 @@
 
 .footer-about .logos-wrapper img.github-link {
 	height: 1.8rem;
+}
+
+.footer-about .logos-wrapper img:hover {
+	opacity: 0.8;
 }
 
 .footer-right {
