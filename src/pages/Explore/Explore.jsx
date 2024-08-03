@@ -9,6 +9,7 @@ import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import SearchBar from "../../components/SearchBar/SearchBar";
 import useGetCoins from "../../hooks/useGetCoins";
+import useSortTable from "../../hooks/useSortTable";
 import { exploreCategories } from "../../constants/categories";
 
 const Explore = () => {
@@ -17,6 +18,13 @@ const Explore = () => {
 
 	const { coins, category, isLoading, categoriesHandler, searchHandler } =
 		useGetCoins(defaultCategory, allCoins, currency);
+
+	const {
+		sortedCoins,
+		selectedSortField,
+		isAscendingOrder,
+		tableSortHandler,
+	} = useSortTable(coins, "_market-cap");
 
 	return (
 		<section className="explore">
@@ -47,13 +55,17 @@ const Explore = () => {
 					"Market Cap",
 				]}
 				type={"coin"}
+				canSort={true}
+				tableSortHandler={tableSortHandler}
+				selectedSortField={selectedSortField}
+				isAscendingOrder={isAscendingOrder}
 			>
 				{isLoading ? (
 					<div className="loading">
 						<Loader />
 					</div>
 				) : (
-					coins.map((coin) => (
+					sortedCoins.map((coin) => (
 						<CoinTableRow coin={coin} key={coin.id} />
 					))
 				)}

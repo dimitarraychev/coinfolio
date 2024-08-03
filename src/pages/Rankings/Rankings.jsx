@@ -13,11 +13,18 @@ import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
 import Loader from "../../components/Loader/Loader";
 import { formatPrice } from "../../utils/helpers";
 import { fetchGlobalMarketData } from "../../api/coinGecko";
+import useSortTable from "../../hooks/useSortTable";
 
 const Rankings = () => {
 	const { allCoins } = useCoinContext();
 	const [globalMarketData, setGlobalMarketData] = useState({});
 	const [isLoading, setIsLoading] = useState(true);
+	const {
+		sortedCoins,
+		selectedSortField,
+		isAscendingOrder,
+		tableSortHandler,
+	} = useSortTable(allCoins, "_market-cap");
 
 	const isPositiveCapChange =
 		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
@@ -107,8 +114,12 @@ const Rankings = () => {
 					"Market Cap",
 				]}
 				type={"coin"}
+				canSort={true}
+				tableSortHandler={tableSortHandler}
+				selectedSortField={selectedSortField}
+				isAscendingOrder={isAscendingOrder}
 			>
-				{allCoins.map((coin) => (
+				{sortedCoins.map((coin) => (
 					<CoinTableRow coin={coin} key={coin.id} />
 				))}
 				<div className="end-message-wrapper">
