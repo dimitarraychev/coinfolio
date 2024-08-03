@@ -48,3 +48,11 @@ export const resetPassword = async (email) => {
 		throw error;
 	}
 };
+
+export const updateProfileImage = async (imageUrl) => {
+	try {
+		await updateProfile(auth.currentUser, { photoURL: imageUrl });
+	} catch (error) {
+		throw error;
+	}
+};
