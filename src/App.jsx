@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -7,23 +8,24 @@ import Footer from "./components/Footer/Footer";
 import ConfirmModal from "./components/ConfirmModal/ConfirmModal";
 import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
 import BreadCrumbs from "./components/BreadCrumbs/BreadCrumbs";
+import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
+import AuthRedirect from "./components/AuthRedirect/AuthRedirect";
+import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
+import Loader from "./components/Loader/Loader";
 import Home from "./pages/Home/Home";
 import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
 import Explore from "./pages/Explore/Explore";
 import Register from "./pages/Register/Register";
 import Login from "./pages/Login/Login";
-import PortfolioHub from "./pages/PortfolioHub/PortfolioHub";
-import Portfolio from "./pages/Portfolio/Portfolio";
-import Create from "./pages/Create/Create";
-import Profile from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
-import { useConfirmModalContext } from "./context/ConfirmModalContext";
-import ProtectedRoute from "./components/ProtectedRoute/ProtectedRoute";
-import AuthRedirect from "./components/AuthRedirect/AuthRedirect";
-import NavbarMobile from "./components/NavbarMobile/NavbarMobile";
 import { useCoinContext } from "./context/CoinContext";
-import Loader from "./components/Loader/Loader";
+import { useConfirmModalContext } from "./context/ConfirmModalContext";
+
+const PortfolioHub = lazy(() => import("./pages/PortfolioHub/PortfolioHub"));
+const Portfolio = lazy(() => import("./pages/Portfolio/Portfolio"));
+const Create = lazy(() => import("./pages/Create/Create"));
+const Profile = lazy(() => import("./pages/Profile/Profile"));
 
 const App = () => {
 	const {
@@ -59,27 +61,35 @@ const App = () => {
 		<div className="app">
 			<Navbar />
 			<BreadCrumbs />
-			<Routes>
-				<Route path="/" element={<Home />} />
-				<Route path="/rankings" element={<Rankings />} />
-				<Route path="/explore" element={<Explore />} />
-				<Route path="/explore/:coinId" element={<Coin />} />
-				<Route path="/hub" element={<PortfolioHub />} />
-				<Route path="/hub/:portfolioId" element={<Portfolio />} />
+			<Suspense
+				fallback={
+					<div className="loading loading-full">
+						<Loader size={"15rem"} />
+					</div>
+				}
+			>
+				<Routes>
+					<Route path="/" element={<Home />} />
+					<Route path="/rankings" element={<Rankings />} />
+					<Route path="/explore" element={<Explore />} />
+					<Route path="/explore/:coinId" element={<Coin />} />
+					<Route path="/hub" element={<PortfolioHub />} />
+					<Route path="/hub/:portfolioId" element={<Portfolio />} />
 
-				<Route element={<AuthRedirect />}>
-					<Route path="/register" element={<Register />} />
-					<Route path="/login" element={<Login />} />
-				</Route>
+					<Route element={<AuthRedirect />}>
+						<Route path="/register" element={<Register />} />
+						<Route path="/login" element={<Login />} />
+					</Route>
 
-				<Route element={<ProtectedRoute />}>
-					<Route path="/profile/:userId" element={<Profile />} />
-					<Route path="/hub/create" element={<Create />} />
-				</Route>
+					<Route element={<ProtectedRoute />}>
+						<Route path="/profile/:userId" element={<Profile />} />
+						<Route path="/hub/create" element={<Create />} />
+					</Route>
 
-				<Route path="*" element={<Navigate to={"/404"} />} />
-				<Route path="/404" element={<NotFound />} />
-			</Routes>
+					<Route path="*" element={<Navigate to={"/404"} />} />
+					<Route path="/404" element={<NotFound />} />
+				</Routes>
+			</Suspense>
 			<ScrollToTop />
 			<ToastContainer
 				position="top-right"
