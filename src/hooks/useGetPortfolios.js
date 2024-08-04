@@ -42,10 +42,11 @@ const useGetPorfolios = (defaultCategory) => {
 
 	const getPortfoliosData = async () => {
 		setIsLoading(true);
+
 		try {
 			const { portfolios, reachedLastPage } = await getPortfolios(
 				category || defaultCategory,
-				currentUser?.uid,
+				currentUser?.uid || "",
 				page
 			);
 

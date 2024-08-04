@@ -31,14 +31,14 @@ const PortfolioHub = () => {
 		changePage,
 	} = useGetPorfolios(defaultCategory);
 
-	const noResultsMessage = hasNoFollowing
+	const noResultsMessage = hasToLogin
+		? "Please login to view this category."
+		: hasNoFollowing
 		? "You haven't followed any portfolios yet."
 		: hasNoOwned
 		? "You don't have any created portfolios yet."
 		: hasNoPortfolios
 		? "No portfolios yet, be the first!"
-		: hasToLogin
-		? "Please login to view this category."
 		: "";
 
 	useEffect(() => {
@@ -88,7 +88,7 @@ const PortfolioHub = () => {
 					]}
 					type={"portfolio"}
 				>
-					{!isLoading && noResultsMessage !== "" ? (
+					{isLoading === false && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
@@ -99,7 +99,7 @@ const PortfolioHub = () => {
 							/>
 						))
 					)}
-					{isLastPage ? (
+					{isLoading === false && isLastPage ? (
 						<div className="end-message-wrapper">
 							<p className="end-message">
 								You've reached the end. Keep exploring or{" "}
