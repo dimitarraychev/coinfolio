@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
-import registerImg from "../../assets/images/login-register.svg";
 import registerIcon from "../../assets/icons/register-icon.svg";
+const registerImg =
+	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Flogin-register.svg?alt=media&token=1cb45459-76e6-42f6-b28d-ce1f45c9785a";
 
 import Button from "../../components/Button/Button";
 import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";

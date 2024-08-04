@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 
 import "./Footer.css";
-import logo from "../../assets/logo.svg";
+const logo =
+	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Flogo.svg?alt=media&token=8f58481a-5ca8-4f9f-9614-9e659c4bfe61";
 import githubLogo from "../../assets/logos/github.svg";
 import linkedInLogo from "../../assets/logos/linkedin.svg";
 import coinGeckoLogo from "../../assets/logos/coingecko.svg";

@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-
-import heroLeft from "../../../assets/images/hero-left.svg";
-import heroRight from "../../../assets/images/hero-right.svg";
-
 import Button from "../../../components/Button/Button";
+
+const heroLeft =
+	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Fhero-left.svg?alt=media&token=1682549c-241b-4831-b012-adedd7c00e17";
+const heroRight =
+	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Fhero-right.svg?alt=media&token=2ef94624-ae33-405c-81f2-0ece17bed684";
 
 const HeroSection = () => {
 	return (

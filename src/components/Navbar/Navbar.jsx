@@ -3,7 +3,8 @@ import { Link, useLocation } from "react-router-dom";
 import Avatar from "react-avatar";
 
 import "./Navbar.css";
-import logo from "../../assets/logo.svg";
+const logo =
+	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Flogo.svg?alt=media&token=8f58481a-5ca8-4f9f-9614-9e659c4bfe61";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 import loginIcon from "../../assets/icons/login-icon.svg";
 import logoutIcon from "../../assets/icons/logout-icon.svg";
