@@ -125,7 +125,7 @@
 	font-size: 0.9rem;
 	display: flex;
 	margin-top: 1rem;
-	align-items: center;
+	align-items: flex-start;
 	justify-content: center;
 	gap: 1em;
 }
@@ -134,14 +134,14 @@
 	color: var(--dark-gray);
 	flex: 1 1 100%;
 	text-align: center;
-	padding-left: 1ch;
+	padding-left: 2em;
 }
 
 .crypto-table .scroll-top-image {
 	text-align: right;
 	color: var(--btn-color);
 	cursor: pointer;
-	height: 1em;
+	height: 2rem;
 	aspect-ratio: 1/1;
 }
 
