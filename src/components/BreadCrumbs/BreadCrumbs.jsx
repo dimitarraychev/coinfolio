@@ -40,20 +40,25 @@ const BreadCrumbs = () => {
 				{pathnames.map((value, index) => {
 					const last = index === pathnames.length - 1;
 					const to = `/${pathnames.slice(0, index + 1).join("/")}`;
+
 					let routeName = routeCrumbs.find(
 						(route) => route.path === to
 					)?.name;
 
 					if (
 						!routeName &&
-						(to.startsWith("/hub/") ||
-							to.startsWith("/explore/") ||
-							to.startsWith("/profile/")) &&
+						to.startsWith("/explore/") &&
 						pathnames.length > 1
 					) {
 						routeName = pathnames[pathnames.length - 1];
 						routeName = convertKebabCase(routeName);
 					}
+
+					if (routeName === "Profile") return;
+
+					if (to.startsWith("/profile/")) routeName = "Profile";
+					if (to.startsWith("/hub/") && !to.includes("create"))
+						routeName = "Inspect Portfolio";
 
 					return (
 						<li className="crumb" key={to}>
