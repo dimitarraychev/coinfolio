@@ -15,17 +15,9 @@ const AuthContextProvider = ({ children }) => {
 	useEffect(() => {
 		const unsubscribe = onAuthStateChanged(auth, (user) => {
 			if (user) {
-				const {
-					uid,
-					email,
-					displayName,
-					photoURL,
-					metadata,
-					providerData,
-				} = user;
+				const { uid, email, displayName, photoURL, metadata } = user;
 
 				if (!displayName) return updateUserData();
-				const signInMethod = providerData[0]?.providerId;
 
 				setCurrentUser({
 					uid,
@@ -34,7 +26,6 @@ const AuthContextProvider = ({ children }) => {
 					photoURL,
 					lastSignIn: metadata.lastSignInTime,
 					createdOn: metadata.creationTime,
-					signInMethod,
 				});
 				setIsAuthenticated(true);
 			} else {

@@ -22,8 +22,6 @@ const Profile = () => {
 	const defaultCategory = "owned";
 	const [isUploaderOpen, setIsUploaderOpen] = useState(false);
 
-	const canChangeProfileImage = currentUser.signInMethod === "password";
-
 	const {
 		portfolios,
 		category,
@@ -73,21 +71,17 @@ const Profile = () => {
 						/>
 					)}
 
-					{canChangeProfileImage && (
-						<>
-							<img
-								src={uploadIcon}
-								alt="edit"
-								className="edit-profile-img-icon"
-								title="Upload Image"
-								onClick={() => setIsUploaderOpen(true)}
-							/>
-							<FileUploader
-								isOpen={isUploaderOpen}
-								closeUploader={() => setIsUploaderOpen(false)}
-							/>
-						</>
-					)}
+					<img
+						src={uploadIcon}
+						alt="edit"
+						className="edit-profile-img-icon"
+						title="Upload Image"
+						onClick={() => setIsUploaderOpen(true)}
+					/>
+					<FileUploader
+						isOpen={isUploaderOpen}
+						closeUploader={() => setIsUploaderOpen(false)}
+					/>
 				</div>
 				<div className="list-wrapper">
 					<ul>
