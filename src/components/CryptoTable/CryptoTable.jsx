@@ -12,7 +12,6 @@ const CryptoTable = ({
 	isAscendingOrder,
 }) => {
 	const translateToClassName = (stringToTranslate) => {
-		if (stringToTranslate === "#") return "hashtag";
 		return (
 			"_" +
 			stringToTranslate.replace("/", "-").replace(" ", "-").toLowerCase()
@@ -36,9 +35,7 @@ const CryptoTable = ({
 								: translateToClassName(col) + " unsortable"
 						}
 						key={col}
-						onClick={(e) =>
-							canSort && col !== "#" && tableSortHandler(e)
-						}
+						onClick={(e) => canSort && tableSortHandler(e)}
 					>
 						{col}
 						{canSort &&
