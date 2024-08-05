@@ -150,7 +150,7 @@ const Coin = () => {
 						{formatPrice(coinData.market_data.ath[currency.name])}
 						{` on ${new Date(
 							coinData.market_data.ath_date[currency.name]
-						).toLocaleDateString()}`}
+						).toDateString()}`}
 					</li>
 				</ul>
 				<ul>
@@ -160,7 +160,7 @@ const Coin = () => {
 						{formatPrice(coinData.market_data.atl[currency.name])}
 						{` on ${new Date(
 							coinData.market_data.atl_date[currency.name]
-						).toLocaleDateString()}`}
+						).toDateString()}`}
 					</li>
 				</ul>
 			</div>

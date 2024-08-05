@@ -180,15 +180,11 @@ const PortfolioDetails = ({
 				</ul>
 				<ul>
 					<li>Created On</li>
-					<li>
-						{new Date(portfolio.createdOn).toLocaleDateString()}
-					</li>
+					<li>{new Date(portfolio.createdOn).toDateString()}</li>
 				</ul>
 				<ul>
 					<li>Updated On</li>
-					<li>
-						{new Date(portfolio.updatedOn).toLocaleDateString()}
-					</li>
+					<li>{new Date(portfolio.updatedOn).toDateString()}</li>
 				</ul>
 			</div>
 		</div>
