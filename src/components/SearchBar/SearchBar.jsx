@@ -28,7 +28,7 @@ const SearchBar = ({ onSearch, autofillSuggestions }) => {
 					required
 				/>
 				<datalist id="coinlist">
-					{autofillSuggestions
+					{[...autofillSuggestions]
 						.sort((a, b) => a.name.localeCompare(b.name))
 						.map((item) => (
 							<option key={item.id} value={item.name} />
