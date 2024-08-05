@@ -58,7 +58,7 @@ export const getPortfolios = async (category, userId, page) => {
 			queryParams = orderBy("createdOn", "desc");
 			break;
 		case portfolioCategoriesEnum.POPULAR:
-			queryParams = orderBy("followers", "desc");
+			queryParams = orderBy("createdOn", "desc");
 			break;
 		case portfolioCategoriesEnum.FOLLOWING:
 			queryParams = where("followers", "array-contains", userId);
@@ -80,6 +80,9 @@ export const getPortfolios = async (category, userId, page) => {
 		snapshot.forEach((doc) => {
 			portfolios.push({ id: doc.id, ...doc.data() });
 		});
+
+		if (category === portfolioCategoriesEnum.POPULAR)
+			portfolios.sort((a, b) => b.followers.length - a.followers.length);
 
 		return { portfolios, reachedLastPage };
 	} catch (error) {
