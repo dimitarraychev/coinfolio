@@ -10,7 +10,7 @@
 }
 
 .navbar .logo {
-	width: max(10vw, 8rem);
+	width: max(12vw, 8rem);
 }
 
 .navbar ul.navbar-links {
@@ -33,12 +33,11 @@
 .nav-right {
 	display: flex;
 	align-items: center;
-	gap: max(1vw, 2rem);
 }
 
 .navbar select {
 	padding: 0.2rem;
-	margin: 0 0.5rem;
+	margin: 0 1rem;
 	border-radius: 0.4rem;
 	border: 2px solid white;
 	background: transparent;
@@ -125,14 +124,16 @@
 		gap: 1.5rem;
 		list-style: none;
 	}
-
-	.nav-right {
-		gap: 1rem;
-	}
 }
 
 @media (max-width: 700px) {
 	.navbar ul.navbar-links {
 		display: none;
+	}
+
+	.user .username {
+		width: 7ch;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 }
