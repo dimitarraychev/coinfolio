@@ -6,7 +6,7 @@ import {
 } from "./helpers";
 
 export const addCoinToPortfolio = (portfolio, coinToAdd) => {
-	const existingCoin = portfolio.allocations.find(
+	const existingCoin = portfolio.allocations.some(
 		(c) => c.id === coinToAdd.id
 	);
 
