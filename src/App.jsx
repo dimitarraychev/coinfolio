@@ -1,17 +1,17 @@
 import { Suspense, lazy } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 
-import ProtectedRoute from "./components/guards/ProtectedRoute/ProtectedRoute";
-import AuthRedirect from "./components/guards/AuthRedirect/AuthRedirect";
+import ProtectedRoute from "./components/common/ProtectedRoute/ProtectedRoute";
 import Loader from "./components/common/Loader/Loader";
 
 import MainLayout from "./components/layout/MainLayout";
+import AuthLayout from "./pages/auth/AuthLayout";
+import Register from "./pages/auth/Register/Register";
+import Login from "./pages/auth/Login/Login";
 import Home from "./pages/Home/Home";
 import Coin from "./pages/Coin/Coin";
 import Rankings from "./pages/Rankings/Rankings";
 import Explore from "./pages/Explore/Explore";
-import Register from "./pages/Register/Register";
-import Login from "./pages/Login/Login";
 import NotFound from "./pages/NotFound/NotFound";
 import { useCoinContext } from "./context/CoinContext";
 
@@ -49,7 +49,7 @@ const App = () => {
 			<MainLayout>
 				<Suspense
 					fallback={
-						<div className="loading loading-full">
+						<div className="loading loading-80">
 							<Loader size={"15rem"} />
 						</div>
 					}
@@ -65,7 +65,7 @@ const App = () => {
 							element={<Portfolio />}
 						/>
 
-						<Route element={<AuthRedirect />}>
+						<Route element={<AuthLayout />}>
 							<Route path="/register" element={<Register />} />
 							<Route path="/login" element={<Login />} />
 						</Route>

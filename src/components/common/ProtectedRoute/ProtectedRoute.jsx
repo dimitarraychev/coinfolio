@@ -1,8 +1,8 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useAuthContext } from "../../../context/AuthContext";
-import Loader from "../../common/Loader/Loader";
+import Loader from "../Loader/Loader";
 
-const AuthRedirect = () => {
+const ProtectedRoute = () => {
 	const { isAuthenticated, isLoading } = useAuthContext();
 
 	if (isLoading)
@@ -12,7 +12,7 @@ const AuthRedirect = () => {
 			</div>
 		);
 
-	return isAuthenticated ? <Navigate to="/profile" /> : <Outlet />;
+	return isAuthenticated ? <Outlet /> : <Navigate to="/login" />;
 };
 
-export default AuthRedirect;
+export default ProtectedRoute;
