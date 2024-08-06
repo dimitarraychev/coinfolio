@@ -31,9 +31,9 @@ export const inputsErrorHandler = (inputs) => {
 
 	if (
 		inputs.username &&
-		(inputs.username.length < 3 || inputs.username.length > 20)
+		(inputs.username.length < 3 || inputs.username.length > 33)
 	)
-		return "Error! Sorry, username should be between 3 and 20 characters.";
+		return "Error! Sorry, username should be between 3 and 33 characters.";
 
 	return null;
 };
