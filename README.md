@@ -1,20 +1,20 @@
 # CoinFol.io - Stay Ahead In The Crypto Market
 
-## Hosting:
+## Hosting
 
-The project is hosted at [coinfol-io.web.app](https://coinfol-io.web.app/)
+Available at [coinfol-io.web.app](https://coinfol-io.web.app/)
 
 ## Table of Content:
 
--   [About The App](#about-the-app)
+-   [About](#about)
 -   [Preview](#preview)
--   [Technologies](#technologies)
+-   [Technologies & Tools](#technologies-&-tools)
 -   [Setup](#setup)
 -   [Architecture](#architecture)
 -   [Credits](#credits)
 -   [License](#license)
 
-## About The App
+## About
 
 **CoinFol.io** can be categorized as a cryptocurrency market tracking application/tool _available both for mobile and desktop_. Allowing users to get real-time price updates, in-depth market data and all the latest information on a wide variety of cryptocurrencies.
 
@@ -24,9 +24,9 @@ The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfo
 
 ![Desktop](https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/coinfolio-desktop.jpg?alt=media&token=9b9c1b61-61cc-477e-bea1-8c6f223b6431)
 
-## Technologies
+## Technologies & Tools
 
-[![Technologies](https://skillicons.dev/icons?i=react,js,html,css,vite,firebase)](https://skillicons.dev)
+[![Technologies & Tools](https://skillicons.dev/icons?i=react,js,html,css,vite,firebase)](https://skillicons.dev)
 
 ## Setup
 
