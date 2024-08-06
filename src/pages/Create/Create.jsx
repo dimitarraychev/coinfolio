@@ -24,6 +24,7 @@ const initialPortfolio = {
 	},
 	allocations: [],
 	followers: [],
+	followersCount: 0,
 };
 
 const Create = () => {

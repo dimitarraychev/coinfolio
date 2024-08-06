@@ -29,13 +29,18 @@ const useFollowPortfolio = (portfolio, setFollowers) => {
 			? `Success! You have unfollowed ${portfolio.title}.`
 			: `Success! You are now following ${portfolio.title}.`;
 
+		const followersCount = isFollowing
+			? portfolio.followersCount--
+			: followersCount++;
+
 		try {
 			await updatePortfolio({
 				...portfolio,
 				followers,
+				followersCount,
 			});
 
-			setFollowers(followers);
+			setFollowers(followers, followersCount);
 			toast.success(message);
 		} catch (error) {
 			toast.error(error.message);

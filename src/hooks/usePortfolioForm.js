@@ -57,10 +57,11 @@ const usePortfolioForm = (initialPortfolio, onSubmit, currency) => {
 		isEditMode && restoreCursorPosition(selectionRef);
 	};
 
-	const setFollowers = (followers) => {
+	const setFollowers = (followers, followersCount) => {
 		setPortfolio((prevPortfolio) => ({
 			...prevPortfolio,
 			followers,
+			followersCount,
 		}));
 	};
 

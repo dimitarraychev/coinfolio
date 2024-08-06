@@ -106,7 +106,7 @@ const PortfolioDetails = ({
 			<div className="followers-wrapper">
 				<p className="label">Followers</p>
 				<div className="follower-bottom">
-					<h5>{portfolio.followers.length.toLocaleString()}</h5>
+					<h5>{portfolio.followersCount.toLocaleString()}</h5>
 					{isFollowButtonVisible && (
 						<Button
 							text={isFollowing ? "following" : "follow"}

@@ -24,6 +24,7 @@ const useGetPorfolioById = () => {
 		createdOn: "",
 		updatedOn: "",
 		followers: [],
+		followersCount: 0,
 		allocations: [],
 	});
 

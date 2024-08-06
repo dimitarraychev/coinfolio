@@ -17,10 +17,11 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 	const { matchingCoins } = useMatchingCoins(portfolio.allocations);
 	const [updatedPortfolio, setUpdatedPortfolio] = useState({});
 
-	const setFollowers = (followers) => {
+	const setFollowers = (followers, followersCount) => {
 		setUpdatedPortfolio((prevPortfolio) => ({
 			...prevPortfolio,
 			followers,
+			followersCount,
 		}));
 	};
 
@@ -82,7 +83,7 @@ const PortfolioTableRow = ({ portfolio, index }) => {
 			</div>
 
 			<div className="followers">
-				<p>{updatedPortfolio.followers.length}</p>
+				<p>{updatedPortfolio.followersCount}</p>
 				{isFollowButtonVisible && (
 					<Button
 						text={isFollowing ? "following" : "follow"}
