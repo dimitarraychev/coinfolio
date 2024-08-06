@@ -46,9 +46,11 @@ const Navbar = () => {
 
 	return (
 		<div className="navbar">
-			<Link to={"/"}>
-				<img src={logo} alt="logo" className="logo" />
-			</Link>
+			<div className="logo-link">
+				<Link to={"/"}>
+					<img src={logo} alt="logo" className="logo" />
+				</Link>
+			</div>
 			<ul className="navbar-links">
 				{navbarLinks.map((link) => {
 					const isHomeRoute = link.route === "/";

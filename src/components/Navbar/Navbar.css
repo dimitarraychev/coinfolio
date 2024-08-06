@@ -13,8 +13,13 @@
 	width: max(12vw, 8rem);
 }
 
+.navbar .logo-link {
+	flex: 1 1 10%;
+}
+
 .navbar ul.navbar-links {
 	display: flex;
+	justify-content: center;
 	gap: 3rem;
 	list-style: none;
 }
@@ -33,6 +38,8 @@
 .nav-right {
 	display: flex;
 	align-items: center;
+	justify-content: flex-end;
+	flex: 1 1 10%;
 }
 
 .navbar select {
@@ -120,9 +127,7 @@
 	}
 
 	.navbar ul.navbar-links {
-		display: flex;
 		gap: 1.5rem;
-		list-style: none;
 	}
 }
 
