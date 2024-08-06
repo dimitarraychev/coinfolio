@@ -31,7 +31,7 @@ const useFollowPortfolio = (portfolio, setFollowers) => {
 
 		const followersCount = isFollowing
 			? portfolio.followersCount--
-			: followersCount++;
+			: portfolio.followersCount++;
 
 		try {
 			await updatePortfolio({
