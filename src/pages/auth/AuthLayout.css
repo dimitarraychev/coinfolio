@@ -82,6 +82,10 @@ section.auth .btn {
 }
 
 @media (max-width: 1024px) {
+	section.auth {
+		padding: 1rem 1rem 4rem 1rem;
+	}
+
 	section.auth .auth-img {
 		display: none;
 	}
