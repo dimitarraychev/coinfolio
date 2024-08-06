@@ -18,7 +18,7 @@ Available at [coinfol-io.web.app](https://coinfol-io.web.app/)
 
 **CoinFol.io** can be categorized as a cryptocurrency market tracking application/tool _available both for mobile and desktop_. Allowing users to get real-time price updates, in-depth market data and all the latest information on a wide variety of cryptocurrencies in both USD and EUR.
 
-The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfolios with the current market prices or they can input a custom price if they bought at a previous moment. Afterwards they can track their portfolio/s movements, edit or remove them. Other users' creations can be explore and followed in the main Hub page which has inifite scrolling implemented.
+The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfolios with the current market prices or they can input a custom price if they bought at a previous moment. Afterwards they can track their portfolio/s movements, edit or remove them. Other users' creations can be explored and followed in the main Hub page which has inifite scrolling implemented.
 
 ## Preview
 
