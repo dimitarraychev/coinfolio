@@ -20,6 +20,8 @@
 
 .portfolio .title-wrapper h2 {
 	width: 15ch;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .portfolio .title-wrapper .edit-img {
@@ -42,6 +44,9 @@
 .portfolio .owner {
 	color: var(--btn-color);
 	margin-bottom: 0.75rem;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 .portfolio .follower-bottom {
