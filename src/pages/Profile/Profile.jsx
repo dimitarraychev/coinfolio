@@ -1,21 +1,19 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import Avatar from "react-avatar";
 
 import "./Profile.css";
 import profileIcon from "../../assets/icons/profile-icon.svg";
 import uploadIcon from "../../assets/icons/upload-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
-import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useAuthContext } from "../../context/AuthContext";
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
-import Loader from "../../components/Loader/Loader";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
 import { profileCategories } from "../../constants/categories";
 import FileUploader from "../../components/FileUploader/FileUploader";
-import { useState } from "react";
+import InfiniteScroll from "../../components/InfiniteScroll/InfiniteScroll";
 
 const Profile = () => {
 	const { currentUser, isAuthenticated } = useAuthContext();
@@ -28,7 +26,9 @@ const Profile = () => {
 		isLoading,
 		hasNoFollowing,
 		hasNoOwned,
+		isLastPage,
 		changeCategory,
+		changePage,
 	} = useGetPorfolios(defaultCategory);
 
 	const noResultsMessage = hasNoFollowing
@@ -125,46 +125,22 @@ const Profile = () => {
 					]}
 					type={"portfolio"}
 				>
-					{isLoading ? (
-						<div className="loading">
-							<Loader />
-						</div>
-					) : noResultsMessage !== "" ? (
+					{isLoading === false && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
-						<>
-							{portfolios.map((portfolio, index) => (
-								<PortfolioTableRow
-									portfolio={portfolio}
-									key={portfolio.id}
-									index={index + 1}
-								/>
-							))}
-							<div className="end-message-wrapper">
-								<p className="end-message">
-									You've reached the end. Keep exploring or{" "}
-									<Link
-										to={"/hub/create"}
-										className="create-link"
-									>
-										create a portfolio!
-									</Link>
-								</p>
-								<img
-									src={arrowScroll}
-									alt="top"
-									title="Back To Top"
-									className="scroll-top-image"
-									onClick={() =>
-										window.scrollTo({
-											top: 0,
-											behavior: "smooth",
-										})
-									}
-								/>
-							</div>
-						</>
+						portfolios.map((portfolio, index) => (
+							<PortfolioTableRow
+								portfolio={portfolio}
+								key={portfolio.id}
+								index={index + 1}
+							/>
+						))
 					)}
+					<InfiniteScroll
+						isLoading={isLoading}
+						isLastPage={isLastPage}
+						changePage={changePage}
+					/>
 				</CryptoTable>
 			</div>
 		</section>

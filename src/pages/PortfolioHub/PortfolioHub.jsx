@@ -1,22 +1,18 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useInView } from "react-intersection-observer";
 
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
-import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
 import CryptoTable from "../../components/CryptoTable/CryptoTable";
 import Button from "../../components/Button/Button";
-import Loader from "../../components/Loader/Loader";
 import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import { portfolioCategories } from "../../constants/categories";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
+import InfiniteScroll from "../../components/InfiniteScroll/InfiniteScroll";
 
 const PortfolioHub = () => {
 	const defaultCategory = "newest";
-	const { ref, inView } = useInView();
 
 	const {
 		portfolios,
@@ -40,12 +36,6 @@ const PortfolioHub = () => {
 		: hasNoPortfolios
 		? "No portfolios yet, be the first!"
 		: "";
-
-	useEffect(() => {
-		if (inView && !isLastPage) {
-			changePage((prevPage) => prevPage + 1);
-		}
-	}, [inView]);
 
 	return (
 		<section className="hub">
@@ -99,35 +89,11 @@ const PortfolioHub = () => {
 							/>
 						))
 					)}
-					{isLoading === false && isLastPage ? (
-						<div className="end-message-wrapper">
-							<p className="end-message">
-								You've reached the end. Keep exploring or{" "}
-								<Link
-									to={"/hub/create"}
-									className="create-link"
-								>
-									create a portfolio!
-								</Link>
-							</p>
-							<img
-								src={arrowScroll}
-								alt="top"
-								title="Back To Top"
-								className="scroll-top-image"
-								onClick={() =>
-									window.scrollTo({
-										top: 0,
-										behavior: "smooth",
-									})
-								}
-							/>
-						</div>
-					) : (
-						<div ref={ref} className="loading">
-							<Loader />
-						</div>
-					)}
+					<InfiniteScroll
+						isLoading={isLoading}
+						isLastPage={isLastPage}
+						changePage={changePage}
+					/>
 				</CryptoTable>
 			</div>
 		</section>
