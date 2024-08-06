@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Button from "../../../components/Button/Button";
+import Button from "../../../components/common/Button/Button";
 
 const homePortfolio =
 	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Fhome-portfolio.svg?alt=media&token=1defc3f6-7a3e-45ca-9178-78e63d3d937f";

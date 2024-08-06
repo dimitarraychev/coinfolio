@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
-import CoinTableRow from "../../../components/CoinTableRow/CoinTableRow";
-import CryptoTable from "../../../components/CryptoTable/CryptoTable";
-import Button from "../../../components/Button/Button";
+import CoinTableRow from "../../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
+import CryptoTable from "../../../components/common/CryptoTable/CryptoTable";
+import Button from "../../../components/common/Button/Button";
 
 const RankingsSection = ({ allCoins }) => {
 	return (

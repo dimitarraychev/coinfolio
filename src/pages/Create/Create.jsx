@@ -3,14 +3,14 @@ import plusIcon from "../../assets/icons/plus-icon.svg";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import Button from "../../components/Button/Button";
-import PieChart from "../../components/PieChart/PieChart";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
-import AddCoin from "../../components/AddCoin/AddCoin";
-import { formatPrice } from "../../utils/helpers";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
 import { postPortfolio } from "../../api/firebase-db";
+import { formatPrice } from "../../utils/helpers";
+import Button from "../../components/common/Button/Button";
+import PieChart from "../../components/common/PieChart/PieChart";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
+import AddCoin from "../../components/common/AddCoin/AddCoin";
 
 const initialPortfolio = {
 	title: "",

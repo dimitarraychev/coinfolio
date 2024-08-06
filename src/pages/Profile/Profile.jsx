@@ -7,13 +7,13 @@ import uploadIcon from "../../assets/icons/upload-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
 import { useAuthContext } from "../../context/AuthContext";
-import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTableRow/PortfolioTableRow";
+import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";
+import FileUploader from "../../components/common/FileUploader/FileUploader";
+import InfiniteScroll from "../../components/common/InfiniteScroll/InfiniteScroll";
 import { profileCategories } from "../../constants/categories";
-import FileUploader from "../../components/FileUploader/FileUploader";
-import InfiniteScroll from "../../components/InfiniteScroll/InfiniteScroll";
 
 const Profile = () => {
 	const { currentUser, isAuthenticated } = useAuthContext();

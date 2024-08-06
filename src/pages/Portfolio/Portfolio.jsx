@@ -2,16 +2,16 @@ import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import PieChart from "../../components/PieChart/PieChart";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
-import Button from "../../components/Button/Button";
-import AddCoin from "../../components/AddCoin/AddCoin";
-import Loader from "../../components/Loader/Loader";
-import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 import useGetPorfolioById from "../../hooks/useGetPortfolioById";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
 import { updatePortfolio } from "../../api/firebase-db";
+import PieChart from "../../components/common/PieChart/PieChart";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
+import Button from "../../components/common/Button/Button";
+import AddCoin from "../../components/common/AddCoin/AddCoin";
+import Loader from "../../components/common/Loader/Loader";
+import PortfolioDetails from "./PortfolioDetails/PortfolioDetails";
 
 const Portfolio = () => {
 	const { currency } = useCoinContext();

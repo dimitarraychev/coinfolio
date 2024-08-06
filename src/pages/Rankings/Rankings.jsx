@@ -8,12 +8,12 @@ import rankIcon from "../../assets/icons/rank-icon-white.svg";
 import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
-import Loader from "../../components/Loader/Loader";
-import { formatPrice } from "../../utils/helpers";
-import { fetchGlobalMarketData } from "../../api/coinGecko";
 import useSortTable from "../../hooks/useSortTable";
+import { fetchGlobalMarketData } from "../../api/coinGecko";
+import { formatPrice } from "../../utils/helpers";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
+import Loader from "../../components/common/Loader/Loader";
 
 const Rankings = () => {
 	const { allCoins } = useCoinContext();

@@ -9,11 +9,11 @@ import editIcon from "../../../assets/icons/edit-icon.svg";
 
 import { useCoinContext } from "../../../context/CoinContext";
 import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
-import Button from "../../../components/Button/Button";
-import Loader from "../../../components/Loader/Loader";
 import useFollowPortfolio from "../../../hooks/useFollowPortfolio";
 import { formatPrice } from "../../../utils/helpers";
 import { deletePortfolio } from "../../../api/firebase-db";
+import Button from "../../../components/common/Button/Button";
+import Loader from "../../../components/common/Loader/Loader";
 
 const PortfolioDetails = ({
 	portfolio,

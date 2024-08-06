@@ -4,10 +4,10 @@ import registerIcon from "../../assets/icons/register-icon.svg";
 const registerImg =
 	"https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/assets%2Flogin-register.svg?alt=media&token=1cb45459-76e6-42f6-b28d-ce1f45c9785a";
 
-import Button from "../../components/Button/Button";
-import ButtonGoogle from "../../components/ButtonGoogle/ButtonGoogle";
 import useAuthForm from "../../hooks/useAuthForm";
 import { register } from "../../api/firebase-auth";
+import Button from "../../components/common/Button/Button";
+import ButtonGoogle from "../../components/common/ButtonGoogle/ButtonGoogle";
 
 const Register = () => {
 	const { inputs, isSubmitting, changeHandler, submitHandler } = useAuthForm(

@@ -6,10 +6,10 @@ import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import LineChart from "../../components/LineChart/LineChart";
-import Loader from "../../components/Loader/Loader";
-import { formatPrice } from "../../utils/helpers";
 import { fetchCoinData, fetchHistoricalData } from "../../api/coinGecko";
+import { formatPrice } from "../../utils/helpers";
+import LineChart from "../../components/common/LineChart/LineChart";
+import Loader from "../../components/common/Loader/Loader";
 
 const Coin = () => {
 	const { coinId } = useParams();

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
 
-import PortfolioTableRow from "../../components/PortfolioTableRow/PortfolioTableRow";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import Button from "../../components/Button/Button";
-import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
-import { portfolioCategories } from "../../constants/categories";
 import useGetPorfolios from "../../hooks/useGetPortfolios";
-import InfiniteScroll from "../../components/InfiniteScroll/InfiniteScroll";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTableRow/PortfolioTableRow";
+import Button from "../../components/common/Button/Button";
+import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";
+import InfiniteScroll from "../../components/common/InfiniteScroll/InfiniteScroll";
+import { portfolioCategories } from "../../constants/categories";
 
 const PortfolioHub = () => {
 	const defaultCategory = "newest";

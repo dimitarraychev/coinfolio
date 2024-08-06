@@ -3,13 +3,13 @@ import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import CryptoTable from "../../components/CryptoTable/CryptoTable";
-import CoinTableRow from "../../components/CoinTableRow/CoinTableRow";
-import Loader from "../../components/Loader/Loader";
-import CategoriesMenu from "../../components/CategoriesMenu/CategoriesMenu";
-import SearchBar from "../../components/SearchBar/SearchBar";
 import useGetCoins from "../../hooks/useGetCoins";
 import useSortTable from "../../hooks/useSortTable";
+import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
+import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
+import Loader from "../../components/common/Loader/Loader";
+import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";
+import SearchBar from "../../components/common/SearchBar/SearchBar";
 import { exploreCategories } from "../../constants/categories";
 
 const Explore = () => {
