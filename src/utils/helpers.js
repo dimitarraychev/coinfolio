@@ -1,5 +1,5 @@
 export function formatPrice(price) {
-	if (price === null || price === 0) return 0;
+	if (price === null || price === 0) return "";
 
 	let fractionDigits = 2;
 
@@ -12,9 +12,16 @@ export function formatPrice(price) {
 		maximumFractionDigits: fractionDigits,
 	});
 
-	return formattedPrice.endsWith(".00")
-		? formattedPrice.slice(0, -3)
-		: formattedPrice;
+	const [integerPart, decimalPart] = formattedPrice.split(".");
+
+	if (decimalPart) {
+		const trimmedDecimalPart = decimalPart.replace(/0+$/, "");
+		return trimmedDecimalPart
+			? `${integerPart}.${trimmedDecimalPart}`
+			: integerPart;
+	}
+
+	return integerPart;
 }
 
 export function formatNumber(number) {
