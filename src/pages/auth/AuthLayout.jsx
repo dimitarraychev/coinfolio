@@ -18,7 +18,7 @@ const AuthLayout = () => {
 		);
 
 	return isAuthenticated ? (
-		<Navigate to={`/profile/${currentUser.id}`} />
+		<Navigate to={`/profile/${currentUser.uid}`} />
 	) : (
 		<section className="auth">
 			<Outlet />
