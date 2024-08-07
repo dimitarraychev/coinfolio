@@ -5,20 +5,22 @@ import closeIcon from "../../../assets/icons/close-icon.svg";
 
 import { useCoinContext } from "../../../context/CoinContext";
 import Button from "../Button/Button";
+import { formatPrice } from "../../../utils/helpers";
 
 const AddCoin = ({ onAddCoin, onClose }) => {
 	const { allCoins, currency, convertCurrency } = useCoinContext();
 	const [coin, setCoin] = useState({
 		id: "",
 		name: "",
-		quantity: 0,
-		price: 0,
+		quantity: "",
+		price: "",
 		total: 0,
 	});
 	const [isAddButtonDisabled, setIsAddButtonDisabled] = useState(true);
 
 	const changeHandler = (e) => {
 		const { name, value } = e.target;
+
 		setCoin((prevCoin) => {
 			let updatedCoin = { ...prevCoin, [name]: value };
 
@@ -32,9 +34,9 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 				};
 			}
 
-			updatedCoin.quantity = parseFloat(updatedCoin.quantity) || 0;
-			updatedCoin.price = parseFloat(updatedCoin.price) || 0;
-			const total = updatedCoin.quantity * updatedCoin.price;
+			updatedCoin.quantity = parseFloat(updatedCoin.quantity);
+			updatedCoin.price = parseFloat(updatedCoin.price);
+			const total = updatedCoin.quantity * updatedCoin.price || 0;
 
 			updatedCoin = { ...updatedCoin, total };
 			return updatedCoin;
@@ -87,11 +89,13 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 					<option value="" disabled>
 						Select a coin...
 					</option>
-					{allCoins.map((coin) => (
-						<option value={coin.id} key={coin.id}>
-							{coin.name}
-						</option>
-					))}
+					{[...allCoins]
+						.sort((a, b) => a.name.localeCompare(b.name))
+						.map((coin) => (
+							<option value={coin.id} key={coin.id}>
+								{coin.name}
+							</option>
+						))}
 				</select>
 
 				<div className="inputs-container">
@@ -119,7 +123,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 							id="price"
 							className="form-input"
 							autoComplete="price"
-							placeholder="Price Per Coin..."
+							placeholder="0.00"
 							value={coin.price}
 							onChange={changeHandler}
 						/>
@@ -130,7 +134,7 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 					<p className="label">Total Spent:</p>
 					<p id="total-spent">
 						{currency.symbol}
-						{coin.total}
+						{formatPrice(coin.total)}
 					</p>
 				</div>
 				<Button

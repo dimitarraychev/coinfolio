@@ -57,6 +57,10 @@
 	padding-left: 0.3rem;
 }
 
+.add-coin-wrapper .btn {
+	align-self: center;
+}
+
 #total-spent {
 	font-size: 1.6rem;
 	font-weight: bold;
