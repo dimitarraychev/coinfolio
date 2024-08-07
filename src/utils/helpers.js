@@ -1,5 +1,5 @@
 export function formatPrice(price) {
-	if (price === null || price === 0) return "";
+	if (price === null || price === 0) return "0";
 
 	let fractionDigits = 2;
 
