@@ -3,7 +3,7 @@ import exploreIcon from "../../assets/icons/explore-icon-white.svg";
 import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import useGetCoins from "../../hooks/useGetCoins";
+import useGetCoins from "../../api/coingecko/useGetCoins";
 import useSortTable from "../../hooks/useSortTable";
 import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";

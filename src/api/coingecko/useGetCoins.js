@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { fetchAllCoins, searchAllCoins } from "../api/coinGecko";
+import { fetchAllCoins, searchAllCoins } from "./coingecko";
 
 const useGetCoins = (defaultCategory, allCoins, currency) => {
 	const [coins, setCoins] = useState([]);
