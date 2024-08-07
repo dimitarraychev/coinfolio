@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { useAuthContext } from "../context/AuthContext";
-import { updatePortfolio } from "../api/firebase-db";
+import { useAuthContext } from "../../context/AuthContext";
+import { updatePortfolio } from "./db";
 
 const useFollowPortfolio = (portfolio, setFollowers) => {
 	const { currentUser, isAuthenticated } = useAuthContext();

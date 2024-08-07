@@ -6,7 +6,7 @@ import {
 	signInWithPopup,
 	sendPasswordResetEmail,
 } from "firebase/auth";
-import { auth, provider } from "../config/firebase";
+import { auth, provider } from "./config";
 
 export const register = async ({ username, email, password }) => {
 	try {

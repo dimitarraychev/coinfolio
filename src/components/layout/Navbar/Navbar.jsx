@@ -14,7 +14,7 @@ import profileIcon from "../../../assets/icons/profile-icon.svg";
 import { useAuthContext } from "../../../context/AuthContext";
 import { useCoinContext } from "../../../context/CoinContext";
 import { navbarLinks } from "../../../constants/links";
-import useLogout from "../../../hooks/useLogout";
+import useLogout from "../../../api/firebase/useLogout";
 
 const Navbar = () => {
 	const { pathname } = useLocation();

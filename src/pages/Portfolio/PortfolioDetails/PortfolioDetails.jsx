@@ -9,9 +9,9 @@ import editIcon from "../../../assets/icons/edit-icon.svg";
 
 import { useCoinContext } from "../../../context/CoinContext";
 import { useConfirmModalContext } from "../../../context/ConfirmModalContext";
-import useFollowPortfolio from "../../../hooks/useFollowPortfolio";
+import useFollowPortfolio from "../../../api/firebase/useFollowPortfolio";
 import { formatPrice } from "../../../utils/helpers";
-import { deletePortfolio } from "../../../api/firebase-db";
+import { deletePortfolio } from "../../../api/firebase/db";
 import Button from "../../../components/common/Button/Button";
 import Loader from "../../../components/common/Loader/Loader";
 

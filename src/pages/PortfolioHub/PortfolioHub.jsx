@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import "./PortfolioHub.css";
 import hubIcon from "../../assets/icons/portfolio-icon-white.svg";
 
-import useGetPorfolios from "../../hooks/useGetPortfolios";
+import useGetPorfolios from "../../api/firebase/useGetPortfolios";
 import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
 import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTableRow/PortfolioTableRow";
 import Button from "../../components/common/Button/Button";

@@ -4,7 +4,7 @@ import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
-import { postPortfolio } from "../../api/firebase-db";
+import { postPortfolio } from "../../api/firebase/db";
 import { formatPrice } from "../../utils/helpers";
 import Button from "../../components/common/Button/Button";
 import PieChart from "../../components/common/PieChart/PieChart";

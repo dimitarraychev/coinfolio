@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 
 import "./ButtonGoogle.css";
 
-import { googleLogin } from "../../../api/firebase-auth";
+import { googleLogin } from "../../../api/firebase/auth";
 
 const ButtonGoogle = () => {
 	const navigate = useNavigate();

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { auth } from "../config/firebase";
+import { auth } from "../api/firebase/config";
 import { firebaseErrorHandler, inputsErrorHandler } from "../utils/error";
 
 const useAuthForm = (initialInputs, onSubmit) => {

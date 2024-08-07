@@ -2,9 +2,9 @@ import "./Portfolio.css";
 import minusIcon from "../../assets/icons/minus-icon.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
-import useGetPorfolioById from "../../hooks/useGetPortfolioById";
+import useGetPorfolioById from "../../api/firebase/useGetPortfolioById";
 import usePortfolioForm from "../../hooks/usePortfolioForm";
-import { updatePortfolio } from "../../api/firebase-db";
+import { updatePortfolio } from "../../api/firebase/db";
 import PieChart from "../../components/common/PieChart/PieChart";
 import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";

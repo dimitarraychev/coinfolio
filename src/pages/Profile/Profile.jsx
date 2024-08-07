@@ -7,7 +7,7 @@ import uploadIcon from "../../assets/icons/upload-icon.svg";
 import userPlaceholder from "../../assets/user-placeholder.svg";
 
 import { useAuthContext } from "../../context/AuthContext";
-import useGetPorfolios from "../../hooks/useGetPortfolios";
+import useGetPorfolios from "../../api/firebase/useGetPortfolios";
 import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
 import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTableRow/PortfolioTableRow";
 import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";

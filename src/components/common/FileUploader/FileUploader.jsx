@@ -2,8 +2,8 @@ import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 import { useAuthContext } from "../../../context/AuthContext";
-import { uploadFile } from "../../../api/firebase-storage";
-import { updateProfileImage } from "../../../api/firebase-auth";
+import { uploadFile } from "../../../api/firebase/storage";
+import { updateProfileImage } from "../../../api/firebase/auth";
 
 const FileUploader = ({ isOpen, closeUploader }) => {
 	const { updateUserData } = useAuthContext();

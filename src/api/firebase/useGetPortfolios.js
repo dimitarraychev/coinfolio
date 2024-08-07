@@ -2,9 +2,9 @@ import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { getPortfolios } from "../api/firebase-db";
-import { useAuthContext } from "../context/AuthContext";
-import { portfolioCategoriesEnum } from "../constants/categories";
+import { getPortfolios } from "./db";
+import { useAuthContext } from "../../context/AuthContext";
+import { portfolioCategoriesEnum } from "../../constants/categories";
 
 const useGetPorfolios = (defaultCategory) => {
 	const [searchParams, setSearchParams] = useSearchParams();

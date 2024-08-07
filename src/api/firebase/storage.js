@@ -1,5 +1,5 @@
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { storage } from "../config/firebase";
+import { storage } from "./config";
 
 export const uploadFile = async (file) => {
 	const filePath = "users/" + Date.now() + "_" + file.name;

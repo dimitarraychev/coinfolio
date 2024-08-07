@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { toast } from "react-toastify";
 
-import { resetPassword } from "../api/firebase-auth";
-import { inputsErrorHandler } from "../utils/error";
+import { resetPassword } from "./auth";
+import { inputsErrorHandler } from "../../utils/error";
 
 const useResetPassword = ({ email }) => {
 	const [isLoading, setIsLoading] = useState(false);

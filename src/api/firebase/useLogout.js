@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { useConfirmModalContext } from "../context/ConfirmModalContext";
-import { logout } from "../api/firebase-auth";
+import { useConfirmModalContext } from "../../context/ConfirmModalContext";
+import { logout } from "./auth";
 
 const useLogout = () => {
 	const navigate = useNavigate();

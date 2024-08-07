@@ -8,7 +8,7 @@ import { useCoinContext } from "../../../../context/CoinContext";
 import Button from "../../Button/Button";
 import Loader from "../../Button/Button";
 import useMatchingCoins from "../../../../hooks/useMatchingCoins";
-import useFollowPortfolio from "../../../../hooks/useFollowPortfolio";
+import useFollowPortfolio from "../../../../api/firebase/useFollowPortfolio";
 import { updatePortfolioMetrics } from "../../../../utils/portfolio";
 import { formatPrice } from "../../../../utils/helpers";
 

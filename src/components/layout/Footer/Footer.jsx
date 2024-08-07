@@ -8,7 +8,7 @@ import linkedInLogo from "../../../assets/logos/linkedin.svg";
 import coinGeckoLogo from "../../../assets/logos/coingecko.svg";
 
 import { useAuthContext } from "../../../context/AuthContext";
-import useLogout from "../../../hooks/useLogout";
+import useLogout from "../../../api/firebase/useLogout";
 
 const Footer = () => {
 	const { currentUser, isAuthenticated } = useAuthContext();

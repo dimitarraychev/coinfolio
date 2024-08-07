@@ -11,8 +11,8 @@ import {
 	where,
 	limit,
 } from "firebase/firestore";
-import { db } from "../config/firebase";
-import { portfolioCategoriesEnum } from "../constants/categories";
+import { db } from "./config";
+import { portfolioCategoriesEnum } from "../../constants/categories";
 
 const PORTFOLIOS_COLLECTION_ID = "portfolios";
 

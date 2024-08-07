@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 
-import { getPortfolioById } from "../api/firebase-db";
+import { getPortfolioById } from "./db";
 
 const useGetPorfolioById = () => {
 	const { portfolioId } = useParams();

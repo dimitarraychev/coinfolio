@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import registerIcon from "../../../assets/icons/register-icon.svg";
 
 import useAuthForm from "../../../hooks/useAuthForm";
-import { register } from "../../../api/firebase-auth";
+import { register } from "../../../api/firebase/auth";
 import Button from "../../../components/common/Button/Button";
 import ButtonGoogle from "../../../components/common/ButtonGoogle/ButtonGoogle";
 

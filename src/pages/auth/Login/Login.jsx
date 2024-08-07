@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 import loginIcon from "../../../assets/icons/login-icon.svg";
 
 import useAuthForm from "../../../hooks/useAuthForm";
-import useResetPassword from "../../../hooks/useResetPassword";
-import { login } from "../../../api/firebase-auth";
+import useResetPassword from "../../../api/firebase/useResetPassword";
+import { login } from "../../../api/firebase/auth";
 import Button from "../../../components/common/Button/Button";
 import ButtonGoogle from "../../../components/common/ButtonGoogle/ButtonGoogle";
 
