@@ -9,7 +9,7 @@ const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
 	const [isLoadingCoins, setIsLoadingCoins] = useState(true);
-	const [isError, setIsError] = useState(false);
+	const [isErrorCoins, setIsError] = useState(false);
 
 	const {
 		convertCurrency,
@@ -37,7 +37,7 @@ const CoinContextProvider = ({ children }) => {
 		allCoins,
 		currency,
 		isLoading: isLoadingCoins || isLoadingRate,
-		isError,
+		isError: isErrorCoins || isErrorRate,
 		setCurrency,
 		convertCurrency,
 	};

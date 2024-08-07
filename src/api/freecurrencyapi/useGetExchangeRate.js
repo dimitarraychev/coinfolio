@@ -30,7 +30,6 @@ const useGetExchangeRate = () => {
 	}, []);
 
 	return {
-		exchangeRate,
 		isLoading,
 		isError,
 		convertCurrency,
