@@ -1,18 +1,21 @@
 import { createContext, useState, useEffect, useContext } from "react";
 import { fetchAllCoins } from "../api/coingecko/coingecko";
-import { getUsdToEurRate } from "../api/freecurrencyapi";
-import { formatNumber } from "../utils/helpers";
 import { toast } from "react-toastify";
+import useGetExchangeRate from "../api/freecurrencyapi/useGetExchangeRate";
 
 const CoinContext = createContext();
 
 const CoinContextProvider = ({ children }) => {
 	const [allCoins, setAllCoins] = useState([]);
-	const [usdToEurRate, setUsdToEurRate] = useState(1);
 	const [currency, setCurrency] = useState({ name: "usd", symbol: "$" });
 	const [isLoadingCoins, setIsLoadingCoins] = useState(true);
-	const [isLoadingRate, setIsLoadingRate] = useState(true);
 	const [isError, setIsError] = useState(false);
+
+	const {
+		convertCurrency,
+		isLoading: isLoadingRate,
+		isError: isErrorRate,
+	} = useGetExchangeRate();
 
 	const loadAllCoins = async () => {
 		try {
@@ -26,31 +29,9 @@ const CoinContextProvider = ({ children }) => {
 		}
 	};
 
-	const loadUsdToEurRate = async () => {
-		try {
-			const rate = await getUsdToEurRate();
-			setUsdToEurRate(rate);
-		} catch (error) {
-			setIsError(true);
-			toast.error(error.message);
-		} finally {
-			setIsLoadingRate(false);
-		}
-	};
-
-	useEffect(() => {
-		loadUsdToEurRate();
-	}, []);
-
 	useEffect(() => {
 		loadAllCoins();
 	}, [currency]);
-
-	const convertCurrency = (price, currency) => {
-		return currency === "usd"
-			? formatNumber(price * usdToEurRate)
-			: formatNumber(price * (1 / usdToEurRate));
-	};
 
 	const contextValue = {
 		allCoins,
