@@ -36,7 +36,7 @@ const Portfolio = () => {
 		return (
 			<section className="portfolio">
 				<div className="loading">
-					<Loader size="10rem" />
+					<Loader size="15rem" />
 				</div>
 			</section>
 		);
