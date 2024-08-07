@@ -8,7 +8,7 @@ Available at [coinfol-io.web.app](https://coinfol-io.web.app/)
 
 -   [About](#about)
 -   [Preview](#preview)
--   [Technologies & Tools](#technologies-&-tools)
+-   [Technologies & Tools](#technologies-and-tools)
 -   [Setup](#setup)
 -   [Architecture](#architecture)
 -   [Credits](#credits)
@@ -22,9 +22,9 @@ The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfo
 
 ## Preview
 
-![Desktop](https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/coinfolio-desktop.jpg?alt=media&token=9b9c1b61-61cc-477e-bea1-8c6f223b6431)
+![Desktop](https://firebasestorage.googleapis.com/v0/b/coinfolio-109f2.appspot.com/o/coinfolio-preview.png?alt=media&token=1e9b7fbe-dacf-4b93-b8e6-41514b75b888)
 
-## Technologies & Tools
+## Technologies and Tools
 
 [![Technologies & Tools](https://skillicons.dev/icons?i=react,js,html,css,vite,firebase)](https://skillicons.dev)
 
@@ -57,13 +57,14 @@ The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfo
 ```sh
 ├── src/
 │   ├── api/
-│   │   └── Files related to API calls.
+│   │   └── Subfolders for each api with calls and hooks.
 │   ├── assets/
 │   │   └── Application assets.
 │   ├── components/
-│   │   └── Layout and reusable UI components.
-│   ├── config/
-│   │   └── Configuration files.
+│   │   ├── common
+│   │   │    └── Reusable components.
+│   │   └── layout
+│   │        └── Main layout and layout components.
 │   ├── constants/
 │   │   └── Constant values used throughout the app.
 │   ├── context/
