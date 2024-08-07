@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { fetchAllCoins, searchAllCoins } from "./coingecko";
+import { fetchAllCoins } from "./coingecko";
+import { logAnalyticsEvent } from "../firebase/config";
 
 const useGetCoins = (defaultCategory, allCoins, currency) => {
 	const [coins, setCoins] = useState([]);
@@ -30,14 +31,7 @@ const useGetCoins = (defaultCategory, allCoins, currency) => {
 		);
 		setCoins(filteredCoins);
 		setIsLoading(false);
-
-		// try {
-		// 	const search = await searchAllCoins(input);
-		// 	setCoins(search.coins);
-		// 	setIsLoading(false);
-		// } catch (error) {
-		// 	console.error("Failed to fetch coins:", error);
-		// }
+		logAnalyticsEvent("search", { searchTerm: input });
 	};
 
 	const fetchCoins = async () => {

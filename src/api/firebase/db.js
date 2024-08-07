@@ -11,7 +11,7 @@ import {
 	where,
 	limit,
 } from "firebase/firestore";
-import { db } from "./config";
+import { db, logAnalyticsEvent } from "./config";
 import { portfolioCategoriesEnum } from "../../constants/categories";
 
 const PORTFOLIOS_COLLECTION_ID = "portfolios";
@@ -29,6 +29,7 @@ export const postPortfolio = async (portfolio) => {
 			timestampedPortfolio
 		);
 
+		logAnalyticsEvent("create_portfolio", { id: docRef.id });
 		return docRef.id;
 	} catch (error) {
 		throw error;
@@ -105,6 +106,7 @@ export const updatePortfolio = async (portfolio) => {
 export const deletePortfolio = async (portfolioId) => {
 	try {
 		await deleteDoc(doc(db, PORTFOLIOS_COLLECTION_ID, portfolioId));
+		logAnalyticsEvent("remove_portfolio", { id: portfolioId });
 	} catch (error) {
 		throw error;
 	}
