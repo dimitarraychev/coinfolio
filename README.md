@@ -57,9 +57,9 @@ The _Portfolio Hub_ gives customers the abillity to create cryptocurrency portfo
 ```sh
 ├── src/
 │   ├── api/
-│   │   └── Subfolders for each api with calls and hooks.
+│   │   └── Each api has a subfolder with calls and hooks.
 │   ├── assets/
-│   │   └── Application assets.
+│   │   └── Images and icons.
 │   ├── components/
 │   │   ├── common
 │   │   │    └── Reusable components.
