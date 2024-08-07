@@ -46,7 +46,7 @@ const useGetPorfolios = (defaultCategory) => {
 		try {
 			const { portfolios, reachedLastPage } = await getPortfolios(
 				category || defaultCategory,
-				currentUser?.uid || "",
+				isAuthenticated ? currentUser.uid : "",
 				page
 			);
 

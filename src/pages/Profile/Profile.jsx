@@ -86,21 +86,19 @@ const Profile = () => {
 				<div className="list-wrapper">
 					<ul>
 						<li>Username</li>
-						<li className="username">
-							@{currentUser?.displayName}
-						</li>
+						<li className="username">@{currentUser.displayName}</li>
 					</ul>
 					<ul>
 						<li>Email</li>
-						<li>{currentUser?.email}</li>
+						<li>{currentUser.email}</li>
 					</ul>
 					<ul>
 						<li>Last Sign In</li>
-						<li>{currentUser?.lastSignIn}</li>
+						<li>{currentUser.lastSignIn}</li>
 					</ul>
 					<ul>
 						<li>Created On</li>
-						<li>{currentUser?.createdOn}</li>
+						<li>{currentUser.createdOn}</li>
 					</ul>
 				</div>
 			</div>

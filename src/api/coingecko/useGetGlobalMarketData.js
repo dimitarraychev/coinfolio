@@ -7,7 +7,7 @@ const useGetGlobalMarketData = () => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	const isPositiveCapChange =
-		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
+		globalMarketData.market_cap_change_percentage_24h_usd > 0;
 
 	const loadGlobalMarketData = async (signal) => {
 		try {

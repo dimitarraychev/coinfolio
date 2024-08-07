@@ -121,7 +121,7 @@ const CoinTableRow = ({ coin, allocation }) => {
 			) : (
 				<p className="last-column">
 					{currency.symbol}
-					{coin.market_cap?.toLocaleString()}
+					{coin.market_cap.toLocaleString()}
 				</p>
 			)}
 		</Link>
