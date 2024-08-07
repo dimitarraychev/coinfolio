@@ -34,8 +34,8 @@ const AddCoin = ({ onAddCoin, onClose }) => {
 				};
 			}
 
-			updatedCoin.quantity = parseFloat(updatedCoin.quantity);
-			updatedCoin.price = parseFloat(updatedCoin.price);
+			updatedCoin.quantity = parseFloat(updatedCoin.quantity) || "";
+			updatedCoin.price = parseFloat(updatedCoin.price) || "";
 			const total = updatedCoin.quantity * updatedCoin.price || 0;
 
 			updatedCoin = { ...updatedCoin, total };
