@@ -8,7 +8,7 @@ import { useAuthContext } from "../../context/AuthContext";
 import Loader from "../../components/common/Loader/Loader";
 
 const AuthLayout = () => {
-	const { isAuthenticated, isLoading } = useAuthContext();
+	const { isAuthenticated, isLoading, currentUser } = useAuthContext();
 
 	if (isLoading)
 		return (
@@ -18,7 +18,7 @@ const AuthLayout = () => {
 		);
 
 	return isAuthenticated ? (
-		<Navigate to="/profile" />
+		<Navigate to={`/profile/${currentUser.id}`} />
 	) : (
 		<section className="auth">
 			<Outlet />
