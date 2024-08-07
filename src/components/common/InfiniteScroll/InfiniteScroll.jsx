@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useInView } from "react-intersection-observer";
 
-import arrowScroll from "../../../assets/icons/arrow-scroll.svg";
 import Loader from "../Loader/Loader";
+import TableEndMessage from "../CryptoTable/TableEndMessage/TableEndMessage";
 
 const InfiniteScroll = ({ isLoading, isLastPage, changePage }) => {
 	const { ref, inView } = useInView();
@@ -17,26 +17,18 @@ const InfiniteScroll = ({ isLoading, isLastPage, changePage }) => {
 	return (
 		<>
 			{!isLoading && isLastPage ? (
-				<div className="end-message-wrapper">
-					<p className="end-message">
-						You've reached the end. Keep exploring or{" "}
-						<Link to={"/hub/create"} className="create-link">
-							create a portfolio!
-						</Link>
-					</p>
-					<img
-						src={arrowScroll}
-						alt="top"
-						title="Back To Top"
-						className="scroll-top-image"
-						onClick={() =>
-							window.scrollTo({
-								top: 0,
-								behavior: "smooth",
-							})
-						}
-					/>
-				</div>
+				<TableEndMessage
+					message={
+						<>
+							<span>
+								You've reached the end. Keep exploring or{" "}
+							</span>
+							<Link to={"/hub/create"} className="create-link">
+								create a portfolio!
+							</Link>
+						</>
+					}
+				/>
 			) : (
 				<div ref={ref} className="loading">
 					<Loader />
