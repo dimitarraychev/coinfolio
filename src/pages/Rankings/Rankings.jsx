@@ -1,6 +1,3 @@
-import { useEffect, useState } from "react";
-import { toast } from "react-toastify";
-
 import "./Rankings.css";
 import arrowUp from "../../assets/icons/arrow-up.svg";
 import arrowDown from "../../assets/icons/arrow-down.svg";
@@ -9,43 +6,24 @@ import arrowScroll from "../../assets/icons/arrow-scroll.svg";
 
 import { useCoinContext } from "../../context/CoinContext";
 import useSortTable from "../../hooks/useSortTable";
-import { fetchGlobalMarketData } from "../../api/coinGecko";
 import { formatPrice } from "../../utils/helpers";
 import CryptoTable from "../../components/common/CryptoTable/CryptoTable";
 import CoinTableRow from "../../components/common/CryptoTable/CoinTableRow/CoinTableRow";
 import Loader from "../../components/common/Loader/Loader";
+import useGetGlobalMarketData from "../../api/coingecko/useGetGlobalMarketData";
 
 const Rankings = () => {
 	const { allCoins } = useCoinContext();
-	const [globalMarketData, setGlobalMarketData] = useState({});
-	const [isLoading, setIsLoading] = useState(true);
+
+	const { globalMarketData, isPositiveCapChange, isLoading } =
+		useGetGlobalMarketData();
+
 	const {
 		sortedCoins,
 		selectedSortField,
 		isAscendingOrder,
 		tableSortHandler,
 	} = useSortTable(allCoins, "_market-cap");
-
-	const isPositiveCapChange =
-		globalMarketData.data?.market_cap_change_percentage_24h_usd > 0;
-
-	const loadGlobalMarketData = async (signal) => {
-		try {
-			const marketData = await fetchGlobalMarketData(signal);
-			setGlobalMarketData(marketData);
-		} catch (error) {
-			toast.error(error.mesage);
-		} finally {
-			setIsLoading(false);
-		}
-	};
-
-	useEffect(() => {
-		const controller = new AbortController();
-		loadGlobalMarketData(controller.signal);
-
-		return () => controller.abort();
-	}, []);
 
 	return (
 		<section className="rankings">
@@ -63,8 +41,7 @@ const Rankings = () => {
 					) : (
 						<h3 className={isPositiveCapChange ? "green" : "red"}>
 							{formatPrice(
-								globalMarketData.data
-									.market_cap_change_percentage_24h_usd
+								globalMarketData.market_cap_change_percentage_24h_usd
 							)}
 							%
 							<img
@@ -83,7 +60,7 @@ const Rankings = () => {
 					) : (
 						<h3>
 							{formatPrice(
-								globalMarketData.data.market_cap_percentage.btc
+								globalMarketData.market_cap_percentage.btc
 							)}
 							%
 						</h3>
@@ -97,7 +74,7 @@ const Rankings = () => {
 					) : (
 						<h3>
 							{formatPrice(
-								globalMarketData.data?.active_cryptocurrencies
+								globalMarketData.active_cryptocurrencies
 							)}
 						</h3>
 					)}
