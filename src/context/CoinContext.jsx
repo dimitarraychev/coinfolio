@@ -55,7 +55,7 @@ const CoinContextProvider = ({ children }) => {
 	const contextValue = {
 		allCoins,
 		currency,
-		isLoading: isLoadingCoins === true || isLoadingRate === true,
+		isLoading: isLoadingCoins || isLoadingRate,
 		isError,
 		setCurrency,
 		convertCurrency,
