@@ -9,6 +9,7 @@ import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTabl
 import Button from "../../components/common/Button/Button";
 import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";
 import InfiniteScroll from "../../components/common/InfiniteScroll/InfiniteScroll";
+import Loader from "../../components/common/Loader/Loader";
 import { portfolioCategories } from "../../constants/categories";
 
 const PortfolioHub = () => {
@@ -18,13 +19,14 @@ const PortfolioHub = () => {
 		portfolios,
 		category,
 		isLoading,
+		isChangingCategory,
 		hasNoPortfolios,
 		hasToLogin,
 		hasNoFollowing,
 		hasNoOwned,
 		isLastPage,
 		changeCategory,
-		changePage,
+		nextPage,
 	} = useGetPorfolios(defaultCategory);
 
 	const noResultsMessage = hasToLogin
@@ -78,7 +80,11 @@ const PortfolioHub = () => {
 					]}
 					type={"portfolio"}
 				>
-					{isLoading === false && noResultsMessage !== "" ? (
+					{isChangingCategory ? (
+						<div className="loading">
+							<Loader />
+						</div>
+					) : isLoading === false && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
@@ -91,8 +97,9 @@ const PortfolioHub = () => {
 					)}
 					<InfiniteScroll
 						isLoading={isLoading}
+						isChangingCategory={isChangingCategory}
 						isLastPage={isLastPage}
-						changePage={changePage}
+						nextPage={nextPage}
 					/>
 				</CryptoTable>
 			</div>

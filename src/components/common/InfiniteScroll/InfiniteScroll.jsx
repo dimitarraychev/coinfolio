@@ -5,13 +5,16 @@ import { useInView } from "react-intersection-observer";
 import Loader from "../Loader/Loader";
 import TableEndMessage from "../CryptoTable/TableEndMessage/TableEndMessage";
 
-const InfiniteScroll = ({ isLoading, isLastPage, changePage }) => {
+const InfiniteScroll = ({
+	isLoading,
+	isChangingCategory,
+	isLastPage,
+	nextPage,
+}) => {
 	const { ref, inView } = useInView();
 
 	useEffect(() => {
-		if (inView && !isLastPage) {
-			changePage((prevPage) => prevPage + 1);
-		}
+		if (inView && !isLastPage) nextPage();
 	}, [inView]);
 
 	return (
@@ -30,9 +33,11 @@ const InfiniteScroll = ({ isLoading, isLastPage, changePage }) => {
 					}
 				/>
 			) : (
-				<div ref={ref} className="loading">
-					<Loader />
-				</div>
+				!isChangingCategory && (
+					<div ref={ref} className="loading">
+						<Loader />
+					</div>
+				)
 			)}
 		</>
 	);

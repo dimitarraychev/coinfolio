@@ -13,6 +13,7 @@ import PortfolioTableRow from "../../components/common/CryptoTable/PortfolioTabl
 import CategoriesMenu from "../../components/common/CategoriesMenu/CategoriesMenu";
 import FileUploader from "../../components/common/FileUploader/FileUploader";
 import InfiniteScroll from "../../components/common/InfiniteScroll/InfiniteScroll";
+import Loader from "../../components/common/Loader/Loader";
 import { profileCategories } from "../../constants/categories";
 
 const Profile = () => {
@@ -24,11 +25,12 @@ const Profile = () => {
 		portfolios,
 		category,
 		isLoading,
+		isChangingCategory,
 		hasNoFollowing,
 		hasNoOwned,
 		isLastPage,
 		changeCategory,
-		changePage,
+		nextPage,
 	} = useGetPorfolios(defaultCategory);
 
 	const noResultsMessage = hasNoFollowing
@@ -123,7 +125,12 @@ const Profile = () => {
 					]}
 					type={"portfolio"}
 				>
-					{isLoading === false && noResultsMessage !== "" ? (
+					{" "}
+					{isChangingCategory ? (
+						<div className="loading">
+							<Loader />
+						</div>
+					) : isLoading === false && noResultsMessage !== "" ? (
 						<h6 className="no-portfolios">{noResultsMessage}</h6>
 					) : (
 						portfolios.map((portfolio, index) => (
@@ -136,8 +143,9 @@ const Profile = () => {
 					)}
 					<InfiniteScroll
 						isLoading={isLoading}
+						isChangingCategory={isChangingCategory}
 						isLastPage={isLastPage}
-						changePage={changePage}
+						nextPage={nextPage}
 					/>
 				</CryptoTable>
 			</div>

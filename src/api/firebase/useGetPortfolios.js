@@ -13,12 +13,9 @@ const useGetPorfolios = (defaultCategory) => {
 	const { currentUser, isAuthenticated } = useAuthContext();
 	const [portfolios, setPortfolios] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
+	const [isChangingCategory, setIsChangingCategory] = useState(false);
 	const [page, setPage] = useState(1);
 	const [isLastPage, setIsLastPage] = useState(false);
-
-	const changePage = (value) => {
-		if (!isLoading) setPage(value);
-	};
 
 	const hasNoPortfolios = portfolios.length < 1;
 
@@ -56,13 +53,19 @@ const useGetPorfolios = (defaultCategory) => {
 			toast.error(error.message);
 		} finally {
 			setIsLoading(false);
+			setIsChangingCategory(false);
 		}
 	};
 
 	const changeCategory = (value) => {
 		if (searchParams.get("category") === value) return;
+		setIsChangingCategory(true);
 		setIsLoading(true);
 		setSearchParams({ category: value });
+	};
+
+	const nextPage = () => {
+		if (!isLoading) setPage((prevPage) => prevPage + 1);
 	};
 
 	useEffect(() => {
@@ -73,13 +76,14 @@ const useGetPorfolios = (defaultCategory) => {
 		portfolios,
 		category,
 		isLoading,
+		isChangingCategory,
 		hasNoPortfolios,
 		hasToLogin,
 		hasNoFollowing,
 		hasNoOwned,
 		isLastPage,
 		changeCategory,
-		changePage,
+		nextPage,
 	};
 };
 
