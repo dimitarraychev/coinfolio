@@ -30,8 +30,8 @@ const useFollowPortfolio = (portfolio, setFollowers) => {
 			: `Success! You are now following ${portfolio.title}.`;
 
 		const followersCount = isFollowing
-			? portfolio.followersCount--
-			: portfolio.followersCount++;
+			? --portfolio.followersCount
+			: ++portfolio.followersCount;
 
 		try {
 			await updatePortfolio({
