@@ -1,0 +1,15 @@
+{
+	"short_name": "CoinFol.io",
+	"name": "CoinFol.io - Stay Ahead In The Crypto Market",
+	"icons": [
+		{
+			"src": "apple-icon.png",
+			"sizes": "180x180",
+			"type": "image/png"
+		}
+	],
+	"start_url": "/",
+	"display": "standalone",
+	"background_color": "#05014a",
+	"theme_color": "#05014a"
+}
